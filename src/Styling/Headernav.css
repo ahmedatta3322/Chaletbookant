@@ -1,0 +1,17 @@
+#home-content {
+  padding: 0.5px;
+  height: 100%;
+}
+#home-menu {
+  background-color: transparent;
+  margin-left: 40%;
+}
+#home-header {
+  background-color: transparent;
+}
+.layout {
+  height: 100%;
+}
+#root {
+  height: 100%;
+}
