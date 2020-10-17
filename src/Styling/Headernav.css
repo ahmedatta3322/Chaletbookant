@@ -23,6 +23,23 @@
   height: 70vh;
 position: relative;
 }
+@media(min-width:1280px){
+  #home-header{
+      height: 79vh;
+  } 
+}
+
+@media (min-width: 1440px)
+{
+#home-header {
+    height: 82vh;
+}
+}
+@media(min-width:1536px){
+  #home-header{
+    height: 88vh;
+  }
+}
 .layout {
   height: 100%;
 }
@@ -48,6 +65,28 @@ position: relative;
   right: 0%;
   bottom: -5rem;
 }
+@media (min-width:1280px){
+  .wave{
+    position: absolute;
+    right: 0%;
+    bottom: -12rem;
+  }
+}
+@media(min-width:1440px){
+  .wave{
+    position: absolute;
+    right: 0%;
+    bottom: -10rem;
+  }
+}
+@media(min-width:1536px){
+  .wave{
+    position: absolute;
+    right: 0%;
+    bottom: -6rem;
+  }
+}
+
 .header-content{
   position: absolute;
   top: 23%;
@@ -87,7 +126,4 @@ width: 28%;
   position: absolute;
   top: 22%;
   left: 104%;
-}
-body {
-  background-color: #000000;
 }
