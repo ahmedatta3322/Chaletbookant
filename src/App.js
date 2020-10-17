@@ -1,10 +1,11 @@
 import React from "react";
-import Headernav from "./Components/Layout/Headernav";
+// import Headernav from "./Components/Layout/Headernav";
+import Home from "./pages/homePage/homePage";
 
 import "./App.css";
 
 function App() {
-  return <Headernav></Headernav>;
+  return <Home />;
 }
 
 export default App;

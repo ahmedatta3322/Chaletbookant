@@ -19,11 +19,13 @@
 #home-header {
   display: flex;
   background-image: url('/images/Header photo.png');
-  /* background-size: cover; */
+  background-size: cover;
   height: 70vh;
+  background-repeat: no-repeat;
 position: relative;
+left: -1%;
 }
-@media(min-width:1280px){
+@media(min-width:1280px ){
   #home-header{
       height: 79vh;
   } 
@@ -31,15 +33,20 @@ position: relative;
 
 @media (min-width: 1440px)
 {
-#home-header {
+  #home-header {
     height: 82vh;
+  }
 }
-}
-@media(min-width:1536px){
+@media(max-width:1536px){
   #home-header{
     height: 88vh;
   }
 }
+    @media(min-width:1920px){
+      #home-header{
+        height: 79vh;
+      }
+    }
 .layout {
   height: 100%;
 }
@@ -63,7 +70,7 @@ position: relative;
 .wave{
   position: absolute;
   right: 0%;
-  bottom: -5rem;
+  bottom: -15rem;
 }
 @media (min-width:1280px){
   .wave{
@@ -86,7 +93,13 @@ position: relative;
     bottom: -6rem;
   }
 }
-
+@media(min-width:1920px){
+  .wave{
+    position: absolute;
+    right: 0%;
+    bottom: 0rem;
+  }
+}
 .header-content{
   position: absolute;
   top: 23%;
@@ -126,4 +139,7 @@ width: 28%;
   position: absolute;
   top: 22%;
   left: 104%;
+}
+.ant-layout-header{
+  background-color: transparent !important;
 }

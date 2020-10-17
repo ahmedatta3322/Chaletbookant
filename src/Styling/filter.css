@@ -1,0 +1,25 @@
+.filter{
+    border-radius: 2.6rem !important;
+border :1px solid none;
+background-color: #0070D3;
+padding: 2rem;
+color: white;
+}
+.ant-btn,.ant-picker,.ant-select-selector,.ant-input-number{
+    border-radius: 2.6rem !important;
+    margin-right: 3rem;
+    margin-left: 1rem;
+}
+label{
+    /* margin-right: 1rem;
+    margin-left: 1rem; */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: .5rem;
+}
+.ant-input-number-handler-wrap{
+    position: absolute;
+    top: 0;
+    right: 7px !important;
+    opacity: 1 !important;
+}
