@@ -48,7 +48,7 @@ export default function Headernav() {
         {/* <div className="side-wave">
           <img
             className="side-wave-img"
-            src="/images/Side wave.png"
+            src="/images/Side-Waveweb.png"
             alt="wave"
           />
         </div> */}
