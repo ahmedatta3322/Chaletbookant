@@ -4,14 +4,87 @@
 }
 #home-menu {
   background-color: transparent;
-  margin-left: 40%;
+  margin-right: 25%;
+  color: #ffffff;
+  margin-top: 0.8%;
+}
+.home-menu-item:hover {
+  color: #F8B544 !important;
+  border-bottom: 2px solid #F8B544 !important
+}
+.home-menu-item-active {
+  color: #F8B544 !important;
+  border-bottom: 2px solid #F8B544 !important
 }
 #home-header {
-  background-color: transparent;
+  display: flex;
+  background-image: url('/images/Header photo.png');
+  /* background-size: cover; */
+  height: 70vh;
+position: relative;
 }
 .layout {
   height: 100%;
 }
 #root {
   height: 100%;
+}
+.logo{
+  display: flex;
+  width: 60%;
+  height: 50%;
+  padding-top: 2%;
+}
+.logo-img{
+  width: 20%;
+  height: 9%;
+}
+.login-btn{
+  background-color: #F8B544;
+  color: #ffffff;
+}
+.wave{
+  position: absolute;
+  right: 0%;
+  bottom: -5rem;
+}
+.header-content{
+  position: absolute;
+  top: 23%;
+  /* left: 40%; */
+  left: 34%;
+}
+.header-content h1,.header-content p{
+  color: #ffffff;
+    font-weight: 700;
+   
+    text-shadow: 6px 6px 8px #000000;
+}
+.header-content h1{
+  font-size: xxx-large;
+  letter-spacing: 2.5px;
+  margin-bottom: 0px;
+}
+.header-content p{
+  font-size: xx-large;
+  text-align: center;
+}
+.header-content span{
+ color: #F8B544; 
+}
+.empty-div-left,.empty-div-right{
+background-color: white;
+height: 4%;
+width: 28%;
+}
+.empty-div-left{
+
+  position: absolute;
+  top: 22%;
+  right: 104%;
+}
+.empty-div-right{
+  position: absolute;
+  top: 22%;
+  left: 104%;
 }
