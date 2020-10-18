@@ -14,13 +14,14 @@ export default function Home() {
         <div className="site-layout-content">
           <HomeFilter />
           <Row className="map">
-            <Col span={15} offset={5}>
+            <Col span={16} offset={4}>
               <Map />
             </Col>
           </Row>
+          <div className="site-flow"></div>
         </div>
       </Content>
-      <Footer style={{ textAlign: "center" }}>Created by Ahmed atta</Footer>
+      {/* <Footer style={{ textAlign: "center" }}>Created by Ahmed atta</Footer> */}
     </Layout>
   );
 }

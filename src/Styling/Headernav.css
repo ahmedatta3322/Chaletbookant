@@ -82,21 +82,21 @@ left: -1%;
 @media(min-width:1440px){
   .wave{
     position: absolute;
-    right: 0%;
+    right: -1%;
     bottom: -10rem;
   }
 }
 @media(min-width:1536px){
   .wave{
     position: absolute;
-    right: 0%;
+    right: -1%;
     bottom: -6rem;
   }
 }
 @media(min-width:1920px){
   .wave{
     position: absolute;
-    right: 0%;
+    right: -1%;
     bottom: 0rem;
   }
 }
