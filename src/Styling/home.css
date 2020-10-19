@@ -3,7 +3,7 @@
     background-color: #EFEFEF !important;
 }
 .site-layout-content{
-    height: 100vh !important;
+    height: 183vh !important;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -11,6 +11,77 @@
     height: 18vh;
     margin-top: 3rem;
 }
-.site-flow{
-   background-color: #0070D3;
+.whychalet{
+   background-color: #79B0E1;
+   margin-top: 19.3%;
+   text-align: center;
+   margin-bottom: 5%;
+   opacity: .8;
+}
+.whychalet-img{
+    width: 50%;
+    padding:3%;
+}
+.ant-card-head{
+    border: none !important;
+}
+.icon{
+    display: block
+}
+.card{
+    box-shadow: 10px 10px 5px rgb(0 0 0 / 15%);
+
+}
+.card-header{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: #0070D3 !important;
+    font-size: larger;
+}
+.card-body{
+    text-align: left;
+    color: #31418C;
+    padding: 2rem 6rem;
+    font-size: large;
+    font-weight: 500;
+}
+.advance-card{
+    transform: translateY(-28px);
+    z-index: 1;
+}
+.basic-card{
+    transform: translateX(19px);
+}
+.platinum-card{
+    transform: translateX(-22px);
+}
+.advance-img{
+width: 56%;
+
+}
+.platinum-img{
+    width: 37%;
+}
+.blue-icon{
+ color: #0070D3;
+ font-size: medium;
+ margin-left: 2rem;
+ margin-right: 1rem;
+}
+.card-footer{
+    border:none !important;
+    background-image: url('/images/wave.png');
+    background-color:rgba(0,0,0,0) !important;
+    color: #FFB741 !important;
+    font-size: large;
+    font-weight: 500;
+    background-size: cover;
+    padding: 1rem 2rem;
+}
+.ant-layout-footer{
+    background-color: #0070D3 !important;
+    display: flex;
+    justify-content: space-between;
+    color: #ffff;
 }
