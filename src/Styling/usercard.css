@@ -1,0 +1,51 @@
+.card{
+    box-shadow: 10px 10px 5px #00000038;
+}
+.userCard{
+    padding: 0 55px !important;
+    position: absolute;
+    width: 37.8rem;
+    margin-left: 3%;
+    
+}
+.imgCard{
+    position: relative;
+}
+.info{
+    position: absolute;
+    top: 50%;
+    left: 4%;
+    background-color: white;
+    padding:1rem;
+    border-radius: 2.25rem
+}
+.blue{
+    color: #0070D3;
+}
+.color{
+    color: #31418C;
+}
+.edit{
+    position: absolute;
+    top: 51%;
+    left: 86%;
+
+}
+.filter{
+    padding: 1rem 2rem !important;
+    color: #C8D2E2 !important;
+}
+.btn{
+    background: transparent !important; 
+    color: #C8D2E2;
+    border: none !important
+
+}
+.active{
+    background-color: #0070D3 !important;
+   
+}
+.cardFooter{
+    border-top: 1px solid #C8D2E2;
+    padding: 0 !important;
+}

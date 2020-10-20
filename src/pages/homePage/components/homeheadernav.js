@@ -1,9 +1,9 @@
 import React from "react";
 import { Layout, Menu, Button, Row } from "antd";
-import "../Styling/Headernav.css";
+import "../../../Styling/homeheadernav.css";
 const { Header } = Layout;
 
-export default function Headernav() {
+export default function HomeNav() {
   return (
     <Layout className="layout">
       <Header id="home-header">

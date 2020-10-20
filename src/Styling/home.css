@@ -3,7 +3,7 @@
     background-color: #EFEFEF !important;
 }
 .site-layout-content{
-    height: 183vh !important;
+    height: 170vh !important;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -42,7 +42,7 @@
 .card-body{
     text-align: left;
     color: #31418C;
-    padding: 2rem 6rem;
+    padding: 2rem 2rem 3rem !important;
     font-size: large;
     font-weight: 500;
 }

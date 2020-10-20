@@ -1,5 +1,5 @@
 import React from "react";
-import Headernav from "../../Layout/Headernav";
+import HomeNav from "./components/homeheadernav";
 import { Layout, Row, Col } from "antd";
 import { Card } from "react-bootstrap";
 import HomeFilter from "../../Components/filter";
@@ -10,7 +10,7 @@ const { Content, Footer } = Layout;
 export default function Home() {
   return (
     <Layout>
-      <Headernav />
+      <HomeNav />
       <Content id="home-content">
         <div className="site-layout-content">
           <HomeFilter />
@@ -28,9 +28,9 @@ export default function Home() {
           </div>
           <div className="site-card-wrapper">
             <Row>
-              <Col span={16} offset={7}>
+              <Col span={12} offset={7}>
                 <Row>
-                  <Col span={5}>
+                  <Col span={6}>
                     <Card className="text-center basic-card">
                       <Card.Header className="text-center text-white font-weight-bold">
                         <img
@@ -57,7 +57,7 @@ export default function Home() {
                       <Card.Footer>6 $</Card.Footer>
                     </Card>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6}>
                     <Card className="text-center advance-card">
                       <Card.Header className="text-center text-white font-weight-bold pt-3">
                         <img
@@ -86,7 +86,7 @@ export default function Home() {
                       </Card.Footer>
                     </Card>
                   </Col>
-                  <Col span={5}>
+                  <Col span={6}>
                     <Card className="text-center platinum-card">
                       <Card.Header className="text-center text-white font-weight-bold">
                         <img
@@ -121,7 +121,7 @@ export default function Home() {
       </Content>
       <Footer className="text-white ">
         <div>
-          <spa className=" h4"> Stay in touch</spa>
+          <spa className=" h3"> Stay in touch</spa>
           <div className="ml-4 mt-1">
             <i class="fab fa-facebook-square mr-2"></i>
             <i class="fab fa-google-plus mr-2"></i>

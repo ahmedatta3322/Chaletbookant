@@ -27,7 +27,7 @@ const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 export default function HomeFilter() {
   return (
     <Row>
-      <Col span={16} offset={4}>
+      <Col span={13} offset={5}>
         <div className="filter">
           <Dropdown overlay={menu}>
             <Button>
