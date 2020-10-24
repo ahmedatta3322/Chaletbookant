@@ -1,0 +1,17 @@
+.shape{
+    position: relative;
+}
+.leftSide{
+    position: absolute;
+    top: 42%;
+    left: 3.7rem;
+}
+.rightSide{
+    position: absolute;
+    top: 7.2rem;
+    left: 13.6rem;
+}
+.price{
+    color: #FFB741;
+    font-size: x-large;
+}

@@ -1,0 +1,14 @@
+.card{
+    text-align: left;
+}
+.badge{
+    background-color: #FEF5DF;
+}
+.card-footer{
+    border: none !important;
+    text-align: right;
+    background: none !important;
+}
+.coloor{
+    color: #888888 !important;
+}
