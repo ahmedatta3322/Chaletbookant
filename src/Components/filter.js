@@ -26,53 +26,53 @@ const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
 
 export default function HomeFilter() {
   return (
-    <Row>
-      <Col span={13} offset={5}>
-        <div className="filter">
-          <Dropdown overlay={menu}>
-            <Button>
-              Type
-              <DownOutlined />
-            </Button>
-          </Dropdown>
-          <label> From :</label>
-          <Space direction="vertical" size={12}>
-            <DatePicker
-              defaultValue={moment("01/01/2015", dateFormatList[0])}
-              format={dateFormatList}
-            />
-          </Space>
-          <label> To :</label>
-          <Space direction="vertical" size={12}>
-            <DatePicker
-              defaultValue={moment("01/01/2015", dateFormatList[0])}
-              format={dateFormatList}
-            />
-          </Space>
-          <label> Region</label>
-          <Select
-            defaultValue="lucy"
-            style={{ width: 120 }}
-            onChange={handleChange}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="Yiminghe">yiminghe</Option>
-          </Select>
-          <label>Maximum Price</label>
-          <InputNumber min={1} max={10} onChange={onChange} />
-          <Button
-            // className="login-btn"
-            style={{
-              backgroundColor: "#F8B544",
-              color: "white",
-              border: "none",
-            }}
-          >
-            Filter
-          </Button>
-        </div>
-      </Col>
-    </Row>
+    // <Row>
+    //   <Col span={13} offset={5}>
+    <div className="filter">
+      <Dropdown overlay={menu}>
+        <Button>
+          Type
+          <DownOutlined />
+        </Button>
+      </Dropdown>
+      <label> From :</label>
+      <Space direction="vertical" size={12}>
+        <DatePicker
+          defaultValue={moment("01/01/2015", dateFormatList[0])}
+          format={dateFormatList}
+        />
+      </Space>
+      <label> To :</label>
+      <Space direction="vertical" size={12}>
+        <DatePicker
+          defaultValue={moment("01/01/2015", dateFormatList[0])}
+          format={dateFormatList}
+        />
+      </Space>
+      <label> Region</label>
+      <Select
+        defaultValue="lucy"
+        style={{ width: 120 }}
+        onChange={handleChange}
+      >
+        <Option value="jack">Jack</Option>
+        <Option value="lucy">Lucy</Option>
+        <Option value="Yiminghe">yiminghe</Option>
+      </Select>
+      <label>Maximum Price</label>
+      <InputNumber min={1} max={10} onChange={onChange} />
+      <Button
+        // className="login-btn"
+        style={{
+          backgroundColor: "#F8B544",
+          color: "white",
+          border: "none",
+        }}
+      >
+        Filter
+      </Button>
+    </div>
+    //   </Col>
+    // </Row>
   );
 }

@@ -1,17 +1,54 @@
 .shape{
     position: relative;
+    margin-left:.8rem
 }
 .leftSide{
     position: absolute;
-    top: 42%;
-    left: 3.7rem;
+    top: 33%;
+    left: 4.7rem;
 }
 .rightSide{
     position: absolute;
-    top: 7.2rem;
-    left: 13.6rem;
+    top: 11.2rem;
+    left: 15.6rem;
 }
 .price{
     color: #FFB741;
     font-size: x-large;
+}
+.emptydivright,.emptydivleft{
+    width: 3rem;
+    height: .3rem;
+    background-color: #0070D3;
+    display: inline-block;
+    margin-bottom: 0.2rem;
+    margin-right: .5rem;
+    margin-left: 0.5rem;
+
+}
+.heading{
+    color: #0070D3;
+    padding: 2rem !important;
+    font-size: medium;
+    background: none !important ;
+    align-items: baseline !important;
+}
+.bluee{
+    color: #0070D3;
+}
+.date{
+    border-bottom: 1px solid #C8D2E2;
+    padding: 1rem;
+}
+.bottomcard{
+    border: 1px solid #C8D2E2;
+    border-radius: 0.5rem;
+    width: fit-content;
+    margin-left: 5rem;
+    box-shadow: 8px 7px 13px #00000038;
+
+}
+.bill{
+    margin-right: 3rem;
+    color: #A4ACB9;
 }

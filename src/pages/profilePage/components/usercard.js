@@ -21,7 +21,7 @@ export default function UserCard() {
         <Button variant="outline-primary" className="edit" roundedCircle>
           <i class="fas fa-pen text-white"></i>
         </Button>
-        <Card.Body>
+        <Card.Body className="p-3">
           <Card.Title>ABOUT</Card.Title>
           <Card.Text>
             Me gusta mucho mi casa porque puedo inviter a mis amigos a cenar o a
@@ -31,21 +31,21 @@ export default function UserCard() {
           </Card.Text>
         </Card.Body>
         <div className="cardFooter">
-          <Button variant="primary" className="filter active">
+          <Button variant="primary" className="filterCount active">
             <img src="/images/Chalets-Icon.png" alt="chalet" />
             <br />
             <span className=" mt-1">My Chalets</span>
             <br />
             <span className="color">112</span>
           </Button>
-          <Button variant="primary" className="filter">
+          <Button variant="primary" className="filterCount">
             <img src="/images/requests icon.png" alt="chalet" />
             <br />
             <span className="text-secondary mt-1">Requests </span>
             <br />
             <span className="color">1000</span>
           </Button>
-          <Button variant="primary" className="filter">
+          <Button variant="primary" className="filterCount">
             <img src="/images/view icon.png" alt="chalet" />
             <br />
             <span className="text-secondary mt-1">Views</span>

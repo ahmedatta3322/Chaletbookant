@@ -7,7 +7,7 @@ function GoogleMap(props) {
       className="map"
       google={props.google}
       zoom={3}
-      style={{ position: "absolute", width: "97%", height: "233%" }}
+      // style={{ position: "absolute", width: "97%", height: "233%" }}
       initialCenter={{
         lat: "29.69843312500002",
         lng: "27.450745816193173",

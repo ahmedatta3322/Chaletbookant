@@ -1,39 +1,38 @@
-
 .layout {
   height: 100%;
 }
-.ant-layout-header{
+.ant-layout-header {
   display: flex;
-  background-color: #0070D3 !important;
+  background-color: #0070d3 !important;
   justify-content: space-between;
   box-shadow: 10px 10px 5px rgb(0 0 0 / 15%);
 }
 #root {
   height: 100%;
 }
-.logo{
+.logo {
   display: flex;
-    width: 56%;
-    height: 73%;
-    padding-top: 1%;
+  width: 56%;
+  height: 73%;
+  padding-top: 1%;
 }
-.logo-img{
-  width: 20%;
-
+.logo-immg {
+  /* width: 20%; */
+  height: 108%;
 }
-.ant-menu{
+.ant-menu {
   background: none !important;
   color: white !important;
 }
-.ant-menu-horizontal{
+.ant-menu-horizontal {
   border: none !important;
 }
-.rotate{
+.rotate {
   transform: rotate3d(1, 1, 1, 45deg);
 }
-.font{
+.font {
   font-size: x-large;
 }
-.ant-badge-count{
-  background-color: #FFB741 !important;
+.ant-badge-count {
+  background-color: #ffb741 !important;
 }

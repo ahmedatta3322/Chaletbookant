@@ -1,15 +1,16 @@
 import React from "react";
-// import Headernav from "./Components/Layout/Headernav";
-// import Home from "./pages/homePage/home";
+import Home from "./pages/homePage/home";
 
 import "./App.css";
+import ChaletsPage from "./pages/chaletsPage/chaletsPage";
 import Profile from "./pages/profilePage/profile";
 
 function App() {
   return (
     <>
       {/* <Home /> */}
-      <Profile />
+      {/* <Profile /> */}
+      <ChaletsPage />
     </>
   );
 }

@@ -1,39 +1,94 @@
-.profile{
-    background-color: #EFEFEF;
+.profile {
+  background-color: #efefef;
 }
-.jumbotron{
-    background-color: #0070D3 !important;
-    position: relative;
-    height: 35vh;
-
+.jumbotron {
+  background-color: #0070d3 !important;
+  position: relative;
+  height: 35vh;
 }
-.username{
-    position: absolute;
-    top: 75%;
-    left: 21%;
-    font-weight: bold;
-    color: white;
-    font-size: 2.5rem;
+.username {
+  position: absolute;
+  top: 75%;
+  left: 21%;
+  font-weight: bold;
+  color: white;
+  font-size: 2.5rem;
 }
-.ant-layout-content{
-    text-align: center;
+.ant-layout-content {
+  text-align: center;
 }
-.color{
-    color: #0070D3 !important;
+.color {
+  color: #0070d3 !important;
 }
-.addButton{
-    position: absolute;
-    padding: 1%;
-    bottom: 18%;
-    left: 7%;
-    background-color: white !important;
-    border-radius: 2.25rem !important;
-    font-size: medium !important;
-    box-shadow: 10px 10px 5px #00000038;
+.addButton {
+  position: absolute;
+  padding: 1%;
+  bottom: 18%;
+  left: 7%;
+  background-color: white !important;
+  border-radius: 2.25rem !important;
+  font-size: medium !important;
+  box-shadow: 10px 10px 5px #00000038;
 }
-.add{
-    font-size: x-large;
+.add {
+  font-size: x-large;
 }
-.ant-layout{
-    background: none !important;
+/* .ant-layout {
+  background: none !important;
+} */
+.filterbtn {
+  background: none;
+  border: none;
+  outline: 0 !important;
+  color: #31418c;
+  font-size: large;
+}
+.content {
+  width: 75%;
+  margin-left: 22%;
+}
+.ant-layout-sider {
+  flex: 0 0 22% !important;
+  max-width: 0 !important;
+  min-width: fit-content !important;
+  background: none !important;
+}
+.requestfilter {
+  justify-content: flex-end !important;
+  /* margin-left: 5%; */
+}
+.anticon svg {
+  font-size: small;
+  margin-left: -71%;
+  margin-top: 62%;
+  color: #0070D3;
+}
+.request-content {
+  font-size: medium;
+  color: #31418C;
+}
+.viewbtn {
+  background-color: white !important;
+  color: #0070d3 !important;
+  border-radius: 1rem !important;
+  margin-left: 2rem;
+  box-shadow: 8px 7px 10px #0000001c;
+}
+.trash {
+  font-size: x-large;
+  color: #c8d2e287;
+  margin-right: -16rem;
+}
+/* .anticon {
+  font-size: large;
+  margin-top: 5% !important;
+} */
+/* .ant-row {
+  justify-content: flex-end !important;
+} */
+.yellow{
+  color: #FFB741;
+}
+.red{
+  color: #BE4F47;
 }

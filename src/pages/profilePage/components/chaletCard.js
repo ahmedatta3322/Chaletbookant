@@ -1,4 +1,3 @@
-import { Col, Row } from "react-bootstrap";
 import React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import "../../../Styling/chaletcard.css";
@@ -6,7 +5,7 @@ export default function ChaletCard() {
   return (
     <Card className="mt-5">
       <Card.Img variant="top" src="/images/chalet.png" className="imgCard" />
-      <Card.Body>
+      <Card.Body className="pb-3">
         <h3>James smith Chalet</h3>
         <h4>
           $ 3,10,500<Badge className="badge p-3 ml-3">For Sell</Badge>
@@ -18,8 +17,8 @@ export default function ChaletCard() {
           tiendas para hacer la compra: panadería, carnicería o pescadería...
         </Card.Text>
       </Card.Body>
-      <div className="card-footer">
-        <Button variant="primary" className="active rounded pl-3 pr-3 p-3 view">
+      <div className="footerCard">
+        <Button variant="primary" className="active m-3 pl-3 pr-3 p-3 view">
           view
         </Button>
       </div>

@@ -1,12 +1,12 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "../../../Styling/usercard.css";
 import "../../../Styling/subscribeCard.css";
 export default function SubscribeCard() {
   return (
     <div>
-      <Card className="mt-5">
-        <Card.Header className="color">SUBSCRIBTION</Card.Header>
+      <Card className="mt-5 mb-5">
+        <Card.Header className="heading">SUBSCRIBTION</Card.Header>
         <Card.Body>
           {/* <Card.Title>Special title treatment</Card.Title> */}
           <Card.Text>
@@ -22,16 +22,32 @@ export default function SubscribeCard() {
             <div className="rightSide text-white ">
               <Card.Text>
                 {" "}
-                <i class="fas fa-check blue-icon mr-3"></i>Rent
+                <i class="fas fa-check  mr-3"></i>Rent
               </Card.Text>
 
               <Card.Text>
-                <i class="fas fa-check blue-icon mr-3"></i>Exchange
+                <i class="fas fa-check  mr-3"></i>Exchange
               </Card.Text>
 
               <Card.Text>
-                <i class="fas fa-check blue-icon mr-3"></i>Up to 2/4 Units.
+                <i class="fas fa-check  mr-3"></i>Up to 2/4 Units.
               </Card.Text>
+            </div>
+            <div className="text-center">
+              <div className="emptydivright"></div>
+              <h5 className="d-inline-block bluee">Billing Info</h5>
+              <div className="emptydivleft"></div>
+            </div>
+
+            <div className="text-center bottomcard">
+              <div className="date">
+                <span className="bill">Next Billing Date </span>
+                <span>22/02/2022</span>
+              </div>
+              <div className="date">
+                <span className="bill">Last Billing Date </span>
+                <span>20/10/2020</span>
+              </div>
             </div>
           </Card.Text>
         </Card.Body>

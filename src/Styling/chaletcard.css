@@ -1,14 +1,17 @@
-.card{
-    text-align: left;
+.card {
+  text-align: left;
 }
-.badge{
-    background-color: #FEF5DF;
+.badge {
+  background-color: #fef5df;
 }
-.card-footer{
-    border: none !important;
-    text-align: right;
-    background: none !important;
+.footerCard {
+  border: none !important;
+  text-align: right;
+  background: none !important;
 }
-.coloor{
-    color: #888888 !important;
+.coloor {
+  color: #888888 !important;
+}
+.view {
+  border-radius: 1rem !important;
 }

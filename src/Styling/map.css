@@ -1,3 +1,6 @@
 .map{
-    height: 18vh;
+    /* height: 18vh; */
+    position: "absolute";
+     width: "97%";
+    height: "272%" 
 }
