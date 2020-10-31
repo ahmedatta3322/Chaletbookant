@@ -33,7 +33,7 @@ export default function SubscribeCard() {
                 <i class="fas fa-check  mr-3"></i>Up to 2/4 Units.
               </Card.Text>
             </div>
-            <div className="text-center">
+            <div className="text-center mb-3 mt-3">
               <div className="emptydivright"></div>
               <h5 className="d-inline-block bluee">Billing Info</h5>
               <div className="emptydivleft"></div>

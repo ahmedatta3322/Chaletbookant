@@ -1,0 +1,65 @@
+.title{
+    color: #0070D3;
+    font-size: x-large !important;
+}
+.close{
+    display: none;
+}
+.tab{
+    color: #31418C !important;
+    box-shadow: 6px 3px 8px #00000029;
+    font-size: medium !important;
+    border: none !important;
+}
+.left-div{
+    display: inline-block;
+    /* height: 4.5rem; */
+    background-color: #0070D3;
+    width: 1rem;
+    padding-top: 4rem;
+}
+.tabs{
+    height: 5.5rem !important;
+    margin-left: 5rem;
+}
+.label{
+    font-size: large;
+    font-weight: bold;
+}
+.add-loction {
+    height: 23rem;
+    width: 85rem;
+    margin-left: -8rem;
+    margin-bottom: 4rem;
+    margin-top: -2.5rem;
+}
+.input-icons i {
+    position: absolute;
+    /* top: 83%;
+    left: 2.2rem; */
+    font-size: large;
+    margin-left: 2.5%;
+    /* padding-right: 5%; */
+  }
+ .inputs{
+    width: 31rem !important;
+ } 
+  .input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+.icon {
+    padding: 12px;
+    color: #0070D3;
+    min-width: 50px;
+    text-align: center;
+  }
+  .input-field {
+    /* width: 45% !important; */
+    padding: 20px !important;
+    margin-left: 2%;
+  }
+  .terms{
+      border: 1px solid #C8D2E2;
+      border-radius: 2.25rem;
+  }

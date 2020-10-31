@@ -38,6 +38,8 @@
 .btn{
     background: transparent !important; 
     color: #C8D2E2;
+}
+.cardButton{
     border: none !important
 
 }

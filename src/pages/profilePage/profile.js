@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "../../Layout/nav";
 import { Button, Jumbotron } from "react-bootstrap";
 import { Row, Col, Layout } from "antd";
@@ -10,6 +10,8 @@ import ChaletCard from "./components/chaletCard";
 import SubscribeCard from "./components/subscribeCard";
 import "../../Styling/profile.css";
 import Foter from "../../Layout/Footer";
+import AboutChaletModal from "../../Components/modal/chaletModal";
+
 const { Sider, Content } = Layout;
 
 const menu1 = (
@@ -35,23 +37,25 @@ const menu2 = (
   </Menu>
 );
 
-export default function profile1() {
+export default function Profile() {
+  const [modalShow, setModalShow] = useState(false);
   return (
     <div className="profile">
       <Layout>
         <Nav />
         <Jumbotron fluid>
-          {/* <Container> */}
           <Row>
             <UserCard />
             <h2 className="username">Gabriella Alessandro</h2>
           </Row>
-
-          {/* </Container> */}
         </Jumbotron>
-        <Button className="addButton color p-4">
+        <Button
+          className="addButton color p-4"
+          onClick={() => setModalShow(true)}
+        >
           <i class="fas fa-plus-circle color add"></i>ADD NEW CHALET
         </Button>
+        <AboutChaletModal show={modalShow} onHide={() => setModalShow(false)} />
         <Layout className="content">
           <Content>
             <Row>
@@ -174,7 +178,6 @@ export default function profile1() {
           </Sider>
         </Layout>
         <Foter />
-        {/* <Footer>Footer</Footer> */}
       </Layout>
     </div>
   );

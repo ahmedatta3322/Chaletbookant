@@ -29,6 +29,7 @@
   border-radius: 2.25rem !important;
   font-size: medium !important;
   box-shadow: 10px 10px 5px #00000038;
+  border: none !important;
 }
 .add {
   font-size: x-large;

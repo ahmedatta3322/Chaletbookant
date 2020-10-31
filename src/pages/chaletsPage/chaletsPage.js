@@ -21,14 +21,9 @@ export default function ChaletsPage() {
               <HomeFilter />
             </Col>
           </Row>
-          {/* <Row>
-            <Col span={25}>
-              {" "}
-            </Col>
-          </Row> */}
           <Row>
             {/* chalits*/}
-            {/* <Col span={3}></Col> */}
+
             <Col span={15} offset={1} className="chalits">
               <Row>
                 <Col span={4}></Col>
@@ -49,7 +44,7 @@ export default function ChaletsPage() {
                 </Col>
               </Row>
             </Col>
-            {/* </div> */}
+
             <Col span={5} offset={25} className="mt-0 rentchalet">
               <Row>
                 <Sider className="m-0">
@@ -59,9 +54,7 @@ export default function ChaletsPage() {
                     </Col>
                   </Row>
                   <br />
-                  {/* <Col span={30} offset={25}> */}
                   <img src="/images/ad.png" alt="adds" className="ads" />{" "}
-                  {/* </Col> */}
                 </Sider>
               </Row>
             </Col>

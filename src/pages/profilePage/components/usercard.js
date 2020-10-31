@@ -31,21 +31,21 @@ export default function UserCard() {
           </Card.Text>
         </Card.Body>
         <div className="cardFooter">
-          <Button variant="primary" className="filterCount active">
+          <Button variant="primary cardButton" className="filterCount active">
             <img src="/images/Chalets-Icon.png" alt="chalet" />
             <br />
             <span className=" mt-1">My Chalets</span>
             <br />
             <span className="color">112</span>
           </Button>
-          <Button variant="primary" className="filterCount">
+          <Button variant="primary cardButton" className="filterCount">
             <img src="/images/requests icon.png" alt="chalet" />
             <br />
             <span className="text-secondary mt-1">Requests </span>
             <br />
             <span className="color">1000</span>
           </Button>
-          <Button variant="primary" className="filterCount">
+          <Button variant="primary cardButton" className="filterCount">
             <img src="/images/view icon.png" alt="chalet" />
             <br />
             <span className="text-secondary mt-1">Views</span>
