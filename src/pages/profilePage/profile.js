@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Nav from "../../Layout/nav";
 import { Button, Jumbotron } from "react-bootstrap";
 import { Row, Col, Layout } from "antd";
-import { Menu, Dropdown } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Menu } from "antd";
 import UserCard from "./components/usercard";
 import ProfileFilter from "./components/profileFilter";
 import ChaletCard from "./components/chaletCard";
@@ -39,6 +38,7 @@ const menu2 = (
 
 export default function Profile() {
   const [modalShow, setModalShow] = useState(false);
+
   return (
     <div className="profile">
       <Layout>
