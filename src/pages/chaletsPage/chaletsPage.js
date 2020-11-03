@@ -16,8 +16,8 @@ export default function ChaletsPage() {
       <Layout className="chalitsContent">
         <Content>
           {/* <div className="site-layout-content"> */}
-          <Row className="m-5">
-            <Col span={15} offset={5}>
+          <Row className="mt-5 mb-5 chaletsFilter">
+            <Col xl={20} xxl={16} span={15} xxlOffset={4} offset={5}>
               <HomeFilter />
             </Col>
           </Row>
@@ -49,7 +49,13 @@ export default function ChaletsPage() {
               <Row>
                 <Sider className="m-0">
                   <Row className="maps">
-                    <Col span={10} offset={20} className="m-0 rentchalet">
+                    <Col
+                      xl={6}
+                      xxl={8}
+                      span={10}
+                      offset={20}
+                      className="m-0 rentchalet"
+                    >
                       <GoogleMap />
                     </Col>
                   </Row>

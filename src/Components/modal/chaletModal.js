@@ -1,20 +1,29 @@
 import React, { useState, useRef } from "react";
-import { Modal } from "react-bootstrap";
-import { Form, Select, Checkbox, Button, Upload, Row, Col, Input } from "antd";
+import { Modal, Button } from "react-bootstrap";
+import {
+  Form,
+  Select,
+  Checkbox,
+  Upload,
+  Button as Btn,
+  Row,
+  Col,
+  Input,
+} from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import Map from "../map";
 import "../../Styling/chaletModal.css";
 import "../../Styling/home.css";
 const { TextArea } = Input;
 const { Option } = Select;
-const formItemLayout = {
-  labelCol: {
-    span: 6,
-  },
-  wrapperCol: {
-    span: 14,
-  },
-};
+// const formItemLayout = {
+//   labelCol: {
+//     span: 6,
+//   },
+//   wrapperCol: {
+//     span: 14,
+//   },
+// };
 
 const normFile = (e) => {
   console.log("Upload event:", e);
@@ -71,9 +80,12 @@ export default function AboutChaletModal(props) {
           Add Chalet
         </Modal.Title>
         <div className="mt-3 tabs">
-          <div className="left-div"></div>
+          {currentTab === "aboutChalet" && <div className="left-div"></div>}
+
           <Button className="tab p-3 mb-5 mr-3">About Chalet</Button>
+          {currentTab === "images" && <div className="left-div"></div>}
           <Button className="tab p-3 mb-5 mr-3">Images</Button>
+          {currentTab === "verification" && <div className="left-div"></div>}
           <Button className="tab p-3 mb-5 mr-3">Verification</Button>
         </div>
       </Modal.Header>
@@ -83,39 +95,49 @@ export default function AboutChaletModal(props) {
           <Form
             name="validate_other"
             className="ml-1 h2"
-            {...formItemLayout}
+            // {...formItemLayout}
             onFinish={onFinish}
           >
             <Row>
               <Col span={13}>
                 <Form.Item label="Location" className="label">
                   <Col span={2}>
-                    <Row className="add-loction mt-5">
-                      <Col span={16} offset={1}>
+                    <Row className="add-loction">
+                      <Col span={18} offset={3}>
                         <Map />
                       </Col>
                     </Row>
                   </Col>
                 </Form.Item>
-                <Form.Item label="Address" className="input-icons label">
-                  <Col>
-                    {/* <i class="fas fa-map-marker-alt icon "></i> */}
-                    <Input
-                      {...props}
-                      className="input-field d-block p-3  inputs"
-                      placeholder="Address of your Chalet "
-                    />
-                  </Col>
+                <Form.Item
+                  label="Address"
+                  className="input-icons label mb-0 mr-3"
+                ></Form.Item>
+                <Form.Item>
+                  <Row>
+                    <Col span={6}>
+                      {/* <i class="fas fa-map-marker-alt icon "></i> */}
+                      <Input
+                        {...props}
+                        className="input-field d-block p-3 inputs ml-3"
+                        placeholder="Address of your Chalet "
+                      />
+                    </Col>
+                  </Row>
                 </Form.Item>
               </Col>
               <Col span={1} offset={15}></Col>
             </Row>
 
             <Row>
-              <Col span={12}>
-                <Form.Item className="input-icons label" label="Description">
-                  <Row className="ml-3">
-                    <Col span={25}>
+              <Col span={10}>
+                <Form.Item
+                  className="input-icons label mb-0 mr-3"
+                  label="Description"
+                ></Form.Item>
+                <Form.Item>
+                  <Row>
+                    <Col span={23} className="ml-3">
                       {/* <i class="fas fa-pen icon "></i> */}
                       <TextArea
                         placeholder="textarea with clear icon"
@@ -132,7 +154,10 @@ export default function AboutChaletModal(props) {
                     </Col>
                   </Row>
                 </Form.Item>
-                <Form.Item label="Fee per night" className="input-icons label">
+                <Form.Item
+                  label="Fee per night"
+                  className="input-icons label mb-3 mr-3"
+                >
                   <Row>
                     <Col span={6}>
                       {/* <i class="fas fa-dollar-sign"></i> */}
@@ -147,7 +172,7 @@ export default function AboutChaletModal(props) {
                   </Row>
                 </Form.Item>
                 <Form.Item
-                  className="input-icons label"
+                  className="input-icons label mt-5 mb-3"
                   name="select"
                   label="Availability"
                   hasFeedback
@@ -158,14 +183,24 @@ export default function AboutChaletModal(props) {
                   //   },
                   // ]}
                 >
-                  <Select defaultValue="Available To All">
-                    <Option value="Available To All">Available To All</Option>
-                    <Option value="Available To Rent">Available To Rent</Option>
-                    <Option value="Available To Exchange">
-                      Available To Exchange
-                    </Option>
-                    <Option value="Available To Sell">Available To Sell</Option>
-                  </Select>
+                  <Row>
+                    <Col span={18}>
+                      <Select defaultValue="Available To All">
+                        <Option value="Available To All">
+                          Available To All
+                        </Option>
+                        <Option value="Available To Rent">
+                          Available To Rent
+                        </Option>
+                        <Option value="Available To Exchange">
+                          Available To Exchange
+                        </Option>
+                        <Option value="Available To Sell">
+                          Available To Sell
+                        </Option>
+                      </Select>
+                    </Col>
+                  </Row>
                 </Form.Item>
                 {/* <Form.Group
                    inline
@@ -181,7 +216,10 @@ export default function AboutChaletModal(props) {
                    </Form.Control>
                  </Form.Group> */}
 
-                <Form.Item label="Max Guests" className="input-icons label">
+                <Form.Item
+                  label="Max Guests"
+                  className="input-icons label mb-3"
+                >
                   {/* <i class="fas fa-users"></i> */}
                   <Input
                     {...props}
@@ -245,7 +283,7 @@ export default function AboutChaletModal(props) {
               className="label"
             >
               <Upload name="logo" action="/upload.do" listType="picture">
-                <Button icon={<UploadOutlined />}>Click to upload</Button>
+                <Btn icon={<UploadOutlined />}>Click to upload</Btn>
               </Upload>
             </Form.Item>
             <Form.Item
@@ -292,11 +330,7 @@ export default function AboutChaletModal(props) {
               <Button variant="outline-secondary" onClick={handlePreviousClick}>
                 <i class="fas fa-angle-double-left"></i>Pervious
               </Button>
-              <Button
-                variant="outline-primary"
-                variant="outline-primary"
-                onClick={handleNextClick}
-              >
+              <Button variant="outline-primary" onClick={handleNextClick}>
                 Next <i class="fas fa-angle-double-right ml-3"></i>
               </Button>{" "}
               <Button variant="outline-secondary" onClick={handleCancel}>
@@ -356,7 +390,7 @@ export default function AboutChaletModal(props) {
                 <i class="fas fa-angle-double-left"></i>
                 Pervious
               </Button>
-              <Button variant="outline-primary" variant="outline-primary">
+              <Button variant="outline-primary">
                 Done <i class="fas fa-angle-double-right ml-3"></i>
               </Button>{" "}
               <Button variant="outline-secondary" onClick={handleCancel}>

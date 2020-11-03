@@ -21,8 +21,8 @@
   color: #0070d3 !important;
 }
 .addButton {
-  position: absolute;
   padding: 1%;
+  position: absolute;
   bottom: 18%;
   left: 7%;
   background-color: white !important;
@@ -30,6 +30,58 @@
   font-size: medium !important;
   box-shadow: 10px 10px 5px #00000038;
   border: none !important;
+}
+@media(min-width:1280px) and (min-height:720px){
+  .addButton{
+    position: absolute;
+    bottom: -3%;
+    left: 5%;
+  }
+}
+@media(min-width:1280px) and (min-height:800px){
+  .addButton{
+    position: absolute;
+    bottom: 9%;
+    left: 7%;
+  }
+}
+@media(min-width:1280px) and (min-height:1024px){
+  .addButton{
+    position: absolute;
+    bottom: 28%;
+    left: 5%;
+  }
+}
+    @media(min-width:1360px) and (max-width:1366px) and (min-height:768px){
+      .addButton{
+        position: absolute;
+        bottom: 5%;
+        left: 7%;
+      }
+    }
+@media(min-width:1500px){
+  .addButton{
+    margin-bottom:-2%;
+  }
+}
+@media(min-width:1680px) and (min-height:1050px){
+  .addButton{
+    margin-bottom: 1%;
+  }
+}
+@media(min-width:1920px){
+
+  .addButton {
+    padding: 1%;
+    position: absolute;
+    bottom: 18%;
+    left: 7%;
+    background-color: white !important;
+    border-radius: 2.25rem !important;
+    font-size: medium !important;
+    box-shadow: 10px 10px 5px #00000038;
+    border: none !important;
+  }
 }
 .add {
   font-size: x-large;
@@ -48,6 +100,47 @@
   width: 75%;
   margin-left: 22%;
 }
+@media(min-width:1280px){
+  .content{
+  margin-left: 25%;
+  } 
+  .username{
+  position: absolute;
+  top: 75%;
+  left: 25%;
+}
+}
+@media(min-width:1536px){
+  .content{
+    margin-left: 25%;
+  }
+  .username{
+    position: absolute;
+    top: 75%;
+    left: 26%;
+  }
+}
+@media(min-width:1360px) and (max-width:1366px) and (min-height:768px){
+  .content{
+    margin-left: 25%;
+  }
+  .username{
+    position: absolute;
+    top: 75%;
+    left: 24%;
+  }
+  }
+@media(min-width:1440px) and (min-height:900px){
+  .content{
+    margin-left: 25%;
+  }
+  .username{
+    position: absolute;
+    top: 75%;
+    left: 25%;
+  }
+}
+
 .ant-layout-sider {
   flex: 0 0 22% !important;
   max-width: 0 !important;
@@ -79,6 +172,16 @@
   font-size: x-large;
   color: #c8d2e287;
   margin-right: -16rem;
+}
+@media(min-width:1280px){
+  .trash{
+    margin-right: -5rem;
+  }
+}
+@media(min-width:1920px){
+  .trash {
+    margin-right: -16rem;
+  }
 }
 /* .anticon {
   font-size: large;

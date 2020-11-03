@@ -5,8 +5,28 @@
     padding: 0 55px !important;
     position: absolute;
     width: 37.8rem;
-    margin-left: 3%;
-    
+}
+@media(min-width:1280px){
+    .userCard{
+        margin-left: -2%;
+    }
+}
+@media(min-width:1360px) and (max-width:1366px) and (min-height:768px){
+    .userCard{
+        margin-left: -1%;
+    }
+}
+@media(min-width:1440px) and (min-height:900px){
+    .userCard{
+        margin-left: 0%;
+    }
+}
+@media(min-width:1920px){
+
+    .userCard{
+
+        margin-left: 3%
+    }
 }
 .imgCard{
     position: relative;

@@ -14,8 +14,14 @@ export default function Home() {
       <HomeNav />
       <Content id="home-content">
         <div className="site-layout-content">
-          <Row>
-            <Col span={13} offset={5}>
+          <Row
+            className="filterContainer"
+            // gutter={{
+            //   xl: 3,
+            //   // xxlg: 13,
+            // }}
+          >
+            <Col>
               <HomeFilter />
             </Col>
           </Row>
@@ -33,9 +39,9 @@ export default function Home() {
           </div>
           <div className="site-card-wrapper">
             <Row>
-              <Col span={12} offset={7}>
-                <Row>
-                  <Col span={6}>
+              <Col span={15} offset={7}>
+                <Row gutter={{ xl: 9, xxlg: 6 }}>
+                  <Col className="gutter-row">
                     <Card className="text-center basic-card">
                       <Card.Header className="text-center text-white font-weight-bold">
                         <img
@@ -62,7 +68,7 @@ export default function Home() {
                       <Card.Footer>6 $</Card.Footer>
                     </Card>
                   </Col>
-                  <Col span={6}>
+                  <Col className="gutter-row">
                     <Card className="text-center advance-card">
                       <Card.Header className="text-center text-white font-weight-bold pt-3">
                         <img
@@ -91,7 +97,7 @@ export default function Home() {
                       </Card.Footer>
                     </Card>
                   </Col>
-                  <Col span={6}>
+                  <Col className="gutter-row">
                     <Card className="text-center platinum-card">
                       <Card.Header className="text-center text-white font-weight-bold">
                         <img

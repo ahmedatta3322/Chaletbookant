@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Nav from "../../Layout/nav";
 import { Button, Jumbotron } from "react-bootstrap";
-import { Row, Col, Layout } from "antd";
+import { Row, Col, Layout, Dropdown } from "antd";
 import { Menu } from "antd";
 import UserCard from "./components/usercard";
 import ProfileFilter from "./components/profileFilter";
@@ -10,7 +10,7 @@ import SubscribeCard from "./components/subscribeCard";
 import "../../Styling/profile.css";
 import Foter from "../../Layout/Footer";
 import AboutChaletModal from "../../Components/modal/chaletModal";
-
+import { DownOutlined } from "@ant-design/icons";
 const { Sider, Content } = Layout;
 
 const menu1 = (
@@ -59,32 +59,33 @@ export default function Profile() {
         <Layout className="content">
           <Content>
             <Row>
-              <Col span={10} offset={4}>
+              <Col xl={15} span={10} offset={4}>
                 <ProfileFilter />
               </Col>
             </Row>
             <Row>
               {/* chalits*/}
-              <Col span={30} offset={25}>
+              {/* <Col xl={20} xxl={24} offset={25}>
                 <Row>
-                  <Col span={6}>
+                  <Col xl={10} xxl={6} span={6}>
                     <ChaletCard />
                   </Col>
-                  <Col span={1}></Col>
-                  <Col span={6}>
+                  <Col md={1} span={1}></Col>
+                  <Col xl={10} xxl={6} span={6}>
                     <ChaletCard />
                   </Col>
-                  <Col span={1}></Col>
-                  <Col span={6}>
+                  <Col md={1} span={1}></Col>
+                  <Col xl={10} xxl={6} span={6}>
                     <ChaletCard />
                   </Col>
-                  <Col span={6}>
+                  <Col md={1}></Col>
+                  <Col xl={10} xxl={6} span={6}>
                     <ChaletCard />
                   </Col>
                 </Row>
-              </Col>
+              </Col> */}
               {/* Requests*/}
-              {/* <Col span={20}>
+              <Col span={20} xl={23} className="mt-5">
                 <Row className="requestfilter">
                   <Dropdown
                     overlay={menu1}
@@ -124,16 +125,16 @@ export default function Profile() {
                       </p>
                     </Col>
                     <Col span={4}></Col>
-                    <Col span={3}>
+                    <Col xl={5} span={3}>
                       <Row>
                         <Button
                           variant="primary"
-                          className="active pl-3 pr-3 p-3 viewbtn d-flex"
+                          className="active pl-3 pr-3 p-3 viewbtn d-flex border-0"
                         >
                           view
-                        </Button> */}
-              {/*it will show in received only*/}
-              {/* <Button>
+                        </Button>
+                        {/*it will show in received only*/}
+                        <Button className="border-0">
                           <i class="fas fa-trash-alt trash"></i>
                         </Button>
                       </Row>
@@ -149,23 +150,23 @@ export default function Profile() {
                       </p>
                     </Col>
                     <Col span={4}></Col>
-                    <Col span={3}>
+                    <Col xl={5} span={3}>
                       <Row>
                         <Button
                           variant="primary"
-                          className="active pl-3 pr-3 p-3 viewbtn d-flex"
+                          className="active pl-3 pr-3 p-3 viewbtn d-flex border-0"
                         >
                           view
-                        </Button> */}
-              {/*it will show in received only*/}
-              {/* <Button>
+                        </Button>
+                        {/*it will show in received only*/}
+                        <Button className="border-0">
                           <i class="fas fa-trash-alt trash"></i>
                         </Button>
                       </Row>
                     </Col>
                   </Row>
                 </div>
-              </Col>  */}
+              </Col>
               {/* end of requests*/}
             </Row>
           </Content>
