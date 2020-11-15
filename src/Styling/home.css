@@ -2,26 +2,50 @@
   /* background: none !important; */
   background-color: #efefef !important;
 }
-.site-layout-content {
-  height: 170vh !important;
+.site-home-content {
+  height: 233vh !important;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
-.map {
+.home-map {
   /* height: 18vh; */
-  height: 20%;
-  margin-top: 3rem;
+  /* height: 42vh; */
+  height: 52rem;
+  width: 109.8rem;
+  margin-top: 2.8rem;
+}
+.home-map h5,.whychalet h5,.site-card-wrapper h5{
+  font-size: 2rem;
+  color: #C8D2E2;
+}
+.site-card-wrapper h5{
+  transform: translate(-67px,42px);
+  margin-bottom:10rem
 }
 .whychalet {
+  height: 831px;
   background-color: #79b0e1;
   margin-top: 6.3%;
   text-align: center;
-  margin-bottom: 5%;
-  opacity: 0.8;
+  margin-bottom: 1%;
+  position: relative;
+  /* opacity: 0.8; */
+}
+.whychalet h5{
+  padding-top: 8rem;
 }
 .whychalet-img {
-  width: 50%;
-  padding: 3%;
+  width: 1145.91px;
+  /* height: 578.89px; */
+  margin-top: 6%;
+  position: absolute;
+  left: 20%;
+  bottom: -111.5%;
+}
+.left-side-wave-img{
+    position: absolute;
+    top: 150rem;
+    left: -3px;
 }
 .ant-card-head {
   border: none !important;
@@ -29,24 +53,39 @@
 .icon {
   display: block;
 }
+.site-card-wrapper{
+  transform: translateY(-164px);
+}
 .card {
   box-shadow: 10px 10px 5px rgb(0 0 0 / 15%);
+
 }
 .card-header {
   display: flex;
   flex-flow: column;
   align-items: center;
   background-color: #0070d3 !important;
-  font-size: larger;
+  font-size: 3.5rem;
 }
 .card-body {
   text-align: left;
   color: #31418c;
-  padding: 2rem 2rem 3rem !important;
+  padding: 6rem 2rem 3rem !important;
+  
 }
 .size {
-  font-size: large;
+  font-size: 2.4rem;
   font-weight: 500;
+}
+.subscribe{
+  width: 35.4rem;
+}
+.headerCard{
+  font-size: 3.5rem;
+}
+.basic-card ,.advance-card,.platinum-card{
+  height: 46.8rem;
+  width: 35.4rem;
 }
 .advance-card {
   transform: translateY(-28px);
@@ -58,12 +97,12 @@
 .platinum-card {
   transform: translateX(-22px);
 }
-.advance-img {
+/* .advance-img {
   width: 56%;
 }
 .platinum-img {
   width: 37%;
-}
+} */
 .blue-icon {
   color: #0070d3;
   font-size: medium;
@@ -75,7 +114,7 @@
   background-image: url("/images/wave.png");
   background-color: rgba(0, 0, 0, 0) !important;
   color: #ffb741 !important;
-  font-size: large;
+  font-size: 3.5rem;
   font-weight: 500;
   background-size: cover;
   padding: 1rem 2rem;
@@ -150,6 +189,6 @@
 }
 @media(min-width:1920px){
   .filterContainer{
-    margin: 0 24%;
+    margin: -5.5rem 24% -2rem;
   }
 }

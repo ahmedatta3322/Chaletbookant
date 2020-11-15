@@ -4,10 +4,10 @@ import "../../../Styling/usercard.css";
 import "../../../Styling/subscribeCard.css";
 export default function SubscribeCard() {
   return (
-    <div>
+    <div className="subscribeCard">
       <Card className="mt-5 mb-5">
         <Card.Header className="heading">SUBSCRIBTION</Card.Header>
-        <Card.Body>
+        <Card.Body className="p-1 pb-3">
           {/* <Card.Title>Special title treatment</Card.Title> */}
           <Card.Text>
             <img
@@ -30,7 +30,7 @@ export default function SubscribeCard() {
               </Card.Text>
 
               <Card.Text>
-                <i class="fas fa-check  mr-3"></i>Up to 2/4 Units.
+                <i class="fas fa-check  mr-3"></i> 2/4 Units.
               </Card.Text>
             </div>
             <div className="text-center mb-3 mt-3">

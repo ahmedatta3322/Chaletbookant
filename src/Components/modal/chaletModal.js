@@ -94,15 +94,15 @@ export default function AboutChaletModal(props) {
         <Modal.Body id="aboutChalet" ref={parentRef}>
           <Form
             name="validate_other"
-            className="ml-1 h2"
+            className="ml-1 h2 form"
             // {...formItemLayout}
             onFinish={onFinish}
           >
             <Row>
               <Col span={13}>
-                <Form.Item label="Location" className="label">
+                <Form.Item label="Location" className="label mb-0">
                   <Col span={2}>
-                    <Row className="add-loction">
+                    <Row className="add-loction mt-1">
                       <Col span={18} offset={3}>
                         <Map />
                       </Col>
@@ -111,9 +111,9 @@ export default function AboutChaletModal(props) {
                 </Form.Item>
                 <Form.Item
                   label="Address"
-                  className="input-icons label mb-0 mr-3"
+                  className="input-icons mt-3 label mb-0 mr-3"
                 ></Form.Item>
-                <Form.Item>
+                <Form.Item className="mb-3">
                   <Row>
                     <Col span={6}>
                       {/* <i class="fas fa-map-marker-alt icon "></i> */}
@@ -130,12 +130,12 @@ export default function AboutChaletModal(props) {
             </Row>
 
             <Row>
-              <Col span={10}>
+              <Col span={13}>
                 <Form.Item
                   className="input-icons label mb-0 mr-3"
                   label="Description"
                 ></Form.Item>
-                <Form.Item>
+                <Form.Item className="mb-3">
                   <Row>
                     <Col span={23} className="ml-3">
                       {/* <i class="fas fa-pen icon "></i> */}
@@ -156,7 +156,7 @@ export default function AboutChaletModal(props) {
                 </Form.Item>
                 <Form.Item
                   label="Fee per night"
-                  className="input-icons label mb-3 mr-3"
+                  className="input-icons label mb-2 mr-3"
                 >
                   <Row>
                     <Col span={6}>
@@ -172,7 +172,7 @@ export default function AboutChaletModal(props) {
                   </Row>
                 </Form.Item>
                 <Form.Item
-                  className="input-icons label mt-5 mb-3"
+                  className="input-icons label mt-4 mb-3"
                   name="select"
                   label="Availability"
                   hasFeedback
@@ -257,76 +257,84 @@ export default function AboutChaletModal(props) {
           // }`}
           // className="d-none"
         >
-          <Form className="pt-3 pl-3 pr-3">
-            <Form.Item label="Chalet Cover" className="label">
-              <Form.Item
-                name="dragger"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                noStyle
-              >
-                <Upload.Dragger name="files" action="/upload.do">
-                  <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">
-                    Click or drag Image to this area to upload
-                  </p>
-                </Upload.Dragger>
-              </Form.Item>
+          <Form className="pt-3 pl-3 pr-3 form">
+            <Form.Item label="Chalet Cover" className="label"></Form.Item>
+            <Form.Item
+              name="dragger"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+              noStyle
+            >
+              <Upload.Dragger name="files" action="/upload.do">
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or drag Image to this area to upload
+                </p>
+              </Upload.Dragger>
             </Form.Item>
+
             <Form.Item
               name="upload"
               label="Chalet Photos"
               valuePropName="fileList"
               getValueFromEvent={normFile}
-              className="label"
+              className="label mb-3"
+            ></Form.Item>
+            <Upload
+              name="logo"
+              action="/upload.do"
+              listType="picture"
+              className="ml-3"
             >
-              <Upload name="logo" action="/upload.do" listType="picture">
-                <Btn icon={<UploadOutlined />}>Click to upload</Btn>
-              </Upload>
-            </Form.Item>
+              <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
+            </Upload>
+
             <Form.Item
               name="checkbox-group"
               label="Chalet Features"
-              className="label"
-            >
-              <Checkbox.Group>
-                <Row>
-                  <Col span={15}>
-                    <Checkbox
-                      value="Air Condition"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                    >
-                      Air Condition
-                    </Checkbox>
-                  </Col>
-                  <Col span={15}>
-                    <Checkbox
-                      value="WI-FI"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                    >
-                      WI-FI
-                    </Checkbox>
-                  </Col>
-                  <Col span={15}>
-                    <Checkbox
-                      value="Garden"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                    >
-                      Garden
-                    </Checkbox>
-                  </Col>
-                </Row>
-              </Checkbox.Group>
-            </Form.Item>
-            <Modal.Footer>
+              className="label mb-3 mt-3"
+            ></Form.Item>
+            <Checkbox.Group className="ml-4 mb-5">
+              <Row>
+                <Col span={15}>
+                  <Checkbox
+                    value="Air Condition"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                    className="mb-2"
+                  >
+                    Air Condition
+                  </Checkbox>
+                </Col>
+                <Col span={15}>
+                  <Checkbox
+                    value="WI-FI"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                    className="mb-2"
+                  >
+                    WI-FI
+                  </Checkbox>
+                </Col>
+                <Col span={15}>
+                  <Checkbox
+                    value="Garden"
+                    style={{
+                      lineHeight: "32px",
+                    }}
+                    className="mb-2"
+                  >
+                    Garden
+                  </Checkbox>
+                </Col>
+              </Row>
+            </Checkbox.Group>
+
+            <Modal.Footer className="modalFooter">
               <Button variant="outline-secondary" onClick={handlePreviousClick}>
                 <i class="fas fa-angle-double-left"></i>Pervious
               </Button>
@@ -344,22 +352,25 @@ export default function AboutChaletModal(props) {
       {currentTab === "verification" && (
         <Modal.Body id="verification" ref={parentRef}>
           {" "}
-          <Form>
-            <Form.Item label="Chalet license" className="label m-5">
-              <Form.Item
-                name="dragger"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                noStyle
-              >
-                <Upload.Dragger name="files" action="/upload.do">
-                  <p className="ant-upload-drag-icon">
-                    <i class="fas fa-file-upload"></i>
-                  </p>
-                  <p className="ant-upload-text">Upload the Chalet document</p>
-                </Upload.Dragger>
-              </Form.Item>
+          <Form className="form">
+            <Form.Item
+              label="Chalet license"
+              className="label mb-3"
+            ></Form.Item>
+            <Form.Item
+              name="dragger"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+              noStyle
+            >
+              <Upload.Dragger name="files" action="/upload.do">
+                <p className="ant-upload-drag-icon">
+                  <i class="fas fa-file-upload"></i>
+                </p>
+                <p className="ant-upload-text">Upload the Chalet document</p>
+              </Upload.Dragger>
             </Form.Item>
+
             <div className="label ml-5 h4">
               <span className="yellow">Chalet</span>
               <span className="blue">Book</span> Terms &amp; Conditions
@@ -385,14 +396,12 @@ export default function AboutChaletModal(props) {
                 </Checkbox>
               </Col>
             </Row>
-            <Modal.Footer>
+            <Modal.Footer className="modalFooter-third">
               <Button variant="outline-secondary" onClick={handlePreviousClick}>
                 <i class="fas fa-angle-double-left"></i>
                 Pervious
               </Button>
-              <Button variant="outline-primary">
-                Done <i class="fas fa-angle-double-right ml-3"></i>
-              </Button>{" "}
+              <Button variant="outline-primary">Done</Button>{" "}
               <Button variant="outline-secondary" onClick={handleCancel}>
                 Skip
               </Button>

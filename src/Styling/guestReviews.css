@@ -1,0 +1,16 @@
+.ant-card-head {
+  color: white;
+}
+
+.comment-title {
+  font-size: 1.4rem !important;
+  color: #0070d3;
+  font-family: lato;
+  font-weight: bold !important;
+}
+/* .anticon svg {
+  color: #ffb741 !important;
+} */
+.Review-card{
+  height: 53.8rem;
+}

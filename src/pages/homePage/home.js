@@ -13,7 +13,7 @@ export default function Home() {
     <Layout>
       <HomeNav />
       <Content id="home-content">
-        <div className="site-layout-content">
+        <div className="site-home-content">
           <Row
             className="filterContainer"
             // gutter={{
@@ -21,29 +21,39 @@ export default function Home() {
             //   // xxlg: 13,
             // }}
           >
-            <Col>
+            <Col offset={1}>
               <HomeFilter />
             </Col>
           </Row>
-          <Row className="map">
-            <Col span={16} offset={4}>
+          <Row className="home-map">
+            <Col span={24} offset={9}>
+              <h5 className="pt-5 pb-5">Find the Perfect Chalet </h5>
               <Map />
             </Col>
           </Row>
           <div className="whychalet">
+            <h5>Why should you choose us? </h5>
+          </div>
+          <img
+            className="whychalet-img"
+            src="/images/why chaletbook.png"
+            alt="site flow"
+          />
+          <div className="left-side-wave">
             <img
-              className="whychalet-img"
-              src="/images/why chaletbook.png"
-              alt="site flow"
+              className="left-side-wave-img"
+              src="/images/b-sidewave.png"
+              alt="wave"
             />
           </div>
-          <div className="site-card-wrapper">
+          <div className="site-card-wrapper mb-5">
             <Row>
-              <Col span={15} offset={7}>
+              <Col span={15} offset={5}>
+                <h5>Memberships </h5>
                 <Row gutter={{ xl: 9, xxlg: 6 }}>
-                  <Col className="gutter-row">
+                  <Col className="gutter-row subscribe">
                     <Card className="text-center basic-card">
-                      <Card.Header className="text-center text-white font-weight-bold">
+                      <Card.Header className="text-center text-white headerCard  font-weight-bold">
                         <img
                           src="/images/Basic Icon.png"
                           alt="basic"
@@ -68,9 +78,9 @@ export default function Home() {
                       <Card.Footer>6 $</Card.Footer>
                     </Card>
                   </Col>
-                  <Col className="gutter-row">
+                  <Col className="gutter-row subscribe">
                     <Card className="text-center advance-card">
-                      <Card.Header className="text-center text-white font-weight-bold pt-3">
+                      <Card.Header className="text-center text-white headerCard font-weight-bold pt-3">
                         <img
                           src="/images/Advance Icon.png"
                           alt="basic"
@@ -97,9 +107,9 @@ export default function Home() {
                       </Card.Footer>
                     </Card>
                   </Col>
-                  <Col className="gutter-row">
+                  <Col className="gutter-row subscribe">
                     <Card className="text-center platinum-card">
-                      <Card.Header className="text-center text-white font-weight-bold">
+                      <Card.Header className="text-center headerCard text-white font-weight-bold">
                         <img
                           src="/images/Platinum icon.png"
                           alt="basic"

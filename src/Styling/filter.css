@@ -1,22 +1,29 @@
 .filter{
+    width: 92rem;
     border-radius: 2.6rem !important;
 border :1px solid none;
 background-color: #0070D3;
 padding: 1rem;
 color: white;
 }
-
+.type-btn{
+    transform: translateX(-6px) !important;
+}
+.ant-btn{
+    
+    margin-right: 0 !important;
+}
 .ant-btn,.ant-picker,.ant-select-selector,.ant-input-number{
     border-radius: 2.6rem !important;
     margin-right: 3rem;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
 }
 label{
     /* margin-right: 1rem;
     margin-left: 1rem; */
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-left: .5rem;
+    /* margin-left: .5rem; */
 }
 .ant-input-number-handler-wrap{
     position: absolute;
@@ -24,3 +31,9 @@ label{
     right: 7px !important;
     opacity: 1 !important;
 }
+.filter-btn{
+    background-color: "#F8B544" !important;
+    color: "white"!important;
+    border: "none" !important;
+    margin-left: 1rem !important;
+  }

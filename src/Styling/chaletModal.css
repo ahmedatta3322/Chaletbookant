@@ -22,15 +22,20 @@
     height: 5.5rem !important;
     margin-left: 5rem;
 }
+.form{
+    width: 724px;
+    height: 724px;
+}
 .label{
     font-size: large;
     font-weight: bold;
 }
 .add-loction {
-    height: 23rem;
+    height: 167px;
+    /* height: 23rem; */
     width: 85rem;
     margin-left: -8rem;
-    margin-bottom: 4rem;
+    /* margin-bottom: 4rem; */
     margin-top: -2.5rem;
 }
 .input-icons i {
@@ -62,4 +67,15 @@
   .terms{
       border: 1px solid #C8D2E2;
       border-radius: 2.25rem;
+  }
+  .ant-upload-drag{
+    height: 20.4rem !important;
+   margin-left: 2rem !important;
+    margin-bottom: 5rem !important;
+  }
+  .modalFooter{
+      margin-top: 8rem;
+  }
+  .modalFooter-third{
+      margin-top: 15rem;
   }

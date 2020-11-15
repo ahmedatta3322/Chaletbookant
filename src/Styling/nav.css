@@ -5,7 +5,7 @@
   display: flex;
   background-color: #0070d3 !important;
   justify-content: space-between;
-  box-shadow: 10px 10px 5px rgb(0 0 0 / 15%);
+  /* box-shadow: 10px 10px 5px rgb(0 0 0 / 15%); */
 }
 #root {
   height: 100%;

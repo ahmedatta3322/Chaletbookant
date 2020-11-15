@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Menu, Badge } from "antd";
 import "../Styling/nav.css";
+import { NavLink } from "react-router-dom";
 const { Header } = Layout;
 
 export default function Nav() {
@@ -8,7 +9,9 @@ export default function Nav() {
     // <Layout className="layout">
     <Header className="header">
       <div className="logo">
-        <img className="logo-immg" src="/images/logo.png" alt="logo" />
+        <NavLink to="/">
+          <img className="logo-immg mb-5" src="/images/logo.png" alt="logo" />
+        </NavLink>
       </div>
       <Menu mode="horizontal" className="mt-1">
         <Menu.Item className="home-menu-item home-menu-item-active" key="1">

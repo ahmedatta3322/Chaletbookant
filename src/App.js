@@ -4,6 +4,9 @@ import "./App.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Profile from "./pages/profilePage/profile";
 import ChaletsPage from "./pages/chaletsPage/chaletsPage";
+import ViewChalet from "./pages/detailsChalet/viewChalet";
+import Login from "./pages/login";
+import SignUp from "./pages/signup";
 function App() {
   return (
     <>
@@ -12,6 +15,9 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/profile/1" component={Profile} />
           <Route exact path="/chalets" component={ChaletsPage} />
+          <Route exact path="/viewchalet/1" component={ViewChalet} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
         </Switch>
       </BrowserRouter>
       {/* <Home />  */}

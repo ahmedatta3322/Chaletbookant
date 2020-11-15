@@ -1,21 +1,29 @@
 import React from "react";
-import { Layout, Menu, Button, Row } from "antd";
+import { Layout, Menu, Row } from "antd";
 import "../../../Styling/homeheadernav.css";
+import { Link, withRouter } from "react-router-dom";
 const { Header } = Layout;
-
-export default function HomeNav() {
+function HomeNav(props) {
+  console.log(props.location.pathname);
   return (
     <Layout className="layout">
       <Header id="home-header">
         <div className="logo">
           <img className="logo-img" src="/images/logo.png" alt="logo" />
         </div>
-        <Menu id="home-menu" mode="horizontal" defaultSelectedKeys={["1"]}>
+        <Menu
+          id="home-menu"
+          mode="horizontal"
+          selectedKeys={[props.location.pathname]}
+        >
           <Menu.Item className="home-menu-item home-menu-item-active" key="1">
             Home
           </Menu.Item>
-          <Menu.Item className="home-menu-item " key="2">
-            Services
+          <Menu.Item className="home-menu-item" key="/chalets">
+            <Link to="/chalets" className="text-white text-decoration-none">
+              {" "}
+              Chalets
+            </Link>
           </Menu.Item>
           <Menu.Item className="home-menu-item" key="3">
             About us
@@ -23,16 +31,21 @@ export default function HomeNav() {
           <Menu.Item className="home-menu-item" key="4">
             Contact
           </Menu.Item>
-          <Button
-            className="login-btn"
-            style={{
-              backgroundColor: "#F8B544",
-              color: "white",
-              border: "none",
-            }}
-          >
-            Login
-          </Button>
+          <Menu.Item className="home-menu-item" key="/login">
+            <Link
+              to="/login"
+              variant="primary"
+              className="login-btn"
+              style={{
+                backgroundColor: "#F8B544",
+                color: "white",
+                border: "none",
+                borderRadius: "0",
+              }}
+            >
+              Login
+            </Link>
+          </Menu.Item>
         </Menu>
         <Row>
           <Row>
@@ -47,18 +60,20 @@ export default function HomeNav() {
           </Row>
           <Row>
             <div className="wave">
-              <img className="wave-img" src="/images/wavees.png" alt="wave" />
+              <img className="wave-img" src="/images/waves.png" alt="wave" />
             </div>
           </Row>
         </Row>
-        {/* <div className="side-wave">
+        <div className="side-wave">
           <img
             className="side-wave-img"
-            src="/images/Side wave.png"
+            src="/images/side wave.png"
             alt="wave"
           />
-        </div> */}
+          <img src="/images/chair.jpg" className="chair" alt="chair" />
+        </div>
       </Header>
     </Layout>
   );
 }
+export default withRouter(HomeNav);

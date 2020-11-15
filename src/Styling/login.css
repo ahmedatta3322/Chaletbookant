@@ -1,0 +1,88 @@
+.login-content{
+    background-image: url('/images/bk login.png');
+    background-size: cover;
+    /* padding-bottom: 23.6rem;
+    padding-top: 8.2rem; */
+    padding-top: 1.2rem;
+}
+.p-login{
+    padding-bottom: 14.6rem;
+}
+.p-signup{
+
+    padding-bottom: 9.5rem;
+}
+.login{
+    background-color: white !important;
+    box-shadow: 10px 7px 5px #0000001f;
+    border-top-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    /* margin-top: 6rem !important; */
+    margin-top: 13.2rem !important;
+}
+.m-login{
+    margin-bottom: 4rem !important;
+}
+.m-signup{
+    margin-bottom: 0 !important;
+}
+.login-logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.ant-tabs-tab{
+    font-size: 3rem !important;
+    font-weight: bold;
+    color: #31418C !important;
+    padding: 1rem 7rem 1.4rem 7rem !important;
+    margin-right: 0 !important;
+}
+.ant-tabs-tab-active{
+    background-color: #F0F3F4 !important;
+
+}
+.ant-tabs-ink-bar{
+    height: 1.2rem !important;
+}
+.input-password{
+    width: 125% !important;
+    border-radius: 5rem !important;
+    box-shadow: 5px 5px 5px #0000001f;
+    height: 4.7rem;
+
+}
+.connect-btn{
+    font-size: 1.3rem !important;
+    color:#31418C !important ;
+    background-color: white !important;
+    border-top-left-radius: 25px !important;
+    border-bottom-right-radius: 25px !important;
+    border: 2px solid #C8D2E2 !important;
+}
+.connect-btn:hover{
+    color:#31418C !important ;
+    background-color: white !important;
+}
+.btn-submit{
+    border-radius: 0 !important;
+    background-color: #0076DE !important;
+}
+.lock,.email{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 4;
+    color: #0076DE;
+    background-color: #C8D2E2;
+    padding: 1.5rem 2rem 1.5rem;
+    border-bottom-left-radius: 23px;
+    border-top-left-radius: 26px;
+    font-size: large;
+}
+.input-email{
+    width: 125% !important;
+    border-radius: 5rem !important;
+    box-shadow: 5px 5px 5px #0000001f !important;
+    height: 4.7rem;
+}

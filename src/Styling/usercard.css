@@ -1,10 +1,12 @@
 .card{
-    box-shadow: 10px 10px 5px #00000038;
+    box-shadow: 7px 3px 5px rgb(0 0 0 / 15%);
 }
 .userCard{
-    padding: 0 55px !important;
+    /* padding: 0 55px !important; */
     position: absolute;
-    width: 37.8rem;
+    top: 3.1rem;
+    width: 42.9rem;
+    max-height: 72.8rem; 
 }
 @media(min-width:1280px){
     .userCard{
@@ -25,49 +27,79 @@
 
     .userCard{
 
-        margin-left: 3%
+        margin-left: 25%
     }
 }
 .imgCard{
     position: relative;
+    max-height: 49.06rem;
+    box-shadow: 0px 10px 5px #0000001f
+}
+.cardTitle,.readmore{
+    font-size: 1.1rem;
 }
 .info{
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 4%;
     background-color: white;
     padding:1rem;
-    border-radius: 2.25rem
+    border-radius: 2.25rem;
+    width: 30.5rem;
+    height: 4.8rem;
+
 }
 .blue{
     color: #0070D3;
+    font-size: medium;
 }
-.color{
+.phone{
+    border-right: 3px solid#0070D3;
+    padding: 1.9rem 1.5rem 1.6rem;
+}
+.count{
     color: #31418C;
 }
 .edit{
+    border-color: #ffff !important;
+    border-radius: 50% !important;
+    padding: 1rem !important;
     position: absolute;
-    top: 51%;
-    left: 86%;
-
+    top: 60%;
+    left: 82%;
+}
+.editIcon{
+    font-size: medium;
 }
 .filterCount{
-    padding: 1rem 2rem !important;
+    width: 14.2rem;
+    padding: 2rem 0 !important;
+    /* padding: 1rem 2rem !important; */
     color: #C8D2E2 !important;
 }
+
 .btn{
     background: transparent !important; 
     color: #C8D2E2;
 }
 .cardButton{
-    border: none !important
-
+    border: none !important;
+color: #C8D2E2;
 }
+.cardButton:hover{
+
+    background-color: #0070D3 !important;
+    color: #ffffff !important;
+} 
 .active{
     background-color: #0070D3 !important;
-   
+  
+}
+.cardBody{
+    font-size: 1rem;
 }
 .cardFooter{
     border-top: 1px solid #C8D2E2;
     padding: 0 !important;
+    font-size: 1.7rem;
 }

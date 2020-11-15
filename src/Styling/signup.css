@@ -1,0 +1,12 @@
+.labels{
+    color: #C8D2E2 !important;
+}
+/* .ant-form-item-label > label{
+    color: #31418C !important;
+} */
+.iconn{
+    position: absolute;
+    top: 7px;
+    right: 23rem;
+    font-size: large;
+}

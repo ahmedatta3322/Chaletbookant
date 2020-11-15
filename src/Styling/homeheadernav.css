@@ -4,9 +4,11 @@
   }
   #home-menu {
     background-color: transparent;
-    margin-right: 25%;
+    margin-right: -6%;
     color: #ffffff;
     margin-top: 0.8%;
+    font-size: 2.3rem;
+    z-index: 555;
   }
   .home-menu-item:hover {
     color: #F8B544 !important;
@@ -23,7 +25,9 @@
     height: 70vh;
     background-repeat: no-repeat;
   position: relative;
-  left: -1%;
+  /* left: -9%; */
+  /* width: 192.1rem;
+  transform: translate(10px, 0px); */
   }
   @media(min-width:1280px ){
     #home-header{
@@ -44,7 +48,7 @@
   }
       @media(min-width:1920px){
         #home-header{
-          height: 79vh;
+          height: 64vh;
         }
       }
   .layout {
@@ -60,12 +64,19 @@
     padding-top: 2%;
   }
   .logo-img{
-    width: 20%;
-    height: 9%;
+    width: 22%;
+    height: 10%;
+  }
+  .ant-btn{
+    border-radius: 0 !important;
+
   }
   .login-btn{
     background-color: #F8B544;
     color: #ffffff;
+    font-size: 2.3rem !important;
+    padding: .5rem 2rem 1rem !important;
+    text-decoration: none !important;
   }
   .wave{
     position: absolute;
@@ -96,9 +107,22 @@
   @media(min-width:1920px){
     .wave{
       position: absolute;
-      right: -1%;
-      bottom: 0rem;
-    }
+      /* bottom: 0rem; */
+      /* right: -1.5rem; */
+      right: 0rem;
+      bottom: -7rem;
+      /* transform: rotateX(56deg); */
+} 
+  }
+  .wave-img{
+    width: 194.3rem;
+  }
+  .chair{
+    position: absolute;
+    top: 31rem;
+    right: 16.4rem;
+    width: 17%;
+    z-index: 0;
   }
   .header-content{
     position: absolute;
@@ -108,21 +132,23 @@
   }
   .header-content h1,.header-content p{
     color: #ffffff;
-      font-weight: 700;
+     
      
       text-shadow: 6px 6px 8px #000000;
   }
   .header-content h1{
-    font-size: xxx-large;
+    font-size: 5.4rem;
     letter-spacing: 2.5px;
     margin-bottom: 0px;
   }
   .header-content p{
-    font-size: xx-large;
+    font-size: 4.2rem;
     text-align: center;
+    font-weight: 700;
   }
   .header-content span{
    color: #F8B544; 
+   font-weight: 700;
   }
   .empty-div-left,.empty-div-right{
   background-color: white;
@@ -142,4 +168,12 @@
   }
   .ant-layout-header{
     background-color: transparent !important;
+  }
+  .side-wave-img{
+
+    position: absolute;
+      top: 18rem;
+      right: 0;
+      height: 70.9rem;
+      z-index: 1;
   }

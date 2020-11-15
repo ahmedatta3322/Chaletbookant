@@ -30,7 +30,7 @@ export default function HomeFilter() {
     //   <Col span={13} offset={5}>
     <div className="filter">
       <Dropdown overlay={menu}>
-        <Button>
+        <Button className="type-btn">
           Type
           <DownOutlined />
         </Button>
@@ -62,12 +62,8 @@ export default function HomeFilter() {
       <label>Maximum Price</label>
       <InputNumber min={1} max={10} onChange={onChange} />
       <Button
-        // className="login-btn"
-        style={{
-          backgroundColor: "#F8B544",
-          color: "white",
-          border: "none",
-        }}
+        className="filter-btn"
+        style={{ backgroundColor: "#F8B544", color: "white", border: "none" }}
       >
         Filter
       </Button>

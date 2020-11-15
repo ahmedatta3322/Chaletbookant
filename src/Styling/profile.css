@@ -12,7 +12,8 @@
   left: 21%;
   font-weight: bold;
   color: white;
-  font-size: 2.5rem;
+  font-size: 3.3rem;
+  text-shadow: 3px 3px 6px #00000085;
 }
 .ant-layout-content {
   text-align: center;
@@ -21,70 +22,76 @@
   color: #0070d3 !important;
 }
 .addButton {
-  padding: 1%;
+  width: 20.8rem;
+  height: 8.7rem;
+  padding-top: 2rem !important;
   position: absolute;
   bottom: 18%;
   left: 7%;
   background-color: white !important;
-  border-radius: 2.25rem !important;
-  font-size: medium !important;
-  box-shadow: 10px 10px 5px #00000038;
+  border-radius: 1.25rem !important;
+  font-size: 1.1rem !important;
+  box-shadow: 4px 8px 13px #00000038;
   border: none !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
-@media(min-width:1280px) and (min-height:720px){
-  .addButton{
+@media (min-width: 1280px) and (min-height: 720px) {
+  .addButton {
     position: absolute;
     bottom: -3%;
     left: 5%;
   }
 }
-@media(min-width:1280px) and (min-height:800px){
-  .addButton{
+@media (min-width: 1280px) and (min-height: 800px) {
+  .addButton {
     position: absolute;
     bottom: 9%;
     left: 7%;
   }
 }
-@media(min-width:1280px) and (min-height:1024px){
-  .addButton{
+@media (min-width: 1280px) and (min-height: 1024px) {
+  .addButton {
     position: absolute;
     bottom: 28%;
     left: 5%;
   }
 }
-    @media(min-width:1360px) and (max-width:1366px) and (min-height:768px){
-      .addButton{
-        position: absolute;
-        bottom: 5%;
-        left: 7%;
-      }
-    }
-@media(min-width:1500px){
-  .addButton{
-    margin-bottom:-2%;
+@media (min-width: 1360px) and (max-width: 1366px) and (min-height: 768px) {
+  .addButton {
+    position: absolute;
+    bottom: 5%;
+    left: 7%;
   }
 }
-@media(min-width:1680px) and (min-height:1050px){
-  .addButton{
+@media (min-width: 1500px) {
+  .addButton {
+    margin-bottom: -2%;
+  }
+}
+@media (min-width: 1680px) and (min-height: 1050px) {
+  .addButton {
     margin-bottom: 1%;
   }
 }
-@media(min-width:1920px){
-
+@media (min-width: 1920px) {
   .addButton {
-    padding: 1%;
     position: absolute;
-    bottom: 18%;
-    left: 7%;
-    background-color: white !important;
-    border-radius: 2.25rem !important;
-    font-size: medium !important;
-    box-shadow: 10px 10px 5px #00000038;
+    bottom: -5%;
+    left: 11%;
     border: none !important;
   }
 }
 .add {
-  font-size: x-large;
+  font-size: -webkit-xxx-large;
+}
+.shadow{
+  box-shadow: 10px 10px 5px #00000038;
+  border-radius: 2.25rem !important;
+}
+.prof-filter{
+  width: 12rem;
 }
 /* .ant-layout {
   background: none !important;
@@ -100,44 +107,51 @@
   width: 75%;
   margin-left: 22%;
 }
-@media(min-width:1280px){
-  .content{
-  margin-left: 25%;
-  } 
-  .username{
-  position: absolute;
-  top: 75%;
-  left: 25%;
-}
-}
-@media(min-width:1536px){
-  .content{
+@media (min-width: 1280px) {
+  .content {
     margin-left: 25%;
   }
-  .username{
+  .username {
+    position: absolute;
+    top: 75%;
+    left: 25%;
+  }
+}
+@media (min-width: 1360px) and (max-width: 1366px) and (min-height: 768px) {
+  .content {
+    margin-left: 25%;
+  }
+  .username {
+    position: absolute;
+    top: 75%;
+    left: 24%;
+  }
+}
+@media (min-width: 1440px) and (min-height: 900px) {
+  .content {
+    margin-left: 25%;
+  }
+  .username {
+    position: absolute;
+    top: 85%;
+    left: 34%;
+  }
+}
+@media (min-width: 1536px) {
+  .content {
+    margin-left: 25%;
+  }
+  .username {
     position: absolute;
     top: 75%;
     left: 26%;
   }
 }
-@media(min-width:1360px) and (max-width:1366px) and (min-height:768px){
-  .content{
-    margin-left: 25%;
-  }
-  .username{
+@media (min-width: 1280px) {
+  .username {
     position: absolute;
-    top: 75%;
-    left: 24%;
-  }
-  }
-@media(min-width:1440px) and (min-height:900px){
-  .content{
-    margin-left: 25%;
-  }
-  .username{
-    position: absolute;
-    top: 75%;
-    left: 25%;
+    top: 82%;
+    left: 30%;
   }
 }
 
@@ -151,19 +165,19 @@
   justify-content: flex-end !important;
   /* margin-left: 5%; */
 }
-.anticon svg {
-  font-size: small;
-  margin-left: -71%;
-  margin-top: 62%;
-  color: #0070D3;
+.arrow {
+  font-size: large;
+  margin-right: 13%;
+  margin-top: 13%;
+  color: #0070d3;
 }
 .request-content {
   font-size: medium;
-  color: #31418C;
+  color: #31418c;
 }
 .viewbtn {
-  background-color: white !important;
-  color: #0070d3 !important;
+  background-color: #0070d3 !important;
+  color: white !important;
   border-radius: 1rem !important;
   margin-left: 2rem;
   box-shadow: 8px 7px 10px #0000001c;
@@ -173,12 +187,12 @@
   color: #c8d2e287;
   margin-right: -16rem;
 }
-@media(min-width:1280px){
-  .trash{
+@media (min-width: 1280px) {
+  .trash {
     margin-right: -5rem;
   }
 }
-@media(min-width:1920px){
+@media (min-width: 1920px) {
   .trash {
     margin-right: -16rem;
   }
@@ -190,9 +204,17 @@
 /* .ant-row {
   justify-content: flex-end !important;
 } */
-.yellow{
-  color: #FFB741;
+.yellow {
+  color: #ffb741;
 }
-.red{
-  color: #BE4F47;
+.red {
+  color: #be4f47;
+}
+
+.adds {
+  width: 26.9rem;
+  height: 42.6rem;
+}
+.side {
+  margin-top: -26rem;
 }

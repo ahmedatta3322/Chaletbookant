@@ -8,10 +8,22 @@
   border: none !important;
   text-align: right;
   background: none !important;
+  display: flex;
+  justify-content: flex-end;
 }
 .coloor {
   color: #888888 !important;
 }
 .view {
   border-radius: 1rem !important;
+}
+.features{
+  color: #8696A9;
+}
+.featureImg{
+  width: 2.8rem;
+  height: 1.7rem;
+}
+.air{
+  width: 11rem;
 }

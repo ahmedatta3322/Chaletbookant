@@ -7,7 +7,7 @@ export default function Foter() {
   return (
     <Footer className="text-white mt-5 ">
       <div>
-        <spa className=" h1"> Stay in touch</spa>
+        <span className=" h1"> Stay in touch</span>
         <div className="ml-4 mt-3 h3">
           <i class="fab fa-facebook-square mr-2"></i>
           <i class="fab fa-google-plus mr-2"></i>

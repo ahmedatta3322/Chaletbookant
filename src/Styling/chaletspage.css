@@ -14,13 +14,14 @@
     margin-left: 15rem;
 } */
 .site-layout-content {
-  height: 170vh !important;
+  /* height: 170vh !important; */
+  height: 165vh !important;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 .maps {
   position: absolute;
-  height: 55%;
+  height: 65%;
   width: 156rem !important;
   margin-left: -7%;
 }
@@ -53,7 +54,7 @@
 }
 @media(min-width:1920px){
  .ads{
-  margin-top: 65%;
+  margin-top: 105%;
   margin-left: -15%;
   width: 54rem;
  }
