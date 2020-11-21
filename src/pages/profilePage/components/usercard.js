@@ -8,7 +8,7 @@ export default function UserCard() {
         <Card.Img
           variant="top"
           src="/images/Person-on-rock.png"
-          className="imgCard"
+          className="img-Card"
         />
         <div className="info">
           <span className="color h6 phone">

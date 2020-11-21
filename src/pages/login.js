@@ -1,46 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, connect } from "react-redux";
 import { Button } from "react-bootstrap";
-import { Row, Col, Layout, Button as Btn, Form, Input } from "antd";
+import { Row, Col, Layout, Button as Btn, Form, Input, Alert } from "antd";
 import { NavLink } from "react-router-dom";
 import { Tabs } from "antd";
 import "../Styling/login.css";
 import SignUp from "./signup";
+import { logIn } from "../redux/actions/userActionCreator";
 // import { Button } from "react-bootstrap";
-export default function Login(props) {
+function Login(props) {
   const { Content } = Layout;
+  const { err, user } = props;
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const [setClass, setStateClass] = useState("1");
+  useEffect(() => {
+    setError(props.err);
+    // console.log(props.err);
+  }, [props.err, error]);
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
   };
-  const handleFilter = (e) => {
-    console.log(typeof e.target.textContent);
-    props.location.push("/signup");
+
+  const onFinish = async (values) => {
+    console.log("Success:", values);
+    await dispatch(logIn(values));
+    console.log(props.user, err, "redux", error, "state");
+    if (error === "") {
+      console.log(props.user);
+      props.history.push(`/`);
+    }
   };
-  // const tailLayout = {
-  //   wrapperCol: { offset: 8, span: 16 },
-  // };
 
-  // const Demo = () => {
-  //   const onFinish = (values) => {
-  //     console.log("Success:", values);
-  //   };
-
-  //   const onFinishFailed = (errorInfo) => {
-  //     console.log("Failed:", errorInfo);
-  //   };
-  // };
   const { TabPane } = Tabs;
 
   function callback(key) {
-    console.log(props);
+    // console.log(props);
     if (key === "2") {
       // props.location.push("/signup");
       setStateClass("2");
     } else if (key === "1") {
       setStateClass("1");
     }
-    console.log(key);
+    // console.log(key);
   }
   return (
     <div>
@@ -73,26 +77,60 @@ export default function Login(props) {
                     <Col offset={4}>
                       <Form
                         {...layout}
-                        name="basic"
-                        initialValues={{ remember: true }}
-                        // onFinish={onFinish}
+                        form={form}
+                        // name="register"
+                        onFinish={onFinish}
+                        // onSubmit={handleSubmit}
                         // onFinishFailed={onFinishFailed}
                       >
                         <Form.Item>
+                          <i className="fas fa-envelope email"></i>
                           <Form.Item
-                            name="username"
+                            name="email"
+                            noStyle
+                            rules={[
+                              {
+                                type: "email",
+                                message: "The input is not valid E-mail!",
+                              },
+                              {
+                                required: true,
+                                message: "Please input your E-mail!",
+                              },
+                            ]}
+                          >
+                            <Input name="email" className="input-email" />
+                          </Form.Item>
+                        </Form.Item>
+                        <Form.Item>
+                          <i className="fas fa-lock lock"></i>
+                          <Form.Item
+                            className="m-0"
                             noStyle
                             rules={[
                               {
                                 required: true,
-                                message: "Username is required",
+                                message: "Please input your password!",
                               },
                             ]}
-                          ></Form.Item>
-                          <i class="fas fa-envelope email"></i>
-                          <Input className="input-email" />
+                            // hasFeedback
+                            name="password"
+                          >
+                            <Input.Password
+                              name="password"
+                              className="input-password"
+                            />
+                          </Form.Item>
                         </Form.Item>
-                        <Form.Item>
+                        {err && (
+                          <Alert
+                            message={error}
+                            type="error"
+                            showIcon
+                            className="mb-3"
+                          />
+                        )}
+                        {/* <Form.Item>
                           <Form.Item
                             name="password"
                             className="m-0"
@@ -103,10 +141,10 @@ export default function Login(props) {
                               },
                             ]}
                           >
-                            <i class="fas fa-lock lock"></i>
+                            <i className="fas fa-lock lock"></i>
                             <Input.Password className="input-password" />
                           </Form.Item>
-                        </Form.Item>
+                        </Form.Item> */}
                         {/* <Form.Item
                           {...tailLayout}
                           name="remember"
@@ -153,7 +191,7 @@ export default function Login(props) {
                     </Col>
                   </Col>
                 </TabPane>
-                <TabPane tab="Sign Up" key="2" onClick={handleFilter}>
+                <TabPane tab="Sign Up" key="2">
                   <SignUp />
                 </TabPane>
               </Tabs>
@@ -164,3 +202,10 @@ export default function Login(props) {
     </div>
   );
 }
+const mapStateToProps = (reduxState) => {
+  return {
+    user: reduxState.Users.user,
+    err: reduxState.Users.errorMessg,
+  };
+};
+export default connect(mapStateToProps)(Login);

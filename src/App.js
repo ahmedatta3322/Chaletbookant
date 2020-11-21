@@ -15,8 +15,9 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/profile/1" component={Profile} />
           <Route exact path="/chalets" component={ChaletsPage} />
-          <Route exact path="/viewchalet/1" component={ViewChalet} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/viewchalet/:id" component={ViewChalet} />
+          <Route exact path="/login" render={(props) => <Login {...props}></Login>} />
+         
           <Route exact path="/signup" component={SignUp} />
         </Switch>
       </BrowserRouter>

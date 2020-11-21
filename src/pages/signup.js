@@ -1,34 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, connect } from "react-redux";
 import { Button } from "react-bootstrap";
-import { Col, Button as Btn, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Col, Button as Btn, Form, Input, Alert } from "antd";
+import { Link, withRouter } from "react-router-dom";
+import { Signup } from "../redux/actions/userActionCreator";
 import "../Styling/signup.css";
-export default function SignUp() {
+function SignUp(props) {
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
+  };
+  useEffect(() => {
+    setError(props.err);
+    console.log(props.err);
+  }, [props.err]);
+  const onFinish = (values) => {
+    const newValues = { ...values, mobile: `+20${values.mobile}` };
+    console.log(newValues);
+    dispatch(Signup(newValues));
+    console.log(props.users);
+    if (props.users.length !== 0) {
+      props.history.push("/");
+    }
   };
   return (
     <div>
       <Col className="ml-0 mr-5 ">
         <Col offset={4}>
-          <Form
-            {...layout}
-            name="basic"
-            initialValues={{ remember: true }}
-            // onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
-          >
+          <Form {...layout} form={form} name="register" onFinish={onFinish}>
             <Form.Item>
               <Form.Item label="USER NAME" className="mb-0 h4 labels ml-4">
                 <i class="fas fa-user iconn"></i>
               </Form.Item>
               <Form.Item
-                name="username"
                 noStyle
                 rules={[{ required: true, message: "Username is required" }]}
+                name="first_name"
               >
                 <Input
+                  // onChange={handleChange}
                   placeholder="ex. Jessica Alexander"
                   style={{ width: "33rem" }}
                 />
@@ -40,8 +53,9 @@ export default function SignUp() {
                 <i class="fas fa-envelope iconn"></i>
               </Form.Item>
               <Form.Item
-                name="email"
                 noStyle
+                // onChange={handleChange}
+                name="email"
                 rules={[
                   {
                     type: "email",
@@ -52,11 +66,12 @@ export default function SignUp() {
                     message: "Please input your E-mail!",
                   },
                 ]}
-              ></Form.Item>
-              <Input
-                style={{ width: "33rem" }}
-                placeholder="ex. Jessica Alexander@gmail.com"
-              />
+              >
+                <Input
+                  style={{ width: "33rem" }}
+                  placeholder="ex. Jessica Alexander@gmail.com"
+                />
+              </Form.Item>
             </Form.Item>
             <Form.Item>
               <Form.Item label="PHONE NO" className="mb-0 h4 labels ml-4">
@@ -64,16 +79,23 @@ export default function SignUp() {
                 <i class="fas fa-phone-alt iconn"></i>
               </Form.Item>
               <Form.Item
-                name="phone"
                 noStyle
+                name="mobile"
                 rules={[
                   {
                     required: true,
                     message: "Please input your phone number!",
                   },
                 ]}
-              ></Form.Item>
-              <Input type="number" style={{ width: "33rem" }} />
+              >
+                <Input
+                  addonBefore="+20"
+                  // value={state.mobile}
+                  // type="number"
+                  // onChange={handleChange}
+                  style={{ width: "33rem" }}
+                />
+              </Form.Item>
             </Form.Item>
             <Form.Item>
               <Form.Item label="PASSWORD" className="mb-0 h4 labels ml-4">
@@ -81,17 +103,25 @@ export default function SignUp() {
                 <i class="fas fa-lock iconn"></i>
               </Form.Item>
               <Form.Item
-                name="password"
                 noStyle
                 rules={[
                   {
                     required: true,
                     message: "Please input your password!",
                   },
+                  {
+                    min: 8,
+                    message: "The password must be at least 8 characters.",
+                  },
                 ]}
                 // hasFeedback
-              ></Form.Item>
-              <Input.Password style={{ width: "33rem" }} />
+                name="password"
+              >
+                <Input.Password
+                  // onChange={handleChange}
+                  style={{ width: "33rem" }}
+                />
+              </Form.Item>
             </Form.Item>
             <Form.Item>
               <Form.Item
@@ -102,11 +132,11 @@ export default function SignUp() {
                 <i class="fas fa-lock iconn"></i>
               </Form.Item>
               <Form.Item
-                name="confirm"
                 noStyle
                 dependencies={["password"]}
                 className="mb-0 h4"
                 // hasFeedback
+                name="c_password"
                 rules={[
                   {
                     required: true,
@@ -123,9 +153,16 @@ export default function SignUp() {
                     },
                   }),
                 ]}
-              ></Form.Item>
-              <Input.Password style={{ width: "33rem" }} />
+              >
+                <Input.Password
+                  // onChange={handleChange}
+                  style={{ width: "33rem" }}
+                />
+              </Form.Item>
             </Form.Item>
+            {error && (
+              <Alert message={error} type="error" showIcon className="mb-3" />
+            )}
             <Button
               variant="outline-secondary"
               className="connect-btn mr-5 p-2"
@@ -165,3 +202,10 @@ export default function SignUp() {
     </div>
   );
 }
+const mapStateToProps = (reduxState) => {
+  return {
+    users: reduxState.Users.users,
+    err: reduxState.Users.errorMessg,
+  };
+};
+export default connect(mapStateToProps)(withRouter(SignUp));

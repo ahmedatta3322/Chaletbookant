@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 import { Layout, Row, Col } from "antd";
 import Nav from "../../Layout/nav";
 import HomeFilter from "../../Components/filter";
@@ -6,9 +7,15 @@ import ChaletCard from "../profilePage/components/chaletCard";
 import GoogleMap from "../../Components/map";
 import "../../Styling/chaletspage.css";
 import Foter from "../../Layout/Footer";
+import { getChalets } from "../../redux/actions/chaletActionCreator";
 const { Sider, Content } = Layout;
 
-export default function ChaletsPage() {
+function ChaletsPage({ chalets }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getChalets());
+  }, [dispatch]);
+  console.log(chalets);
   return (
     <Layout>
       <Nav />
@@ -26,7 +33,20 @@ export default function ChaletsPage() {
 
             <Col span={15} offset={1} className="chalits">
               <Row>
-                <Col span={4}></Col>
+                {chalets && chalets.length !== 0 ? (
+                  chalets.map((chalet) => (
+                    <>
+                      {/* <Col span={2}></Col> */}
+                      {/* <Col span={3}></Col> */}
+                      <Col span={7} className="m-chalet">
+                        <ChaletCard chalet={chalet} key={chalet.id} />
+                      </Col>
+                    </>
+                  ))
+                ) : (
+                  <p>No Chalets </p>
+                )}
+                {/* <Col span={4}></Col>
                 <Col span={7}>
                   <ChaletCard />
                 </Col>
@@ -37,11 +57,7 @@ export default function ChaletsPage() {
                 <Col span={4}></Col>
                 <Col span={7}>
                   <ChaletCard />
-                </Col>
-                <Col span={4}></Col>
-                <Col span={7}>
-                  <ChaletCard />
-                </Col>
+                </Col> */}
               </Row>
             </Col>
 
@@ -56,7 +72,7 @@ export default function ChaletsPage() {
                       offset={20}
                       className="m-0 rentchalet"
                     >
-                      <GoogleMap />
+                      <GoogleMap chalets={chalets} />
                     </Col>
                   </Row>
                   <br />
@@ -71,3 +87,9 @@ export default function ChaletsPage() {
     </Layout>
   );
 }
+const mapStateToProps = (reduxState) => {
+  return {
+    chalets: reduxState.Chalets.chalets,
+  };
+};
+export default connect(mapStateToProps)(ChaletsPage);

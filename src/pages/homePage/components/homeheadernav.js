@@ -2,9 +2,11 @@ import React from "react";
 import { Layout, Menu, Row } from "antd";
 import "../../../Styling/homeheadernav.css";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 const { Header } = Layout;
 function HomeNav(props) {
-  console.log(props.location.pathname);
+  const token = localStorage.getItem("token");
+  console.log();
   return (
     <Layout className="layout">
       <Header id="home-header">
@@ -31,21 +33,23 @@ function HomeNav(props) {
           <Menu.Item className="home-menu-item" key="4">
             Contact
           </Menu.Item>
-          <Menu.Item className="home-menu-item" key="/login">
-            <Link
-              to="/login"
-              variant="primary"
-              className="login-btn"
-              style={{
-                backgroundColor: "#F8B544",
-                color: "white",
-                border: "none",
-                borderRadius: "0",
-              }}
-            >
-              Login
-            </Link>
-          </Menu.Item>
+          {!token && (
+            <Menu.Item className="home-menu-item" key="/login">
+              <Link
+                to="/login"
+                variant="primary"
+                className="login-btn"
+                style={{
+                  backgroundColor: "#F8B544",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "0",
+                }}
+              >
+                Login
+              </Link>
+            </Menu.Item>
+          )}
         </Menu>
         <Row>
           <Row>
@@ -76,4 +80,10 @@ function HomeNav(props) {
     </Layout>
   );
 }
-export default withRouter(HomeNav);
+const mapStateToProps = (reduxState) => {
+  return {
+    chalets: reduxState.Chalets.chalets,
+    token: reduxState.Users.token,
+  };
+};
+export default connect(mapStateToProps)(withRouter(HomeNav));

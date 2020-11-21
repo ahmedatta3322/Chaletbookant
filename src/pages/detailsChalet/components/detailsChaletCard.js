@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import { Menu, Dropdown, Button } from "antd";
 import { Button as Btn } from "react-bootstrap";
@@ -7,28 +7,47 @@ import { DownOutlined } from "@ant-design/icons";
 import { DatePicker, Space } from "antd";
 import "../../../Styling/chaletcard.css";
 import "../../../Styling/detailschaletcard.css";
-export default function DetailsChaletCard() {
+export default function DetailsChaletCard({ chalet }) {
+  const [status, setStatus] = useState("");
   const { RangePicker } = DatePicker;
+  useEffect(() => {
+    if (chalet && chalet.status === "available_to_exchange") {
+      setStatus("Exchange");
+    } else if (chalet && chalet.status === "available_to_rent") {
+      setStatus("Rent");
+    } else if (chalet && chalet.status === "available_to_all") {
+      setStatus("available_to_all");
+    }
+  }, [chalet]);
   const menu = (
-    <Menu>
-      <Menu.Item key="1">Available to Rent</Menu.Item>
-      <Menu.Item key="2">Available to Exchange</Menu.Item>
-      <Menu.Item key="3">Available to All</Menu.Item>
-    </Menu>
+    <>
+      {status === "available_to_all" && (
+        <Menu className="text-dark">
+          <>
+            <Menu.Item key="1">Rent</Menu.Item>
+            <Menu.Item key="2">Exchange</Menu.Item>
+          </>
+          {/* <Menu.Item key="3">Available to All</Menu.Item> */}
+        </Menu>
+      )}
+    </>
   );
+
+  // console.log(props.chalet);
   return (
     <Card className="details-card">
       <Card.Body className="pl-4 pr-4 pt-3 pb-2">
-        <h3 className="p-3">Dahb, Saint Catherine</h3>
+        <h3 className="p-3">{chalet && chalet.address}</h3>
         <Row>
-          <Col span={17}>
-            <h4 className="p-3">$ 3,10,500</h4>
+          <Col span={15}>
+            <h4 className="p-3">$ {chalet && chalet.fees}</h4>
           </Col>
           <Col>
             {" "}
             <Dropdown overlay={menu}>
               <Button className="btn-dropdown">
-                Rent <DownOutlined />
+                {status === "available_to_all" ? "Rent" : status}{" "}
+                {status === "available_to_all" && <DownOutlined />}
               </Button>
             </Dropdown>
           </Col>
@@ -36,28 +55,26 @@ export default function DetailsChaletCard() {
 
         <Card.Title className="about-title pl-3">About</Card.Title>
         <Card.Text className="coloor h4 pl-3">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the
+          {chalet && chalet.description}
         </Card.Text>
         <hr />
         <Card.Title className="about-title pl-3">Features</Card.Title>
         <div className="features d-flex">
+          <div className="h6 ml-2">
+            <img src="/images/wifi.png" className="featureImg" alt="wifi" />
+            {chalet && chalet.feature && chalet.feature[0]}
+          </div>
+          <div className="h6">
+            <img src="/images/garden.png" className="featureImg" alt="garden" />
+            {chalet && chalet.feature && chalet.feature[1]}
+          </div>
           <div className="h6 air">
             <img
               src="/images/air condition.png"
               className="featureImg"
               alt="air condition"
             />
-            3 Air Conditioner
-          </div>
-          <div className="h6">
-            <img src="/images/garden.png" className="featureImg" alt="garden" />
-            2 Garden
-          </div>
-          <div className="h6 ml-2">
-            <img src="/images/wifi.png" className="featureImg" alt="wifi" />1
-            Wi-Fi
+            {chalet && chalet.feature && chalet.feature[2]}
           </div>
         </div>
         <hr />
@@ -98,7 +115,7 @@ export default function DetailsChaletCard() {
             className="rangeInput"
             min="1"
             max="10"
-            value="5"
+            value={chalet && chalet.max_guests}
           />
           <span className="spans">Maximum</span>
         </div>

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 import HomeNav from "./components/homeheadernav";
 import { Layout, Row, Col } from "antd";
 import { Card } from "react-bootstrap";
 import HomeFilter from "../../Components/filter";
 import Map from "../../Components/map";
+import { getChalets } from "../../redux/actions/chaletActionCreator";
 import "../../Styling/home.css";
 import Footer from "../../Layout/Footer";
 const { Content } = Layout;
-
-export default function Home() {
+function Home({ chalets }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getChalets());
+  }, [dispatch]);
   return (
     <Layout>
       <HomeNav />
@@ -28,7 +33,7 @@ export default function Home() {
           <Row className="home-map">
             <Col span={24} offset={9}>
               <h5 className="pt-5 pb-5">Find the Perfect Chalet </h5>
-              <Map />
+              <Map chalets={chalets} />
             </Col>
           </Row>
           <div className="whychalet">
@@ -144,3 +149,10 @@ export default function Home() {
     </Layout>
   );
 }
+const mapStateToProps = (reduxState) => {
+  return {
+    chalets: reduxState.Chalets.chalets,
+    // token:reduxState.Users.token
+  };
+};
+export default connect(mapStateToProps)(Home);

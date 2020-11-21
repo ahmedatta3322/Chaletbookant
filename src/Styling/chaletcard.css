@@ -1,6 +1,13 @@
 .card {
   text-align: left;
 }
+.shadow-card{
+  border-radius: 1.25rem !important;
+}
+.imgCard{
+  height: 14.9rem;
+  border-radius: 1.25rem !important;
+}
 .badge {
   background-color: #fef5df;
 }
