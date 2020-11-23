@@ -1,6 +1,12 @@
 .profile {
   background-color: #efefef;
 }
+.fadee{
+  opacity: .5 !important;
+}
+.nofade{
+  opacity: 1;
+}
 .jumbotron {
   background-color: #0070d3 !important;
   position: relative;

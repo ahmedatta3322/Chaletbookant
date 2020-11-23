@@ -1,7 +1,8 @@
-import { Get_Chalets, Get_ChaletById } from "../actionTypes";
+import { Get_Chalets, Get_ChaletById, Get_UserChalet } from "../actionTypes";
 const initialState = {
   chalets: [],
   chalet: {},
+  currentUserChalets: [],
 };
 export default (state = initialState, action) => {
   let newState;
@@ -18,6 +19,11 @@ export default (state = initialState, action) => {
       newState = { ...state };
       newState.chalet = action.payload;
       // newState.loading = true;
+      break;
+    case Get_UserChalet:
+      newState = { ...state };
+      newState.currentUserChalets = action.payload;
+      console.log(newState.currentUserChalets);
       break;
     default:
       newState = state;

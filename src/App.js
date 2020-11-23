@@ -13,11 +13,15 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/profile/1" component={Profile} />
+          <Route path="/profile/:id" component={Profile} />
           <Route exact path="/chalets" component={ChaletsPage} />
           <Route exact path="/viewchalet/:id" component={ViewChalet} />
-          <Route exact path="/login" render={(props) => <Login {...props}></Login>} />
-         
+          <Route
+            exact
+            path="/login"
+            render={(props) => <Login {...props}></Login>}
+          />
+
           <Route exact path="/signup" component={SignUp} />
         </Switch>
       </BrowserRouter>

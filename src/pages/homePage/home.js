@@ -73,11 +73,12 @@ function Home({ chalets }) {
                         </Card.Text>
 
                         <Card.Text>
-                          <i class="fas fa-times blue-icon"></i>Exchange
+                          <i className="fas fa-times blue-icon"></i>Exchange
                         </Card.Text>
 
                         <Card.Text>
-                          <i class="fas fa-check blue-icon"></i>only one Unit.
+                          <i className="fas fa-check blue-icon"></i>only one
+                          Unit.
                         </Card.Text>
                       </Card.Body>
                       <Card.Footer>6 $</Card.Footer>
@@ -96,15 +97,16 @@ function Home({ chalets }) {
                       <Card.Body className="size">
                         <Card.Text>
                           {" "}
-                          <i class="fas fa-check blue-icon"></i>Rent
+                          <i className="fas fa-check blue-icon"></i>Rent
                         </Card.Text>
 
                         <Card.Text>
-                          <i class="fas fa-check blue-icon"></i>Exchange
+                          <i className="fas fa-check blue-icon"></i>Exchange
                         </Card.Text>
 
                         <Card.Text>
-                          <i class="fas fa-check blue-icon"></i>Up to 4 Units.
+                          <i className="fas fa-check blue-icon"></i>Up to 4
+                          Units.
                         </Card.Text>
                       </Card.Body>
                       <Card.Footer>
@@ -125,15 +127,16 @@ function Home({ chalets }) {
                       <Card.Body className="size">
                         <Card.Text>
                           {" "}
-                          <i class="fas fa-check blue-icon"></i>Rent
+                          <i className="fas fa-check blue-icon"></i>Rent
                         </Card.Text>
 
                         <Card.Text>
-                          <i class="fas fa-check blue-icon"></i>Exchange
+                          <i className="fas fa-check blue-icon"></i>Exchange
                         </Card.Text>
 
                         <Card.Text>
-                          <i class="fas fa-check blue-icon"></i>Unlimited Units.
+                          <i className="fas fa-check blue-icon"></i>Unlimited
+                          Units.
                         </Card.Text>
                       </Card.Body>
                       <Card.Footer>30 $</Card.Footer>

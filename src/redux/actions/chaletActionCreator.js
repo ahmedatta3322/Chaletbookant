@@ -1,6 +1,12 @@
 import axios from "axios";
+import { authApi } from "../../api/authApi";
 import { chaletsApi } from "../../api/notAuthApi";
-import { Get_Chalets, GET_Error, Get_ChaletById } from "../actionTypes";
+import {
+  Get_Chalets,
+  GET_Error,
+  Get_ChaletById,
+  Get_UserChalet,
+} from "../actionTypes";
 export const getChalets = () => (dispatch) => {
   axios
     .get(`${chaletsApi}`)
@@ -37,4 +43,27 @@ export const getChaletById = (id) => (dispatch) => {
 };
 const getChaletByIdSuccess = (chalet) => {
   return { type: Get_ChaletById, payload: chalet };
+};
+///////////////////////get user chalet////////
+export const getUserChalet = () => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  return axios
+    .get(`${authApi}user_chalets`, config)
+    .then((response) => {
+      console.log(response);
+      const chalets = response.data.response.data;
+      console.log("chalit", chalets);
+      dispatch(getUserChaletSuccess(chalets));
+      // return user;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+const getUserChaletSuccess = (chalets) => {
+  return { type: Get_UserChalet, payload: chalets };
 };

@@ -10,15 +10,20 @@ import { logIn } from "../redux/actions/userActionCreator";
 // import { Button } from "react-bootstrap";
 function Login(props) {
   const { Content } = Layout;
-  const { err, user } = props;
+  const { err } = props;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
+  const [auth, setAuth] = useState(false);
   const [setClass, setStateClass] = useState("1");
   useEffect(() => {
     setError(props.err);
+    console.log(props.auth);
+    setAuth(props.auth);
+
+    console.log(props.auth);
     // console.log(props.err);
-  }, [props.err, error]);
+  }, [props.err, props.auth]);
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -27,12 +32,14 @@ function Login(props) {
   const onFinish = async (values) => {
     console.log("Success:", values);
     await dispatch(logIn(values));
-    console.log(props.user, err, "redux", error, "state");
-    if (error === "") {
+    console.log(auth);
+    console.log(props.auth);
+    if (props.auth) {
       console.log(props.user);
-      props.history.push(`/`);
+      props.history.push(`/profile/${props.user.id}`);
     }
   };
+  console.log(props.user, err, "redux", error, "state");
 
   const { TabPane } = Tabs;
 
@@ -204,8 +211,9 @@ function Login(props) {
 }
 const mapStateToProps = (reduxState) => {
   return {
-    user: reduxState.Users.user,
+    user: reduxState.Users.currentUser,
     err: reduxState.Users.errorMessg,
+    auth: reduxState.Users.auth,
   };
 };
 export default connect(mapStateToProps)(Login);

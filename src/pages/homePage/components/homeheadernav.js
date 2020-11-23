@@ -1,12 +1,18 @@
-import React from "react";
-import { Layout, Menu, Row } from "antd";
+import React, { useState } from "react";
+import { Layout, Menu, Row, Badge } from "antd";
 import "../../../Styling/homeheadernav.css";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 const { Header } = Layout;
 function HomeNav(props) {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
+  const [auth, setAuth] = useState(props.auth);
+
   console.log();
+  const handleLogOut = () => {
+    localStorage.clear();
+    setAuth(false);
+  };
   return (
     <Layout className="layout">
       <Header id="home-header">
@@ -33,7 +39,7 @@ function HomeNav(props) {
           <Menu.Item className="home-menu-item" key="4">
             Contact
           </Menu.Item>
-          {!token && (
+          {!auth && (
             <Menu.Item className="home-menu-item" key="/login">
               <Link
                 to="/login"
@@ -49,6 +55,22 @@ function HomeNav(props) {
                 Login
               </Link>
             </Menu.Item>
+          )}
+          {auth && (
+            <>
+              <Menu.Item className="home-menu-item" key="1">
+                <Badge count={25}>
+                  <i className="far fa-bell font rotate text-white"></i>
+                </Badge>
+              </Menu.Item>
+              <Menu.Item
+                className="home-menu-item "
+                key="2"
+                onClick={handleLogOut}
+              >
+                <i className="fas fa-sign-out-alt font"></i>
+              </Menu.Item>
+            </>
           )}
         </Menu>
         <Row>
@@ -84,6 +106,7 @@ const mapStateToProps = (reduxState) => {
   return {
     chalets: reduxState.Chalets.chalets,
     token: reduxState.Users.token,
+    auth: reduxState.Users.auth,
   };
 };
 export default connect(mapStateToProps)(withRouter(HomeNav));

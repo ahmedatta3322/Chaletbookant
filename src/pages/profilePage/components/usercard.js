@@ -1,23 +1,20 @@
 import React from "react";
 import { Card, Button, NavLink } from "react-bootstrap";
 import "../../../Styling/usercard.css";
-export default function UserCard() {
+export default function UserCard({ user, chaletsCount }) {
+  console.log(user, chaletsCount);
   return (
     <div>
       <Card className="userCard">
-        <Card.Img
-          variant="top"
-          src="/images/Person-on-rock.png"
-          className="img-Card"
-        />
+        <Card.Img variant="top" src={`${user.avatar}`} className="img-Card" />
         <div className="info">
           <span className="color h6 phone">
             <i class="fas fa-phone-alt mr-2 blue"></i>
-            <p className="d-inline-block count">010005004412</p>
+            <p className="d-inline-block count">{user.mobile}</p>
           </span>
           <span className="color h6">
             <i class="fas fa-envelope mr-2 ml-3 blue"></i>
-            <p className="d-inline-block count mt-3">Gabriella@gmail.com</p>
+            <p className="d-inline-block count mt-3">{user.email}</p>
           </span>
         </div>
         <Button variant="outline-primary" className="edit" roundedCircle>
@@ -26,10 +23,8 @@ export default function UserCard() {
         <Card.Body className="p-3">
           <Card.Title className="h5">ABOUT</Card.Title>
           <Card.Text className="h6">
-            Me gusta mucho mi casa porque puedo inviter a mis amigos a cenar o a
-            ver el fútbol en mi televisión. Además, cerca de mi casa hay muchas
-            tiendas para hacer la compra: panadería, carnicería o pescadería...
-            <NavLink className="h5">Read More</NavLink>
+            {user.description}
+            {user.description && <NavLink className="h5">Read More</NavLink>}
           </Card.Text>
         </Card.Body>
         <div className="cardFooter">
@@ -38,7 +33,7 @@ export default function UserCard() {
             <br />
             <span className=" mt-1 h4">My Chalets</span>
             <br />
-            <span className="count h3">112</span>
+            <span className="count h3">{chaletsCount}</span>
           </Button>
           <Button variant="primary" className="filterCount cardButton">
             <img src="/images/requests icon.png" alt="chalet" />

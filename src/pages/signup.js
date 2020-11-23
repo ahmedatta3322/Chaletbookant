@@ -3,7 +3,7 @@ import { useDispatch, connect } from "react-redux";
 import { Button } from "react-bootstrap";
 import { Col, Button as Btn, Form, Input, Alert } from "antd";
 import { Link, withRouter } from "react-router-dom";
-import { Signup } from "../redux/actions/userActionCreator";
+import { getUsers, Signup } from "../redux/actions/userActionCreator";
 import "../Styling/signup.css";
 function SignUp(props) {
   const [form] = Form.useForm();
@@ -14,16 +14,17 @@ function SignUp(props) {
     wrapperCol: { span: 16 },
   };
   useEffect(() => {
+    dispatch(getUsers());
     setError(props.err);
-    console.log(props.err);
-  }, [props.err]);
+    // console.log(props.err);
+  }, [props.err, dispatch]);
   const onFinish = (values) => {
     const newValues = { ...values, mobile: `+20${values.mobile}` };
     console.log(newValues);
     dispatch(Signup(newValues));
-    console.log(props.users);
+    console.log(props);
     if (props.users.length !== 0) {
-      props.history.push("/");
+      props.history.push(`/profile/${props.users[props.users.length - 1].id}`);
     }
   };
   return (
@@ -206,6 +207,7 @@ const mapStateToProps = (reduxState) => {
   return {
     users: reduxState.Users.users,
     err: reduxState.Users.errorMessg,
+    auth: reduxState.Users.auth,
   };
 };
 export default connect(mapStateToProps)(withRouter(SignUp));
