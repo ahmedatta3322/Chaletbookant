@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 import Nav from "../../Layout/nav";
 import { Button, Jumbotron, Alert, Modal, Form } from "react-bootstrap";
-import { Row, Col, Layout, Dropdown, Button as Btn } from "antd";
+import { Row, Col, Layout, Dropdown } from "antd";
 import { Menu } from "antd";
 import UserCard from "./components/usercard";
 // import ProfileFilter from "./components/profileFilter";
@@ -43,11 +43,11 @@ const menu2 = (
 );
 
 function Profile(props) {
-  const { user, chalets, err, status } = props;
+  const { user, chalets, errorMessg, status } = props;
   const [modalShow, setModalShow] = useState(false);
   const [show, setShow] = useState(false);
   // const [statuss, setStatus] = useState(status);
-  const [error, setError] = useState(err);
+  // const [error, setError] = useState(err);
   const [filterStatus, setFilterStatus] = useState("My Chalets");
   const [code, setCode] = useState(0);
   const dispatch = useDispatch();
@@ -55,10 +55,22 @@ function Profile(props) {
   useEffect(() => {
     // console.log(match.params.id);
     // setStatus(status);
-    if (err) setError(err);
+    // if (err) setError(err);
+
+    console.log(status, errorMessg);
     dispatch(getUserChalet());
     dispatch(getOnlineUserProfile());
-  }, [dispatch, err]);
+    if (
+      errorMessg === "The code must be 4 digits." ||
+      errorMessg === "not verified"
+    ) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+
+    console.log(status, errorMessg);
+  }, [dispatch, errorMessg, status]);
   console.log(chalets);
   const handleFilter = (e) => {
     const { textContent } = e.target;
@@ -81,9 +93,9 @@ function Profile(props) {
     }));
     console.log(code);
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await dispatch(verifyMobile(code));
+    dispatch(verifyMobile(code));
     console.log(props);
   };
   // const onFinish = (values, props) => {
@@ -111,7 +123,7 @@ function Profile(props) {
           to verify it.
         </Alert>
       )}
-      <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal show={show} onHide={handleClose} animation={false} centered>
         <Modal.Header closeButton>
           <Modal.Title>Verify Phone Number</Modal.Title>
         </Modal.Header>
@@ -130,6 +142,7 @@ function Profile(props) {
             <Form.Group>
               <Form.Control type="number" name="code" onChange={handleChange} />
             </Form.Group>
+            {errorMessg && <Alert variant="danger">{errorMessg}</Alert>}
             {/* <Form.Item>
               <Input
                 // {...props}
@@ -142,7 +155,13 @@ function Profile(props) {
               />
             </Form.Item> */}
             <Modal.Footer>
-              <Button variant="secondary">Close</Button>
+              <Button
+                variant="secondary"
+                onClick={handleClose}
+                className="text-dark"
+              >
+                Close
+              </Button>
               <Button
                 // htmlType="submit"
                 type="submit"
@@ -160,7 +179,7 @@ function Profile(props) {
         className={`profile ${user.mobile_verfied === 0 ? "fadee" : "nofade"}`}
       >
         <Layout>
-          <Nav />
+          <Nav auth={props.auth} />
           <Jumbotron fluid>
             <Row>
               <Col span={5}>
@@ -354,6 +373,7 @@ const mapStateToProps = (reduxState) => {
     chalets: reduxState.Chalets.currentUserChalets,
     errorMessg: reduxState.Users.errorMessg,
     status: reduxState.Users.status,
+    auth: reduxState.Users.auth,
   };
 };
 export default connect(mapStateToProps)(Profile);

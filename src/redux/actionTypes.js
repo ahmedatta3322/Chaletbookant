@@ -1,6 +1,8 @@
 export const Get_Chalets = "Get_Chalets";
 export const Get_ChaletById = "Get_ChaletById";
 export const Get_UserChalet = "Get_UserChalet";
+export const Get_ChaletsByPrice = "Get_ChaletsByPrice";
+export const Get_ChaletsByFilter = "Get_ChaletsByFilter";
 
 export const Post_SignUp = "Post_SignUp";
 export const Post_Login = "Post_Login";

@@ -8,19 +8,23 @@ import ChaletCard from "../profilePage/components/chaletCard";
 import Foter from "../../Layout/Footer";
 import "../../Styling/viewChalet.css";
 import GuestsReviews from "./components/guestsReviews";
-import { getChaletById } from "../../redux/actions/chaletActionCreator";
+import {
+  getChaletById,
+  getChaletsByPrice,
+} from "../../redux/actions/chaletActionCreator";
 const { Content } = Layout;
-function ViewChalet({ match, chalet }) {
+function ViewChalet({ match, chalet, chalets, auth }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getChaletById(match.params.id));
-  }, [dispatch, match.params.id]);
+    dispatch(getChaletsByPrice(chalet.fees));
+  }, [dispatch, match.params.id, chalet.fees]);
 
-  console.log(chalet, match.params.id);
+  console.log(chalet, chalets);
   return (
     <div>
       <Layout>
-        <Nav />
+        <Nav auth={auth} />
         <Layout className="chalits-details">
           <Content>
             <hr className="d-inline-block mr-0 rightdiv" />
@@ -100,7 +104,19 @@ function ViewChalet({ match, chalet }) {
 
               <Col xl={20} xxl={22} offset={1}>
                 <Row>
-                  <Col xl={10} xxl={4} span={6}>
+                  {chalets && chalets.length !== 0 ? (
+                    chalets.map((chalet) => (
+                      <>
+                        <Col xl={10} xxl={4} span={6} className="m-chalets">
+                          <ChaletCard chalet={chalet} key={chalet.id} />
+                        </Col>
+                        {/* <Col md={1} span={1}></Col> */}
+                      </>
+                    ))
+                  ) : (
+                    <p>No Chlets Added</p>
+                  )}
+                  {/* <Col xl={10} xxl={4} span={6}>
                     <ChaletCard />
                   </Col>
                   <Col md={1} span={1}></Col>
@@ -118,7 +134,7 @@ function ViewChalet({ match, chalet }) {
                   <Col md={1}></Col>
                   <Col xl={10} xxl={4} span={6}>
                     <ChaletCard />
-                  </Col>
+                  </Col> */}
                 </Row>
               </Col>
             </Row>
@@ -132,6 +148,8 @@ function ViewChalet({ match, chalet }) {
 const mapStateToProps = (reduxState) => {
   return {
     chalet: reduxState.Chalets.chalet,
+    chalets: reduxState.Chalets.chalets,
+    auth: reduxState.Chalets.auth,
   };
 };
 export default connect(mapStateToProps)(ViewChalet);

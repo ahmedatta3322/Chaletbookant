@@ -16,8 +16,8 @@ export const Signup = (newUser) => (dispatch) => {
       console.log(response);
       const user = response.data.response.data;
       console.log("data", user);
-
-      if (response.status === 200) dispatch(SignUpSuccess(user));
+      const auth = true;
+      if (response.status === 200) dispatch(SignUpSuccess(user, auth));
       // return data.user;
     })
     .catch((err) => {
@@ -27,8 +27,8 @@ export const Signup = (newUser) => (dispatch) => {
     });
 };
 
-const SignUpSuccess = (user) => {
-  return { type: Post_SignUp, payload: user };
+const SignUpSuccess = (user, auth) => {
+  return { type: Post_SignUp, payload: { user, auth } };
 };
 const SignUpFailed = (errMsg) => {
   return { type: GET_Error, payload: errMsg };

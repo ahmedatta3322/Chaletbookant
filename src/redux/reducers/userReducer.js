@@ -20,9 +20,11 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case Post_SignUp:
       newState = { ...state };
-      newState.users = [...state.users, action.payload];
+      newState.users = [...state.users, action.payload.users];
       localStorage.setItem("token", action.payload.token);
       newState.token = action.payload.token;
+      newState.errorMessg = "";
+      newState.auth = action.payload.auth;
       break;
     case GET_Error:
       newState = { ...state };
@@ -54,6 +56,7 @@ export default (state = initialState, action) => {
       const mobile_verfied = action.payload.mobile_verfied;
       newState.status = action.payload.status;
       newState.user = { ...state.user, mobile_verfied };
+      newState.errorMessg = "";
       break;
     default:
       newState = state;

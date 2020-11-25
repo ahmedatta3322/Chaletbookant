@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button, NavLink } from "react-bootstrap";
+import { Button as Btn, Form, Upload } from "antd";
 import "../../../Styling/usercard.css";
 export default function UserCard({ user, chaletsCount }) {
   console.log(user, chaletsCount);
@@ -7,18 +8,37 @@ export default function UserCard({ user, chaletsCount }) {
     <div>
       <Card className="userCard">
         <Card.Img variant="top" src={`${user.avatar}`} className="img-Card" />
+        {user.avatar === "http://app.apptechegy.com/images/defaultuser.jpg" && (
+          <Form.Item
+            name="upload"
+            valuePropName="fileList"
+            className="upload-img"
+            // getValueFromEvent={normFile}
+            // extra="longgggggggggggggggggggggggggggggggggg"
+          >
+            <Upload name="logo" action="/upload.do" listType="picture">
+              <Btn
+                className="bg-transparent border-0 add-img"
+                disabled={user.mobile_verfied === 0 ? true : false}
+                icon={
+                  <i className="fas fa-plus-circle color add mr-3 i-add"></i>
+                }
+              ></Btn>
+            </Upload>
+          </Form.Item>
+        )}
         <div className="info">
           <span className="color h6 phone">
-            <i class="fas fa-phone-alt mr-2 blue"></i>
+            <i className="fas fa-phone-alt mr-2 blue"></i>
             <p className="d-inline-block count">{user.mobile}</p>
           </span>
           <span className="color h6">
-            <i class="fas fa-envelope mr-2 ml-3 blue"></i>
+            <i className="fas fa-envelope mr-2 ml-3 blue"></i>
             <p className="d-inline-block count mt-3">{user.email}</p>
           </span>
         </div>
         <Button variant="outline-primary" className="edit" roundedCircle>
-          <i class="fas fa-edit text-white editIcon"></i>
+          <i className="fas fa-edit text-white editIcon"></i>
         </Button>
         <Card.Body className="p-3">
           <Card.Title className="h5">ABOUT</Card.Title>

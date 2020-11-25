@@ -16,6 +16,7 @@ function ChaletsPage({ chalets }) {
     dispatch(getChalets());
   }, [dispatch]);
   console.log(chalets);
+
   return (
     <Layout>
       <Nav />

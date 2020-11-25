@@ -1,4 +1,10 @@
-import { Get_Chalets, Get_ChaletById, Get_UserChalet } from "../actionTypes";
+import {
+  Get_Chalets,
+  Get_ChaletById,
+  Get_UserChalet,
+  Get_ChaletsByPrice,
+  Get_ChaletsByFilter,
+} from "../actionTypes";
 const initialState = {
   chalets: [],
   chalet: {},
@@ -7,6 +13,8 @@ const initialState = {
 export default (state = initialState, action) => {
   let newState;
   switch (action.type) {
+    case Get_ChaletsByFilter:
+    case Get_ChaletsByPrice:
     case Get_Chalets:
       newState = { ...state };
       newState.chalets = action.payload;

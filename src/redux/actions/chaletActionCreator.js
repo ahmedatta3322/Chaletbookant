@@ -6,6 +6,8 @@ import {
   GET_Error,
   Get_ChaletById,
   Get_UserChalet,
+  Get_ChaletsByPrice,
+  Get_ChaletsByFilter,
 } from "../actionTypes";
 export const getChalets = () => (dispatch) => {
   axios
@@ -66,4 +68,52 @@ export const getUserChalet = () => (dispatch) => {
 };
 const getUserChaletSuccess = (chalets) => {
   return { type: Get_UserChalet, payload: chalets };
+};
+//////////////////////////////get related chalets///////////////
+export const getChaletsByPrice = (fees) => (dispatch) => {
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+  //   },
+  // };
+  // console.log(typeof status, "chalits");
+  return axios
+    .get(`${chaletsApi}?fees=${fees}`)
+    .then((response) => {
+      const chalets = response.data.response.data;
+      // const pagesNum = response.data.response.meta.last_page;
+      // console.log("chalit", response.data.response.meta);
+      dispatch(getChaletsByPriceSuccess(chalets));
+      //return user;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+const getChaletsByPriceSuccess = (chalets) => {
+  return { type: Get_ChaletsByPrice, payload: chalets };
+};
+///////////////////////////////get chalets by filter/////////
+export const getChaletsByFilter = (status, fees, from, to) => (dispatch) => {
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+  //   },
+  // };
+  // console.log(typeof status, "chalits");
+  return axios
+    .get(`${chaletsApi}?status=${status}&fees=${fees}&from=${from}&to=${to}`)
+    .then((response) => {
+      const chalets = response.data.response.data;
+      // const pagesNum = response.data.response.meta.last_page;
+      // console.log("chalit", response.data.response.meta);
+      dispatch(getChaletsByFilterSuccess(chalets));
+      //return user;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+const getChaletsByFilterSuccess = (chalets) => {
+  return { type: Get_ChaletsByFilter, payload: chalets };
 };

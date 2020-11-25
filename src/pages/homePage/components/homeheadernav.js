@@ -8,7 +8,7 @@ function HomeNav(props) {
   // const token = localStorage.getItem("token");
   const [auth, setAuth] = useState(props.auth);
 
-  console.log();
+  console.log(auth);
   const handleLogOut = () => {
     localStorage.clear();
     setAuth(false);

@@ -16,16 +16,16 @@ function SignUp(props) {
   useEffect(() => {
     dispatch(getUsers());
     setError(props.err);
+    if (props.users.length !== 0) {
+      props.history.push(`/profile/${props.users[props.users.length - 1].id}`);
+    }
     // console.log(props.err);
-  }, [props.err, dispatch]);
+  }, [props.err, dispatch, props.history, props.users]);
   const onFinish = (values) => {
     const newValues = { ...values, mobile: `+20${values.mobile}` };
     console.log(newValues);
     dispatch(Signup(newValues));
     console.log(props);
-    if (props.users.length !== 0) {
-      props.history.push(`/profile/${props.users[props.users.length - 1].id}`);
-    }
   };
   return (
     <div>
@@ -186,7 +186,7 @@ function SignUp(props) {
             <Btn
               type="primary"
               htmlType="submit"
-              className="mt-5 mb-3 h3 pl-3 mr-5 pr-3 btn-submit"
+              className="mt-5 mb-3 h3 pl-3 mr-5 pr-3 btn-submit rounded"
             >
               SIGN UP
             </Btn>

@@ -35,8 +35,28 @@
     max-height: 49.06rem;
     /* box-shadow: 0px 10px 5px #0000001f */
 }
+.upload-img{
+    position: absolute;
+    top: 50rem;
+    left: 1rem;
+
+}
+.add-img{
+    position: absolute;
+    top: -20.5rem;
+    left: 23.5rem;
+    background: #efefef;
+    z-index: 55555;
+}
+.i-add{
+    font-size: xxx-large !important;
+    background-color: #efefef;
+    padding: 2rem;
+    border-radius: 5.25rem !important;
+}
 .cardTitle,.readmore{
     font-size: 1.1rem;
+    
 }
 .info{
     position: absolute;
@@ -45,8 +65,10 @@
     background-color: white;
     padding:1rem;
     border-radius: 2.25rem;
-    width: 30.5rem;
+    /* max-width: 32.5rem; */
     height: 4.8rem;
+    width: fit-content;
+    /* width: 30.5rem; */
 
 }
 .blue{

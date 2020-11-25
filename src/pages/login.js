@@ -14,16 +14,19 @@ function Login(props) {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
+  const [submit, setSubmit] = useState("");
   const [auth, setAuth] = useState(false);
   const [setClass, setStateClass] = useState("1");
   useEffect(() => {
     setError(props.err);
-    console.log(props.auth);
+    // console.log(props.auth);
     setAuth(props.auth);
-
-    console.log(props.auth);
+    if (auth && submit === "submitted") {
+      props.history.push(`/profile/${props.user.id}`);
+    }
+    console.log(props.user);
     // console.log(props.err);
-  }, [props.err, props.auth]);
+  }, [props.err, auth, props.auth, props.user, props.history, submit]);
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -34,12 +37,13 @@ function Login(props) {
     await dispatch(logIn(values));
     console.log(auth);
     console.log(props.auth);
-    if (props.auth) {
-      console.log(props.user);
-      props.history.push(`/profile/${props.user.id}`);
-    }
+    setSubmit("submitted");
+    // if (props.auth) {
+    //   console.log(props.user);
+    //   props.history.push(`/profile/${props.user.id}`);
+    // }
   };
-  console.log(props.user, err, "redux", error, "state");
+  // console.log(props.user, err, "redux", error, "state");
 
   const { TabPane } = Tabs;
 
@@ -183,7 +187,7 @@ function Login(props) {
                         <Btn
                           type="primary"
                           htmlType="submit"
-                          className="mt-5 mb-3 h3 pl-3 pr-3 btn-submit"
+                          className="mt-5 mb-3 h3 pl-3 pr-3 btn-submit rounded"
                         >
                           LOGIN
                         </Btn>

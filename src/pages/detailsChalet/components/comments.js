@@ -21,7 +21,7 @@ export default function GuestsComments({ children }) {
           </Tooltip>
         }
       >
-        {children}
+        {/* {children} */}
       </Comment>
     </div>
   );
