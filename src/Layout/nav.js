@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Layout, Menu, Badge } from "antd";
 import "../Styling/nav.css";
 import { NavLink, withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { LogOut } from "../redux/actions/userActionCreator";
 const { Header } = Layout;
-function Nav(props) {
-  const [auth, setAuth] = useState(props.auth);
+function Nav({ auth, history }) {
+  // const [auth, setAuth] = useState(props.auth);
+  const dispatch = useDispatch();
   const handleLogOut = () => {
     localStorage.clear();
-    setAuth(false);
-    props.history.push("/");
+    // setAuth(false);
+    dispatch(LogOut());
+    history.push("/");
   };
   console.log(auth);
   return (

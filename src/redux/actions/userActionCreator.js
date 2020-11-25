@@ -7,6 +7,7 @@ import {
   Get_OnlineUserProfile,
   Get_Users,
   Post_VerificateMobile,
+  Logout,
 } from "../actionTypes";
 
 export const Signup = (newUser) => (dispatch) => {
@@ -69,6 +70,15 @@ const loginSuccess = (data, token, auth) => {
 };
 const LoginFailed = (errMsg) => {
   return { type: GET_Error, payload: errMsg };
+};
+///////////////////////logout//////////////////////
+export const LogOut = () => (dispatch) => {
+  const auth = false;
+  dispatch(LogOutSuccess(auth));
+  // return roles;
+};
+const LogOutSuccess = (auth) => {
+  return { type: Logout, payload: auth };
 };
 ////////////////////////get online user profile///////////
 export const getOnlineUserProfile = () => (dispatch) => {

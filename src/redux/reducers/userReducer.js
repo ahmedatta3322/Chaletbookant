@@ -5,6 +5,7 @@ import {
   Get_OnlineUserProfile,
   Get_Users,
   Post_VerificateMobile,
+  Logout,
 } from "../actionTypes";
 const initialState = {
   users: [],
@@ -57,6 +58,10 @@ export default (state = initialState, action) => {
       newState.status = action.payload.status;
       newState.user = { ...state.user, mobile_verfied };
       newState.errorMessg = "";
+      break;
+    case Logout:
+      newState = { ...state };
+      newState.auth = action.payload;
       break;
     default:
       newState = state;

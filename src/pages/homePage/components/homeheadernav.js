@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Layout, Menu, Row, Badge } from "antd";
 import "../../../Styling/homeheadernav.css";
 import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { LogOut } from "../../../redux/actions/userActionCreator";
 const { Header } = Layout;
-function HomeNav(props) {
+function HomeNav({ auth, location }) {
   // const token = localStorage.getItem("token");
-  const [auth, setAuth] = useState(props.auth);
-
+  // const [auth, setAuth] = useState(props.auth);
+  const dispatch = useDispatch();
   console.log(auth);
   const handleLogOut = () => {
     localStorage.clear();
-    setAuth(false);
+    // setAuth(false);
+    dispatch(LogOut());
   };
   return (
     <Layout className="layout">
@@ -22,7 +24,7 @@ function HomeNav(props) {
         <Menu
           id="home-menu"
           mode="horizontal"
-          selectedKeys={[props.location.pathname]}
+          selectedKeys={[location.pathname]}
         >
           <Menu.Item className="home-menu-item home-menu-item-active" key="1">
             Home
