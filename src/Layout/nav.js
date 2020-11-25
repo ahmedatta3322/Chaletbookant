@@ -5,7 +5,7 @@ import { NavLink, withRouter, Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { LogOut } from "../redux/actions/userActionCreator";
 const { Header } = Layout;
-function Nav({ auth, history }) {
+function Nav({ auth, history, user }) {
   // const [auth, setAuth] = useState(props.auth);
   const dispatch = useDispatch();
   const handleLogOut = () => {
@@ -14,7 +14,7 @@ function Nav({ auth, history }) {
     dispatch(LogOut());
     history.push("/");
   };
-  console.log(auth);
+  console.log(user, auth);
   return (
     // <Layout className="layout">
     <Header className="header">
@@ -51,39 +51,41 @@ function Nav({ auth, history }) {
         <Menu.Item className="home-menu-item" key="4">
           Contact
         </Menu.Item>
-        {!auth && (
-          <Menu.Item className="home-menu-item" key="5">
-            <Link
-              to="/login"
-              variant="primary"
-              className="login-btn"
-              style={{
-                backgroundColor: "#F8B544",
-                color: "white",
-                border: "none",
-                borderRadius: "0",
-              }}
-            >
-              Login
-            </Link>
-          </Menu.Item>
-        )}
-        {auth && (
-          <>
-            <Menu.Item className="home-menu-item" key="6">
-              <Badge count={25}>
-                <i className="far fa-bell font rotate text-white"></i>
-              </Badge>
+        {!auth ||
+          (!user && (
+            <Menu.Item className="home-menu-item" key="5">
+              <Link
+                to="/login"
+                variant="primary"
+                className="login-btn"
+                style={{
+                  backgroundColor: "#F8B544",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "0",
+                }}
+              >
+                Login
+              </Link>
             </Menu.Item>
-            <Menu.Item
-              className="home-menu-item "
-              key="7"
-              onClick={handleLogOut}
-            >
-              <i className="fas fa-sign-out-alt font"></i>
-            </Menu.Item>
-          </>
-        )}
+          ))}
+        {auth ||
+          (user && (
+            <>
+              <Menu.Item className="home-menu-item" key="6">
+                <Badge count={25}>
+                  <i className="far fa-bell font rotate text-white"></i>
+                </Badge>
+              </Menu.Item>
+              <Menu.Item
+                className="home-menu-item "
+                key="7"
+                onClick={handleLogOut}
+              >
+                <i className="fas fa-sign-out-alt font"></i>
+              </Menu.Item>
+            </>
+          ))}
         {/* <Menu.Item className="home-menu-item" key="1">
           <Badge count={25}>
             <i className="far fa-bell font rotate text-white"></i>
@@ -99,6 +101,7 @@ function Nav({ auth, history }) {
 }
 const mapStateToProps = (reduxState) => {
   return {
+    user: reduxState.Users.user,
     chalets: reduxState.Chalets.chalets,
     token: reduxState.Users.token,
     auth: reduxState.Users.auth,

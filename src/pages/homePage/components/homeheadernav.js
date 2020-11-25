@@ -5,16 +5,16 @@ import { Link, withRouter } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { LogOut } from "../../../redux/actions/userActionCreator";
 const { Header } = Layout;
-function HomeNav({ auth, location }) {
+function HomeNav({ auth, location, user }) {
   // const token = localStorage.getItem("token");
   // const [auth, setAuth] = useState(props.auth);
   const dispatch = useDispatch();
-  console.log(auth);
   const handleLogOut = () => {
     localStorage.clear();
     // setAuth(false);
     dispatch(LogOut());
   };
+  console.log(auth, user);
   return (
     <Layout className="layout">
       <Header id="home-header">
@@ -41,7 +41,7 @@ function HomeNav({ auth, location }) {
           <Menu.Item className="home-menu-item" key="4">
             Contact
           </Menu.Item>
-          {!auth && (
+          {!auth && !user && (
             <Menu.Item className="home-menu-item" key="/login">
               <Link
                 to="/login"
@@ -58,22 +58,23 @@ function HomeNav({ auth, location }) {
               </Link>
             </Menu.Item>
           )}
-          {auth && (
-            <>
-              <Menu.Item className="home-menu-item" key="1">
-                <Badge count={25}>
-                  <i className="far fa-bell font rotate text-white"></i>
-                </Badge>
-              </Menu.Item>
-              <Menu.Item
-                className="home-menu-item "
-                key="2"
-                onClick={handleLogOut}
-              >
-                <i className="fas fa-sign-out-alt font"></i>
-              </Menu.Item>
-            </>
-          )}
+          {auth ||
+            (user && (
+              <>
+                <Menu.Item className="home-menu-item" key="1">
+                  <Badge count={25}>
+                    <i className="far fa-bell font rotate text-white"></i>
+                  </Badge>
+                </Menu.Item>
+                <Menu.Item
+                  className="home-menu-item "
+                  key="2"
+                  onClick={handleLogOut}
+                >
+                  <i className="fas fa-sign-out-alt font"></i>
+                </Menu.Item>
+              </>
+            ))}
         </Menu>
         <Row>
           <Row>
@@ -106,6 +107,7 @@ function HomeNav({ auth, location }) {
 }
 const mapStateToProps = (reduxState) => {
   return {
+    user: reduxState.Users.user,
     chalets: reduxState.Chalets.chalets,
     token: reduxState.Users.token,
     auth: reduxState.Users.auth,

@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/homePage/home";
 import "./App.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Profile from "./pages/profilePage/profile";
 import ChaletsPage from "./pages/chaletsPage/chaletsPage";
 import ViewChalet from "./pages/detailsChalet/viewChalet";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
-function App() {
+import { getOnlineUserProfile } from "./redux/actions/userActionCreator";
+function App(props) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // if (!localStorage.getItem("token")) {
+    //   // props.history.push("/login");
+    // }
+    dispatch(getOnlineUserProfile());
+  });
   return (
     <>
       <BrowserRouter>

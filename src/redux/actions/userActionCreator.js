@@ -74,11 +74,12 @@ const LoginFailed = (errMsg) => {
 ///////////////////////logout//////////////////////
 export const LogOut = () => (dispatch) => {
   const auth = false;
-  dispatch(LogOutSuccess(auth));
+  const user = {};
+  dispatch(LogOutSuccess(auth, user));
   // return roles;
 };
-const LogOutSuccess = (auth) => {
-  return { type: Logout, payload: auth };
+const LogOutSuccess = (auth, user) => {
+  return { type: Logout, payload: { auth, user } };
 };
 ////////////////////////get online user profile///////////
 export const getOnlineUserProfile = () => (dispatch) => {

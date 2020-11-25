@@ -61,7 +61,8 @@ export default (state = initialState, action) => {
       break;
     case Logout:
       newState = { ...state };
-      newState.auth = action.payload;
+      newState.auth = action.payload.auth;
+      newState.user = action.payload.user;
       break;
     default:
       newState = state;
