@@ -23,9 +23,13 @@
 .ant-menu {
   background: none !important;
   color: white !important;
+  font-size: 1.8rem;
+    font-family: 'Google Sans';
 }
 .ant-menu-horizontal {
   border: none !important;
+  z-index: 55555555;
+
 }
 .rotate {
   transform: rotate3d(1, 1, 1, 45deg);

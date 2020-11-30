@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
+import { Pagination } from "react-bootstrap";
 import { Layout, Row, Col } from "antd";
 import Nav from "../../Layout/nav";
 import HomeFilter from "../../Components/filter";
@@ -10,13 +11,30 @@ import Foter from "../../Layout/Footer";
 import { getChalets } from "../../redux/actions/chaletActionCreator";
 const { Sider, Content } = Layout;
 
-function ChaletsPage({ chalets }) {
+function ChaletsPage({ chalets, pagesNum, total }) {
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const handleClick = (e) => {
+    setCurrentPage(e.target.textContent);
+  };
   useEffect(() => {
-    dispatch(getChalets());
-  }, [dispatch]);
-  console.log(chalets);
-
+    dispatch(getChalets("4", currentPage));
+  }, [dispatch, currentPage]);
+  console.log(chalets, pagesNum);
+  let active = currentPage;
+  let items = [];
+  for (let number = 1; number <= pagesNum; number++) {
+    items.push(
+      <Pagination.Item
+        onClick={handleClick}
+        key={number}
+        active={number === active}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
+  // console.log(currentPage);
   return (
     <Layout>
       <Nav />
@@ -60,6 +78,16 @@ function ChaletsPage({ chalets }) {
                   <ChaletCard />
                 </Col> */}
               </Row>
+              {/* {currentPage < total && ( */}
+              <Pagination
+                size="lg"
+                className="justify-content-end paginate mt-3"
+              >
+                {/* <Pagination.Prev /> */}
+                {items}
+                {/* <Pagination.Next /> */}
+              </Pagination>
+              {/* )} */}
             </Col>
 
             <Col span={5} offset={25} className="mt-0 rentchalet">
@@ -91,6 +119,8 @@ function ChaletsPage({ chalets }) {
 const mapStateToProps = (reduxState) => {
   return {
     chalets: reduxState.Chalets.chalets,
+    pagesNum: reduxState.Chalets.pagesNum,
+    total: reduxState.Chalets.total,
   };
 };
 export default connect(mapStateToProps)(ChaletsPage);

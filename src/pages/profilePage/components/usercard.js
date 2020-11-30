@@ -1,9 +1,11 @@
 import React from "react";
-import { Card, Button, NavLink } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+
 import { Button as Btn, Form, Upload } from "antd";
 import "../../../Styling/usercard.css";
-export default function UserCard({ user, chaletsCount }) {
-  console.log(user, chaletsCount);
+function UserCard(props) {
+  const { user, chaletsCount } = props;
+  // console.log(user, chaletsCount, match.url.slice(1, 8));
   return (
     <div>
       <Card className="userCard">
@@ -40,13 +42,13 @@ export default function UserCard({ user, chaletsCount }) {
         <Button variant="outline-primary" className="edit" roundedCircle>
           <i className="fas fa-edit text-white editIcon"></i>
         </Button>
-        <Card.Body className="p-3">
+        {/* <Card.Body className="p-3">
           <Card.Title className="h5">ABOUT</Card.Title>
           <Card.Text className="h6">
             {user.description}
             {user.description && <NavLink className="h5">Read More</NavLink>}
           </Card.Text>
-        </Card.Body>
+        </Card.Body> */}
         <div className="cardFooter">
           <Button variant="primary" className="filterCount active cardButton">
             <img src="/images/Chalets-Icon.png" alt="chalet" />
@@ -74,3 +76,4 @@ export default function UserCard({ user, chaletsCount }) {
     </div>
   );
 }
+export default UserCard;

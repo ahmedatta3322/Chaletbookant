@@ -16,7 +16,7 @@ function App(props) {
     //   // props.history.push("/login");
     // }
     dispatch(getOnlineUserProfile());
-  });
+  }, [dispatch]);
   return (
     <>
       <BrowserRouter>

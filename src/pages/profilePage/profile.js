@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 import Nav from "../../Layout/nav";
-import { Button, Jumbotron, Alert, Modal, Form } from "react-bootstrap";
+import {
+  Button,
+  Jumbotron,
+  Alert,
+  Modal,
+  Form,
+  Pagination,
+} from "react-bootstrap";
 import { Row, Col, Layout, Dropdown } from "antd";
 import { Menu } from "antd";
 import UserCard from "./components/usercard";
@@ -43,7 +50,7 @@ const menu2 = (
 );
 
 function Profile(props) {
-  const { user, chalets, errorMessg, status } = props;
+  const { user, chalets, errorMessg, status, pagesNum, total } = props;
   const [modalShow, setModalShow] = useState(false);
   const [show, setShow] = useState(false);
   // const [statuss, setStatus] = useState(status);
@@ -51,14 +58,14 @@ function Profile(props) {
   const [filterStatus, setFilterStatus] = useState("My Chalets");
   const [code, setCode] = useState(0);
   const dispatch = useDispatch();
-
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     // console.log(match.params.id);
     // setStatus(status);
     // if (err) setError(err);
 
     console.log(status, errorMessg);
-    dispatch(getUserChalet());
+    dispatch(getUserChalet(currentPage));
     dispatch(getOnlineUserProfile());
     if (
       errorMessg === "The code must be 4 digits." ||
@@ -70,7 +77,7 @@ function Profile(props) {
     }
 
     console.log(status, errorMessg);
-  }, [dispatch, errorMessg, status]);
+  }, [dispatch, errorMessg, status, currentPage]);
   console.log(chalets);
   const handleFilter = (e) => {
     const { textContent } = e.target;
@@ -93,6 +100,22 @@ function Profile(props) {
     }));
     console.log(code);
   };
+  const handleClick = (e) => {
+    setCurrentPage(e.target.textContent);
+  };
+  let active = currentPage;
+  let items = [];
+  for (let number = 1; number <= pagesNum; number++) {
+    items.push(
+      <Pagination.Item
+        onClick={handleClick}
+        key={number}
+        active={number === active}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(verifyMobile(code));
@@ -242,7 +265,7 @@ function Profile(props) {
                         chalets.map((chalet) => (
                           <>
                             <Col xl={10} xxl={7} span={6}>
-                              <ChaletCard chalet={chalet} key={chalet.id} />
+                              <ChaletCard userChalet={chalet} key={chalet.id} />
                             </Col>
                             <Col md={1} span={1}></Col>
                           </>
@@ -251,9 +274,18 @@ function Profile(props) {
                         <p>No Chlets Added</p>
                       )}
                     </Row>
+                    {currentPage < total && (
+                      <Pagination
+                        size="lg"
+                        className="justify-content-end mr-5 mt-5"
+                      >
+                        {/* <Pagination.Prev /> */}
+                        {items}
+                        {/* <Pagination.Next /> */}
+                      </Pagination>
+                    )}
                   </Col>
                 )}
-
                 {/* Requests*/}
                 {filterStatus === "Requests" && (
                   <Col span={15} xl={23} xxl={16} offset={2} className="mt-5">
@@ -374,6 +406,8 @@ const mapStateToProps = (reduxState) => {
     errorMessg: reduxState.Users.errorMessg,
     status: reduxState.Users.status,
     auth: reduxState.Users.auth,
+    pagesNum: reduxState.Chalets.pagesNum,
+    total: reduxState.Chalets.total,
   };
 };
 export default connect(mapStateToProps)(Profile);

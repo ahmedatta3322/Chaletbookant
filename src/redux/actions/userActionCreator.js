@@ -56,7 +56,8 @@ export const logIn = (user) => (dispatch) => {
     })
     .catch((error) => {
       console.log(error.response.data);
-      dispatch(LoginFailed(error.response.data.message));
+      if(error.response.data==='file_put_contents(/var/www/html/projects/chalet/back-end/storage/framework/cache/data/f0/48/f0486f50aa5db0a4a2d804405053a1be6e973b24): failed to open stream: No such file or directory')
+      dispatch(LoginFailed('Server Out'));
       // if (error.response.status === 500)
       //   dispatch(LoginFailed(error.response.statusText));
       // else {
@@ -75,11 +76,12 @@ const LoginFailed = (errMsg) => {
 export const LogOut = () => (dispatch) => {
   const auth = false;
   const user = {};
-  dispatch(LogOutSuccess(auth, user));
+  const errorMessg = "Unauthenticated.";
+  dispatch(LogOutSuccess(auth, user, errorMessg));
   // return roles;
 };
-const LogOutSuccess = (auth, user) => {
-  return { type: Logout, payload: { auth, user } };
+const LogOutSuccess = (auth, user, errorMessg) => {
+  return { type: Logout, payload: { auth, user, errorMessg } };
 };
 ////////////////////////get online user profile///////////
 export const getOnlineUserProfile = () => (dispatch) => {
@@ -97,11 +99,15 @@ export const getOnlineUserProfile = () => (dispatch) => {
       //return user;
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.response.data.message);
+      dispatch(getOnlineUserProfileFailed(err.response.data.message));
     });
 };
 const getOnlineUserProfileSuccess = (user) => {
   return { type: Get_OnlineUserProfile, payload: user };
+};
+const getOnlineUserProfileFailed = (errMsg) => {
+  return { type: GET_Error, payload: errMsg };
 };
 //////////////////////////get usesrs////////////
 export const getUsers = () => (dispatch) => {

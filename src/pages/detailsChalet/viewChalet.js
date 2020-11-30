@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Layout, Row, Col, Carousel, Image } from "antd";
+import { Pagination } from "react-bootstrap";
 import Nav from "../../Layout/nav";
 import DetailsChaletCard from "./components/detailsChaletCard";
 import GoogleMap from "../../Components/map";
@@ -13,14 +14,30 @@ import {
   getChaletsByPrice,
 } from "../../redux/actions/chaletActionCreator";
 const { Content } = Layout;
-function ViewChalet({ match, chalet, chalets, auth }) {
+function ViewChalet({ match, chalet, chalets, auth, pagesNum, total }) {
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     dispatch(getChaletById(match.params.id));
-    dispatch(getChaletsByPrice(chalet.fees));
-  }, [dispatch, match.params.id, chalet.fees]);
-
-  console.log(chalet, chalets);
+    dispatch(getChaletsByPrice("5", chalet.fees, currentPage));
+  }, [dispatch, match.params.id, chalet.fees, currentPage]);
+  const handleClick = (e) => {
+    setCurrentPage(e.target.textContent);
+  };
+  let active = currentPage;
+  let items = [];
+  for (let number = 1; number <= pagesNum; number++) {
+    items.push(
+      <Pagination.Item
+        onClick={handleClick}
+        key={number}
+        active={number === active}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
+  console.log(chalet, chalets, pagesNum, total);
   return (
     <div>
       <Layout>
@@ -116,6 +133,7 @@ function ViewChalet({ match, chalet, chalets, auth }) {
                   ) : (
                     <p>No Chlets Added</p>
                   )}
+
                   {/* <Col xl={10} xxl={4} span={6}>
                     <ChaletCard />
                   </Col>
@@ -138,6 +156,13 @@ function ViewChalet({ match, chalet, chalets, auth }) {
                 </Row>
               </Col>
             </Row>
+            {currentPage < total && (
+              <Pagination size="lg" className="justify-content-end mr-5">
+                {/* <Pagination.Prev /> */}
+                {items}
+                {/* <Pagination.Next /> */}
+              </Pagination>
+            )}
           </Content>
         </Layout>
         <Foter />
@@ -150,6 +175,8 @@ const mapStateToProps = (reduxState) => {
     chalet: reduxState.Chalets.chalet,
     chalets: reduxState.Chalets.chalets,
     auth: reduxState.Chalets.auth,
+    pagesNum: reduxState.Chalets.pagesNum,
+    total: reduxState.Chalets.total,
   };
 };
 export default connect(mapStateToProps)(ViewChalet);

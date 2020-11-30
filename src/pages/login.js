@@ -18,15 +18,16 @@ function Login(props) {
   const [auth, setAuth] = useState(false);
   const [setClass, setStateClass] = useState("1");
   useEffect(() => {
-    setError(props.err);
     // console.log(props.auth);
     setAuth(props.auth);
     if (auth && submit === "submitted") {
       props.history.push(`/profile/${props.user.id}`);
+    } else if (!auth && submit === "submitted") {
+      setError(err);
     }
     console.log(props.user);
     // console.log(props.err);
-  }, [props.err, auth, props.auth, props.user, props.history, submit]);
+  }, [err, auth, props.auth, props.user, props.history, submit]);
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -133,7 +134,7 @@ function Login(props) {
                             />
                           </Form.Item>
                         </Form.Item>
-                        {err && (
+                        {error !== "" && (
                           <Alert
                             message={error}
                             type="error"

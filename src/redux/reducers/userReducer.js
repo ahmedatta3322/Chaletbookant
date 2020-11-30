@@ -63,6 +63,7 @@ export default (state = initialState, action) => {
       newState = { ...state };
       newState.auth = action.payload.auth;
       newState.user = action.payload.user;
+      newState.errorMessg = action.payload.errorMessg;
       break;
     default:
       newState = state;

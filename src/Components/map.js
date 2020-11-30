@@ -3,7 +3,7 @@ import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import "../Styling/map.css";
 function GoogleMap(props) {
   const { langitude, latitude, chalets } = props;
-  console.log(chalets);
+  // console.log(chalets);
   return (
     <Map
       className="map"
@@ -21,7 +21,7 @@ function GoogleMap(props) {
       {chalets ? (
         chalets.map((chalet) => (
           <Marker
-            //   onDragend={moveMarker}
+            onDragend={props.moveMarker}
             key={chalet.id}
             name={"Current location"}
             draggable={true}
@@ -33,12 +33,12 @@ function GoogleMap(props) {
         ))
       ) : (
         <Marker
-          //   onDragend={moveMarker}
+          onDragend={props.moveMarker}
           name={"Current location"}
           draggable={true}
           position={{
-            lat: latitude,
-            lng: langitude,
+            lat: latitude ? langitude : "35.41279457509518",
+            lng: langitude ? langitude : "24.237523291240844",
           }}
         />
       )}

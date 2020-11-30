@@ -5,7 +5,7 @@ import { NavLink, withRouter, Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { LogOut } from "../redux/actions/userActionCreator";
 const { Header } = Layout;
-function Nav({ auth, history, user }) {
+function Nav({ auth, history, user, errorMessg }) {
   // const [auth, setAuth] = useState(props.auth);
   const dispatch = useDispatch();
   const handleLogOut = () => {
@@ -36,40 +36,63 @@ function Nav({ auth, history, user }) {
               borderRadius: "0",
             }}
           >
-            Home
+            HOME
           </Link>
         </Menu.Item>
         <Menu.Item className="home-menu-item" key="2">
           <Link to="/chalets" className="text-white text-decoration-none">
             {" "}
-            Chalets
+            CHALETS
           </Link>
         </Menu.Item>
         <Menu.Item className="home-menu-item" key="3">
-          About us
+          <Link
+            to={`/profile/${user.id}`}
+            className="text-white text-decoration-none"
+          >
+            {" "}
+            PROFILE
+          </Link>
         </Menu.Item>
         <Menu.Item className="home-menu-item" key="4">
-          Contact
+          ABOUT US
         </Menu.Item>
-        {!auth ||
-          (!user && (
-            <Menu.Item className="home-menu-item" key="5">
-              <Link
-                to="/login"
-                variant="primary"
-                className="login-btn"
-                style={{
-                  backgroundColor: "#F8B544",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "0",
-                }}
-              >
-                Login
-              </Link>
+        <Menu.Item className="home-menu-item" key="5">
+          CONTACT
+        </Menu.Item>
+        {(!auth && !user) || errorMessg === "Unauthenticated." ? (
+          <Menu.Item className="home-menu-item" key="6">
+            <Link
+              to="/login"
+              variant="primary"
+              className="login-btn"
+              style={{
+                backgroundColor: "#F8B544",
+                color: "white",
+                border: "none",
+                borderRadius: "0",
+              }}
+            >
+              Login
+            </Link>
+          </Menu.Item>
+        ) : (
+          <>
+            <Menu.Item className="home-menu-item" key="7">
+              <Badge count={25}>
+                <i className="far fa-bell font rotate text-white"></i>
+              </Badge>
             </Menu.Item>
-          ))}
-        {auth ||
+            <Menu.Item
+              className="home-menu-item "
+              key="8"
+              onClick={handleLogOut}
+            >
+              <i className="fas fa-sign-out-alt font"></i>
+            </Menu.Item>
+          </>
+        )}
+        {/* {auth ||
           (user && (
             <>
               <Menu.Item className="home-menu-item" key="6">
@@ -85,7 +108,7 @@ function Nav({ auth, history, user }) {
                 <i className="fas fa-sign-out-alt font"></i>
               </Menu.Item>
             </>
-          ))}
+          ))} */}
         {/* <Menu.Item className="home-menu-item" key="1">
           <Badge count={25}>
             <i className="far fa-bell font rotate text-white"></i>
@@ -105,6 +128,7 @@ const mapStateToProps = (reduxState) => {
     chalets: reduxState.Chalets.chalets,
     token: reduxState.Users.token,
     auth: reduxState.Users.auth,
+    errorMessg: reduxState.Users.errorMessg,
   };
 };
 export default connect(mapStateToProps)(withRouter(Nav));

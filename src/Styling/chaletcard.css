@@ -4,6 +4,14 @@
 .shadow-card{
   border-radius: 1.25rem !important;
 }
+.Card-prof-height{
+  max-height: 31.5rem;
+  
+}
+.Card-view-height{
+  
+  max-height: 37.5rem;
+}
 .imgCard{
   height: 14.9rem;
   border-radius: 1.25rem !important;
@@ -33,4 +41,10 @@
 }
 .air{
   width: 11rem;
+}
+.btn-trash{
+  position: absolute !important;
+    top: 0;
+    right: 0;
+    color: #e81a1af5 !important;
 }

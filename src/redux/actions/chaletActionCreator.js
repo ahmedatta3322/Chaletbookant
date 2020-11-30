@@ -8,23 +8,26 @@ import {
   Get_UserChalet,
   Get_ChaletsByPrice,
   Get_ChaletsByFilter,
+  Post_AddChalet,
+  Delete_Chalet,
 } from "../actionTypes";
-export const getChalets = () => (dispatch) => {
+export const getChalets = (pagenaite, page) => (dispatch) => {
   axios
-    .get(`${chaletsApi}`)
+    .get(`${chaletsApi}?pagenaite=${pagenaite}&page=${page}`)
     .then((response) => {
       const chalets = response.data.response.data;
-      // const pagesNum = response.data.response.meta.last_page;
-      console.log(chalets);
-      dispatch(getChaletsSuccess(chalets));
+      const pagesNum = response.data.response.meta.last_page;
+      const total = response.data.response.meta.total;
+      // console.log(pagesNum);
+      dispatch(getChaletsSuccess(chalets, pagesNum, total));
     })
     .catch((error) => {
       dispatch(getChaletsFailed(error.response.data.message));
     });
 };
 
-const getChaletsSuccess = (chalets) => {
-  return { type: Get_Chalets, payload: chalets };
+const getChaletsSuccess = (chalets, pagesNum, total) => {
+  return { type: Get_Chalets, payload: { chalets, pagesNum, total } };
 };
 const getChaletsFailed = (err) => {
   return { type: GET_Error, payload: err };
@@ -47,30 +50,32 @@ const getChaletByIdSuccess = (chalet) => {
   return { type: Get_ChaletById, payload: chalet };
 };
 ///////////////////////get user chalet////////
-export const getUserChalet = () => (dispatch) => {
+export const getUserChalet = (page) => (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   };
   return axios
-    .get(`${authApi}user_chalets`, config)
+    .get(`${authApi}user_chalets?page=${page}`, config)
     .then((response) => {
       console.log(response);
       const chalets = response.data.response.data;
+      const pagesNum = response.data.response.meta.last_page;
+      const total = response.data.response.meta.total;
       console.log("chalit", chalets);
-      dispatch(getUserChaletSuccess(chalets));
+      dispatch(getUserChaletSuccess(chalets, pagesNum, total));
       // return user;
     })
     .catch((err) => {
       console.log(err);
     });
 };
-const getUserChaletSuccess = (chalets) => {
-  return { type: Get_UserChalet, payload: chalets };
+const getUserChaletSuccess = (chalets, pagesNum, total) => {
+  return { type: Get_UserChalet, payload: { chalets, pagesNum, total } };
 };
 //////////////////////////////get related chalets///////////////
-export const getChaletsByPrice = (fees) => (dispatch) => {
+export const getChaletsByPrice = (pagenaite, fees, page) => (dispatch) => {
   // const config = {
   //   headers: {
   //     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -78,20 +83,25 @@ export const getChaletsByPrice = (fees) => (dispatch) => {
   // };
   // console.log(typeof status, "chalits");
   return axios
-    .get(`${chaletsApi}?fees=${fees}`)
+    .get(`${chaletsApi}?pagenaite=${pagenaite}&fees=${fees}&page=${page}`)
     .then((response) => {
       const chalets = response.data.response.data;
-      // const pagesNum = response.data.response.meta.last_page;
+      console.log(response);
+      const pagesNum = response.data.response.meta.last_page;
+      const total = response.data.response.meta.total;
       // console.log("chalit", response.data.response.meta);
-      dispatch(getChaletsByPriceSuccess(chalets));
+      dispatch(getChaletsByPriceSuccess(chalets, pagesNum, total));
       //return user;
     })
     .catch((err) => {
       console.log(err);
     });
 };
-const getChaletsByPriceSuccess = (chalets) => {
-  return { type: Get_ChaletsByPrice, payload: chalets };
+const getChaletsByPriceSuccess = (chalets, pagesNum, total) => {
+  return {
+    type: Get_ChaletsByPrice,
+    payload: { chalets, pagesNum, total },
+  };
 };
 ///////////////////////////////get chalets by filter/////////
 export const getChaletsByFilter = (status, fees, from, to) => (dispatch) => {
@@ -116,4 +126,42 @@ export const getChaletsByFilter = (status, fees, from, to) => (dispatch) => {
 };
 const getChaletsByFilterSuccess = (chalets) => {
   return { type: Get_ChaletsByFilter, payload: chalets };
+};
+//////////////////////add chalet/////////////
+export const addChalet = (newChalet) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  axios
+    .post(`${authApi}chalets`, newChalet, config)
+    .then((response) => {
+      console.log(response);
+      if (response.status === 200) dispatch(addChaletSuccess(newChalet));
+    })
+    .catch(console.log);
+};
+
+const addChaletSuccess = (newChalet) => {
+  return { type: Post_AddChalet, payload: newChalet };
+};
+//////////////////////Delete Chalet////////////
+export const deleteChalet = (chaletId) => (dispatch) => {
+  console.log(authApi);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  axios
+    .delete(`${authApi}chalets/${chaletId}`, config)
+    .then((response) => {
+      if (response.status === 200) dispatch(deleteChaletSuccess(chaletId));
+    })
+    .catch(console.log);
+};
+
+const deleteChaletSuccess = (chaletId) => {
+  return { type: Delete_Chalet, payload: chaletId };
 };
