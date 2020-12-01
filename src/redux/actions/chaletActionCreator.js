@@ -140,7 +140,9 @@ export const addChalet = (newChalet) => (dispatch) => {
       console.log(response);
       if (response.status === 200) dispatch(addChaletSuccess(newChalet));
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err.response);
+    });
 };
 
 const addChaletSuccess = (newChalet) => {

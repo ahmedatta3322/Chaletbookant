@@ -33,12 +33,43 @@ export default function AboutChaletModal(props) {
   // const childRef = useRef(null);
   const [currentTab, setCurrentTab] = useState("aboutChalet");
   // const [footer, setFooter] = useState(true);
-  const [about, setAbout] = useState();
-  const [images, setImages] = useState({});
+  const [about, setAbout] = useState({
+    address: "",
+    description: "",
+    fees: 0,
+    status: "disabled",
+    max_guests: 0,
+  });
+  const [image, setImage] = useState({
+    cover: {},
+    images: [],
+    feature: [],
+  });
   const [location, setLocation] = useState({
     langitude: "29.69843312500002",
     latitude: "27.450745816193173",
   });
+  const [files, setFiles] = useState({ fileList: [] });
+  const { fileList } = files;
+  const prop = {
+    onRemove: (file) => {
+      setFiles((state) => {
+        const index = state.fileList.indexOf(file);
+        const newFileList = state.fileList.slice();
+        newFileList.splice(index, 1);
+        return {
+          fileList: newFileList,
+        };
+      });
+    },
+    beforeUpload: (file) => {
+      setFiles((state) => ({
+        fileList: [...state.fileList, file],
+      }));
+      return false;
+    },
+    fileList,
+  };
   const handleNextClick = () => {
     console.log(parentRef.current.id);
     if (parentRef.current && parentRef.current.id === "aboutChalet") {
@@ -80,15 +111,32 @@ export default function AboutChaletModal(props) {
     handleNextClick();
   };
   const onImagesFinish = (values) => {
-    setImages(values);
-    dispatch(addChalet({ ...about, ...images, ...location }));
+    setImage(values);
+    // const { fileList } = this.state;
+    let formData = new FormData();
+    fileList.forEach((file) => {
+      formData.append("images[]", file);
+    });
+    // setFiles({
+    //   uploading: true,
+    // });
+    formData.append("langitude", location.langitude);
+    formData.append("latitude", location.latitude);
+    formData.append("address", about.address);
+    formData.append("description", about.description);
+    formData.append("fees", about.fees);
+    formData.append("status", about.status);
+    formData.append("max_guests", about.max_guests);
+    formData.append("feature", image.feature);
+    console.log(formData);
+    dispatch(addChalet(formData));
     handleNextClick();
   };
   console.log(about);
-  console.log(images);
+  console.log(image);
   console.log(location.langitude);
   console.log(location.latitude);
-  console.log({ ...about, ...images, ...location });
+  console.log({ ...about, ...image, ...location });
 
   return (
     <Modal
@@ -319,14 +367,17 @@ export default function AboutChaletModal(props) {
               getValueFromEvent={normFile}
               className="label mb-3"
             >
-              <Upload
+              <Upload {...prop}>
+                <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
+              </Upload>
+              {/* <Upload
                 name="logo"
                 action="/upload.do"
                 listType="picture"
                 className="ml-3"
               >
                 <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
-              </Upload>
+              </Upload> */}
             </Form.Item>
             <Form.Item
               name="feature"

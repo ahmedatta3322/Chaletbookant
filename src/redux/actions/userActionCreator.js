@@ -56,8 +56,11 @@ export const logIn = (user) => (dispatch) => {
     })
     .catch((error) => {
       console.log(error.response.data);
-      if(error.response.data==='file_put_contents(/var/www/html/projects/chalet/back-end/storage/framework/cache/data/f0/48/f0486f50aa5db0a4a2d804405053a1be6e973b24): failed to open stream: No such file or directory')
-      dispatch(LoginFailed('Server Out'));
+      if (
+        error.response.data ===
+        "file_put_contents(/var/www/html/projects/chalet/back-end/storage/framework/cache/data/f0/48/f0486f50aa5db0a4a2d804405053a1be6e973b24): failed to open stream: No such file or directory"
+      )
+        dispatch(LoginFailed("Server Out"));
       // if (error.response.status === 500)
       //   dispatch(LoginFailed(error.response.statusText));
       // else {
@@ -99,7 +102,7 @@ export const getOnlineUserProfile = () => (dispatch) => {
       //return user;
     })
     .catch((err) => {
-      console.log(err.response.data.message);
+      console.log(err.response);
       dispatch(getOnlineUserProfileFailed(err.response.data.message));
     });
 };
