@@ -135,19 +135,18 @@ export const addChalet = (newChalet, data) => (dispatch) => {
       "Content-Type": "multipart/form-data",
     },
   };
-  const data = {};
-  for (var pair of newChalet.entries()) {
-    // console.log(pair[0] + ":" + pair[1]);
-    // data.push(pair[0] + ":" + pair[1]);
-    data[pair[0]] = pair[1];
-  }
+  // const data = {};
+  // for (var pair of newChalet.entries()) {
+  //   data[pair[0]] = pair[1];
+  // }
   console.log(data);
   axios
     .post(`${authApi}chalets`, newChalet, config)
     .then((response) => {
       console.log(response);
+      const chalet = response.data.response.data;
       if (response.status === 200) {
-        dispatch(addChaletSuccess(data));
+        dispatch(addChaletSuccess(chalet));
       }
     })
     .catch((err) => {

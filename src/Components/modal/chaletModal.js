@@ -245,7 +245,12 @@ export default function AboutChaletModal(props) {
                   label="Address"
                   className="input-icons mt-3 label mb-0 mr-3"
                 >
-                  <Form.Item className="mb-3">
+                  <Form.Item
+                    className="mb-3"
+                    name="address"
+                    noStyle
+                    rules={[{ required: true, message: "address is required" }]}
+                  >
                     <Row>
                       <Col span={6}>
                         {/* <i class="fas fa-map-marker-alt icon "></i> */}
@@ -253,7 +258,7 @@ export default function AboutChaletModal(props) {
                           {...props}
                           // onChange={handleChange}
                           name="address"
-                          className="input-field d-block p-3 inputs ml-3"
+                          className="input-field d-block p-3 inputs ml-3 mb-3"
                           placeholder="Address of your Chalet "
                         />
                       </Col>
@@ -267,11 +272,17 @@ export default function AboutChaletModal(props) {
             <Row>
               <Col span={13}>
                 <Form.Item
-                  name="description"
                   className="input-icons label mb-0 mr-3"
                   label="Description"
                 >
-                  <Form.Item className="mb-3">
+                  <Form.Item
+                    className="mb-3"
+                    name="description"
+                    rules={[
+                      { required: true, message: "Description is required" },
+                    ]}
+                    noStyle
+                  >
                     <Row>
                       <Col span={23} className="ml-3">
                         {/* <i class="fas fa-pen icon "></i> */}
@@ -292,51 +303,62 @@ export default function AboutChaletModal(props) {
                   </Form.Item>
                 </Form.Item>
                 <Form.Item
-                  name="fees"
                   label="Fee per night"
                   className="input-icons label mb-2 mr-3"
                 >
-                  <Row>
-                    <Col span={6}>
-                      {/* <i class="fas fa-dollar-sign"></i> */}
-                      <Input
-                        {...props}
-                        className="input-field d-block p-3 ml-3 inputs"
-                        placeholder="Enter price of the Chalet per night "
-                        maxLength={25}
-                        type="number"
-                      />
-                    </Col>
-                  </Row>
+                  <Form.Item
+                    // className="mb-3"
+                    name="fees"
+                    rules={[{ required: true, message: "fees is required" }]}
+                    noStyle
+                  >
+                    <Row>
+                      <Col span={6}>
+                        {/* <i class="fas fa-dollar-sign"></i> */}
+                        <Input
+                          {...props}
+                          className="input-field d-block p-3 ml-3 inputs"
+                          placeholder="Enter price of the Chalet per night "
+                          maxLength={25}
+                          type="number"
+                        />
+                      </Col>
+                    </Row>
+                  </Form.Item>
                 </Form.Item>
                 <Row>
                   <Col span={18}>
                     <Form.Item
                       className="input-icons label mt-4 mb-3"
-                      name="status"
                       label="Availability"
                       hasFeedback
-                      // rules={[
-                      //   {
-                      //     required: true,
-                      //     // message: 'Please select your country!',
-                      //   },
-                      // ]}
                     >
-                      <Select defaultValue="Available To All">
-                        <Option value="available_to_all">
-                          Available To All
-                        </Option>
-                        <Option value="available_to_rent">
-                          Available To Rent
-                        </Option>
-                        <Option value="available_to_exchange">
-                          Available To Exchange
-                        </Option>
-                        <Option value="available_to_sell">
-                          Available To Sell
-                        </Option>
-                      </Select>
+                      <Form.Item
+                        // className="mb-3"
+                        name="status"
+                        rules={[
+                          {
+                            required: true,
+                            message: "status is required",
+                          },
+                        ]}
+                        noStyle
+                      >
+                        <Select defaultValue="Available To All">
+                          <Option value="available_to_all">
+                            Available To All
+                          </Option>
+                          <Option value="available_to_rent">
+                            Available To Rent
+                          </Option>
+                          <Option value="available_to_exchange">
+                            Available To Exchange
+                          </Option>
+                          <Option value="available_to_sell">
+                            Available To Sell
+                          </Option>
+                        </Select>
+                      </Form.Item>
                     </Form.Item>
                   </Col>
                 </Row>
@@ -355,18 +377,26 @@ export default function AboutChaletModal(props) {
              </Form.Group> */}
 
                 <Form.Item
-                  name="max_guests"
                   label="Max Guests"
                   className="input-icons label mb-3"
                 >
-                  {/* <i class="fas fa-users"></i> */}
-                  <Input
-                    {...props}
-                    className="input-field d-block p-3 ml-3 inputs"
-                    placeholder="The Number of Guests"
-                    maxLength={25}
-                    type="number"
-                  />
+                  <Form.Item
+                    className="mb-3"
+                    name="max_guests"
+                    rules={[
+                      { required: true, message: "Max Guests is required" },
+                    ]}
+                    noStyle
+                  >
+                    {/* <i class="fas fa-users"></i> */}
+                    <Input
+                      {...props}
+                      className="input-field d-block p-3 ml-3 inputs"
+                      placeholder="The Number of Guests"
+                      maxLength={25}
+                      type="number"
+                    />
+                  </Form.Item>
                 </Form.Item>
               </Col>
               <Col span={1} offset={13} className="ml-5">
@@ -436,9 +466,21 @@ export default function AboutChaletModal(props) {
               getValueFromEvent={normFile}
               className="label mb-3"
             >
-              <Upload {...prop}>
-                <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
-              </Upload>
+              <Form.Item
+                // className="mb-3"
+                name="images"
+                rules={[
+                  {
+                    required: true,
+                    message: "Note : Chalet Photos is required",
+                  },
+                ]}
+                noStyle
+              >
+                <Upload {...prop}>
+                  <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
+                </Upload>
+              </Form.Item>
               {/* <Upload
                 name="logo"
                 action="/upload.do"
@@ -453,43 +495,52 @@ export default function AboutChaletModal(props) {
               label="Chalet Features"
               className="label mb-3 mt-3"
             >
-              <Checkbox.Group className="ml-4 mb-5">
-                <Row>
-                  <Col span={15}>
-                    <Checkbox
-                      value="Air Condition"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                      className="mb-2"
-                    >
-                      Air Condition
-                    </Checkbox>
-                  </Col>
-                  <Col span={15}>
-                    <Checkbox
-                      value="WI-FI"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                      className="mb-2"
-                    >
-                      WI-FI
-                    </Checkbox>
-                  </Col>
-                  <Col span={15}>
-                    <Checkbox
-                      value="Garden"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                      className="mb-2"
-                    >
-                      Garden
-                    </Checkbox>
-                  </Col>
-                </Row>
-              </Checkbox.Group>
+              <Form.Item
+                // className="mb-3"
+                name="feature"
+                rules={[
+                  { required: true, message: "Note : feature is required" },
+                ]}
+                noStyle
+              >
+                <Checkbox.Group className="ml-4 mb-5">
+                  <Row>
+                    <Col span={15}>
+                      <Checkbox
+                        value="Air Condition"
+                        style={{
+                          lineHeight: "32px",
+                        }}
+                        className="mb-2"
+                      >
+                        Air Condition
+                      </Checkbox>
+                    </Col>
+                    <Col span={15}>
+                      <Checkbox
+                        value="WI-FI"
+                        style={{
+                          lineHeight: "32px",
+                        }}
+                        className="mb-2"
+                      >
+                        WI-FI
+                      </Checkbox>
+                    </Col>
+                    <Col span={15}>
+                      <Checkbox
+                        value="Garden"
+                        style={{
+                          lineHeight: "32px",
+                        }}
+                        className="mb-2"
+                      >
+                        Garden
+                      </Checkbox>
+                    </Col>
+                  </Row>
+                </Checkbox.Group>
+              </Form.Item>
             </Form.Item>
             <Modal.Footer className="modalFooter">
               <Button variant="outline-secondary" onClick={handlePreviousClick}>
