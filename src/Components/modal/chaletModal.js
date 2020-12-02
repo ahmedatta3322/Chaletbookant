@@ -50,7 +50,9 @@ export default function AboutChaletModal(props) {
     latitude: "27.450745816193173",
   });
   const [files, setFiles] = useState({ fileList: [] });
+  const [fiile, setFile] = useState({ file: {} });
   const { fileList } = files;
+  const { file } = fiile;
   const prop = {
     onRemove: (file) => {
       setFiles((state) => {
@@ -69,6 +71,25 @@ export default function AboutChaletModal(props) {
       return false;
     },
     fileList,
+  };
+  const prop2 = {
+    onRemove: (file) => {
+      setFile((state) => {
+        const index = state.file.indexOf(file);
+        const newFileList = state.file.slice();
+        newFileList.splice(index, 1);
+        return {
+          file: newFileList,
+        };
+      });
+    },
+    beforeUpload: (file) => {
+      setFile((state) => ({
+        file: { ...state.file, file },
+      }));
+      return false;
+    },
+    file,
   };
   const handleNextClick = () => {
     console.log(parentRef.current.id);
@@ -112,14 +133,25 @@ export default function AboutChaletModal(props) {
   };
   const onImagesFinish = (values) => {
     setImage(values);
-    // const { fileList } = this.state;
     let formData = new FormData();
     fileList.forEach((file) => {
       formData.append("images[]", file);
     });
+    console.log(values.feature);
+    values.feature.forEach((f) => {
+      formData.append("feature[]", f);
+    });
     // setFiles({
     //   uploading: true,
     // });
+    console.log(image);
+    console.log(file.file);
+    console.log(values);
+    console.log(values.cover[0]);
+    // values.cover.forEach((file) => {
+    //   formData.append("cover", file);
+    // });
+    formData.append("cover", file.file);
     formData.append("langitude", location.langitude);
     formData.append("latitude", location.latitude);
     formData.append("address", about.address);
@@ -127,16 +159,38 @@ export default function AboutChaletModal(props) {
     formData.append("fees", about.fees);
     formData.append("status", about.status);
     formData.append("max_guests", about.max_guests);
-    formData.append("feature", image.feature);
-    console.log(formData);
-    dispatch(addChalet(formData));
+    // formData.append("feature", image.feature);
+    console.log(formData.get("address"));
+    console.log(formData.get("images[]"));
+    console.log(formData.get("cover"), "cover");
+
+    // var options = { content: formData };
+    // console.log(options);
+    // const data = {};
+    // for (var pair of formData.entries()) {
+    //   // pair[0] + ":" + pair[1]);
+    //   data[pair[0]] = pair[1];
+    // }
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ":" + pair[1]);
+      // data.pair[0] = pair[1];
+    }
+    // console.log(data);
+    dispatch(
+      addChalet(formData, {
+        ...about,
+        ...values,
+        cover: file.file,
+        ...location,
+      })
+    );
     handleNextClick();
   };
-  console.log(about);
-  console.log(image);
-  console.log(location.langitude);
-  console.log(location.latitude);
-  console.log({ ...about, ...image, ...location });
+  // console.log(about);
+  // console.log(image);
+  // console.log(location.langitude);
+  // console.log(location.latitude);
+  // console.log({ ...about, ...image, ...location });
 
   return (
     <Modal
@@ -350,7 +404,12 @@ export default function AboutChaletModal(props) {
               getValueFromEvent={normFile}
               noStyle
             >
-              <Upload.Dragger name="files" action="/upload.do">
+              {/* {file && ( */}
+              <Upload.Dragger
+                // name="files"
+                {...prop2}
+                // disabled={`${file !== {} ? true : false}`}
+              >
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />
                 </p>
@@ -358,6 +417,16 @@ export default function AboutChaletModal(props) {
                   Click or drag Image to this area to upload
                 </p>
               </Upload.Dragger>
+              {/* )} */}
+
+              {/* <Upload.Dragger name="files" {...prop2}>
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or drag Image to this area to upload
+                </p>
+              </Upload.Dragger> */}
             </Form.Item>
 
             <Form.Item

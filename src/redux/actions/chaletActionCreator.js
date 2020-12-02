@@ -128,17 +128,27 @@ const getChaletsByFilterSuccess = (chalets) => {
   return { type: Get_ChaletsByFilter, payload: chalets };
 };
 //////////////////////add chalet/////////////
-export const addChalet = (newChalet) => (dispatch) => {
+export const addChalet = (newChalet, data) => (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "multipart/form-data",
     },
   };
+  const data = {};
+  for (var pair of newChalet.entries()) {
+    // console.log(pair[0] + ":" + pair[1]);
+    // data.push(pair[0] + ":" + pair[1]);
+    data[pair[0]] = pair[1];
+  }
+  console.log(data);
   axios
     .post(`${authApi}chalets`, newChalet, config)
     .then((response) => {
       console.log(response);
-      if (response.status === 200) dispatch(addChaletSuccess(newChalet));
+      if (response.status === 200) {
+        dispatch(addChaletSuccess(data));
+      }
     })
     .catch((err) => {
       console.log(err.response);

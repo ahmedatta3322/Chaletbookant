@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { Button, Image } from "antd";
 import { Card, Badge } from "react-bootstrap";
 import { NavLink, withRouter } from "react-router-dom";
@@ -11,9 +11,13 @@ function ChaletCard({ chalet, match, userChalet }) {
   const dispatch = useDispatch();
   const [modalShow, setModalShow] = React.useState(false);
   const handleDelete = () => {
-    dispatch(deleteChalet(chalet.id));
+    if (chalet) dispatch(deleteChalet(chalet.id));
+    else {
+      dispatch(deleteChalet(userChalet.id));
+    }
     setModalShow(false);
   };
+  console.log(userChalet, chalet);
   return (
     <Card
       className={`mt-5 shadow-card ${
@@ -115,7 +119,7 @@ function ChaletCard({ chalet, match, userChalet }) {
             <h3>{userChalet && userChalet.address}</h3>
             <h4>
               $ {userChalet && userChalet.fees}
-              <Badge className="badge p-3 ml-3">For Sell</Badge>
+              {/* <Badge className="badge p-3 ml-3">For Sell</Badge> */}
             </h4>
             <div className="features d-flex">
               <>
@@ -125,7 +129,7 @@ function ChaletCard({ chalet, match, userChalet }) {
                     className="featureImg"
                     alt="wifi"
                   />
-                  {userChalet && userChalet.feature[0]}
+                  {userChalet && userChalet.feature && userChalet.feature[0]}
                 </div>
                 <div className="h6">
                   <img
@@ -133,7 +137,7 @@ function ChaletCard({ chalet, match, userChalet }) {
                     className="featureImg"
                     alt="garden"
                   />
-                  {userChalet && userChalet.feature[1]}
+                  {userChalet && userChalet.feature && userChalet.feature[1]}
                 </div>
                 <div className="h6 air">
                   <img
@@ -141,7 +145,7 @@ function ChaletCard({ chalet, match, userChalet }) {
                     className="featureImg"
                     alt="air condition"
                   />
-                  {userChalet && userChalet.feature[2]}
+                  {userChalet && userChalet.feature && userChalet.feature[2]}
                 </div>
               </>
             </div>
@@ -183,4 +187,9 @@ function ChaletCard({ chalet, match, userChalet }) {
     </Card>
   );
 }
-export default withRouter(ChaletCard);
+const mapStateToProps = (reduxState) => {
+  return {
+    // userChalet: reduxState.Chalets.currentUserChalets,
+  };
+};
+export default connect(mapStateToProps)(withRouter(ChaletCard));
