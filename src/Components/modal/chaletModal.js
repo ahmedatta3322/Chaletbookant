@@ -160,9 +160,9 @@ export default function AboutChaletModal(props) {
     formData.append("status", about.status);
     formData.append("max_guests", about.max_guests);
     // formData.append("feature", image.feature);
-    console.log(formData.get("address"));
-    console.log(formData.get("images[]"));
-    console.log(formData.get("cover"), "cover");
+    // console.log(formData.get("address"));
+    // console.log(formData.get("images[]"));
+    // console.log(formData.get("cover"), "cover");
 
     // var options = { content: formData };
     // console.log(options);
@@ -171,19 +171,12 @@ export default function AboutChaletModal(props) {
     //   // pair[0] + ":" + pair[1]);
     //   data[pair[0]] = pair[1];
     // }
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ":" + pair[1]);
-      // data.pair[0] = pair[1];
-    }
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ":" + pair[1]);
+    //   // data.pair[0] = pair[1];
+    // }
     // console.log(data);
-    dispatch(
-      addChalet(formData, {
-        ...about,
-        ...values,
-        cover: file.file,
-        ...location,
-      })
-    );
+    dispatch(addChalet(formData));
     handleNextClick();
   };
   // console.log(about);
@@ -191,7 +184,7 @@ export default function AboutChaletModal(props) {
   // console.log(location.langitude);
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
-
+  console.log(file);
   return (
     <Modal
       {...props}
@@ -438,7 +431,7 @@ export default function AboutChaletModal(props) {
               <Upload.Dragger
                 // name="files"
                 {...prop2}
-                // disabled={`${file ? true : false}`}
+                disabled={`${file ? true : false}`}
                 // disabled={true}
               >
                 <p className="ant-upload-drag-icon">

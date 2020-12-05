@@ -128,7 +128,7 @@ const getChaletsByFilterSuccess = (chalets) => {
   return { type: Get_ChaletsByFilter, payload: chalets };
 };
 //////////////////////add chalet/////////////
-export const addChalet = (newChalet, data) => (dispatch) => {
+export const addChalet = (newChalet) => (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -139,7 +139,7 @@ export const addChalet = (newChalet, data) => (dispatch) => {
   // for (var pair of newChalet.entries()) {
   //   data[pair[0]] = pair[1];
   // }
-  console.log(data);
+  // console.log(data);
   axios
     .post(`${authApi}chalets`, newChalet, config)
     .then((response) => {
