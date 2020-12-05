@@ -50,7 +50,7 @@ export default function AboutChaletModal(props) {
     latitude: "27.450745816193173",
   });
   const [files, setFiles] = useState({ fileList: [] });
-  const [fiile, setFile] = useState({ file: {} });
+  const [fiile, setFile] = useState({ file: {}, Upload: false });
   const { fileList } = files;
   const { file } = fiile;
   const prop = {
@@ -86,6 +86,7 @@ export default function AboutChaletModal(props) {
     beforeUpload: (file) => {
       setFile((state) => ({
         file: { ...state.file, file },
+        Upload: true,
       }));
       return false;
     },
@@ -184,7 +185,7 @@ export default function AboutChaletModal(props) {
   // console.log(location.langitude);
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
-  console.log(file);
+  console.log(fiile.Upload);
   return (
     <Modal
       {...props}
@@ -431,7 +432,7 @@ export default function AboutChaletModal(props) {
               <Upload.Dragger
                 // name="files"
                 {...prop2}
-                // disabled={`${file ? true : false}`}
+                disabled={fiile.Upload ? true : false}
                 // disabled={true}
               >
                 <p className="ant-upload-drag-icon">
