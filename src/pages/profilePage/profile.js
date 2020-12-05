@@ -206,7 +206,7 @@ function Profile(props) {
           <Jumbotron fluid>
             <Row>
               <Col span={5}>
-                <UserCard user={user} chaletsCount={chalets.length} />
+                <UserCard user={user} chaletsCount={total} />
               </Col>
               <h2 className="username">{user.first_name}</h2>
             </Row>

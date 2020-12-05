@@ -24,7 +24,7 @@
 }
 .form{
     width: 724px;
-    height: 724px;
+    max-height: 81.5rem;
 }
 .label{
     font-size: large;

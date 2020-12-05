@@ -8,6 +8,7 @@ import {
   Get_Users,
   Post_VerificateMobile,
   Logout,
+  Get_RentRequests,
 } from "../actionTypes";
 
 export const Signup = (newUser) => (dispatch) => {
@@ -56,8 +57,11 @@ export const logIn = (user) => (dispatch) => {
     })
     .catch((error) => {
       console.log(error.response.data);
-      if(error.response.data==='file_put_contents(/var/www/html/projects/chalet/back-end/storage/framework/cache/data/f0/48/f0486f50aa5db0a4a2d804405053a1be6e973b24): failed to open stream: No such file or directory')
-      dispatch(LoginFailed('Server Out'));
+      if (
+        error.response.data ===
+        "file_put_contents(/var/www/html/projects/chalet/back-end/storage/framework/cache/data/f0/48/f0486f50aa5db0a4a2d804405053a1be6e973b24): failed to open stream: No such file or directory"
+      )
+        dispatch(LoginFailed("Server Out"));
       // if (error.response.status === 500)
       //   dispatch(LoginFailed(error.response.statusText));
       // else {
@@ -99,7 +103,7 @@ export const getOnlineUserProfile = () => (dispatch) => {
       //return user;
     })
     .catch((err) => {
-      console.log(err.response.data.message);
+      console.log(err.response);
       dispatch(getOnlineUserProfileFailed(err.response.data.message));
     });
 };
@@ -164,4 +168,38 @@ const verifyMobileSuccess = (mobile_verfied, status) => {
 };
 const verifyMobileFailed = (errMsg) => {
   return { type: GET_Error, payload: errMsg };
+};
+////////////////////////////////get rent requests///////////
+export const getRentRequests = (status, pageNum) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+    },
+  };
+
+  axios
+    .get(
+      `http://app.apptechegy.com/api/system/rentChalet?status=${status}&page=${pageNum}`,
+      config
+    )
+    .then((response) => {
+      const data = response.data.response.data;
+      const pagesNum = response.data.response.meta.last_page;
+      // console.log(data);
+      dispatch(getRentRequestsSuccess(data, pagesNum));
+    })
+    .catch((error) => {
+      dispatch(getRentRequestsFailed(error));
+      console.log(error);
+    });
+};
+
+const getRentRequestsSuccess = (rentRequests, pagesNum) => {
+  return {
+    type: Get_RentRequests,
+    payload: { rentRequests, pagesNum },
+  };
+};
+const getRentRequestsFailed = (err) => {
+  return { type: GET_Error, payload: err };
 };

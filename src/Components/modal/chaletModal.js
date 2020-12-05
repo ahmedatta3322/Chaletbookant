@@ -33,12 +33,64 @@ export default function AboutChaletModal(props) {
   // const childRef = useRef(null);
   const [currentTab, setCurrentTab] = useState("aboutChalet");
   // const [footer, setFooter] = useState(true);
-  const [about, setAbout] = useState();
-  const [images, setImages] = useState({});
+  const [about, setAbout] = useState({
+    address: "",
+    description: "",
+    fees: 0,
+    status: "disabled",
+    max_guests: 0,
+  });
+  const [image, setImage] = useState({
+    cover: {},
+    images: [],
+    feature: [],
+  });
   const [location, setLocation] = useState({
     langitude: "29.69843312500002",
     latitude: "27.450745816193173",
   });
+  const [files, setFiles] = useState({ fileList: [] });
+  const [fiile, setFile] = useState({ file: {} });
+  const { fileList } = files;
+  const { file } = fiile;
+  const prop = {
+    onRemove: (file) => {
+      setFiles((state) => {
+        const index = state.fileList.indexOf(file);
+        const newFileList = state.fileList.slice();
+        newFileList.splice(index, 1);
+        return {
+          fileList: newFileList,
+        };
+      });
+    },
+    beforeUpload: (file) => {
+      setFiles((state) => ({
+        fileList: [...state.fileList, file],
+      }));
+      return false;
+    },
+    fileList,
+  };
+  const prop2 = {
+    onRemove: (file) => {
+      setFile((state) => {
+        const index = state.file.indexOf(file);
+        const newFileList = state.file.slice();
+        newFileList.splice(index, 1);
+        return {
+          file: newFileList,
+        };
+      });
+    },
+    beforeUpload: (file) => {
+      setFile((state) => ({
+        file: { ...state.file, file },
+      }));
+      return false;
+    },
+    file,
+  };
   const handleNextClick = () => {
     console.log(parentRef.current.id);
     if (parentRef.current && parentRef.current.id === "aboutChalet") {
@@ -80,15 +132,65 @@ export default function AboutChaletModal(props) {
     handleNextClick();
   };
   const onImagesFinish = (values) => {
-    setImages(values);
-    dispatch(addChalet({ ...about, ...images, ...location }));
+    setImage(values);
+    let formData = new FormData();
+    fileList.forEach((file) => {
+      formData.append("images[]", file);
+    });
+    console.log(values.feature);
+    values.feature.forEach((f) => {
+      formData.append("feature[]", f);
+    });
+    // setFiles({
+    //   uploading: true,
+    // });
+    console.log(image);
+    console.log(file.file);
+    console.log(values);
+    console.log(values.cover[0]);
+    // values.cover.forEach((file) => {
+    //   formData.append("cover", file);
+    // });
+    formData.append("cover", file.file);
+    formData.append("langitude", location.langitude);
+    formData.append("latitude", location.latitude);
+    formData.append("address", about.address);
+    formData.append("description", about.description);
+    formData.append("fees", about.fees);
+    formData.append("status", about.status);
+    formData.append("max_guests", about.max_guests);
+    // formData.append("feature", image.feature);
+    console.log(formData.get("address"));
+    console.log(formData.get("images[]"));
+    console.log(formData.get("cover"), "cover");
+
+    // var options = { content: formData };
+    // console.log(options);
+    // const data = {};
+    // for (var pair of formData.entries()) {
+    //   // pair[0] + ":" + pair[1]);
+    //   data[pair[0]] = pair[1];
+    // }
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ":" + pair[1]);
+      // data.pair[0] = pair[1];
+    }
+    // console.log(data);
+    dispatch(
+      addChalet(formData, {
+        ...about,
+        ...values,
+        cover: file.file,
+        ...location,
+      })
+    );
     handleNextClick();
   };
-  console.log(about);
-  console.log(images);
-  console.log(location.langitude);
-  console.log(location.latitude);
-  console.log({ ...about, ...images, ...location });
+  // console.log(about);
+  // console.log(image);
+  // console.log(location.langitude);
+  // console.log(location.latitude);
+  // console.log({ ...about, ...image, ...location });
 
   return (
     <Modal
@@ -143,7 +245,12 @@ export default function AboutChaletModal(props) {
                   label="Address"
                   className="input-icons mt-3 label mb-0 mr-3"
                 >
-                  <Form.Item className="mb-3">
+                  <Form.Item
+                    className="mb-3"
+                    name="address"
+                    noStyle
+                    rules={[{ required: true, message: "address is required" }]}
+                  >
                     <Row>
                       <Col span={6}>
                         {/* <i class="fas fa-map-marker-alt icon "></i> */}
@@ -151,7 +258,7 @@ export default function AboutChaletModal(props) {
                           {...props}
                           // onChange={handleChange}
                           name="address"
-                          className="input-field d-block p-3 inputs ml-3"
+                          className="input-field d-block p-3 inputs ml-3 mb-3"
                           placeholder="Address of your Chalet "
                         />
                       </Col>
@@ -165,11 +272,17 @@ export default function AboutChaletModal(props) {
             <Row>
               <Col span={13}>
                 <Form.Item
-                  name="description"
                   className="input-icons label mb-0 mr-3"
                   label="Description"
                 >
-                  <Form.Item className="mb-3">
+                  <Form.Item
+                    className="mb-3"
+                    name="description"
+                    rules={[
+                      { required: true, message: "Description is required" },
+                    ]}
+                    noStyle
+                  >
                     <Row>
                       <Col span={23} className="ml-3">
                         {/* <i class="fas fa-pen icon "></i> */}
@@ -190,51 +303,62 @@ export default function AboutChaletModal(props) {
                   </Form.Item>
                 </Form.Item>
                 <Form.Item
-                  name="fees"
                   label="Fee per night"
                   className="input-icons label mb-2 mr-3"
                 >
-                  <Row>
-                    <Col span={6}>
-                      {/* <i class="fas fa-dollar-sign"></i> */}
-                      <Input
-                        {...props}
-                        className="input-field d-block p-3 ml-3 inputs"
-                        placeholder="Enter price of the Chalet per night "
-                        maxLength={25}
-                        type="number"
-                      />
-                    </Col>
-                  </Row>
+                  <Form.Item
+                    // className="mb-3"
+                    name="fees"
+                    rules={[{ required: true, message: "fees is required" }]}
+                    noStyle
+                  >
+                    <Row>
+                      <Col span={6}>
+                        {/* <i class="fas fa-dollar-sign"></i> */}
+                        <Input
+                          {...props}
+                          className="input-field d-block p-3 ml-3 inputs"
+                          placeholder="Enter price of the Chalet per night "
+                          maxLength={25}
+                          type="number"
+                        />
+                      </Col>
+                    </Row>
+                  </Form.Item>
                 </Form.Item>
                 <Row>
                   <Col span={18}>
                     <Form.Item
                       className="input-icons label mt-4 mb-3"
-                      name="status"
                       label="Availability"
                       hasFeedback
-                      // rules={[
-                      //   {
-                      //     required: true,
-                      //     // message: 'Please select your country!',
-                      //   },
-                      // ]}
                     >
-                      <Select defaultValue="Available To All">
-                        <Option value="available_to_all">
-                          Available To All
-                        </Option>
-                        <Option value="available_to_rent">
-                          Available To Rent
-                        </Option>
-                        <Option value="available_to_exchange">
-                          Available To Exchange
-                        </Option>
-                        <Option value="available_to_sell">
-                          Available To Sell
-                        </Option>
-                      </Select>
+                      <Form.Item
+                        // className="mb-3"
+                        name="status"
+                        rules={[
+                          {
+                            required: true,
+                            message: "status is required",
+                          },
+                        ]}
+                        noStyle
+                      >
+                        <Select defaultValue="Available To All">
+                          <Option value="available_to_all">
+                            Available To All
+                          </Option>
+                          <Option value="available_to_rent">
+                            Available To Rent
+                          </Option>
+                          <Option value="available_to_exchange">
+                            Available To Exchange
+                          </Option>
+                          <Option value="available_to_sell">
+                            Available To Sell
+                          </Option>
+                        </Select>
+                      </Form.Item>
                     </Form.Item>
                   </Col>
                 </Row>
@@ -253,18 +377,26 @@ export default function AboutChaletModal(props) {
              </Form.Group> */}
 
                 <Form.Item
-                  name="max_guests"
                   label="Max Guests"
                   className="input-icons label mb-3"
                 >
-                  {/* <i class="fas fa-users"></i> */}
-                  <Input
-                    {...props}
-                    className="input-field d-block p-3 ml-3 inputs"
-                    placeholder="The Number of Guests"
-                    maxLength={25}
-                    type="number"
-                  />
+                  <Form.Item
+                    className="mb-3"
+                    name="max_guests"
+                    rules={[
+                      { required: true, message: "Max Guests is required" },
+                    ]}
+                    noStyle
+                  >
+                    {/* <i class="fas fa-users"></i> */}
+                    <Input
+                      {...props}
+                      className="input-field d-block p-3 ml-3 inputs"
+                      placeholder="The Number of Guests"
+                      maxLength={25}
+                      type="number"
+                    />
+                  </Form.Item>
                 </Form.Item>
               </Col>
               <Col span={1} offset={13} className="ml-5">
@@ -302,7 +434,13 @@ export default function AboutChaletModal(props) {
               getValueFromEvent={normFile}
               noStyle
             >
-              <Upload.Dragger name="files" action="/upload.do">
+              {/* {file && ( */}
+              <Upload.Dragger
+                // name="files"
+                {...prop2}
+                // disabled={`${file !== {} ? true : false}`}
+                disabled={true}
+              >
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />
                 </p>
@@ -310,6 +448,16 @@ export default function AboutChaletModal(props) {
                   Click or drag Image to this area to upload
                 </p>
               </Upload.Dragger>
+              {/* )} */}
+
+              {/* <Upload.Dragger name="files" {...prop2}>
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or drag Image to this area to upload
+                </p>
+              </Upload.Dragger> */}
             </Form.Item>
 
             <Form.Item
@@ -319,57 +467,81 @@ export default function AboutChaletModal(props) {
               getValueFromEvent={normFile}
               className="label mb-3"
             >
-              <Upload
+              <Form.Item
+                // className="mb-3"
+                name="images"
+                rules={[
+                  {
+                    required: true,
+                    message: "Note : Chalet Photos is required",
+                  },
+                ]}
+                noStyle
+              >
+                <Upload {...prop}>
+                  <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
+                </Upload>
+              </Form.Item>
+              {/* <Upload
                 name="logo"
                 action="/upload.do"
                 listType="picture"
                 className="ml-3"
               >
                 <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
-              </Upload>
+              </Upload> */}
             </Form.Item>
             <Form.Item
               name="feature"
               label="Chalet Features"
               className="label mb-3 mt-3"
             >
-              <Checkbox.Group className="ml-4 mb-5">
-                <Row>
-                  <Col span={15}>
-                    <Checkbox
-                      value="Air Condition"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                      className="mb-2"
-                    >
-                      Air Condition
-                    </Checkbox>
-                  </Col>
-                  <Col span={15}>
-                    <Checkbox
-                      value="WI-FI"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                      className="mb-2"
-                    >
-                      WI-FI
-                    </Checkbox>
-                  </Col>
-                  <Col span={15}>
-                    <Checkbox
-                      value="Garden"
-                      style={{
-                        lineHeight: "32px",
-                      }}
-                      className="mb-2"
-                    >
-                      Garden
-                    </Checkbox>
-                  </Col>
-                </Row>
-              </Checkbox.Group>
+              <Form.Item
+                // className="mb-3"
+                name="feature"
+                rules={[
+                  { required: true, message: "Note : feature is required" },
+                ]}
+                noStyle
+              >
+                <Checkbox.Group className="ml-4 mb-5">
+                  <Row>
+                    <Col span={15}>
+                      <Checkbox
+                        value="Air Condition"
+                        style={{
+                          lineHeight: "32px",
+                        }}
+                        className="mb-2"
+                      >
+                        Air Condition
+                      </Checkbox>
+                    </Col>
+                    <Col span={15}>
+                      <Checkbox
+                        value="WI-FI"
+                        style={{
+                          lineHeight: "32px",
+                        }}
+                        className="mb-2"
+                      >
+                        WI-FI
+                      </Checkbox>
+                    </Col>
+                    <Col span={15}>
+                      <Checkbox
+                        value="Garden"
+                        style={{
+                          lineHeight: "32px",
+                        }}
+                        className="mb-2"
+                      >
+                        Garden
+                      </Checkbox>
+                    </Col>
+                  </Row>
+                </Checkbox.Group>
+              </Form.Item>
             </Form.Item>
             <Modal.Footer className="modalFooter">
               <Button variant="outline-secondary" onClick={handlePreviousClick}>

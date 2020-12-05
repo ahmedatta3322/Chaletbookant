@@ -13,5 +13,6 @@ export const Logout = "Logout";
 
 export const Get_Users = "Get_Users";
 export const Get_OnlineUserProfile = "Get_OnlineUserProfile";
+export const Get_RentRequests = "Get_RentRequests";
 
 export const GET_Error = "GET_Error";
