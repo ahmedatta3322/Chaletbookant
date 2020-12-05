@@ -431,7 +431,7 @@ export default function AboutChaletModal(props) {
               <Upload.Dragger
                 // name="files"
                 {...prop2}
-                disabled={`${file ? true : false}`}
+                // disabled={`${file ? true : false}`}
                 // disabled={true}
               >
                 <p className="ant-upload-drag-icon">
