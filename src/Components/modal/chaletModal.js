@@ -40,11 +40,11 @@ export default function AboutChaletModal(props) {
     status: "disabled",
     max_guests: 0,
   });
-  const [image, setImage] = useState({
-    cover: {},
-    images: [],
-    feature: [],
-  });
+  // const [image, setImage] = useState({
+  //   cover: {},
+  //   images: [],
+  //   feature: [],
+  // });
   const [location, setLocation] = useState({
     langitude: "29.69843312500002",
     latitude: "27.450745816193173",
@@ -132,7 +132,7 @@ export default function AboutChaletModal(props) {
     handleNextClick();
   };
   const onImagesFinish = (values) => {
-    setImage(values);
+    // setImage(values);
     let formData = new FormData();
     fileList.forEach((file) => {
       formData.append("images[]", file);
@@ -144,7 +144,7 @@ export default function AboutChaletModal(props) {
     // setFiles({
     //   uploading: true,
     // });
-    console.log(image);
+    // console.log(image);
     console.log(file.file);
     console.log(values);
     console.log(values.cover[0]);
