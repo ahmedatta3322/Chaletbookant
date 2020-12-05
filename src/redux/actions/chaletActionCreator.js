@@ -128,7 +128,7 @@ const getChaletsByFilterSuccess = (chalets) => {
   return { type: Get_ChaletsByFilter, payload: chalets };
 };
 //////////////////////add chalet/////////////
-export const addChalet = (newChalet) => (dispatch) => {
+export const addChalet = (newChalet, data) => (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
