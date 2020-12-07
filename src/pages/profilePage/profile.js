@@ -23,34 +23,23 @@ import {
   verifyMobile,
 } from "../../redux/actions/userActionCreator";
 import { getUserChalet } from "../../redux/actions/chaletActionCreator";
-
+import {
+  getSentRentRequests,
+  getReciviedRentRequests,
+} from "../../redux/actions/requestActionCreator";
 const { Sider, Content } = Layout;
 
-const menu1 = (
-  <Menu>
-    <Menu.Item key="0">
-      <button className="filterbtn">Rent</button>
-    </Menu.Item>
-    <Menu.Item key="1">
-      <button className="filterbtn">Exchange</button>
-    </Menu.Item>
-    <Menu.Divider />
-  </Menu>
-);
-const menu2 = (
-  <Menu>
-    <Menu.Item key="0">
-      <button className="filterbtn"> Sent</button>
-    </Menu.Item>
-    <Menu.Item key="1">
-      <button className="filterbtn">Receivied</button>
-    </Menu.Item>
-    <Menu.Divider />
-  </Menu>
-);
-
 function Profile(props) {
-  const { user, chalets, errorMessg, status, pagesNum, total } = props;
+  const {
+    user,
+    chalets,
+    errorMessg,
+    status,
+    pagesNum,
+    total,
+    sentRentRequests,
+    reciviedRentRequests,
+  } = props;
   const [modalShow, setModalShow] = useState(false);
   const [show, setShow] = useState(false);
   // const [statuss, setStatus] = useState(status);
@@ -59,12 +48,58 @@ function Profile(props) {
   const [code, setCode] = useState(0);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const [requestfilterStatus, setRequestFilterStatus] = useState("0");
+  const [requestTypefilterStatus, setRequestTypeFilterStatus] = useState("0");
+
+  const handleRequestFilter = (e) => {
+    console.log(typeof e.key);
+    if (e.key === "1") setRequestFilterStatus("1");
+    else if (e.key === "0") setRequestFilterStatus("0");
+  };
+  const handleTypeRequestFilter = (e) => {
+    console.log(typeof e.key);
+    if (e.key === "0") setRequestTypeFilterStatus("0");
+    if (e.key === "1") setRequestTypeFilterStatus("1");
+  };
+  const menu1 = (
+    <Menu onClick={handleRequestFilter}>
+      <Menu.Item key="0">
+        <button className="filterbtn">Rent</button>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <button className="filterbtn">Exchange</button>
+      </Menu.Item>
+      <Menu.Divider />
+    </Menu>
+  );
+  const menu2 = (
+    <Menu onClick={handleTypeRequestFilter}>
+      <Menu.Item key="0">
+        <button className="filterbtn">Sent</button>
+      </Menu.Item>
+      <Menu.Item key="1">
+        <button className="filterbtn">Receivied</button>
+      </Menu.Item>
+      <Menu.Divider />
+    </Menu>
+  );
   useEffect(() => {
     // console.log(match.params.id);
     // setStatus(status);
     // if (err) setError(err);
-
-    console.log(status, errorMessg);
+    if (
+      filterStatus === "Requests" &&
+      requestfilterStatus === "0" &&
+      requestTypefilterStatus === "0"
+    )
+      dispatch(getSentRentRequests());
+    else if (
+      filterStatus === "Requests" &&
+      requestfilterStatus === "0" &&
+      requestTypefilterStatus === "1"
+    )
+      dispatch(getReciviedRentRequests());
+    console.log(requestTypefilterStatus, requestfilterStatus);
     dispatch(getUserChalet(currentPage));
     dispatch(getOnlineUserProfile());
     if (
@@ -77,7 +112,15 @@ function Profile(props) {
     }
 
     console.log(status, errorMessg);
-  }, [dispatch, errorMessg, status, currentPage]);
+  }, [
+    dispatch,
+    errorMessg,
+    status,
+    currentPage,
+    requestTypefilterStatus,
+    requestfilterStatus,
+    filterStatus,
+  ]);
   console.log(chalets);
   const handleFilter = (e) => {
     const { textContent } = e.target;
@@ -127,7 +170,7 @@ function Profile(props) {
   //   console.log(statuss);
   //   setShow(false);
   // };
-  // console.log(errorMessg);
+  console.log(sentRentRequests, reciviedRentRequests);
   return (
     <>
       {user.mobile_verfied === 0 && (
@@ -319,57 +362,102 @@ function Profile(props) {
                         </button>
                       </Dropdown>
                     </Row>
+
                     <div className="bg-light p-3 mt-5">
-                      <Row className="mt-5 mb-5">
-                        <Col span={15}>
-                          <p className="request-content">
-                            You have a Request form{" "}
-                            <span className="yellow">ChaletBook</span> to{" "}
-                            <span className="red">Rent</span> your{" "}
-                            <span className="yellow">Maldives</span> Chalet
-                          </p>
-                        </Col>
-                        <Col span={4}></Col>
-                        <Col xl={5} span={3}>
-                          <Row>
-                            <Button
-                              variant="primary"
-                              className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
-                            >
-                              view
-                            </Button>
-                            {/*it will show in received only*/}
-                            <Button className="border-0">
-                              <i class="fas fa-trash-alt trash"></i>
-                            </Button>
-                          </Row>
-                        </Col>
-                      </Row>
-                      <Row className="mt-5 mb-5">
-                        <Col span={15}>
-                          <p className="request-content">
-                            You have a Request form{" "}
-                            <span className="yellow">ChaletBook</span> to{" "}
-                            <span className="red">Rent</span> your{" "}
-                            <span className="yellow">Maldives</span> Chalet
-                          </p>
-                        </Col>
-                        <Col span={4}></Col>
-                        <Col xl={5} span={3}>
-                          <Row>
-                            <Button
-                              variant="primary"
-                              className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
-                            >
-                              view
-                            </Button>
-                            {/*it will show in received only*/}
-                            <Button className="border-0">
-                              <i class="fas fa-trash-alt trash"></i>
-                            </Button>
-                          </Row>
-                        </Col>
-                      </Row>
+                      {/*sent request */}
+                      {requestTypefilterStatus === "0" &&
+                        requestfilterStatus === "0" &&
+                        (sentRentRequests && sentRentRequests !== 0 ? (
+                          sentRentRequests.map(
+                            (request) =>
+                              request.chalet !== null && (
+                                <Row className="mt-5 mb-5">
+                                  <Col span={15}>
+                                    {requestTypefilterStatus === "0" && (
+                                      <p className="request-content">
+                                        You have Sent{" "}
+                                        <span className="red">Rent</span>{" "}
+                                        Request to{" "}
+                                        <span className="yellow">
+                                          {request.chalet &&
+                                            request.chalet.address}
+                                        </span>{" "}
+                                      </p>
+                                    )}
+                                  </Col>
+                                  <>
+                                    <Col span={4}></Col>
+                                    <Col xl={5} span={3}>
+                                      <Row>
+                                        <Button
+                                          variant="primary"
+                                          className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
+                                        >
+                                          view
+                                        </Button>
+                                        {/*it will show in received only*/}
+                                        {requestfilterStatus === "0" &&
+                                          request.chalet !== null && (
+                                            <Button className="border-0">
+                                              <i class="fas fa-trash-alt trash"></i>
+                                            </Button>
+                                          )}
+                                      </Row>
+                                    </Col>
+                                  </>
+                                </Row>
+                              )
+                          )
+                        ) : (
+                          <p>No Sent Rent Requests yet</p>
+                        ))}
+                      {requestTypefilterStatus === "1" &&
+                        requestfilterStatus === "0" &&
+                        (reciviedRentRequests && reciviedRentRequests !== 0 ? (
+                          reciviedRentRequests.map(
+                            (request) =>
+                              request.chalet !== null && (
+                                <Row className="mt-5 mb-5">
+                                  <Col span={15}>
+                                    {requestTypefilterStatus === "1" && (
+                                      <p className="request-content">
+                                        You have Recivied a Request from{" "}
+                                        <span className="yellow">
+                                          {request.chalet && request.user}
+                                        </span>{" "}
+                                        to <span className="red">Rent</span>{" "}
+                                        your{" "}
+                                        <span className="yellow">
+                                          {request.chalet &&
+                                            request.chalet.address}
+                                        </span>{" "}
+                                        Chalet
+                                      </p>
+                                    )}
+                                  </Col>
+                                  <Col span={4}></Col>
+                                  <Col xl={5} span={3}>
+                                    <Row>
+                                      <Button
+                                        variant="primary"
+                                        className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
+                                      >
+                                        view
+                                      </Button>
+                                      {/*it will show in received only*/}
+                                      {/* {requestfilterStatus === "0" && (
+                                <Button className="border-0">
+                                  <i class="fas fa-trash-alt trash"></i>
+                                </Button>
+                              )} */}
+                                    </Row>
+                                  </Col>
+                                </Row>
+                              )
+                          )
+                        ) : (
+                          <p>No Recivied Rent Requests yet</p>
+                        ))}
                     </div>
                   </Col>
                 )}
@@ -408,6 +496,8 @@ const mapStateToProps = (reduxState) => {
     auth: reduxState.Users.auth,
     pagesNum: reduxState.Chalets.pagesNum,
     total: reduxState.Chalets.total,
+    sentRentRequests: reduxState.Requests.sentRentRequests,
+    reciviedRentRequests: reduxState.Requests.reciviedRentRequests,
   };
 };
 export default connect(mapStateToProps)(Profile);

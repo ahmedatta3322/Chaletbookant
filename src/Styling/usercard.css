@@ -32,7 +32,7 @@
 }
 .img-Card{
     position: relative;
-    max-height: 49.06rem;
+    height: 49.06rem;
     /* box-shadow: 0px 10px 5px #0000001f */
 }
 .upload-img{
@@ -60,7 +60,8 @@
 }
 .info{
     position: absolute;
-    top: 60%;
+    /* top: 60%; */
+    top: 67%;
     left: 4%;
     background-color: white;
     padding:1rem;
@@ -87,7 +88,8 @@
     border-radius: 50% !important;
     padding: 1rem !important;
     position: absolute;
-    top: 60%;
+    /* top: 60%; */
+    top: 67%;
     left: 82%;
 }
 .editIcon{

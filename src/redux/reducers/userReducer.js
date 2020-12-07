@@ -3,9 +3,10 @@ import {
   GET_Error,
   Post_Login,
   Get_OnlineUserProfile,
-  Get_Users,
+  // Get_Users,
   Post_VerificateMobile,
   Logout,
+  Edit_User,
 } from "../actionTypes";
 const initialState = {
   users: [],
@@ -20,9 +21,11 @@ export default (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case Post_SignUp:
+      const { user } = action.payload;
       newState = { ...state };
-      newState.users = [...state.users, action.payload.users];
-      localStorage.setItem("token", action.payload.token);
+      newState.user = { ...state.user };
+      newState.user = user;
+      localStorage.setItem("token", action.payload.user.token);
       newState.token = action.payload.token;
       newState.errorMessg = "";
       newState.auth = action.payload.auth;
@@ -48,10 +51,10 @@ export default (state = initialState, action) => {
       newState = { ...state };
       newState.user = action.payload;
       break;
-    case Get_Users:
-      newState = { ...state };
-      newState.users = action.payload;
-      break;
+    // case Get_Users:
+    //   newState = { ...state };
+    //   newState.users = action.payload;
+    //   break;
     case Post_VerificateMobile:
       newState = { ...state };
       const mobile_verfied = action.payload.mobile_verfied;
@@ -64,6 +67,11 @@ export default (state = initialState, action) => {
       newState.auth = action.payload.auth;
       newState.user = action.payload.user;
       newState.errorMessg = action.payload.errorMessg;
+      break;
+    case Edit_User:
+      newState = { ...state };
+      let editUser = action.payload;
+      newState.user = { ...state.user, ...editUser };
       break;
     default:
       newState = state;

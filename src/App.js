@@ -15,7 +15,7 @@ function App(props) {
     // if (!localStorage.getItem("token")) {
     //   // props.history.push("/login");
     // }
-    dispatch(getOnlineUserProfile());
+    // dispatch(getOnlineUserProfile());
   }, [dispatch]);
   return (
     <>

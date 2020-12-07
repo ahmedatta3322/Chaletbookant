@@ -1,0 +1,15 @@
+.m-icon{
+    margin-right: 13rem;
+}
+.f-icon{
+    margin-right: 23rem;
+}
+.w-form{
+    width: 49.4rem;
+}
+.w-upload{
+    width: 88% !important;
+}
+.ant-upload.ant-upload-drag{
+    width: 91% !important;
+}

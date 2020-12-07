@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 
 import { Button as Btn, Form, Upload } from "antd";
 import "../../../Styling/usercard.css";
+import EditPersonalInfoModal from "../../../Components/modal/editPersonalInfoModal";
 function UserCard(props) {
   const { user, chaletsCount } = props;
+  const [modalShow, setModalShow] = useState(false);
   // console.log(user, chaletsCount, match.url.slice(1, 8));
   return (
     <div>
@@ -39,9 +41,19 @@ function UserCard(props) {
             <p className="d-inline-block count mt-3">{user.email}</p>
           </span>
         </div>
-        <Button variant="outline-primary" className="edit" roundedCircle>
+
+        <Button
+          variant="outline-primary"
+          className="edit"
+          roundedCircle
+          onClick={() => setModalShow(true)}
+        >
           <i className="fas fa-edit text-white editIcon"></i>
         </Button>
+        <EditPersonalInfoModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
         {/* <Card.Body className="p-3">
           <Card.Title className="h5">ABOUT</Card.Title>
           <Card.Text className="h6">

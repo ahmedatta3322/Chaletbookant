@@ -5,10 +5,10 @@ import {
   GET_Error,
   Post_Login,
   Get_OnlineUserProfile,
-  Get_Users,
+  // Get_Users,
   Post_VerificateMobile,
   Logout,
-  Get_RentRequests,
+  Edit_User,
 } from "../actionTypes";
 
 export const Signup = (newUser) => (dispatch) => {
@@ -23,7 +23,8 @@ export const Signup = (newUser) => (dispatch) => {
       // return data.user;
     })
     .catch((err) => {
-      console.log(err.response.data.error);
+      console.log(err.response.data.message);
+      if (err.response.status === 500) dispatch(SignUpFailed("server error"));
       dispatch(SignUpFailed(err.response.data.error));
       return err.response.data.message;
     });
@@ -114,28 +115,28 @@ const getOnlineUserProfileFailed = (errMsg) => {
   return { type: GET_Error, payload: errMsg };
 };
 //////////////////////////get usesrs////////////
-export const getUsers = () => (dispatch) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  };
+// export const getUsers = () => (dispatch) => {
+//   const config = {
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//     },
+//   };
 
-  axios
-    .get(`${authApi}users`, config)
-    .then((response) => {
-      const users = response.data.response.data;
-      // const pagesNum = response.data.response.meta.last_page;
-      //  console.log(pagesNum);
-      dispatch(getUsersSuccess(users));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-const getUsersSuccess = (users) => {
-  return { type: Get_Users, payload: users };
-};
+//   axios
+//     .get(`${authApi}users`, config)
+//     .then((response) => {
+//       const users = response.data.response.data;
+//       // const pagesNum = response.data.response.meta.last_page;
+//       //  console.log(pagesNum);
+//       dispatch(getUsersSuccess(users));
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+// const getUsersSuccess = (users) => {
+//   return { type: Get_Users, payload: users };
+// };
 /////////////////////////////////////VERIFICATION MOBILE////////////////////
 export const verifyMobile = (code) => (dispatch) => {
   const config = {
@@ -169,37 +170,23 @@ const verifyMobileSuccess = (mobile_verfied, status) => {
 const verifyMobileFailed = (errMsg) => {
   return { type: GET_Error, payload: errMsg };
 };
-////////////////////////////////get rent requests///////////
-export const getRentRequests = (status, pageNum) => (dispatch) => {
+////////////////////////////////edit user//////////////
+export const EditUser = (editUser) => (dispatch) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   };
-
-  axios
-    .get(
-      `http://app.apptechegy.com/api/system/rentChalet?status=${status}&page=${pageNum}`,
-      config
-    )
+  return axios
+    .put(`${authApi}profile`, editUser, config)
     .then((response) => {
-      const data = response.data.response.data;
-      const pagesNum = response.data.response.meta.last_page;
-      // console.log(data);
-      dispatch(getRentRequestsSuccess(data, pagesNum));
+      if (response.status === 200) dispatch(EditUserSuccess(editUser));
     })
-    .catch((error) => {
-      dispatch(getRentRequestsFailed(error));
-      console.log(error);
+    .catch((err) => {
+      console.log(err.response);
     });
 };
 
-const getRentRequestsSuccess = (rentRequests, pagesNum) => {
-  return {
-    type: Get_RentRequests,
-    payload: { rentRequests, pagesNum },
-  };
-};
-const getRentRequestsFailed = (err) => {
-  return { type: GET_Error, payload: err };
+const EditUserSuccess = (editUser) => {
+  return { type: Edit_User, payload: editUser };
 };
