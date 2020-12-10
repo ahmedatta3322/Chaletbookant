@@ -14,7 +14,7 @@ function Nav({ auth, history, user, errorMessg }) {
     dispatch(LogOut());
     history.push("/");
   };
-  console.log(user, auth);
+  // console.log(user, auth);
   return (
     // <Layout className="layout">
     <Header className="header">

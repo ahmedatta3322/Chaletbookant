@@ -9,7 +9,7 @@ import {
   Form,
   Pagination,
 } from "react-bootstrap";
-import { Row, Col, Layout, Dropdown } from "antd";
+import { Row, Col, Layout, Dropdown, Modal as Modals } from "antd";
 import { Menu } from "antd";
 import UserCard from "./components/usercard";
 // import ProfileFilter from "./components/profileFilter";
@@ -83,6 +83,12 @@ function Profile(props) {
       <Menu.Divider />
     </Menu>
   );
+  function warning() {
+    Modals.warning({
+      title: "This is a warning message",
+      content: "You need to Verify your Account First ",
+    });
+  }
   useEffect(() => {
     // console.log(match.params.id);
     // setStatus(status);
@@ -256,7 +262,9 @@ function Profile(props) {
           </Jumbotron>
           <Button
             className="addButton color p-4 h5"
-            onClick={() => setModalShow(true)}
+            onClick={
+              user.status !== "verified" ? warning : () => setModalShow(true)
+            }
             disabled={user.mobile_verfied === 0 ? true : false}
           >
             <i class="fas fa-plus-circle color add mr-3"></i>

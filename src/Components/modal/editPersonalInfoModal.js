@@ -1,12 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch, connect } from "react-redux";
-import { Form, Upload, Button as Btn, Row, Col, Input } from "antd";
+import { Form, Upload, Row, Col, Input, Alert } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import "../../Styling/chaletModal.css";
 import "../../Styling/home.css";
 import "../../Styling/editPersonalInfoModal.css";
-import { EditUser } from "../../redux/actions/userActionCreator";
+import {
+  changePassword,
+  EditUser,
+  verifyAccount,
+} from "../../redux/actions/userActionCreator";
 const normFile = (e) => {
   console.log("Upload event:", e);
 
@@ -17,10 +21,11 @@ const normFile = (e) => {
   return e && e.fileList;
 };
 function EditPersonalInfoModal(props) {
-  const { user } = props;
+  const { user, err, onHide, status } = props;
   const dispatch = useDispatch();
   const parentRef = useRef(null);
   const [currentTab, setCurrentTab] = useState("Personal Info");
+  const [submit, setSubmit] = useState("");
   const [files, setFiles] = useState({ fileList: [] });
   const { fileList } = files;
   const prop = {
@@ -42,9 +47,24 @@ function EditPersonalInfoModal(props) {
     },
     fileList,
   };
+  useEffect(() => {
+    console.log(err);
+    // debugger;
+    if (
+      submit === "submit" &&
+      status === "OK" &&
+      err !== "The password  doesnot match"
+    ) {
+      setSubmit("");
+      onHide();
+      console.log(err);
+    }
+    console.log(submit, status, err);
+  }, [err, onHide, submit, status]);
+
   const handleCancel = () => {
     props.onHide();
-    // setCurrentTab("Personal Info");
+    setSubmit("");
   };
   const handleFilter = (e) => {
     console.log(e.target.textContent);
@@ -64,24 +84,33 @@ function EditPersonalInfoModal(props) {
       setCurrentTab("Verify Account");
     }
   };
-  const onPersonalFinish = (values, e) => {
-    // setAbout(values);
-    // handleNextClick();
-    console.log(values);
+  const onPersonalFinish = (values) => {
+    // console.log(values);
     const newValues = { ...values, mobile: `+20${values.mobile}` };
     dispatch(EditUser(newValues));
-    // setModalShow(false);
     props.onHide();
   };
-  const onChangePasswordFinish = (values, e) => {
+  const onChangePasswordFinish = (values) => {
+    console.log(values);
+    // debugger;
+    dispatch(changePassword(values));
+    setSubmit("submit");
+    // setSubmit("");
+    console.log(err);
+
+    // props.onHide();
+  };
+  const onVerifyAccountFinish = (values) => {
     // setAbout(values);
     // handleNextClick();
+    let formData = new FormData();
+    fileList.forEach((file) => {
+      formData.append("card_images[]", file);
+    });
+    dispatch(verifyAccount(formData));
+    props.onHide();
   };
-  const onVerifyAccountFinish = (values, e) => {
-    // setAbout(values);
-    // handleNextClick();
-  };
-  console.log(user.first_name);
+  // console.log(user.first_name);
   return (
     <div>
       <Modal
@@ -112,7 +141,11 @@ function EditPersonalInfoModal(props) {
             {currentTab === "Verify Account" && (
               <div className="left-div"></div>
             )}
-            <Button className="tab p-3 mb-5" onClick={handleFilter}>
+            <Button
+              className="tab p-3 mb-5"
+              onClick={handleFilter}
+              disabled={user.status === "verified" ? true : false}
+            >
               Verify Account
             </Button>
           </div>
@@ -254,7 +287,7 @@ function EditPersonalInfoModal(props) {
                       message: "The password must be at least 8 characters.",
                     },
                   ]}
-                  name="old password"
+                  name="current_password"
                 >
                   <Input.Password
                     // onChange={handleChange}
@@ -262,6 +295,14 @@ function EditPersonalInfoModal(props) {
                   />
                 </Form.Item>
               </Form.Item>
+              {err && submit && (
+                <Alert
+                  message="this password does not match your old password"
+                  type="error"
+                  showIcon
+                  className="mb-3 mr-5"
+                />
+              )}
               <Form.Item>
                 <Form.Item label="NEW PASSWORD" className="mb-0 h4 labels ml-3">
                   <i class="fas fa-lock iconn f-icon"></i>{" "}
@@ -278,7 +319,7 @@ function EditPersonalInfoModal(props) {
                       message: "The password must be at least 8 characters.",
                     },
                   ]}
-                  name=" new password"
+                  name="new_password"
                 >
                   <Input.Password
                     // onChange={handleChange}
@@ -296,7 +337,7 @@ function EditPersonalInfoModal(props) {
                 </Form.Item>
                 <Form.Item
                   noStyle
-                  dependencies={["password"]}
+                  dependencies={["new_password"]}
                   className="mb-0 h4"
                   name="c_password"
                   rules={[
@@ -306,7 +347,7 @@ function EditPersonalInfoModal(props) {
                     },
                     ({ getFieldValue }) => ({
                       validator(rule, value) {
-                        if (!value || getFieldValue("password") === value) {
+                        if (!value || getFieldValue("new_password") === value) {
                           return Promise.resolve();
                         }
                         return Promise.reject(
@@ -323,12 +364,20 @@ function EditPersonalInfoModal(props) {
                 </Form.Item>
               </Form.Item>
               <Modal.Footer className="modalFooter">
-                <Btn variant="outline-primary" type="submit">
+                <Button
+                  variant="outline-primary"
+                  className="rounded"
+                  type="submit"
+                >
                   Save
-                </Btn>{" "}
-                <Btn variant="outline-secondary" onClick={handleCancel}>
+                </Button>{" "}
+                <Button
+                  variant="outline-secondary"
+                  className="rounded"
+                  onClick={handleCancel}
+                >
                   Cancel
-                </Btn>
+                </Button>
               </Modal.Footer>
             </Modal.Body>
           </Form>
@@ -339,10 +388,16 @@ function EditPersonalInfoModal(props) {
               <Form.Item label="VERIFY ACCOUNT" className="label"></Form.Item>
               <Form.Item
                 // className="w-upload"
-                name="cover"
+                name="card_images"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                noStyle
+                // noStyle
+                rules={[
+                  {
+                    required: true,
+                    message: "Please upload your ID!",
+                  },
+                ]}
               >
                 <Upload.Dragger
                   // name="files"
@@ -368,12 +423,12 @@ function EditPersonalInfoModal(props) {
               </Form.Item>
 
               <Modal.Footer className="modalFooter">
-                <Btn variant="outline-primary" type="submit">
-                  Save <i class="fas fa-angle-double-right ml-3"></i>
-                </Btn>{" "}
-                <Btn variant="outline-secondary" onClick={handleCancel}>
+                <Button variant="outline-primary" type="submit">
+                  Save
+                </Button>{" "}
+                <Button variant="outline-secondary" onClick={handleCancel}>
                   Cancel
-                </Btn>
+                </Button>
               </Modal.Footer>
             </Modal.Body>
           </Form>
@@ -385,6 +440,8 @@ function EditPersonalInfoModal(props) {
 const mapStateToProps = (reduxState) => {
   return {
     user: reduxState.Users.user,
+    err: reduxState.Users.errorMessg,
+    status: reduxState.Users.status,
   };
 };
 export default connect(mapStateToProps)(EditPersonalInfoModal);

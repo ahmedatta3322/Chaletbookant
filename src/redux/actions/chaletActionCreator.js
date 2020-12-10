@@ -10,6 +10,7 @@ import {
   Get_ChaletsByFilter,
   Post_AddChalet,
   Delete_Chalet,
+  Edit_Chalet,
 } from "../actionTypes";
 export const getChalets = (pagenaite, page) => (dispatch) => {
   axios
@@ -59,7 +60,7 @@ export const getUserChalet = (page) => (dispatch) => {
   return axios
     .get(`${authApi}user_chalets?page=${page}`, config)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       const chalets = response.data.response.data;
       const pagesNum = response.data.response.meta.last_page;
       const total = response.data.response.meta.total;
@@ -128,7 +129,7 @@ const getChaletsByFilterSuccess = (chalets) => {
   return { type: Get_ChaletsByFilter, payload: chalets };
 };
 //////////////////////add chalet/////////////
-export const addChalet = (newChalet, data) => (dispatch) => {
+export const addChalet = (newChalet) => (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -175,4 +176,59 @@ export const deleteChalet = (chaletId) => (dispatch) => {
 
 const deleteChaletSuccess = (chaletId) => {
   return { type: Delete_Chalet, payload: chaletId };
+};
+//////////////////////verify chalet/////////////
+export const verifyChalet = (id, document) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  for (var pair of document.entries()) {
+    console.log(pair[0] + ":" + pair[1]);
+    // data.pair[0] = pair[1];
+  }
+  // const data = {};
+  // for (var pair of newChalet.entries()) {
+  //   data[pair[0]] = pair[1];
+  // }
+  // console.log(data);
+  axios
+    .post(`${authApi}verify_chalet/${id}`, document, config)
+    .then((response) => {
+      console.log(response);
+      // const chalet = response.data.response.data;
+      // if (response.status === 200) {
+      //   dispatch(verifyAccountSuccess(chalet));
+      // }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+// const verifyChaletSuccess = (newChalet) => {
+//   return { type: Post_AddChalet, payload: newChalet };
+// };
+////////////////////////////////edit chalet//////////////
+export const EditChalet = (id, editChalet) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  return axios
+    .put(`${authApi}chalets/${id}`, editChalet, config)
+    .then((response) => {
+      const newChalet = response.data.response.data;
+      if (response.status === 200) dispatch(EditChaletSuccess(newChalet, id));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const EditChaletSuccess = (editChalet, id) => {
+  return { type: Edit_Chalet, payload: { editChalet, id } };
 };

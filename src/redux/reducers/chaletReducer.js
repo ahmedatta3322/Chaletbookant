@@ -6,6 +6,7 @@ import {
   Get_ChaletsByFilter,
   Post_AddChalet,
   Delete_Chalet,
+  Edit_Chalet,
 } from "../actionTypes";
 const initialState = {
   chalets: [],
@@ -41,10 +42,16 @@ export default (state = initialState, action) => {
       console.log(newState.currentUserChalets);
       break;
     case Post_AddChalet:
+      const chalet = action.payload;
+      console.log(chalet);
       newState = {
         ...state,
         currentUserChalets: [...state.currentUserChalets, action.payload],
       };
+      // newState = {
+      //   ...state,
+      //   chalet: { ...state.chalet, chalet },
+      // };
       break;
     case Delete_Chalet:
       newState = { ...state };
@@ -53,6 +60,27 @@ export default (state = initialState, action) => {
       newState.currentUserChalets = newState.currentUserChalets.filter(
         (chalet) => chalet.id !== action.payload
       );
+      break;
+    case Edit_Chalet:
+      // newState = { ...state };
+      // let editChalet = action.payload.editChalet;
+      // const chaleet = newState.currentUserChalets.find(
+      //   (chalet) => chalet.id === action.payload.id
+      // );
+      // const edit = { ...chaleet, ...editChalet };
+      // console.log(edit);
+      // newState.currentUserChalets = [...state.currentUserChalets, edit];
+      // console.log(newState.currentUserChalets);
+      const updateditem = action.payload.editChalet;
+      const id = action.payload.id;
+      console.log(updateditem);
+      newState = {
+        ...state,
+        currentUserChalets: state.currentUserChalets.map((t) =>
+          t.id === id ? updateditem : t
+        ),
+      };
+      console.log(newState);
       break;
     default:
       newState = state;

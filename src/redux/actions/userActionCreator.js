@@ -9,6 +9,7 @@ import {
   Post_VerificateMobile,
   Logout,
   Edit_User,
+  Post_ChangePassword,
 } from "../actionTypes";
 
 export const Signup = (newUser) => (dispatch) => {
@@ -190,3 +191,62 @@ export const EditUser = (editUser) => (dispatch) => {
 const EditUserSuccess = (editUser) => {
   return { type: Edit_User, payload: editUser };
 };
+////////////////////////////////////change password///////////
+export const changePassword = (data) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  return axios
+    .post(`${authApi}change_password`, data, config)
+    .then((response) => {
+      console.log(response);
+      if (response.status === 200)
+        dispatch(changePasswordSuccess(response.statusText));
+    })
+    .catch((err) => {
+      console.log(err.response);
+      if (err.response.status === 422)
+        dispatch(changePasswordFailed(err.response.data.error));
+      else if (err.response.status === 500)
+        dispatch(changePasswordFailed(err.response.data.message));
+      return err.response.data.message;
+    });
+};
+const changePasswordSuccess = (status) => {
+  return { type: Post_ChangePassword, payload: status };
+};
+const changePasswordFailed = (errMsg) => {
+  return { type: GET_Error, payload: errMsg };
+};
+//////////////////////verify account/////////////
+export const verifyAccount = (document) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  // const data = {};
+  // for (var pair of newChalet.entries()) {
+  //   data[pair[0]] = pair[1];
+  // }
+  // console.log(data);
+  axios
+    .post(`${authApi}verify_user`, document, config)
+    .then((response) => {
+      console.log(response);
+      // const chalet = response.data.response.data;
+      // if (response.status === 200) {
+      //   dispatch(verifyAccountSuccess(chalet));
+      // }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+// const verifyAccountSuccess = (newChalet) => {
+//   return { type: Post_AddChalet, payload: newChalet };
+// };

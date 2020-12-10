@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { useDispatch, connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Form,
   Select,
@@ -15,10 +15,7 @@ import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import Map from "../map";
 import "../../Styling/chaletModal.css";
 import "../../Styling/home.css";
-import {
-  addChalet,
-  verifyChalet,
-} from "../../redux/actions/chaletActionCreator";
+import { EditChalet } from "../../redux/actions/chaletActionCreator";
 const { TextArea } = Input;
 const { Option } = Select;
 const normFile = (e) => {
@@ -30,20 +27,20 @@ const normFile = (e) => {
   console.log(e.fileList);
   return e && e.fileList;
 };
-function AboutChaletModal(props) {
-  const { userChalet, chalet } = props;
+export default function EditChaletModal(props) {
   const dispatch = useDispatch();
+  const { userChalet } = props;
   const parentRef = useRef(null);
   // const childRef = useRef(null);
-  const [currentTab, setCurrentTab] = useState("aboutChalet");
+  const [currentTab, setCurrentTab] = useState("About Chalet");
   // const [footer, setFooter] = useState(true);
-  const [about, setAbout] = useState({
-    address: "",
-    description: "",
-    fees: 0,
-    status: "disabled",
-    max_guests: 0,
-  });
+  // const [about, setAbout] = useState({
+  //   address: "",
+  //   description: "",
+  //   fees: 0,
+  //   status: "disabled",
+  //   max_guests: 0,
+  // });
   // const [image, setImage] = useState({
   //   cover: {},
   //   images: [],
@@ -54,7 +51,6 @@ function AboutChaletModal(props) {
     latitude: "27.450745816193173",
   });
   const [files, setFiles] = useState({ fileList: [] });
-  const [filesDocument, setDocumentsFiles] = useState({ fileList: [] });
   const [fiile, setFile] = useState({ file: {}, Upload: false });
   const { fileList } = files;
   const { file } = fiile;
@@ -97,46 +93,22 @@ function AboutChaletModal(props) {
     },
     file,
   };
-  const prop3 = {
-    onRemove: (file) => {
-      setDocumentsFiles((state) => {
-        const index = state.fileList.indexOf(file);
-        const newFileList = state.fileList.slice();
-        newFileList.splice(index, 1);
-        return {
-          fileList: newFileList,
-        };
-      });
-    },
-    beforeUpload: (file) => {
-      setDocumentsFiles((state) => ({
-        fileList: [...state.fileList, file],
-      }));
-      return false;
-    },
-    fileList,
-  };
-  const handleNextClick = () => {
-    console.log(parentRef.current.id);
-    if (parentRef.current && parentRef.current.id === "aboutChalet") {
-      parentRef.current.id = "images";
+  const handleFilter = (e) => {
+    console.log(e.target.textContent);
+    const { textContent } = e.target;
+    console.log(textContent);
+    console.log(currentTab, "after");
+    // debugger;
+    if (textContent === "About Chalet") {
+      //   parentRef.current.id = "aboutChalet";
       console.log(currentTab, "befor");
-      setCurrentTab("images");
-      console.log(currentTab, "after");
-    } else if (parentRef.current && parentRef.current.id === "images") {
-      parentRef.current.id = "verification";
-      setCurrentTab("verification");
-    }
-    // console.log(currentTab, "pn");/
-  };
-  const handlePreviousClick = () => {
-    // console.log(parentRef.current.id);
-    if (parentRef.current && parentRef.current.id === "images") {
-      setCurrentTab("aboutChalet");
-      parentRef.current.id = "aboutChalet";
-    } else if (parentRef.current && parentRef.current.id === "verification") {
-      parentRef.current.id = "images";
-      setCurrentTab("images");
+      setCurrentTab("About Chalet");
+    } else if (textContent === "Images") {
+      parentRef.current.id = "Images";
+      setCurrentTab("Images");
+    } else if (textContent === "Verification") {
+      parentRef.current.id = "Verification";
+      setCurrentTab("Verification");
     }
   };
   const handleCancel = () => {
@@ -152,38 +124,36 @@ function AboutChaletModal(props) {
     }));
     // console.log(state);
   };
-  const onAboutFinish = (values, e) => {
-    setAbout(values);
-    handleNextClick();
-  };
-  const onImagesFinish = (values) => {
+
+  const onAboutFinish = (values) => {
     // setImage(values);
-    let formData = new FormData();
-    fileList.forEach((file) => {
-      formData.append("images[]", file);
-    });
-    console.log(values.feature);
-    values.feature.forEach((f) => {
-      formData.append("feature[]", f);
-    });
-    // setFiles({
-    //   uploading: true,
+    // let formData = new FormData();
+    // fileList.forEach((file) => {
+    //   formData.append("images[]", file);
     // });
-    // console.log(image);
-    console.log(file.file);
     console.log(values);
-    console.log(values.cover[0]);
+    console.log({ ...values, ...location });
+    // values.feature.forEach((f) => {
+    //   formData.append("feature[]", f);
+    // });
+    // // setFiles({
+    // //   uploading: true,
+    // // });
+    // // console.log(image);
+    // console.log(file.file);
+    // console.log(values);
+    // console.log(values.cover[0]);
     // values.cover.forEach((file) => {
     //   formData.append("cover", file);
     // });
-    formData.append("cover", file.file);
-    formData.append("langitude", location.langitude);
-    formData.append("latitude", location.latitude);
-    formData.append("address", about.address);
-    formData.append("description", about.description);
-    formData.append("fees", about.fees);
-    formData.append("status", about.status);
-    formData.append("max_guests", about.max_guests);
+    // formData.append("cover", file.file);
+    // formData.append("langitude", location.langitude);
+    // formData.append("latitude", location.latitude);
+    // formData.append("address", values.address);
+    // formData.append("description", values.description);
+    // formData.append("fees", values.fees);
+    // formData.append("status", values.status);
+    // formData.append("max_guests", values.max_guests);
     // formData.append("feature", image.feature);
     // console.log(formData.get("address"));
     // console.log(formData.get("images[]"));
@@ -201,21 +171,21 @@ function AboutChaletModal(props) {
     //   // data.pair[0] = pair[1];
     // }
     // console.log(data);
-    dispatch(addChalet(formData));
-    handleNextClick();
+    dispatch(EditChalet(userChalet.id, { ...values, ...location }));
   };
   const handleVerifyChalet = (values) => {
-    console.log(values.chalet_contruct);
-    console.log(chalet);
+    console.log(values.chalet_album);
     let formData = new FormData();
-    filesDocument.fileList.forEach((file) => {
-      formData.append("chalet_contruct[]", file);
+    fileList.forEach((file) => {
+      formData.append("chalet_album[]", file);
     });
-    dispatch(verifyChalet(userChalet[6].id, formData));
-    props.onHide();
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ":" + pair[1]);
+      // data.pair[0] = pair[1];
+    }
   };
   // console.log(about);
-  // console.log(image);
+  console.log(userChalet.id);
   // console.log(location.langitude);
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
@@ -232,20 +202,26 @@ function AboutChaletModal(props) {
           id="contained-modal-title-vcenter"
           className="title h1 mr-5 mb-3 m-3"
         >
-          Add Chalet
+          Edit Chalet
         </Modal.Title>
         <div className="mt-3 tabs">
-          {currentTab === "aboutChalet" && <div className="left-div"></div>}
+          {currentTab === "About Chalet" && <div className="left-div"></div>}
 
-          <Button className="tab p-3 mb-5 mr-3">About Chalet</Button>
-          {currentTab === "images" && <div className="left-div"></div>}
-          <Button className="tab p-3 mb-5 mr-3">Images</Button>
-          {currentTab === "verification" && <div className="left-div"></div>}
-          <Button className="tab p-3 mb-5 mr-3">Verification</Button>
+          <Button className="tab p-3 mb-5 mr-3" onClick={handleFilter}>
+            About Chalet
+          </Button>
+          {currentTab === "Images" && <div className="left-div"></div>}
+          <Button className="tab p-3 mb-5 mr-3" onClick={handleFilter}>
+            Images
+          </Button>
+          {currentTab === "Verification" && <div className="left-div"></div>}
+          <Button className="tab p-3 mb-5 mr-3" onClick={handleFilter}>
+            Verification
+          </Button>
         </div>
       </Modal.Header>
 
-      {currentTab === "aboutChalet" && (
+      {currentTab === "About Chalet" && (
         <Modal.Body id="aboutChalet" ref={parentRef}>
           <Form
             name="validate_other"
@@ -261,8 +237,8 @@ function AboutChaletModal(props) {
                       <Col span={18} offset={3}>
                         <Map
                           moveMarker={moveMarker}
-                          langitude={location.langitude}
-                          latitude={location.latitude}
+                          langitude={userChalet.langitude}
+                          latitude={userChalet.latitude}
                         />
                       </Col>
                     </Row>
@@ -273,14 +249,17 @@ function AboutChaletModal(props) {
                   label="Address"
                   className="input-icons mt-3 label mb-0 mr-3"
                 >
-                  <Form.Item
-                    className="mb-3"
-                    name="address"
-                    noStyle
-                    rules={[{ required: true, message: "address is required" }]}
-                  >
-                    <Row>
-                      <Col span={6}>
+                  <Row>
+                    <Col span={6}>
+                      <Form.Item
+                        className="mb-3"
+                        name="address"
+                        noStyle
+                        rules={[
+                          { required: true, message: "address is required" },
+                        ]}
+                        initialValue={userChalet.address}
+                      >
                         {/* <i class="fas fa-map-marker-alt icon "></i> */}
                         <Input
                           {...props}
@@ -289,9 +268,9 @@ function AboutChaletModal(props) {
                           className="input-field d-block p-3 inputs ml-3 mb-3"
                           placeholder="Address of your Chalet "
                         />
-                      </Col>
-                    </Row>
-                  </Form.Item>
+                      </Form.Item>
+                    </Col>
+                  </Row>
                 </Form.Item>
               </Col>
               <Col span={1} offset={15}></Col>
@@ -303,16 +282,20 @@ function AboutChaletModal(props) {
                   className="input-icons label mb-0 mr-3"
                   label="Description"
                 >
-                  <Form.Item
-                    className="mb-3"
-                    name="description"
-                    rules={[
-                      { required: true, message: "Description is required" },
-                    ]}
-                    noStyle
-                  >
-                    <Row>
-                      <Col span={23} className="ml-3">
+                  <Row>
+                    <Col span={23} className="ml-3">
+                      <Form.Item
+                        className="mb-3"
+                        name="description"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Description is required",
+                          },
+                        ]}
+                        noStyle
+                        initialValue={userChalet.description}
+                      >
                         {/* <i class="fas fa-pen icon "></i> */}
                         <TextArea
                           placeholder="textarea with clear icon"
@@ -326,22 +309,25 @@ function AboutChaletModal(props) {
                        rows="4"
                        cols="55"
                      /> */}
-                      </Col>
-                    </Row>
-                  </Form.Item>
+                      </Form.Item>
+                    </Col>
+                  </Row>
                 </Form.Item>
                 <Form.Item
                   label="Fee per night"
                   className="input-icons label mb-2 mr-3"
                 >
-                  <Form.Item
-                    // className="mb-3"
-                    name="fees"
-                    rules={[{ required: true, message: "fees is required" }]}
-                    noStyle
-                  >
-                    <Row>
-                      <Col span={6}>
+                  <Row>
+                    <Col span={6}>
+                      <Form.Item
+                        // className="mb-3"
+                        name="fees"
+                        rules={[
+                          { required: true, message: "fees is required" },
+                        ]}
+                        noStyle
+                        initialValue={userChalet.fees}
+                      >
                         {/* <i class="fas fa-dollar-sign"></i> */}
                         <Input
                           {...props}
@@ -350,9 +336,9 @@ function AboutChaletModal(props) {
                           maxLength={25}
                           type="number"
                         />
-                      </Col>
-                    </Row>
-                  </Form.Item>
+                      </Form.Item>
+                    </Col>
+                  </Row>
                 </Form.Item>
                 <Row>
                   <Col span={18}>
@@ -371,8 +357,9 @@ function AboutChaletModal(props) {
                           },
                         ]}
                         noStyle
+                        initialValue={userChalet.status}
                       >
-                        <Select defaultValue="Available To All">
+                        <Select>
                           <Option value="available_to_all">
                             Available To All
                           </Option>
@@ -415,6 +402,7 @@ function AboutChaletModal(props) {
                       { required: true, message: "Max Guests is required" },
                     ]}
                     noStyle
+                    initialValue={userChalet.max_guests}
                   >
                     {/* <i class="fas fa-users"></i> */}
                     <Input
@@ -434,17 +422,21 @@ function AboutChaletModal(props) {
 
             <Modal.Footer>
               <Button variant="outline-primary" type="submit">
-                Next <i class="fas fa-angle-double-right ml-3"></i>
+                Save
               </Button>{" "}
-              <Button variant="outline-secondary" onClick={props.onHide}>
+              <Button
+                variant="outline-secondary"
+                className="rounded"
+                onClick={handleCancel}
+              >
                 Cancel
               </Button>
             </Modal.Footer>
           </Form>
         </Modal.Body>
       )}
-      {currentTab === "images" && (
-        <Form className="pt-3 pl-3 pr-3 form" onFinish={onImagesFinish}>
+      {currentTab === "Images" && (
+        <Form className="pt-3 pl-3 pr-3 form">
           <Modal.Body
             id="images"
             ref={parentRef}
@@ -572,13 +564,14 @@ function AboutChaletModal(props) {
               </Form.Item>
             </Form.Item>
             <Modal.Footer className="modalFooter">
-              <Button variant="outline-secondary" onClick={handlePreviousClick}>
-                <i class="fas fa-angle-double-left"></i>Pervious
-              </Button>
               <Button variant="outline-primary" type="submit">
-                Next <i class="fas fa-angle-double-right ml-3"></i>
+                Save <i class="fas fa-angle-double-right ml-3"></i>
               </Button>{" "}
-              <Button variant="outline-secondary" onClick={handleCancel}>
+              <Button
+                variant="outline-secondary"
+                className="rounded"
+                onClick={handleCancel}
+              >
                 Cancel
               </Button>
             </Modal.Footer>
@@ -586,7 +579,7 @@ function AboutChaletModal(props) {
         </Form>
       )}
 
-      {currentTab === "verification" && (
+      {currentTab === "Verification" && (
         <Modal.Body id="verification" ref={parentRef}>
           {" "}
           <Form className="form" onFinish={handleVerifyChalet}>
@@ -595,12 +588,12 @@ function AboutChaletModal(props) {
               className="label mb-3"
             ></Form.Item>
             <Form.Item
-              name="chalet_contruct"
+              name="chalet_album"
               valuePropName="fileList"
               getValueFromEvent={normFile}
               noStyle
             >
-              <Upload.Dragger name="files" {...prop3}>
+              <Upload.Dragger name="files" {...prop}>
                 <p className="ant-upload-drag-icon">
                   <i class="fas fa-file-upload"></i>
                 </p>
@@ -623,6 +616,17 @@ function AboutChaletModal(props) {
                   la habitación contigua. Esta primera noche no he podido
                   dormir.
                 </p>
+                {/* <Checkbox
+                  value="I agree the terms, conditions &amp; privacy Policy."
+                  style={{
+                    lineHeight: "32px",
+                  }}
+                  rules={[
+                    { required: true, message: "Note : feature is required" },
+                  ]}
+                >
+                  I agree the terms, conditions &amp; privacy Policy.
+                </Checkbox> */}
                 <Form.Item
                   name="agreement"
                   valuePropName="checked"
@@ -643,15 +647,15 @@ function AboutChaletModal(props) {
               </Col>
             </Row>
             <Modal.Footer className="modalFooter-third">
-              <Button variant="outline-secondary" onClick={handlePreviousClick}>
-                <i class="fas fa-angle-double-left"></i>
-                Pervious
-              </Button>
               <Button variant="outline-primary" type="submit">
-                Done
+                Verify
               </Button>{" "}
-              <Button variant="outline-secondary" onClick={handleCancel}>
-                Skip
+              <Button
+                variant="outline-secondary"
+                className="rounded"
+                onClick={handleCancel}
+              >
+                Cancel
               </Button>
             </Modal.Footer>
           </Form>
@@ -660,10 +664,3 @@ function AboutChaletModal(props) {
     </Modal>
   );
 }
-const mapStateToProps = (reduxState) => {
-  return {
-    userChalet: reduxState.Chalets.currentUserChalets,
-    chalet: reduxState.Chalets.chalet,
-  };
-};
-export default connect(mapStateToProps)(AboutChaletModal);

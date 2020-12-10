@@ -42,9 +42,18 @@
 .air{
   width: 11rem;
 }
-.btn-trash{
+.btn-trash,.edit-chalet,.status{
   position: absolute !important;
     top: 0;
     right: 0;
     color: #e81a1af5 !important;
+    background:none !important;
+    border: none !important;
+}
+.edit-chalet{
+  right: 8%;
+}
+.status{
+  right: 25%;
+  top: 2%;
 }

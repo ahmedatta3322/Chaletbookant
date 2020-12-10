@@ -7,6 +7,7 @@ import {
   Post_VerificateMobile,
   Logout,
   Edit_User,
+  Post_ChangePassword,
 } from "../actionTypes";
 const initialState = {
   users: [],
@@ -34,6 +35,7 @@ export default (state = initialState, action) => {
       newState = { ...state };
       console.log(action.payload);
       newState.errorMessg = action.payload;
+      newState.status = "";
       break;
     case Post_Login:
       newState = { ...state };
@@ -72,6 +74,11 @@ export default (state = initialState, action) => {
       newState = { ...state };
       let editUser = action.payload;
       newState.user = { ...state.user, ...editUser };
+      break;
+    case Post_ChangePassword:
+      newState = { ...state };
+      newState.status = action.payload;
+      newState.errorMessg = "";
       break;
     default:
       newState = state;

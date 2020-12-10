@@ -8,7 +8,7 @@ import ChaletsPage from "./pages/chaletsPage/chaletsPage";
 import ViewChalet from "./pages/detailsChalet/viewChalet";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
-import { getOnlineUserProfile } from "./redux/actions/userActionCreator";
+// import { getOnlineUserProfile } from "./redux/actions/userActionCreator";
 function App(props) {
   const dispatch = useDispatch();
   useEffect(() => {

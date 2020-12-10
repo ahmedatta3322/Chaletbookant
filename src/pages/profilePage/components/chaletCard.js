@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, connect } from "react-redux";
-import { Button, Image } from "antd";
-import { Card, Badge } from "react-bootstrap";
+import { Button, Image, Tooltip } from "antd";
+import { Card, Badge, Row, Col } from "react-bootstrap";
+
 import { NavLink, withRouter } from "react-router-dom";
 import "../../../Styling/chaletcard.css";
 import { deleteChalet } from "../../../redux/actions/chaletActionCreator";
 import DeleteModal from "../../../Components/modal/deleteModal";
+import EditChaletModal from "../../../Components/modal/editChaletModal";
 
 function ChaletCard({ chalet, match, userChalet }) {
   const dispatch = useDispatch();
-  const [modalShow, setModalShow] = React.useState(false);
+  const [status, setStatus] = useState("");
+  const [deleteModalShow, setDeleteModalShow] = React.useState(false);
+  const [editModalShow, setEditModalShow] = React.useState(false);
   const handleDelete = () => {
     if (chalet) dispatch(deleteChalet(chalet.id));
     else {
       dispatch(deleteChalet(userChalet.id));
     }
-    setModalShow(false);
+    setDeleteModalShow(false);
   };
-  console.log(userChalet, chalet);
+  useEffect(() => {
+    if (userChalet && userChalet.verification === "verified") {
+      setStatus("check-circle text-success");
+    } else if (userChalet && userChalet.verification === "waiting") {
+      setStatus("stopwatch text-warning medium");
+    } else if (userChalet && userChalet.verification === "not_verified") {
+      setStatus("ban text-danger");
+    }
+  }, [userChalet]);
+  // console.log(userChalet.verification, chalet);
   return (
     <Card
       className={`mt-5 shadow-card ${
@@ -44,7 +57,23 @@ function ChaletCard({ chalet, match, userChalet }) {
             />
           )}
           <Card.Body className="p-2">
-            <h3>{chalet && chalet.address}</h3>
+            <Row>
+              <Col>
+                <h3>{chalet && chalet.address}</h3>
+                <Button
+                  variant="outline-warning"
+                  className="edit"
+                  roundedCircle
+                  onClick={() => setEditModalShow(true)}
+                >
+                  <i className="fas fa-edit text-white editIcon"></i>
+                </Button>
+                <EditChaletModal
+                  show={editModalShow}
+                  onHide={() => setEditModalShow(false)}
+                />
+              </Col>
+            </Row>
             <h4>
               $ {chalet && chalet.fees}
               <Badge className="badge p-3 ml-3">For Sell</Badge>
@@ -116,7 +145,14 @@ function ChaletCard({ chalet, match, userChalet }) {
             />
           )}
           <Card.Body className="p-2">
-            <h3>{userChalet && userChalet.address}</h3>
+            {/* <Row>
+              <Col> */}
+            <h3 className="d-inline-block">
+              {userChalet && userChalet.address}
+            </h3>
+
+            {/* </Col>
+            </Row> */}
             <h4>
               $ {userChalet && userChalet.fees}
               {/* <Badge className="badge p-3 ml-3">For Sell</Badge> */}
@@ -168,17 +204,57 @@ function ChaletCard({ chalet, match, userChalet }) {
             >
               view
             </NavLink>
+            <Tooltip
+              title={
+                userChalet.verification === "waiting" &&
+                userChalet.verification !== "verified"
+                  ? "your chalet is in the waiting List to verify it"
+                  : userChalet.verification === "not_verified"
+                  ? "you need to verify your chalet"
+                  : "This Chalet is verified"
+              }
+              color={
+                userChalet.verification === "waiting" &&
+                userChalet.verification !== "verified"
+                  ? "gold"
+                  : userChalet.verification === "not_verified"
+                  ? "red"
+                  : "green"
+              }
+              // key={color}
+            >
+              <Button className="border-none status">
+                {" "}
+                <i
+                  className={`fas fa-${status} status`}
+                  style={{ fontSize: "medium" }}
+                ></i>
+              </Button>
+            </Tooltip>
 
             <Button
+              variant="outline-primary"
+              className="edit-chalet"
+              roundedCircle
+              onClick={() => setEditModalShow(true)}
+            >
+              <i className="fas fa-edit text-warning editIcon"></i>
+            </Button>
+            <EditChaletModal
+              userChalet={userChalet}
+              show={editModalShow}
+              onHide={() => setEditModalShow(false)}
+            />
+            <Button
               className="border-0 bg-transparent btn-trash"
-              onClick={() => setModalShow(true)}
+              onClick={() => setDeleteModalShow(true)}
             >
               <i class="fas fa-trash-alt"></i>
             </Button>
 
             <DeleteModal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
+              show={deleteModalShow}
+              onHide={() => setDeleteModalShow(false)}
               handleDelete={handleDelete}
             />
           </div>
