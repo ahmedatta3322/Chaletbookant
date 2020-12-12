@@ -158,22 +158,12 @@ export default function EditChaletModal(props) {
     // console.log(formData.get("address"));
     // console.log(formData.get("images[]"));
     // console.log(formData.get("cover"), "cover");
-
-    // var options = { content: formData };
-    // console.log(options);
-    // const data = {};
-    // for (var pair of formData.entries()) {
-    //   // pair[0] + ":" + pair[1]);
-    //   data[pair[0]] = pair[1];
-    // }
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0] + ":" + pair[1]);
-    //   // data.pair[0] = pair[1];
-    // }
-    // console.log(data);
     dispatch(EditChalet(userChalet.id, { ...values, ...location }));
     props.onHide();
     console.log(currentTab);
+  };
+  const onImagesFinish = (values) => {
+    console.log(values);
   };
   const handleVerifyChalet = (values) => {
     console.log(values.chalet_album);
@@ -187,7 +177,7 @@ export default function EditChaletModal(props) {
     }
   };
   // console.log(about);
-  // console.log(userChalet.id);
+  console.log(userChalet.cover);
   // console.log(location.langitude);
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
@@ -438,17 +428,8 @@ export default function EditChaletModal(props) {
         </Modal.Body>
       )}
       {currentTab === "Images" && (
-        <Form className="pt-3 pl-3 pr-3 form">
-          <Modal.Body
-            id="images"
-            ref={parentRef}
-            // className={`${
-            //   next && parentRef.current && parentRef.current.id === "images"
-            //     ? "d-block"
-            //     : "d-none"
-            // }`}
-            // className="d-none"
-          >
+        <Form className="pt-3 pl-3 pr-3 form" onFinish={onImagesFinish}>
+          <Modal.Body id="images" ref={parentRef}>
             <Form.Item label="Chalet Cover" className="label"></Form.Item>
             <Form.Item
               name="cover"
@@ -499,8 +480,9 @@ export default function EditChaletModal(props) {
                   },
                 ]}
                 noStyle
+                initialValue={userChalet.images}
               >
-                <Upload {...prop}>
+                <Upload {...prop} defaultFileList={userChalet.images}>
                   <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
                 </Upload>
               </Form.Item>
@@ -525,8 +507,12 @@ export default function EditChaletModal(props) {
                   { required: true, message: "Note : feature is required" },
                 ]}
                 noStyle
+                initialValue={userChalet.feature}
               >
-                <Checkbox.Group className="ml-4 mb-5">
+                <Checkbox.Group
+                  className="ml-4 mb-5"
+                  value={userChalet.feature}
+                >
                   <Row>
                     <Col span={15}>
                       <Checkbox
