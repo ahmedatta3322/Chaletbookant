@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, connect } from "react-redux";
 import { Button, Image, Tooltip } from "antd";
-import { Card, Badge, Row, Col } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 
 import { NavLink, withRouter } from "react-router-dom";
 import "../../../Styling/chaletcard.css";
@@ -30,16 +30,16 @@ function ChaletCard({ chalet, match, userChalet }) {
       setStatus("ban text-danger");
     }
   }, [userChalet]);
-  // console.log(userChalet.verification, chalet);
+  // console.log(userChalet, chalet, match);
   return (
     <Card
       className={`mt-5 shadow-card ${
-        match.url.slice(1, 8) === "profile"
+        match && match.url.slice(1, 8) === "profile"
           ? "Card-prof-height"
           : "Card-view-height"
       }`}
     >
-      {chalet && (
+      {chalet !== undefined && (
         <>
           {chalet && chalet.cover !== null && (
             <Card.Img
@@ -60,7 +60,7 @@ function ChaletCard({ chalet, match, userChalet }) {
             <Row>
               <Col>
                 <h3>{chalet && chalet.address}</h3>
-                <Button
+                {/* <Button
                   variant="outline-warning"
                   className="edit"
                   roundedCircle
@@ -71,12 +71,12 @@ function ChaletCard({ chalet, match, userChalet }) {
                 <EditChaletModal
                   show={editModalShow}
                   onHide={() => setEditModalShow(false)}
-                />
+                /> */}
               </Col>
             </Row>
             <h4>
               $ {chalet && chalet.fees}
-              <Badge className="badge p-3 ml-3">For Sell</Badge>
+              {/* <Badge className="badge p-3 ml-3">For Sell</Badge> */}
             </h4>
             <div className="features d-flex">
               <>
@@ -127,7 +127,7 @@ function ChaletCard({ chalet, match, userChalet }) {
           </div>
         </>
       )}
-      {userChalet && (
+      {userChalet !== undefined && (
         <>
           {userChalet && userChalet.cover !== null && (
             <Card.Img
@@ -233,12 +233,14 @@ function ChaletCard({ chalet, match, userChalet }) {
             </Tooltip>
 
             <Button
-              variant="outline-primary"
+              // type="primary"
               className="edit-chalet"
               roundedCircle
+              shape="circle"
               onClick={() => setEditModalShow(true)}
             >
-              <i className="fas fa-edit text-warning editIcon"></i>
+              <i class="fas fa-pen text-primary editIcon"></i>
+              {/* <i className="fas fa-edit text-primary editIcon"></i> */}
             </Button>
             <EditChaletModal
               userChalet={userChalet}
@@ -249,7 +251,7 @@ function ChaletCard({ chalet, match, userChalet }) {
               className="border-0 bg-transparent btn-trash"
               onClick={() => setDeleteModalShow(true)}
             >
-              <i class="fas fa-trash-alt"></i>
+              <i class="fas fa-trash-alt text-primary"></i>
             </Button>
 
             <DeleteModal

@@ -104,10 +104,10 @@ export default function EditChaletModal(props) {
       console.log(currentTab, "befor");
       setCurrentTab("About Chalet");
     } else if (textContent === "Images") {
-      parentRef.current.id = "Images";
+      // parentRef.current.id = "Images";
       setCurrentTab("Images");
     } else if (textContent === "Verification") {
-      parentRef.current.id = "Verification";
+      // parentRef.current.id = "Verification";
       setCurrentTab("Verification");
     }
   };
@@ -172,6 +172,8 @@ export default function EditChaletModal(props) {
     // }
     // console.log(data);
     dispatch(EditChalet(userChalet.id, { ...values, ...location }));
+    props.onHide();
+    console.log(currentTab);
   };
   const handleVerifyChalet = (values) => {
     console.log(values.chalet_album);
@@ -185,7 +187,7 @@ export default function EditChaletModal(props) {
     }
   };
   // console.log(about);
-  console.log(userChalet.id);
+  // console.log(userChalet.id);
   // console.log(location.langitude);
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
@@ -237,8 +239,8 @@ export default function EditChaletModal(props) {
                       <Col span={18} offset={3}>
                         <Map
                           moveMarker={moveMarker}
-                          langitude={userChalet.langitude}
-                          latitude={userChalet.latitude}
+                          langitude={userChalet && userChalet.langitude}
+                          latitude={userChalet && userChalet.latitude}
                         />
                       </Col>
                     </Row>
@@ -258,7 +260,7 @@ export default function EditChaletModal(props) {
                         rules={[
                           { required: true, message: "address is required" },
                         ]}
-                        initialValue={userChalet.address}
+                        initialValue={userChalet && userChalet.address}
                       >
                         {/* <i class="fas fa-map-marker-alt icon "></i> */}
                         <Input
@@ -294,7 +296,7 @@ export default function EditChaletModal(props) {
                           },
                         ]}
                         noStyle
-                        initialValue={userChalet.description}
+                        initialValue={userChalet && userChalet.description}
                       >
                         {/* <i class="fas fa-pen icon "></i> */}
                         <TextArea
@@ -326,7 +328,7 @@ export default function EditChaletModal(props) {
                           { required: true, message: "fees is required" },
                         ]}
                         noStyle
-                        initialValue={userChalet.fees}
+                        initialValue={userChalet && userChalet.fees}
                       >
                         {/* <i class="fas fa-dollar-sign"></i> */}
                         <Input
@@ -357,7 +359,7 @@ export default function EditChaletModal(props) {
                           },
                         ]}
                         noStyle
-                        initialValue={userChalet.status}
+                        initialValue={userChalet && userChalet.status}
                       >
                         <Select>
                           <Option value="available_to_all">
@@ -402,7 +404,7 @@ export default function EditChaletModal(props) {
                       { required: true, message: "Max Guests is required" },
                     ]}
                     noStyle
-                    initialValue={userChalet.max_guests}
+                    initialValue={userChalet && userChalet.max_guests}
                   >
                     {/* <i class="fas fa-users"></i> */}
                     <Input

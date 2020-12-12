@@ -222,10 +222,12 @@ export const EditChalet = (id, editChalet) => (dispatch) => {
     .put(`${authApi}chalets/${id}`, editChalet, config)
     .then((response) => {
       const newChalet = response.data.response.data;
+      console.log(response);
+      console.log(newChalet);
       if (response.status === 200) dispatch(EditChaletSuccess(newChalet, id));
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.response);
     });
 };
 
