@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch, connect } from "react-redux";
 import {
@@ -123,10 +123,23 @@ function EditChaletModal(props) {
       dispatch(addImage(formData, userChalet.id));
     }
   };
+  useEffect(() => {
+    console.log(fileList[fileList.length - 1]);
+    if (fileList[fileList.length - 1]) {
+      // console.log("dis");
+      let formData = new FormData();
+      console.log(fileList[fileList.length - 1]);
+      formData.append("chalet_album", fileList[fileList.length - 1]);
+      dispatch(addImage(formData, userChalet.id));
+    }
+  }, [fileList, dispatch, userChalet.id]);
+  const handleAddChange = ({ fileList }) => {
+    console.log(fileList);
+  };
   console.log(chalet);
   const uploadButton = (
     <div>
-      <PlusOutlined />
+      <PlusOutlined onChange={handleAddChange} />
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
@@ -542,7 +555,7 @@ function EditChaletModal(props) {
                   {...prop}
                   listType="picture-card"
                   fileList={fileList}
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   // onPreview={this.handlePreview}
                 >
                   {fileList.length >= 8 ? null : uploadButton}

@@ -261,7 +261,7 @@ export const deleteImage = (imageId) => (dispatch) => {
 // const deleteImageSuccess = (imageId) => {
 //   return { type: Delete_Image, payload: imageId };
 // };
-//////////////////////add chalet/////////////
+//////////////////////add Image/////////////
 export const addImage = (newImage, id) => (dispatch) => {
   const config = {
     headers: {
