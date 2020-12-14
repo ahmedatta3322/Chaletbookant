@@ -104,42 +104,39 @@ function EditChaletModal(props) {
     },
     file,
   };
-  const handleChange = ({ fileList }, e) => {
-    // console.log(editChalet);
-    console.log("change", fileList);
-    console.log(userChalet);
-    setFiles({ fileList });
-    let formData = new FormData();
-    const arr = [];
-    arr.push(fileList[fileList.length - 1]);
-    console.log(arr);
-    arr.forEach((file) => {
-      formData.append("chalet_album[]", file);
-      console.log(file);
-    });
-    // formData.append("chalet_album[]", fileList[fileList.length - 1]);
-    console.log(fileList[fileList.length - 1]);
-    if (fileList.length > userChalet.images.length) {
-      dispatch(addImage(formData, userChalet.id));
-    }
-  };
+  // const handleChange = ({ fileList }, e) => {
+  //   // console.log(editChalet);
+  //   console.log("change", fileList);
+  //   console.log(userChalet);
+  //   setFiles({ fileList });
+  //   let formData = new FormData();
+  //   const arr = [];
+  //   arr.push(fileList[fileList.length - 1]);
+  //   console.log(arr);
+  //   arr.forEach((file) => {
+  //     formData.append("chalet_album[]", file);
+  //     console.log(file);
+  //   });
+  //   // formData.append("chalet_album[]", fileList[fileList.length - 1]);
+  //   console.log(fileList[fileList.length - 1]);
+  //   if (fileList.length > userChalet.images.length) {
+  //     dispatch(addImage(formData, userChalet.id));
+  //   }
+  // };
   useEffect(() => {
     console.log(fileList[fileList.length - 1]);
     if (fileList[fileList.length - 1]) {
       // console.log("dis");
       let formData = new FormData();
       console.log(fileList[fileList.length - 1]);
-      formData.append("chalet_album", fileList[fileList.length - 1]);
+      formData.append("chalet_album[]", fileList[fileList.length - 1]);
       dispatch(addImage(formData, userChalet.id));
     }
   }, [fileList, dispatch, userChalet.id]);
-  const handleAddChange = ({ fileList }) => {
-    console.log(fileList);
-  };
   console.log(chalet);
   const uploadButton = (
     <div>
-      <PlusOutlined onChange={handleAddChange} />
+      <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
@@ -186,16 +183,18 @@ function EditChaletModal(props) {
           formData.append("feature[]", f);
         });
       }
+      console.log(file.file);
       formData.append("cover", file.file);
       dispatch(EditChalet(userChalet.id, formData));
+
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ":" + pair[1]);
+        // data.pair[0] = pair[1];
+      }
+    } else {
+      dispatch(EditChalet(userChalet.id, { ...values, ...location }));
     }
     console.log(file.file);
-
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0] + ":" + pair[1]);
-    //   // data.pair[0] = pair[1];
-    // }
-    dispatch(EditChalet(userChalet.id, { ...values, ...location }));
     props.onHide();
     console.log(currentTab);
   };
