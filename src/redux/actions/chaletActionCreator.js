@@ -11,6 +11,8 @@ import {
   Post_AddChalet,
   Delete_Chalet,
   Edit_Chalet,
+  // Delete_Image,
+  // Post_addAlbum,
 } from "../actionTypes";
 export const getChalets = (pagenaite, page) => (dispatch) => {
   axios
@@ -216,8 +218,13 @@ export const EditChalet = (id, editChalet) => (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // "Content-Type": "multipart/form-data",
     },
   };
+  // for (var pair of editChalet.entries()) {
+  //   console.log(pair[0] + ":" + pair[1]);
+  //   // data.pair[0] = pair[1];
+  // }
   return axios
     .put(`${authApi}chalets/${id}`, editChalet, config)
     .then((response) => {
@@ -234,3 +241,53 @@ export const EditChalet = (id, editChalet) => (dispatch) => {
 const EditChaletSuccess = (editChalet, id) => {
   return { type: Edit_Chalet, payload: { editChalet, id } };
 };
+//////////////////////Delete Chalet////////////
+export const deleteImage = (imageId) => (dispatch) => {
+  console.log(authApi);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  axios
+    .delete(`${authApi}del_album/${imageId}`, config)
+    .then((response) => {
+      console.log(response);
+      // if (response.status === 200) dispatch(deleteImageSuccess(imageId));
+    })
+    .catch(console.log);
+};
+
+// const deleteImageSuccess = (imageId) => {
+//   return { type: Delete_Image, payload: imageId };
+// };
+//////////////////////add chalet/////////////
+export const addImage = (newImage, id) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  // const data = {};
+  for (var pair of newImage.entries()) {
+    console.log(pair[0] + ":" + pair[1]);
+  }
+  // console.log(data);
+  axios
+    .post(`${authApi}add_album/${id}`, newImage, config)
+    .then((response) => {
+      console.log(response);
+      // const chalet = response.data.response.data;
+      // if (response.status === 200) {
+      //   dispatch(addImageSuccess(chalet));
+      // }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+// const addImageSuccess = (newImage) => {
+//   return { type: Post_addAlbum, payload: newImage };
+// };

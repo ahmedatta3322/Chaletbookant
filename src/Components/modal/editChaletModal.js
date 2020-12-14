@@ -1,21 +1,28 @@
 import React, { useState, useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import {
   Form,
   Select,
   Checkbox,
   Upload,
-  Button as Btn,
+  // Button as Btn,
   Row,
   Col,
   Input,
 } from "antd";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { InboxOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import Map from "../map";
 import "../../Styling/chaletModal.css";
 import "../../Styling/home.css";
-import { EditChalet } from "../../redux/actions/chaletActionCreator";
+import {
+  addImage,
+  deleteImage,
+  EditChalet,
+  // getChaletById,
+} from "../../redux/actions/chaletActionCreator";
+const { Dragger } = Upload;
 const { TextArea } = Input;
 const { Option } = Select;
 const normFile = (e) => {
@@ -27,35 +34,39 @@ const normFile = (e) => {
   console.log(e.fileList);
   return e && e.fileList;
 };
-export default function EditChaletModal(props) {
+function EditChaletModal(props) {
   const dispatch = useDispatch();
-  const { userChalet } = props;
+  const { userChalet, chalet } = props;
   const parentRef = useRef(null);
-  // const childRef = useRef(null);
   const [currentTab, setCurrentTab] = useState("About Chalet");
-  // const [footer, setFooter] = useState(true);
-  // const [about, setAbout] = useState({
-  //   address: "",
-  //   description: "",
-  //   fees: 0,
-  //   status: "disabled",
-  //   max_guests: 0,
-  // });
-  // const [image, setImage] = useState({
-  //   cover: {},
-  //   images: [],
-  //   feature: [],
-  // });
   const [location, setLocation] = useState({
     langitude: "29.69843312500002",
     latitude: "27.450745816193173",
   });
-  const [files, setFiles] = useState({ fileList: [] });
-  const [fiile, setFile] = useState({ file: {}, Upload: false });
+
+  const { images } = userChalet;
+  const newImages = images.map((i) => {
+    return { uid: i.id, name: i.name, url: i.url, status: "done" };
+  });
+  // const [editChalet, serEditChalet] = useState(userChalet);
+  const [files, setFiles] = useState({ fileList: newImages });
+  const [fiile, setFile] = useState({
+    file: [
+      {
+        uid: "-1",
+        name: "pic.png",
+        status: "done",
+        url: userChalet.cover,
+      },
+    ],
+    Upload: false,
+  });
   const { fileList } = files;
   const { file } = fiile;
   const prop = {
     onRemove: (file) => {
+      console.log(file);
+      dispatch(deleteImage(file.uid));
       setFiles((state) => {
         const index = state.fileList.indexOf(file);
         const newFileList = state.fileList.slice();
@@ -93,6 +104,33 @@ export default function EditChaletModal(props) {
     },
     file,
   };
+  const handleChange = ({ fileList }, e) => {
+    // console.log(editChalet);
+    console.log("change", fileList);
+    console.log(userChalet);
+    setFiles({ fileList });
+    let formData = new FormData();
+    const arr = [];
+    arr.push(fileList[fileList.length - 1]);
+    console.log(arr);
+    arr.forEach((file) => {
+      formData.append("chalet_album[]", file);
+      console.log(file);
+    });
+    // formData.append("chalet_album[]", fileList[fileList.length - 1]);
+    console.log(fileList[fileList.length - 1]);
+    if (fileList.length > userChalet.images.length) {
+      dispatch(addImage(formData, userChalet.id));
+    }
+  };
+  console.log(chalet);
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+  console.log(fileList);
   const handleFilter = (e) => {
     console.log(e.target.textContent);
     const { textContent } = e.target;
@@ -125,45 +163,28 @@ export default function EditChaletModal(props) {
     // console.log(state);
   };
 
-  const onAboutFinish = (values) => {
-    // setImage(values);
-    // let formData = new FormData();
-    // fileList.forEach((file) => {
-    //   formData.append("images[]", file);
-    // });
-    console.log(values);
+  const onFinish = (values) => {
     console.log({ ...values, ...location });
-    // values.feature.forEach((f) => {
-    //   formData.append("feature[]", f);
-    // });
-    // // setFiles({
-    // //   uploading: true,
-    // // });
-    // // console.log(image);
-    // console.log(file.file);
     // console.log(values);
-    // console.log(values.cover[0]);
-    // values.cover.forEach((file) => {
-    //   formData.append("cover", file);
-    // });
-    // formData.append("cover", file.file);
-    // formData.append("langitude", location.langitude);
-    // formData.append("latitude", location.latitude);
-    // formData.append("address", values.address);
-    // formData.append("description", values.description);
-    // formData.append("fees", values.fees);
-    // formData.append("status", values.status);
-    // formData.append("max_guests", values.max_guests);
-    // formData.append("feature", image.feature);
-    // console.log(formData.get("address"));
-    // console.log(formData.get("images[]"));
-    // console.log(formData.get("cover"), "cover");
+    if (file.file !== undefined) {
+      let formData = new FormData();
+      if (values.feature) {
+        values.feature.forEach((f) => {
+          formData.append("feature[]", f);
+        });
+      }
+      formData.append("cover", file.file);
+      dispatch(EditChalet(userChalet.id, formData));
+    }
+    console.log(file.file);
+
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ":" + pair[1]);
+    //   // data.pair[0] = pair[1];
+    // }
     dispatch(EditChalet(userChalet.id, { ...values, ...location }));
     props.onHide();
     console.log(currentTab);
-  };
-  const onImagesFinish = (values) => {
-    console.log(values);
   };
   const handleVerifyChalet = (values) => {
     console.log(values.chalet_album);
@@ -177,7 +198,7 @@ export default function EditChaletModal(props) {
     }
   };
   // console.log(about);
-  console.log(userChalet.cover);
+  // console.log(userChalet.images);
   // console.log(location.langitude);
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
@@ -219,7 +240,7 @@ export default function EditChaletModal(props) {
             name="validate_other"
             className="ml-1 h2 form"
             // {...formItemLayout}
-            onFinish={onAboutFinish}
+            onFinish={onFinish}
           >
             <Row>
               <Col span={13}>
@@ -428,7 +449,7 @@ export default function EditChaletModal(props) {
         </Modal.Body>
       )}
       {currentTab === "Images" && (
-        <Form className="pt-3 pl-3 pr-3 form" onFinish={onImagesFinish}>
+        <Form className="pt-3 pl-3 pr-3 form" onFinish={onFinish}>
           <Modal.Body id="images" ref={parentRef}>
             <Form.Item label="Chalet Cover" className="label"></Form.Item>
             <Form.Item
@@ -438,7 +459,42 @@ export default function EditChaletModal(props) {
               noStyle
             >
               {/* {file && ( */}
-              <Upload.Dragger
+              {userChalet.cover !== null && (
+                <Dragger
+                  listType="picture"
+                  defaultFileList={file}
+                  // name="files"
+
+                  {...prop2}
+                  disabled={fiile.Upload ? true : false}
+                >
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">
+                    {" "}
+                    Click or drag Image to this area to upload
+                  </p>
+                </Dragger>
+              )}
+              {userChalet.cover === null && (
+                <Upload.Dragger
+                  // name="files"
+                  {...prop2}
+                  disabled={fiile.Upload ? true : false}
+                  // disabled={true}
+                >
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">
+                    Click or drag Image to this area to upload
+                  </p>
+                </Upload.Dragger>
+              )}
+              {/* <Upload.Dragger
+                listType="picture"
+                defaultFileList={file}
                 // name="files"
                 {...prop2}
                 disabled={fiile.Upload ? true : false}
@@ -450,7 +506,7 @@ export default function EditChaletModal(props) {
                 <p className="ant-upload-text">
                   Click or drag Image to this area to upload
                 </p>
-              </Upload.Dragger>
+              </Upload.Dragger> */}
               {/* )} */}
 
               {/* <Upload.Dragger name="files" {...prop2}>
@@ -464,7 +520,7 @@ export default function EditChaletModal(props) {
             </Form.Item>
 
             <Form.Item
-              name="images"
+              // name="images"
               label="Chalet Photos"
               valuePropName="fileList"
               getValueFromEvent={normFile}
@@ -472,7 +528,7 @@ export default function EditChaletModal(props) {
             >
               <Form.Item
                 // className="mb-3"
-                name="images"
+                // name="images"
                 rules={[
                   {
                     required: true,
@@ -482,18 +538,31 @@ export default function EditChaletModal(props) {
                 noStyle
                 initialValue={userChalet.images}
               >
-                <Upload {...prop} defaultFileList={userChalet.images}>
-                  <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
+                <Upload
+                  {...prop}
+                  listType="picture-card"
+                  fileList={fileList}
+                  onChange={handleChange}
+                  // onPreview={this.handlePreview}
+                >
+                  {fileList.length >= 8 ? null : uploadButton}
                 </Upload>
+                {/* <Modal
+                  visible={previewVisible}
+                  title={previewTitle}
+                  footer={null}
+                  onCancel={this.handleCancel}
+                >
+                  <img
+                    alt="example"
+                    style={{ width: "100%" }}
+                    src={previewImage}
+                  />
+                </Modal> */}
+                {/* <Upload listType="picture" {...prop} defaultFileList={fileList}>
+                  <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
+                </Upload> */}
               </Form.Item>
-              {/* <Upload
-                name="logo"
-                action="/upload.do"
-                listType="picture"
-                className="ml-3"
-              >
-                <Btn icon={<UploadOutlined />}>Upload Chalet photos</Btn>
-              </Upload> */}
             </Form.Item>
             <Form.Item
               name="feature"
@@ -553,7 +622,7 @@ export default function EditChaletModal(props) {
             </Form.Item>
             <Modal.Footer className="modalFooter">
               <Button variant="outline-primary" type="submit">
-                Save <i class="fas fa-angle-double-right ml-3"></i>
+                Save
               </Button>{" "}
               <Button
                 variant="outline-secondary"
@@ -652,3 +721,9 @@ export default function EditChaletModal(props) {
     </Modal>
   );
 }
+const mapStateToProps = (reduxState) => {
+  return {
+    chalet: reduxState.Chalets.chalet,
+  };
+};
+export default connect(mapStateToProps)(EditChaletModal);
