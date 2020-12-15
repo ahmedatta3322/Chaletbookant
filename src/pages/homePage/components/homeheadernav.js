@@ -35,23 +35,26 @@ function HomeNav({ auth, location, user, errorMessg }) {
               CHALETS
             </Link>
           </Menu.Item>
-          <Menu.Item className="home-menu-item" key="3">
-            <Link
-              to={`/profile/${user.id}`}
-              className="text-white text-decoration-none"
-            >
-              {" "}
-              PROFILE
-            </Link>
-          </Menu.Item>
-          <Menu.Item className="home-menu-item" key="3">
+          {user && (
+            // (errorMessg === "Unauthenticated."
+            <Menu.Item className="home-menu-item" key="3">
+              <Link
+                to={user.id !== undefined ? `/profile/${user.id}` : "/login"}
+                className="text-white text-decoration-none"
+              >
+                {" "}
+                PROFILE
+              </Link>
+            </Menu.Item>
+          )}
+          <Menu.Item className="home-menu-item" key="4">
             ABOUT US
           </Menu.Item>
-          <Menu.Item className="home-menu-item" key="4">
+          <Menu.Item className="home-menu-item" key="5">
             CONTACT
           </Menu.Item>
-          {(!auth && !user) || errorMessg === "Unauthenticated." ? (
-            <Menu.Item className="home-menu-item" key="5">
+          {!user || errorMessg === "Unauthenticated." ? (
+            <Menu.Item className="home-menu-item" key="6">
               <Link
                 to="/login"
                 variant="primary"

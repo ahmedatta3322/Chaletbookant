@@ -225,8 +225,9 @@ export const EditChalet = (id, editChalet) => (dispatch) => {
   //   console.log(pair[0] + ":" + pair[1]);
   //   // data.pair[0] = pair[1];
   // }
+  //app.apptechegy.com/api/gateway/chalets/125?_method=PUT
   return axios
-    .put(`${authApi}chalets/${id}`, editChalet, config)
+    .post(`${authApi}chalets/${id}?_method=PUT`, editChalet, config)
     .then((response) => {
       const newChalet = response.data.response.data;
       console.log(response);
@@ -234,7 +235,7 @@ export const EditChalet = (id, editChalet) => (dispatch) => {
       if (response.status === 200) dispatch(EditChaletSuccess(newChalet, id));
     })
     .catch((err) => {
-      console.log(err.response);
+      console.log(err);
     });
 };
 

@@ -20,6 +20,7 @@ import {
   addImage,
   deleteImage,
   EditChalet,
+  verifyChalet,
   // getChaletById,
 } from "../../redux/actions/chaletActionCreator";
 const { Dragger } = Upload;
@@ -38,6 +39,7 @@ function EditChaletModal(props) {
   const dispatch = useDispatch();
   const { userChalet, chalet } = props;
   const parentRef = useRef(null);
+  const [filesDocument, setDocumentsFiles] = useState({ fileList: [] });
   const [currentTab, setCurrentTab] = useState("About Chalet");
   const [location, setLocation] = useState({
     langitude: "29.69843312500002",
@@ -104,6 +106,25 @@ function EditChaletModal(props) {
     },
     file,
   };
+  const prop3 = {
+    onRemove: (file) => {
+      setDocumentsFiles((state) => {
+        const index = state.fileList.indexOf(file);
+        const newFileList = state.fileList.slice();
+        newFileList.splice(index, 1);
+        return {
+          fileList: newFileList,
+        };
+      });
+    },
+    beforeUpload: (file) => {
+      setDocumentsFiles((state) => ({
+        fileList: [...state.fileList, file],
+      }));
+      return false;
+    },
+    fileList,
+  };
   // const handleChange = ({ fileList }, e) => {
   //   // console.log(editChalet);
   //   console.log("change", fileList);
@@ -132,7 +153,7 @@ function EditChaletModal(props) {
       formData.append("chalet_album[]", fileList[fileList.length - 1]);
       dispatch(addImage(formData, userChalet.id));
     }
-  }, [fileList, dispatch, userChalet.id]);
+  }, [fileList, dispatch, userChalet.id, userChalet.cover]);
   console.log(chalet);
   const uploadButton = (
     <div>
@@ -173,7 +194,7 @@ function EditChaletModal(props) {
     // console.log(state);
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log({ ...values, ...location });
     // console.log(values);
     if (file.file !== undefined) {
@@ -185,12 +206,14 @@ function EditChaletModal(props) {
       }
       console.log(file.file);
       formData.append("cover", file.file);
-      dispatch(EditChalet(userChalet.id, formData));
+      await dispatch(EditChalet(userChalet.id, formData));
 
       for (var pair of formData.entries()) {
         console.log(pair[0] + ":" + pair[1]);
         // data.pair[0] = pair[1];
       }
+      setCurrentTab("About Chalet");
+      window.location.reload();
     } else {
       dispatch(EditChalet(userChalet.id, { ...values, ...location }));
     }
@@ -199,15 +222,14 @@ function EditChaletModal(props) {
     console.log(currentTab);
   };
   const handleVerifyChalet = (values) => {
-    console.log(values.chalet_album);
+    console.log(values.chalet_contruct);
+    console.log(chalet);
     let formData = new FormData();
-    fileList.forEach((file) => {
-      formData.append("chalet_album[]", file);
+    filesDocument.fileList.forEach((file) => {
+      formData.append("chalet_contruct[]", file);
     });
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ":" + pair[1]);
-      // data.pair[0] = pair[1];
-    }
+    dispatch(verifyChalet(userChalet[6].id, formData));
+    props.onHide();
   };
   // console.log(about);
   // console.log(userChalet.images);
@@ -215,6 +237,8 @@ function EditChaletModal(props) {
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
   // console.log(fiile.Upload);
+  console.log(file);
+  console.log(userChalet.cover);
   return (
     <Modal
       {...props}
@@ -472,38 +496,29 @@ function EditChaletModal(props) {
             >
               {/* {file && ( */}
               {userChalet.cover !== null && (
-                <Dragger
-                  listType="picture"
-                  defaultFileList={file}
-                  // name="files"
-
+                <Upload
                   {...prop2}
-                  disabled={fiile.Upload ? true : false}
+                  listType="picture-card"
+                  defaultFileList={file}
+                  // onChange={handleChange}
+                  // onPreview={this.handlePreview}
+                  // disabled={fiile.Upload ? true : false}
                 >
-                  <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">
-                    {" "}
-                    Click or drag Image to this area to upload
-                  </p>
-                </Dragger>
+                  {file.length === 0 ? uploadButton : null}
+                </Upload>
               )}
               {userChalet.cover === null && (
-                <Upload.Dragger
-                  // name="files"
+                <Upload
                   {...prop2}
-                  disabled={fiile.Upload ? true : false}
-                  // disabled={true}
+                  listType="picture-card"
+                  // onChange={handleChange}
+                  // onPreview={this.handlePreview}
+                  // disabled={fiile.Upload ? true : false}
                 >
-                  <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">
-                    Click or drag Image to this area to upload
-                  </p>
-                </Upload.Dragger>
+                  {userChalet.cover === null ? uploadButton : null}
+                </Upload>
               )}
+
               {/* <Upload.Dragger
                 listType="picture"
                 defaultFileList={file}
@@ -657,19 +672,40 @@ function EditChaletModal(props) {
               className="label mb-3"
             ></Form.Item>
             <Form.Item
-              name="chalet_album"
+              name="chalet_contruct"
               valuePropName="fileList"
               getValueFromEvent={normFile}
               noStyle
             >
-              <Upload.Dragger name="files" {...prop}>
+              <Form.Item
+                // className="mb-3"
+                // name="images"
+                rules={[
+                  {
+                    required: true,
+                    message: "Note : Chalet Photos is required",
+                  },
+                ]}
+                noStyle
+                initialValue={userChalet.images}
+              >
+                <Upload
+                  {...prop3}
+                  listType="picture-card"
+                  // fileList={filesDocument}
+                  // onChange={handleChange}
+                  // onPreview={this.handlePreview}
+                >
+                  {fileList.length >= 8 ? null : uploadButton}
+                </Upload>
+                {/* <Upload.Dragger name="files" {...prop3}>
                 <p className="ant-upload-drag-icon">
                   <i class="fas fa-file-upload"></i>
                 </p>
                 <p className="ant-upload-text">Upload the Chalet document</p>
-              </Upload.Dragger>
+              </Upload.Dragger> */}
+              </Form.Item>
             </Form.Item>
-
             <div className="label ml-5 h4">
               <span className="yellow">Chalet</span>
               <span className="blue">Book</span> Terms &amp; Conditions

@@ -12,7 +12,7 @@ const { Content } = Layout;
 function Home({ chalets }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getChalets());
+    dispatch(getChalets("", ""));
   }, [dispatch]);
   return (
     <Layout>
