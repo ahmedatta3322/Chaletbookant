@@ -11,7 +11,7 @@ import {
   Col,
   Input,
 } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+// import { InboxOutlined } from "@ant-design/icons";
 import { PlusOutlined } from "@ant-design/icons";
 import Map from "../map";
 import "../../Styling/chaletModal.css";
@@ -23,33 +23,32 @@ import {
   verifyChalet,
   // getChaletById,
 } from "../../redux/actions/chaletActionCreator";
-const { Dragger } = Upload;
+// const { Dragger } = Upload;
 const { TextArea } = Input;
 const { Option } = Select;
 const normFile = (e) => {
-  console.log("Upload event:", e);
+  // console.log("Upload event:", e);
 
   if (Array.isArray(e)) {
     return e;
   }
-  console.log(e.fileList);
+  // console.log(e.fileList);
   return e && e.fileList;
 };
 function EditChaletModal(props) {
   const dispatch = useDispatch();
-  const { userChalet, chalet } = props;
+  const { userChalet } = props;
+  const { images, chalet_contruct } = userChalet;
   const parentRef = useRef(null);
-  const [filesDocument, setDocumentsFiles] = useState({ fileList: [] });
   const [currentTab, setCurrentTab] = useState("About Chalet");
   const [location, setLocation] = useState({
     langitude: "29.69843312500002",
     latitude: "27.450745816193173",
   });
-
-  const { images } = userChalet;
   const newImages = images.map((i) => {
     return { uid: i.id, name: i.name, url: i.url, status: "done" };
   });
+
   // const [editChalet, serEditChalet] = useState(userChalet);
   const [files, setFiles] = useState({ fileList: newImages });
   const [fiile, setFile] = useState({
@@ -65,6 +64,13 @@ function EditChaletModal(props) {
   });
   const { fileList } = files;
   const { file } = fiile;
+  const newContructs = chalet_contruct.map((i) => {
+    return { uid: i.id, name: i.name, url: i.url, status: "done" };
+  });
+  const [filesDocument, setDocumentsFiles] = useState({
+    fileList: newContructs,
+  });
+  // console.log(filesDocument);
   const prop = {
     onRemove: (file) => {
       console.log(file);
@@ -89,13 +95,25 @@ function EditChaletModal(props) {
   const prop2 = {
     onRemove: (file) => {
       setFile((state) => {
-        const index = state.file.indexOf(file);
-        const newFileList = state.file.slice();
-        newFileList.splice(index, 1);
-        return {
-          file: newFileList,
-        };
+        // console.log(state.file);
+        if (typeof state.file === "object") {
+          delete file.file;
+          const newFileList = [];
+          // console.log(newFileList);
+          return {
+            file: newFileList,
+          };
+        } else {
+          const index = state.file.indexOf(file);
+          const newFileList = state.file.slice();
+          newFileList.splice(index, 1);
+          // console.log(newFileList);
+          return {
+            file: newFileList,
+          };
+        }
       });
+      // }
     },
     beforeUpload: (file) => {
       setFile((state) => ({
@@ -112,19 +130,22 @@ function EditChaletModal(props) {
         const index = state.fileList.indexOf(file);
         const newFileList = state.fileList.slice();
         newFileList.splice(index, 1);
+
         return {
           fileList: newFileList,
         };
       });
     },
     beforeUpload: (file) => {
+      console.log(file);
       setDocumentsFiles((state) => ({
+        // console.log(state.fileList)
         fileList: [...state.fileList, file],
       }));
       return false;
     },
-    fileList,
   };
+  //console.log(fileList);
   // const handleChange = ({ fileList }, e) => {
   //   // console.log(editChalet);
   //   console.log("change", fileList);
@@ -145,28 +166,28 @@ function EditChaletModal(props) {
   //   }
   // };
   useEffect(() => {
-    console.log(fileList[fileList.length - 1]);
+    // console.log(fileList[fileList.length - 1]);
     if (fileList[fileList.length - 1]) {
       // console.log("dis");
       let formData = new FormData();
-      console.log(fileList[fileList.length - 1]);
+      // console.log(fileList[fileList.length - 1]);
       formData.append("chalet_album[]", fileList[fileList.length - 1]);
       dispatch(addImage(formData, userChalet.id));
     }
   }, [fileList, dispatch, userChalet.id, userChalet.cover]);
-  console.log(chalet);
+  // console.log(chalet);
   const uploadButton = (
     <div>
       <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-  console.log(fileList);
+  // console.log(fileList);
   const handleFilter = (e) => {
-    console.log(e.target.textContent);
+    // console.log(e.target.textContent);
     const { textContent } = e.target;
-    console.log(textContent);
-    console.log(currentTab, "after");
+    // console.log(textContent);
+    // console.log(currentTab, "after");
     // debugger;
     if (textContent === "About Chalet") {
       //   parentRef.current.id = "aboutChalet";
@@ -195,8 +216,10 @@ function EditChaletModal(props) {
   };
 
   const onFinish = async (values) => {
-    console.log({ ...values, ...location });
+    // console.log({ ...values, ...location });
     // console.log(values);
+    console.log(file.file);
+
     if (file.file !== undefined) {
       let formData = new FormData();
       if (values.feature) {
@@ -216,19 +239,21 @@ function EditChaletModal(props) {
       window.location.reload();
     } else {
       dispatch(EditChalet(userChalet.id, { ...values, ...location }));
+      setCurrentTab("About Chalet");
     }
-    console.log(file.file);
+    // console.log(file.file);
     props.onHide();
-    console.log(currentTab);
+    // console.log(currentTab);
   };
   const handleVerifyChalet = (values) => {
     console.log(values.chalet_contruct);
-    console.log(chalet);
+    // console.log(chalet);
     let formData = new FormData();
     filesDocument.fileList.forEach((file) => {
       formData.append("chalet_contruct[]", file);
     });
-    dispatch(verifyChalet(userChalet[6].id, formData));
+    // console.log(userChalet.id);
+    dispatch(verifyChalet(userChalet.id, formData));
     props.onHide();
   };
   // console.log(about);
@@ -237,8 +262,10 @@ function EditChaletModal(props) {
   // console.log(location.latitude);
   // console.log({ ...about, ...image, ...location });
   // console.log(fiile.Upload);
-  console.log(file);
-  console.log(userChalet.cover);
+  // console.log(file);
+  // console.log(userChalet.chalet_contruct.length, "contruct length");
+  // console.log(userChalet, "contruct");
+
   return (
     <Modal
       {...props}
@@ -263,10 +290,19 @@ function EditChaletModal(props) {
           <Button className="tab p-3 mb-5 mr-3" onClick={handleFilter}>
             Images
           </Button>
-          {currentTab === "Verification" && <div className="left-div"></div>}
-          <Button className="tab p-3 mb-5 mr-3" onClick={handleFilter}>
-            Verification
-          </Button>
+          {currentTab === "Verification" &&
+            userChalet.verification !== "verified" && (
+              <div className="left-div"></div>
+            )}
+          {userChalet.verification !== "verified" && (
+            <Button
+              className="tab p-3 mb-5 mr-3"
+              onClick={handleFilter}
+              disabled={userChalet.verification === "verified" ? true : false}
+            >
+              Verification
+            </Button>
+          )}
         </div>
       </Modal.Header>
 
@@ -515,7 +551,7 @@ function EditChaletModal(props) {
                   // onPreview={this.handlePreview}
                   // disabled={fiile.Upload ? true : false}
                 >
-                  {userChalet.cover === null ? uploadButton : null}
+                  {file.length === 1 || file.length === 0 ? uploadButton : null}
                 </Upload>
               )}
 
@@ -687,17 +723,31 @@ function EditChaletModal(props) {
                   },
                 ]}
                 noStyle
-                initialValue={userChalet.images}
               >
-                <Upload
-                  {...prop3}
-                  listType="picture-card"
-                  // fileList={filesDocument}
-                  // onChange={handleChange}
-                  // onPreview={this.handlePreview}
-                >
-                  {fileList.length >= 8 ? null : uploadButton}
-                </Upload>
+                {userChalet.chalet_contruct.length !== 0 && (
+                  <Upload
+                    {...prop3}
+                    listType="picture-card"
+                    defaultFileList={filesDocument.fileList}
+                    // onChange={handleChange}
+                    // onPreview={this.handlePreview}
+                  >
+                    {filesDocument.fileList.length >= 8 ? null : uploadButton}
+                  </Upload>
+                )}
+                {userChalet.chalet_contruct.length === 0 && (
+                  <Upload
+                    {...prop3}
+                    listType="picture-card"
+                    // onChange={handleChange}
+                    // onPreview={this.handlePreview}
+                    // disabled={fiile.Upload ? true : false}
+                  >
+                    {userChalet.chalet_contruct.length === 0
+                      ? uploadButton
+                      : null}
+                  </Upload>
+                )}
                 {/* <Upload.Dragger name="files" {...prop3}>
                 <p className="ant-upload-drag-icon">
                   <i class="fas fa-file-upload"></i>

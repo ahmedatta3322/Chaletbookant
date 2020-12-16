@@ -105,7 +105,7 @@ function Profile(props) {
       requestTypefilterStatus === "1"
     )
       dispatch(getReciviedRentRequests());
-    console.log(requestTypefilterStatus, requestfilterStatus);
+    // console.log(requestTypefilterStatus, requestfilterStatus);
     dispatch(getUserChalet(currentPage));
     dispatch(getOnlineUserProfile());
     if (
@@ -117,7 +117,7 @@ function Profile(props) {
       setShow(false);
     }
 
-    console.log(status, errorMessg);
+    // console.log(status, errorMessg);
   }, [
     dispatch,
     errorMessg,
@@ -127,7 +127,7 @@ function Profile(props) {
     requestfilterStatus,
     filterStatus,
   ]);
-  console.log(chalets);
+  // console.log(chalets);
   const handleFilter = (e) => {
     const { textContent } = e.target;
     // console.log(typeof textContent);
@@ -176,7 +176,7 @@ function Profile(props) {
   //   console.log(statuss);
   //   setShow(false);
   // };
-  console.log(sentRentRequests, reciviedRentRequests);
+  // console.log(sentRentRequests, reciviedRentReqsuests);
   return (
     <>
       {user.mobile_verfied === 0 && (

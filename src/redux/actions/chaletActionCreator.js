@@ -66,7 +66,7 @@ export const getUserChalet = (page) => (dispatch) => {
       const chalets = response.data.response.data;
       const pagesNum = response.data.response.meta.last_page;
       const total = response.data.response.meta.total;
-      console.log("chalit", chalets);
+      // console.log("chalit", chalets);
       dispatch(getUserChaletSuccess(chalets, pagesNum, total));
       // return user;
     })
@@ -242,9 +242,9 @@ export const EditChalet = (id, editChalet) => (dispatch) => {
 const EditChaletSuccess = (editChalet, id) => {
   return { type: Edit_Chalet, payload: { editChalet, id } };
 };
-//////////////////////Delete Chalet////////////
+//////////////////////Delete image////////////
 export const deleteImage = (imageId) => (dispatch) => {
-  console.log(authApi);
+  // console.log(authApi);
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -271,9 +271,9 @@ export const addImage = (newImage, id) => (dispatch) => {
     },
   };
   // const data = {};
-  for (var pair of newImage.entries()) {
-    console.log(pair[0] + ":" + pair[1]);
-  }
+  // for (var pair of newImage.entries()) {
+  //   console.log(pair[0] + ":" + pair[1]);
+  // }
   // console.log(data);
   axios
     .post(`${authApi}add_album/${id}`, newImage, config)

@@ -48,7 +48,7 @@ function EditPersonalInfoModal(props) {
     fileList,
   };
   useEffect(() => {
-    console.log(err);
+    // console.log(err);
     // debugger;
     if (
       submit === "submit" &&
@@ -59,7 +59,7 @@ function EditPersonalInfoModal(props) {
       onHide();
       console.log(err);
     }
-    console.log(submit, status, err);
+    // console.log(submit, status, err);
   }, [err, onHide, submit, status]);
 
   const handleCancel = () => {
@@ -138,16 +138,18 @@ function EditPersonalInfoModal(props) {
             <Button className="tab p-3 mb-5" onClick={handleFilter}>
               Change Password
             </Button>
-            {currentTab === "Verify Account" && (
+            {currentTab === "Verify Account" && user.status !== "verified" && (
               <div className="left-div"></div>
             )}
-            <Button
-              className="tab p-3 mb-5"
-              onClick={handleFilter}
-              disabled={user.status === "verified" ? true : false}
-            >
-              Verify Account
-            </Button>
+            {user.status !== "verified" && (
+              <Button
+                className="tab p-3 mb-5"
+                onClick={handleFilter}
+                disabled={user.status === "verified" ? true : false}
+              >
+                Verify Account
+              </Button>
+            )}
           </div>
         </Modal.Header>
         {currentTab === "Personal Info" && (

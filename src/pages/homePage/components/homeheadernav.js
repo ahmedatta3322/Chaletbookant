@@ -53,7 +53,8 @@ function HomeNav({ auth, location, user, errorMessg }) {
           <Menu.Item className="home-menu-item" key="5">
             CONTACT
           </Menu.Item>
-          {!user || errorMessg === "Unauthenticated." ? (
+          {Object.keys(user).length === 0 ||
+          errorMessg === "Unauthenticated." ? (
             <Menu.Item className="home-menu-item" key="6">
               <Link
                 to="/login"
