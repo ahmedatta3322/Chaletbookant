@@ -1,3 +1,4 @@
+import { Post_addAlbum } from "../actionTypes";
 import {
   Get_Chalets,
   Get_ChaletById,
@@ -14,6 +15,7 @@ const initialState = {
   currentUserChalets: [],
   pagesNum: 1,
   total: 0,
+  status: "",
 };
 export default (state = initialState, action) => {
   let newState;
@@ -81,6 +83,10 @@ export default (state = initialState, action) => {
         ),
       };
       console.log(newState);
+      break;
+    case Post_addAlbum:
+      newState = { ...state };
+      newState.status = action.payload;
       break;
     default:
       newState = state;

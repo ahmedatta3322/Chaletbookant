@@ -1,6 +1,7 @@
 import axios from "axios";
 import { authApi } from "../../api/authApi";
 import { chaletsApi } from "../../api/notAuthApi";
+import { Post_addAlbum } from "../actionTypes";
 import {
   Get_Chalets,
   GET_Error,
@@ -279,16 +280,17 @@ export const addImage = (newImage, id) => (dispatch) => {
     .post(`${authApi}add_album/${id}`, newImage, config)
     .then((response) => {
       console.log(response);
+      console.log(response.data.status);
       // const chalet = response.data.response.data;
-      // if (response.status === 200) {
-      //   dispatch(addImageSuccess(chalet));
-      // }
+      if (response.data.status === 200) {
+        dispatch(addImageSuccess("ok"));
+      }
     })
     .catch((err) => {
       console.log(err.response);
     });
 };
 
-// const addImageSuccess = (newImage) => {
-//   return { type: Post_addAlbum, payload: newImage };
-// };
+const addImageSuccess = (status) => {
+  return { type: Post_addAlbum, payload: status };
+};

@@ -73,7 +73,7 @@ function EditChaletModal(props) {
       formData.append("chalet_album[]", fileList[fileList.length - 1]);
       dispatch(addImage(formData, userChalet.id));
     }
-  }, [fileList, dispatch, userChalet.id, userChalet.cover, userChalet.images]);
+  }, [fileList, dispatch, userChalet.id, userChalet.cover, images]);
   const newContructs = chalet_contruct.map((i) => {
     return { uid: i.id, name: i.name, url: i.url, status: "done" };
   });
