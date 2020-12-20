@@ -33,6 +33,7 @@ export default (state = initialState, action) => {
       break;
     case Get_ChaletById:
       newState = { ...state };
+      //console.log(action.payload);
       newState.chalet = action.payload;
       // newState.loading = true;
       break;
@@ -85,8 +86,17 @@ export default (state = initialState, action) => {
       console.log(newState);
       break;
     case Post_addAlbum:
-      newState = { ...state };
-      newState.status = action.payload;
+      const updatedChalet = action.payload.chalet;
+      const chaletId = action.payload.id;
+      console.log(updatedChalet);
+      newState = {
+        ...state,
+        currentUserChalets: state.currentUserChalets.map((t) =>
+          t.id === chaletId ? updatedChalet : t
+        ),
+      };
+
+      // newState.status = action.payload;
       break;
     default:
       newState = state;

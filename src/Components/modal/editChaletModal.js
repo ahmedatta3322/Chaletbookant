@@ -20,6 +20,7 @@ import {
   addImage,
   deleteImage,
   EditChalet,
+  getUserChalet,
   verifyChalet,
   // getChaletById,
 } from "../../redux/actions/chaletActionCreator";
@@ -37,7 +38,9 @@ const normFile = (e) => {
 };
 function EditChaletModal(props) {
   const dispatch = useDispatch();
-  const { userChalet } = props;
+  console.log(props);
+  const { userChalet, chalet } = props;
+
   const { images, chalet_contruct } = userChalet;
   const parentRef = useRef(null);
   const [currentTab, setCurrentTab] = useState("About Chalet");
@@ -45,11 +48,12 @@ function EditChaletModal(props) {
     langitude: "29.69843312500002",
     latitude: "27.450745816193173",
   });
+
   const newImages = images.map((i) => {
     return { uid: i.id, name: i.name, url: i.url, status: "done" };
   });
 
-  // const [editChalet, serEditChalet] = useState(userChalet);
+  const [imagesChalet, setImagesChalet] = useState({});
   const [files, setFiles] = useState({ fileList: newImages });
   const [fiile, setFile] = useState({
     file: [
@@ -65,13 +69,29 @@ function EditChaletModal(props) {
   const { fileList } = files;
   const { file } = fiile;
   useEffect(() => {
-    // console.log(fileList[fileList.length - 1]);
+    console.log(fileList);
+    // setEditChalet(chalet);
+    // if (Object.keys(editChalet).length !== 0) {
+    //   console.log(chalet.images);
+    //   setEditChalet(chalet);
+    //   let newImages = editChalet.images.map((i) => {
+    //     return { uid: i.id, name: i.name, url: i.url, status: "done" };
+    //   });
+    //   console.log(newImages);
+
+    //   setFiles({ fileList: newImages });
+    // }
+    // console.log(fileList);
     if (fileList[fileList.length - 1]) {
-      // console.log("dis");
-      let formData = new FormData();
-      // console.log(fileList[fileList.length - 1]);
-      formData.append("chalet_album[]", fileList[fileList.length - 1]);
-      dispatch(addImage(formData, userChalet.id));
+      // // console.log("dis");
+      // let formData = new FormData();
+      // console.log(
+      //   typeof fileList[fileList.length - 1],
+      //   fileList[fileList.length - 1]
+      // );
+      // formData.append("chalet_album[]", fileList[fileList.length - 1]);
+      // dispatch(addImage(formData, userChalet.id));
+      //dispatch(getUserChalet("1"));
     }
   }, [fileList, dispatch, userChalet.id, userChalet.cover, images]);
   const newContructs = chalet_contruct.map((i) => {
@@ -83,8 +103,8 @@ function EditChaletModal(props) {
   // console.log(filesDocument);
   const prop = {
     onRemove: (file) => {
-      console.log(file, fileList, images);
-      dispatch(deleteImage(file.uid));
+      console.log(file, fileList, chalet.images);
+
       setFiles((state) => {
         const index = state.fileList.indexOf(file);
         const newFileList = state.fileList.slice();
@@ -155,27 +175,34 @@ function EditChaletModal(props) {
       return false;
     },
   };
-  //console.log(fileList);
-  // const handleChange = ({ fileList }, e) => {
-  //   // console.log(editChalet);
-  //   console.log("change", fileList);
-  //   console.log(userChalet);
-  //   setFiles({ fileList });
-  //   let formData = new FormData();
-  //   const arr = [];
-  //   arr.push(fileList[fileList.length - 1]);
-  //   console.log(arr);
-  //   arr.forEach((file) => {
-  //     formData.append("chalet_album[]", file);
-  //     console.log(file);
-  //   });
-  //   // formData.append("chalet_album[]", fileList[fileList.length - 1]);
-  //   console.log(fileList[fileList.length - 1]);
-  //   if (fileList.length > userChalet.images.length) {
-  //     dispatch(addImage(formData, userChalet.id));
-  //   }
-  // };
-  // console.log(chalet);
+  console.log(fileList);
+  const handleChange = (fileList1, e) => {
+    // console.log(editChalet);
+
+    console.log(userChalet, fileList1, fileList);
+    if (fileList1.file.status === "removed") {
+      dispatch(deleteImage(fileList1.file.uid));
+      // console.log(editChalet);
+      // const newImages = chalet.images.map((i) => {
+      //   return { uid: i.id, name: i.name, url: i.url, status: "done" };
+      // });
+      // setFiles(newImages);
+    }
+
+    // fileList = fileList.map((i) => {
+    //   return { uid: i.id, name: i.name, url: i.url, status: "done" };
+    // });
+    // return { uid: i.id, name: i.name, url: i.url, status: "done" };
+    //console.log("change", fileList, e);
+    // let file1 = new File(fileList[fileList.length - 1]);
+    else if (fileList1.file.status === "done") {
+      let formData = new FormData();
+      formData.append("chalet_album[]", fileList.file);
+
+      dispatch(addImage(formData, userChalet.id));
+    }
+  };
+  console.log(chalet);
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -547,7 +574,7 @@ function EditChaletModal(props) {
                 <Upload
                   {...prop2}
                   listType="picture-card"
-                  // onChange={handleChange}
+                  //onChange={handleChange}
                   // onPreview={this.handlePreview}
                   // disabled={fiile.Upload ? true : false}
                 >
@@ -599,13 +626,14 @@ function EditChaletModal(props) {
                   },
                 ]}
                 noStyle
-                initialValue={userChalet.images}
+                // initialValue={userChalet.images}
               >
                 <Upload
                   {...prop}
                   listType="picture-card"
                   fileList={fileList}
-                  // onChange={handleChange}
+                  onChange={handleChange}
+
                   // onPreview={this.handlePreview}
                 >
                   {fileList.length >= 8 ? null : uploadButton}

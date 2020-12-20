@@ -280,10 +280,10 @@ export const addImage = (newImage, id) => (dispatch) => {
     .post(`${authApi}add_album/${id}`, newImage, config)
     .then((response) => {
       console.log(response);
-      console.log(response.data.status);
-      // const chalet = response.data.response.data;
+      console.log(response.data.response.data.images);
+      const chalet = response.data.response.data;
       if (response.data.status === 200) {
-        dispatch(addImageSuccess("ok"));
+        dispatch(addImageSuccess(chalet, id));
       }
     })
     .catch((err) => {
@@ -291,6 +291,6 @@ export const addImage = (newImage, id) => (dispatch) => {
     });
 };
 
-const addImageSuccess = (status) => {
-  return { type: Post_addAlbum, payload: status };
+const addImageSuccess = (chalet, id) => {
+  return { type: Post_addAlbum, payload: { chalet, id } };
 };
