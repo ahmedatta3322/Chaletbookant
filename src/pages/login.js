@@ -192,12 +192,12 @@ function Login(props) {
                         >
                           LOGIN
                         </Btn>
-                        <a
-                          href="forgetpassword.html"
+                        <NavLink
+                          to="/forgetpassword"
                           className="d-block text-right pl-5 pt-5 pb-3 text-dark h5"
                         >
                           Forget password?
-                        </a>
+                        </NavLink>
                         {/* </Form.Item> */}
                       </Form>
                     </Col>

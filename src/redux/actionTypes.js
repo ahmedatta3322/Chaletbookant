@@ -24,4 +24,7 @@ export const Post_ChangePassword = "Post_ChangePassword";
 export const Get_SentRentRequests = "Get_SentRentRequests";
 export const Get_ReciviedRentRequests = "Get_ReciviedRentRequests";
 
+export const Get_SentExchangeRequests = "Get_SentExchangeRequests";
+export const Get_ReciviedExchangeRequests = "Get_ReciviedExchangeRequests";
+
 export const GET_Error = "GET_Error";

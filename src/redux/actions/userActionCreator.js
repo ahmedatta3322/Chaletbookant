@@ -1,5 +1,5 @@
 import axios from "axios";
-import { authApi } from "../../api/authApi";
+import { authApi, baseUrl } from "../../api/authApi";
 import {
   Post_SignUp,
   GET_Error,
@@ -246,3 +246,18 @@ export const verifyAccount = (document) => (dispatch) => {
 // const verifyAccountSuccess = (newChalet) => {
 //   return { type: Post_AddChalet, payload: newChalet };
 // };
+///////////////////////logout//////////////////////
+export const forgetPasword = (email) => (dispatch) => {
+  console.log(email);
+  axios
+    .post(`${baseUrl}password/email`, email)
+    .then((response) => {
+      console.log(response);
+      // console.log(pagesNum);
+      // dispatch(getChaletsSuccess(chalets, pagesNum, total));
+    })
+    .catch((error) => {
+      console.log(error.response);
+      // dispatch(getChaletsFailed(error.response.data.message));
+    });
+};

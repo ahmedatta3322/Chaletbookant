@@ -1,7 +1,14 @@
-import { Get_SentRentRequests, Get_ReciviedRentRequests } from "../actionTypes";
+import {
+  Get_SentRentRequests,
+  Get_ReciviedRentRequests,
+  Get_SentExchangeRequests,
+  Get_ReciviedExchangeRequests,
+} from "../actionTypes";
 const initialState = {
   sentRentRequests: [],
   reciviedRentRequests: [],
+  sentExchangeRequests: [],
+  reciviedExchangeRequests: [],
   pagesNum: 1,
   total: 0,
 };
@@ -18,6 +25,19 @@ export default (state = initialState, action) => {
       newState = { ...state };
       newState.reciviedRentRequests = action.payload.reciviedRentRequests;
       console.log(action.payload.reciviedRentRequests);
+      //   newState.pagesNum = action.payload.pagesNum;
+      //   newState.total = action.payload.total;
+      break;
+    case Get_SentExchangeRequests:
+      newState = { ...state };
+      newState.sentExchangeRequests = action.payload;
+      // newState.pagesNum = action.payload.pagesNum;
+      // newState.total = action.payload.total;
+      break;
+    case Get_ReciviedExchangeRequests:
+      newState = { ...state };
+      newState.reciviedExchangeRequests = action.payload;
+      console.log(action.payload);
       //   newState.pagesNum = action.payload.pagesNum;
       //   newState.total = action.payload.total;
       break;

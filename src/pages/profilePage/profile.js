@@ -10,8 +10,7 @@ import {
   Form,
   Pagination,
 } from "react-bootstrap";
-import { Row, Col, Layout, Dropdown, Modal as Modals } from "antd";
-import { Menu } from "antd";
+import { Row, Col, Layout, Modal as Modals, Select } from "antd";
 import UserCard from "./components/usercard";
 // import ProfileFilter from "./components/profileFilter";
 import ChaletCard from "./components/chaletCard";
@@ -27,9 +26,12 @@ import { getUserChalet } from "../../redux/actions/chaletActionCreator";
 import {
   getSentRentRequests,
   getReciviedRentRequests,
+  getSentExchangeRequests,
+  getReciviedExchangeRequests,
 } from "../../redux/actions/requestActionCreator";
+import ViewRequestModal from "../../Components/modal/viewRequestModal";
 const { Sider, Content } = Layout;
-
+const { Option } = Select;
 function Profile(props) {
   const {
     user,
@@ -40,8 +42,11 @@ function Profile(props) {
     total,
     sentRentRequests,
     reciviedRentRequests,
+    sentExchangeRequests,
+    reciviedExchangeRequests,
   } = props;
   const [modalShow, setModalShow] = useState(false);
+  const [viewModalShow, setViewModalShow] = useState(false);
   const [show, setShow] = useState(false);
   // const [statuss, setStatus] = useState(status);
   // const [error, setError] = useState(err);
@@ -49,41 +54,20 @@ function Profile(props) {
   const [code, setCode] = useState(0);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const [requestfilterStatus, setRequestFilterStatus] = useState("0");
-  const [requestTypefilterStatus, setRequestTypeFilterStatus] = useState("0");
+  const [requestfilterStatus, setRequestFilterStatus] = useState("Rent");
+  const [requestTypefilterStatus, setRequestTypeFilterStatus] = useState(
+    "Sent"
+  );
 
-  const handleRequestFilter = (e) => {
-    console.log(typeof e.key);
-    if (e.key === "1") setRequestFilterStatus("1");
-    else if (e.key === "0") setRequestFilterStatus("0");
+  const handleRequestFilter = (value) => {
+    if (value === "Exchange") setRequestFilterStatus("Exchange");
+    else if (value === "Rent") setRequestFilterStatus("Rent");
   };
-  const handleTypeRequestFilter = (e) => {
-    console.log(typeof e.key);
-    if (e.key === "0") setRequestTypeFilterStatus("0");
-    if (e.key === "1") setRequestTypeFilterStatus("1");
+  const handleTypeRequestFilter = (value) => {
+    // console.log(typeof e.key);
+    if (value === "Sent") setRequestTypeFilterStatus("Sent");
+    if (value === "Receivied") setRequestTypeFilterStatus("Receivied");
   };
-  const menu1 = (
-    <Menu onClick={handleRequestFilter}>
-      <Menu.Item key="0">
-        <button className="filterbtn">Rent</button>
-      </Menu.Item>
-      <Menu.Item key="1">
-        <button className="filterbtn">Exchange</button>
-      </Menu.Item>
-      <Menu.Divider />
-    </Menu>
-  );
-  const menu2 = (
-    <Menu onClick={handleTypeRequestFilter}>
-      <Menu.Item key="0">
-        <button className="filterbtn">Sent</button>
-      </Menu.Item>
-      <Menu.Item key="1">
-        <button className="filterbtn">Receivied</button>
-      </Menu.Item>
-      <Menu.Divider />
-    </Menu>
-  );
   function warning() {
     Modals.warning({
       title: "This is a warning message",
@@ -96,16 +80,29 @@ function Profile(props) {
     // if (err) setError(err);
     if (
       filterStatus === "Requests" &&
-      requestfilterStatus === "0" &&
-      requestTypefilterStatus === "0"
+      requestfilterStatus === "Rent" &&
+      requestTypefilterStatus === "Sent"
     )
       dispatch(getSentRentRequests());
     else if (
       filterStatus === "Requests" &&
-      requestfilterStatus === "0" &&
-      requestTypefilterStatus === "1"
+      requestfilterStatus === "Rent" &&
+      requestTypefilterStatus === "Receivied"
     )
       dispatch(getReciviedRentRequests());
+
+    if (
+      filterStatus === "Requests" &&
+      requestfilterStatus === "Exchange" &&
+      requestTypefilterStatus === "Sent"
+    )
+      dispatch(getSentExchangeRequests());
+    else if (
+      filterStatus === "Requests" &&
+      requestfilterStatus === "Exchange" &&
+      requestTypefilterStatus === "Receivied"
+    )
+      dispatch(getReciviedExchangeRequests());
     // console.log(requestTypefilterStatus, requestfilterStatus);
     dispatch(getUserChalet(currentPage));
     dispatch(getOnlineUserProfile());
@@ -178,6 +175,7 @@ function Profile(props) {
   //   setShow(false);
   // };
   console.log(errorMessg);
+  console.log(props);
   return (
     <>
       {errorMessg === "Unauthenticated." ? (
@@ -363,47 +361,36 @@ function Profile(props) {
                         className="mt-5"
                       >
                         <Row className="requestfilter">
-                          <Dropdown
-                            overlay={menu1}
-                            trigger={["click"]}
-                            className="pr-5 pl-5"
+                          <Select
+                            defaultValue="Rent"
+                            style={{ width: 109 }}
+                            onChange={handleRequestFilter}
                           >
-                            <button
-                              className="ant-dropdown-link filterbtn d-flex"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <i class="fas fa-angle-down arrow"></i>
-                              {/* <DownOutlined /> */}
-                              Rent
-                            </button>
-                          </Dropdown>
-                          <Dropdown
-                            overlay={menu2}
-                            trigger={["click"]}
-                            className="pr-5 pl-5"
+                            <Option value="Rent">Rent</Option>
+                            <Option value="Exchange">Exchange</Option>
+                          </Select>
+                          <Select
+                            defaultValue="Sent"
+                            style={{ width: 109 }}
+                            onChange={handleTypeRequestFilter}
                           >
-                            <button
-                              className="ant-dropdown-link filterbtn d-flex"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <i class="fas fa-angle-down arrow"></i>
-                              {/* <DownOutlined /> */}
-                              Sent
-                            </button>
-                          </Dropdown>
+                            <Option value="Sent">Sent</Option>
+                            <Option value="Receivied">Receivied</Option>
+                          </Select>
                         </Row>
 
                         <div className="bg-light p-3 mt-5">
                           {/*sent request */}
-                          {requestTypefilterStatus === "0" &&
-                            requestfilterStatus === "0" &&
-                            (sentRentRequests && sentRentRequests !== 0 ? (
+                          {requestTypefilterStatus === "Sent" &&
+                            requestfilterStatus === "Rent" &&
+                            (sentRentRequests &&
+                            sentRentRequests.length !== 0 ? (
                               sentRentRequests.map(
                                 (request) =>
                                   request.chalet !== null && (
                                     <Row className="mt-5 mb-5">
                                       <Col span={15}>
-                                        {requestTypefilterStatus === "0" && (
+                                        {requestTypefilterStatus === "Sent" && (
                                           <p className="request-content">
                                             You have Sent{" "}
                                             <span className="red">Rent</span>{" "}
@@ -426,7 +413,7 @@ function Profile(props) {
                                               view
                                             </Button>
                                             {/*it will show in received only*/}
-                                            {requestfilterStatus === "0" &&
+                                            {requestfilterStatus === "Rent" &&
                                               request.chalet !== null && (
                                                 <Button className="border-0">
                                                   <i class="fas fa-trash-alt trash"></i>
@@ -441,16 +428,17 @@ function Profile(props) {
                             ) : (
                               <p>No Sent Rent Requests yet</p>
                             ))}
-                          {requestTypefilterStatus === "1" &&
-                            requestfilterStatus === "0" &&
+                          {requestTypefilterStatus === "Receivied" &&
+                            requestfilterStatus === "Rent" &&
                             (reciviedRentRequests &&
-                            reciviedRentRequests !== 0 ? (
+                            reciviedRentRequests.length !== 0 ? (
                               reciviedRentRequests.map(
                                 (request) =>
                                   request.chalet !== null && (
                                     <Row className="mt-5 mb-5">
                                       <Col span={15}>
-                                        {requestTypefilterStatus === "1" && (
+                                        {requestTypefilterStatus ===
+                                          "Receivied" && (
                                           <p className="request-content">
                                             You have Recivied a Request from{" "}
                                             <span className="yellow">
@@ -472,9 +460,19 @@ function Profile(props) {
                                           <Button
                                             variant="primary"
                                             className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
+                                            // onClick={() =>
+                                            //   setViewModalShow(true)
+                                            // }
                                           >
                                             view
                                           </Button>
+                                          <ViewRequestModal
+                                            request={request}
+                                            show={viewModalShow}
+                                            onHide={() =>
+                                              setViewModalShow(false)
+                                            }
+                                          />
                                           {/*it will show in received only*/}
                                           {/* {requestfilterStatus === "0" && (
                                 <Button className="border-0">
@@ -488,6 +486,143 @@ function Profile(props) {
                               )
                             ) : (
                               <p>No Recivied Rent Requests yet</p>
+                            ))}
+                          {/*exchange*/}
+                          {/*sent request */}
+                          {requestTypefilterStatus === "Sent" &&
+                            requestfilterStatus === "Exchange" &&
+                            (sentExchangeRequests &&
+                            sentExchangeRequests.length !== 0 ? (
+                              sentExchangeRequests.map(
+                                (request) =>
+                                  request.chalet_host !== null && (
+                                    <Row className="mt-5 mb-5">
+                                      <Col span={15}>
+                                        {requestTypefilterStatus === "Sent" && (
+                                          <p className="request-content">
+                                            You have Sent{" "}
+                                            <span className="red">
+                                              Exchange
+                                            </span>{" "}
+                                            Request to{" "}
+                                            <span className="yellow">
+                                              {request.chalet_host &&
+                                                request.chalet_host.address}
+                                            </span>{" "}
+                                            with your Chalet{" "}
+                                            <span className="yellow">
+                                              {request.chalet_Guest &&
+                                                request.chalet_Guest.address}
+                                            </span>{" "}
+                                          </p>
+                                        )}
+                                      </Col>
+                                      <>
+                                        <Col span={4}></Col>
+                                        <Col xl={5} span={3}>
+                                          <Row>
+                                            <Button
+                                              variant="primary"
+                                              className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
+                                              onClick={() =>
+                                                setViewModalShow(true)
+                                              }
+                                            >
+                                              view
+                                            </Button>
+                                            <ViewRequestModal
+                                              filterStatus={
+                                                requestTypefilterStatus
+                                              }
+                                              request={request}
+                                              show={viewModalShow}
+                                              onHide={() =>
+                                                setViewModalShow(false)
+                                              }
+                                            />
+                                            {/*it will show in received only*/}
+                                            {requestfilterStatus ===
+                                              "Exchange" &&
+                                              request.chalet !== null && (
+                                                <Button className="border-0">
+                                                  <i class="fas fa-trash-alt trash"></i>
+                                                </Button>
+                                              )}
+                                          </Row>
+                                        </Col>
+                                      </>
+                                    </Row>
+                                  )
+                              )
+                            ) : (
+                              <p>No Sent Exchange Requests yet</p>
+                            ))}
+                          {requestTypefilterStatus === "Receivied" &&
+                            requestfilterStatus === "Exchange" &&
+                            (reciviedExchangeRequests &&
+                            reciviedExchangeRequests.length !== 0 ? (
+                              reciviedExchangeRequests.map(
+                                (request) =>
+                                  request.chalet !== null && (
+                                    <Row className="mt-5 mb-5">
+                                      <Col span={15}>
+                                        {requestTypefilterStatus ===
+                                          "Receivied" && (
+                                          <p className="request-content">
+                                            You have Recivied a Request from{" "}
+                                            <span className="yellow">
+                                              {request.chalet_Guest &&
+                                                request.chalet_Guest.user
+                                                  .first_name}
+                                            </span>{" "}
+                                            to{" "}
+                                            <span className="red">
+                                              Exchange
+                                            </span>{" "}
+                                            your{" "}
+                                            <span className="yellow">
+                                              {request.chalet_host &&
+                                                request.chalet_host.address}
+                                            </span>{" "}
+                                            Chalet
+                                          </p>
+                                        )}
+                                      </Col>
+                                      <Col span={4}></Col>
+                                      <Col xl={5} span={3}>
+                                        <Row>
+                                          <Button
+                                            variant="primary"
+                                            className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
+                                            onClick={() =>
+                                              setViewModalShow(true)
+                                            }
+                                          >
+                                            view
+                                          </Button>
+                                          <ViewRequestModal
+                                            filterStatus={
+                                              requestTypefilterStatus
+                                            }
+                                            request={request}
+                                            show={viewModalShow}
+                                            onHide={() =>
+                                              setViewModalShow(false)
+                                            }
+                                          />
+                                          {/*it will show in received only*/}
+                                          {/* {requestfilterStatus === "0" && (
+                                <Button className="border-0">
+                                  <i class="fas fa-trash-alt trash"></i>
+                                </Button>
+                              )} */}
+                                        </Row>
+                                      </Col>
+                                    </Row>
+                                  )
+                              )
+                            ) : (
+                              <p>No Recivied Exchange Requests yet</p>
                             ))}
                         </div>
                       </Col>
@@ -531,6 +666,8 @@ const mapStateToProps = (reduxState) => {
     total: reduxState.Chalets.total,
     sentRentRequests: reduxState.Requests.sentRentRequests,
     reciviedRentRequests: reduxState.Requests.reciviedRentRequests,
+    sentExchangeRequests: reduxState.Requests.sentExchangeRequests,
+    reciviedExchangeRequests: reduxState.Requests.reciviedExchangeRequests,
   };
 };
 export default connect(mapStateToProps)(Profile);

@@ -7,6 +7,7 @@
     top: 3.1rem;
     width: 42.9rem;
     max-height: 72.8rem; 
+    border: none !important
 }
 @media(min-width:1280px){
     .userCard{
@@ -33,6 +34,8 @@
 .img-Card{
     position: relative;
     height: 49.06rem;
+    width: 42.7rem !important;
+    height: 49rem !important;
     /* box-shadow: 0px 10px 5px #0000001f */
 }
 .upload-img{
@@ -61,7 +64,8 @@
 .info{
     position: absolute;
     /* top: 60%; */
-    top: 67%;
+    /* top: 67%; */
+    /* top:337% ; */
     left: 4%;
     background-color: white;
     padding:1rem;
@@ -70,7 +74,7 @@
     height: 4.8rem;
     width: fit-content;
     /* width: 30.5rem; */
-
+    transform: translateY(41rem);
 }
 .blue{
     color: #0070D3;
@@ -91,6 +95,8 @@
     /* top: 60%; */
     top: 67%;
     left: 82%;
+    transform: translateY(41rem);
+
 }
 .editIcon{
     font-size: medium;
@@ -126,4 +132,23 @@ color: #C8D2E2;
     border-top: 1px solid #C8D2E2;
     padding: 0 !important;
     font-size: 1.7rem;
+    position: absolute;
+    top: 49rem;
+    left: 0;
+}
+/* .ant-upload.ant-upload-select-picture-card{
+    width: 42.7rem !important;
+    height: 49rem !important; 
+} */
+.uploader{
+    width: 42.7rem !important;
+    height: 49rem !important; 
+    top: 19.4rem;
+    left: 14.6rem;
+    /* transform: translate(147px, 201px); */
+}
+.upload-img{
+    position: absolute;
+    top: 0rem !important;
+    left: 0rem !important;
 }

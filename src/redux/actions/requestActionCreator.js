@@ -4,6 +4,8 @@ import {
   GET_Error,
   Get_SentRentRequests,
   Get_ReciviedRentRequests,
+  Get_SentExchangeRequests,
+  Get_ReciviedExchangeRequests,
 } from "../actionTypes";
 ////////////////////////////////get sent rent requests///////////
 export const getSentRentRequests = () => (dispatch) => {
@@ -65,5 +67,69 @@ const getReciviedRentRequestsSuccess = (reciviedRentRequests) => {
   };
 };
 const getReciviedRentRequestsFailed = (err) => {
+  return { type: GET_Error, payload: err };
+};
+////////////////////////////////get sent Exchange requests///////////
+export const getSentExchangeRequests = () => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+
+  axios
+    .get(`${authApi}exchange_chalet`, config)
+    .then((response) => {
+      const data = response.data.response.data;
+      console.log(response);
+      console.log(data);
+      // const pagesNum = response.data.response.meta.last_page;
+      // console.log(data);
+      dispatch(getSentExchangeRequestsSuccess(data));
+    })
+    .catch((error) => {
+      dispatch(getSentExchangeRequestsFailed(error));
+      console.log(error);
+    });
+};
+
+const getSentExchangeRequestsSuccess = (sentExchangeRequests) => {
+  return {
+    type: Get_SentExchangeRequests,
+    payload: sentExchangeRequests,
+  };
+};
+const getSentExchangeRequestsFailed = (err) => {
+  return { type: GET_Error, payload: err };
+};
+////////////////////////////////get recevied Exchange requests///////////
+export const getReciviedExchangeRequests = () => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+
+  axios
+    .get(`${authApi}recieved_exchange_request`, config)
+    .then((response) => {
+      const data = response.data.response.data;
+      //   const pagesNum = response.data.response.meta.last_page;
+      // console.log(data);
+      dispatch(getReciviedExchangeRequestsSuccess(data));
+    })
+    .catch((error) => {
+      dispatch(getReciviedExchangeRequestsFailed(error));
+      console.log(error);
+    });
+};
+
+const getReciviedExchangeRequestsSuccess = (reciviedExchangeRequests) => {
+  return {
+    type: Get_ReciviedExchangeRequests,
+    payload: reciviedExchangeRequests,
+  };
+};
+const getReciviedExchangeRequestsFailed = (err) => {
   return { type: GET_Error, payload: err };
 };

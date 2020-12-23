@@ -8,6 +8,8 @@ import ChaletsPage from "./pages/chaletsPage/chaletsPage";
 import ViewChalet from "./pages/detailsChalet/viewChalet";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
+import ForgetPassword from "./pages/forgetPassword/forgetPassword";
+import ResetPassword from "./pages/resetPassword/resetPassword";
 // import { getOnlineUserProfile } from "./redux/actions/userActionCreator";
 function App(props) {
   const dispatch = useDispatch();
@@ -25,6 +27,8 @@ function App(props) {
           <Route path="/profile/:id" component={Profile} />
           <Route exact path="/chalets" component={ChaletsPage} />
           <Route exact path="/viewchalet/:id" component={ViewChalet} />
+          <Route exact path="/forgetpassword" component={ForgetPassword} />
+          <Route exact path="/resetpassword" component={ResetPassword} />
           <Route
             exact
             path="/login"

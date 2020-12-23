@@ -1,0 +1,40 @@
+.request-card{
+  border: none !important;
+background: none !important;
+}
+.cover-card{
+    height: 26.4rem !important;
+    margin-right: 25rem !important;
+    border-top-right-radius: 1.25rem !important;
+    border-top-left-radius: 1.25rem !important
+}
+.exchange-card{
+    background: white !important;
+    border-bottom-left-radius: 1.25rem !important;
+    border-bottom-right-radius: 1.25rem !important;
+}
+.view-bg{
+
+    height: 21.2rem;
+}
+.view-title{
+    color: #C8D2E2;
+}
+.exchange-img{
+    margin-top: 15rem;
+    margin-left: 4.5rem;
+}
+/* .modal-view{
+    width: 36.2rem !important;
+ 
+}  */
+.seprate{
+    margin-top: 24rem;
+}
+.request-done{
+    padding: 2rem 28.9rem 2rem 36.9rem !important;
+    font-size: 2.5rem !important;
+}
+.request-cancel{
+    padding: 2rem 26.9rem 2rem 25.9rem !important;
+}

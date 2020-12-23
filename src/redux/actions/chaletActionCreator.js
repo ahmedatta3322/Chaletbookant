@@ -119,17 +119,18 @@ export const getChaletsByFilter = (status, fees, from, to) => (dispatch) => {
     .get(`${chaletsApi}?status=${status}&fees=${fees}&from=${from}&to=${to}`)
     .then((response) => {
       const chalets = response.data.response.data;
-      // const pagesNum = response.data.response.meta.last_page;
+      const pagesNum = response.data.response.meta.last_page;
+      const total = response.data.response.meta.total;
       // console.log("chalit", response.data.response.meta);
-      dispatch(getChaletsByFilterSuccess(chalets));
+      dispatch(getChaletsByFilterSuccess(chalets, pagesNum, total));
       //return user;
     })
     .catch((err) => {
       console.log(err);
     });
 };
-const getChaletsByFilterSuccess = (chalets) => {
-  return { type: Get_ChaletsByFilter, payload: chalets };
+const getChaletsByFilterSuccess = (chalets, pagesNum, total) => {
+  return { type: Get_ChaletsByFilter, payload: { chalets, pagesNum, total } };
 };
 //////////////////////add chalet/////////////
 export const addChalet = (newChalet) => (dispatch) => {
