@@ -90,7 +90,7 @@ function UserCard(props) {
   // };
   // const { loading, imageUrl } = state;
   const uploadButton = (
-    <div>
+    <div className="d-none">
       <LoadingOutlined /> : <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
@@ -110,7 +110,7 @@ function UserCard(props) {
           <Upload
             name="avatar"
             listType="picture-card"
-            className="avatar-uploader uploader"
+            className="avatar-uploader uploader bg-transparent"
             showUploadList={false}
             action={`${user.avatar}`}
             {...prop2}

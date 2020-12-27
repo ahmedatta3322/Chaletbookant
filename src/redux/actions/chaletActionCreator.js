@@ -60,17 +60,18 @@ export const getUserChalet = (page) => (dispatch) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   };
+  console.log(page);
   return axios
     .get(`${authApi}user_chalets?page=${page}`, config)
     .then((response) => {
       // console.log(response);
       const chalets = response.data.response.data;
-      if (page) {
-        const pagesNum = response.data.response.meta.last_page;
-        const total = response.data.response.meta.total;
-        dispatch(getUserChaletSuccess(chalets, pagesNum, total));
-      }
-      dispatch(getUserChaletSuccess(chalets));
+      // if (page) {
+      const pagesNum = response.data.response.meta.last_page;
+      const total = response.data.response.meta.total;
+      dispatch(getUserChaletSuccess(chalets, pagesNum, total));
+      // }
+      // dispatch(getUserChaletSuccess(chalets));
       // console.log("chalit", chalets);
       // return user;
     })

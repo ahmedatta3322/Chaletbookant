@@ -109,6 +109,7 @@ function Profile(props) {
     )
       dispatch(getReciviedExchangeRequests());
     // console.log(requestTypefilterStatus, requestfilterStatus);
+    console.log(currentPage);
     dispatch(getUserChalet(currentPage));
     dispatch(getOnlineUserProfile());
     if (
