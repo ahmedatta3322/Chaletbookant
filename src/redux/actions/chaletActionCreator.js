@@ -65,10 +65,13 @@ export const getUserChalet = (page) => (dispatch) => {
     .then((response) => {
       // console.log(response);
       const chalets = response.data.response.data;
-      const pagesNum = response.data.response.meta.last_page;
-      const total = response.data.response.meta.total;
+      if (page) {
+        const pagesNum = response.data.response.meta.last_page;
+        const total = response.data.response.meta.total;
+        dispatch(getUserChaletSuccess(chalets, pagesNum, total));
+      }
+      dispatch(getUserChaletSuccess(chalets));
       // console.log("chalit", chalets);
-      dispatch(getUserChaletSuccess(chalets, pagesNum, total));
       // return user;
     })
     .catch((err) => {

@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
       newState.currentUserChalets = action.payload.chalets;
       newState.pagesNum = action.payload.pagesNum;
       newState.total = action.payload.total;
-      // console.log(newState.currentUserChalets);
+      console.log(action.payload);
       break;
     case Post_AddChalet:
       const chalet = action.payload;

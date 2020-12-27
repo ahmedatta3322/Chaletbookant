@@ -73,3 +73,9 @@
   .rangeInput{
     transform: translate(0px, 4px);
   }
+  .link:hover{
+    text-decoration: none;
+  }
+  .link{
+    margin: 1.8rem 7.4rem 0rem;
+  }

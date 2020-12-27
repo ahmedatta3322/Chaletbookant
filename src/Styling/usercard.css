@@ -102,10 +102,12 @@
     font-size: medium;
 }
 .filterCount{
-    width: 14.2rem;
-    padding: 2rem 0 !important;
+    /* width: 14.2rem; */
+    /* padding: 2rem 0 !important; */
     /* padding: 1rem 2rem !important; */
     color: #C8D2E2 !important;
+    padding: 3rem 39px !important;
+    transform: translate(0px, -12px);
 }
 
 .btn{
@@ -116,11 +118,11 @@
     border: none !important;
 color: #C8D2E2;
 }
-.cardButton:hover{
+/* .cardButton:hover{
 
     background-color: #0070D3 !important;
     color: #ffffff !important;
-} 
+}  */
 .active{
     background-color: #0070D3 !important;
   
@@ -129,12 +131,16 @@ color: #C8D2E2;
     font-size: 1rem;
 }
 .cardFooter{
+    background-color: #ffffff;
     border-top: 1px solid #C8D2E2;
     padding: 0 !important;
     font-size: 1.7rem;
     position: absolute;
     top: 49rem;
     left: 0;
+}
+.userCard-footer{
+    height: 12.6rem !important;
 }
 /* .ant-upload.ant-upload-select-picture-card{
     width: 42.7rem !important;
@@ -145,6 +151,8 @@ color: #C8D2E2;
     height: 49rem !important; 
     top: 19.4rem;
     left: 14.6rem;
+    margin-top: -4rem;
+    transform: translate(4px, 6px);
     /* transform: translate(147px, 201px); */
 }
 .upload-img{

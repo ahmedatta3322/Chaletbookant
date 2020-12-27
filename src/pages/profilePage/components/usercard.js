@@ -1,60 +1,101 @@
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
-import { Form, Upload, message } from "antd";
+import { Form, Upload } from "antd";
+import { useDispatch } from "react-redux";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import "../../../Styling/usercard.css";
 import EditPersonalInfoModal from "../../../Components/modal/editPersonalInfoModal";
+import { addAvatar } from "../../../redux/actions/userActionCreator";
 function UserCard(props) {
   const { user, chaletsCount } = props;
+  const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
   const [state, setState] = useState({ loading: false });
+  const [fiile, setFile] = useState({ file: "", Upload: false });
+  const { file } = fiile;
   // console.log(user, chaletsCount, match.url.slice(1, 8));
-  function getBase64(img, callback) {
-    console.log(img);
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(img);
-    console.log(reader);
+  function getBase64(file) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+      dispatch(addAvatar({ avatar: reader.result }));
+      // window.location.reload();
+      setFile((prevState) => ({
+        ...prevState,
+        file: reader.result,
+        Upload: true,
+      }));
+      setFile(file);
+    };
+    console.log(file);
+    // dispatch(addAvatar({ avatar: reader.result }));
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
   }
 
-  function beforeUpload(file) {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    console.log(isJpgOrPng);
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    debugger;
-    return isJpgOrPng && isLt2M;
-  }
-
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setState({ loading: true });
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      console.log(info.file.originFileObj);
-      getBase64(info.file.originFileObj, (imageUrl) =>
-        setState({
-          imageUrl,
-          loading: false,
-        })
-      );
-    }
+  // function beforeUpload(file) {
+  //   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  //   console.log(isJpgOrPng);
+  //   if (!isJpgOrPng) {
+  //     message.error("You can only upload JPG/PNG file!");
+  //   }
+  //   const isLt2M = file.size / 1024 / 1024 < 2;
+  //   if (!isLt2M) {
+  //     message.error("Image must smaller than 2MB!");
+  //   }
+  //   debugger;
+  //   return isJpgOrPng && isLt2M;
+  // }
+  const prop2 = {
+    onRemove: (file) => {
+      setFile((state) => {
+        const index = state.file.indexOf(file);
+        const newFileList = state.file.slice();
+        newFileList.splice(index, 1);
+        return {
+          file: newFileList,
+        };
+      });
+    },
+    beforeUpload: (file) => {
+      getBase64(file);
+      console.log(file);
+      setFile((state) => ({
+        file: { ...state.file, file },
+        Upload: true,
+      }));
+      return false;
+    },
+    file,
   };
-  const { loading, imageUrl } = state;
+  // console.log(file);
+  // const handleChange = (info) => {
+  //   console.log(info.file);
+  // if (info.file.status === "uploading") {
+  //   setState({ loading: true });
+  //   return;
+  // }
+  // if (info.file.status === "done") {
+  //   // Get this url from response in real world.
+  //   console.log(info.file.originFileObj);
+  //   getBase64(info.file.originFileObj, (imageUrl) =>
+  //     setState({
+  //       imageUrl,
+  //       loading: false,
+  //     })
+  //   );
+  // }
+  // };
+  // const { loading, imageUrl } = state;
   const uploadButton = (
     <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <LoadingOutlined /> : <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-  console.log(loading);
+  // console.log(loading);
   return (
     <div>
       <Card className="userCard">
@@ -72,8 +113,8 @@ function UserCard(props) {
             className="avatar-uploader uploader"
             showUploadList={false}
             action={`${user.avatar}`}
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
+            {...prop2}
+            // onChange={handleChange}
           >
             {user.avatar ? (
               <img
@@ -105,8 +146,9 @@ function UserCard(props) {
               className="avatar-uploader uploader"
               showUploadList={false}
               // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              beforeUpload={beforeUpload}
-              onChange={handleChange}
+              // beforeUpload={beforeUpload}
+              {...prop2}
+              // onChange={handleChange}
             >
               {user.avatar ===
               "http://app.apptechegy.com/images/defaultuser.jpg" ? (
@@ -119,7 +161,7 @@ function UserCard(props) {
               ) : (
                 <img
                   className="img-Card uploader"
-                  src={imageUrl}
+                  src={user.avatar}
                   alt="avatar"
                   style={{ width: "100%" }}
                 />
@@ -157,7 +199,7 @@ function UserCard(props) {
             {user.description && <NavLink className="h5">Read More</NavLink>}
           </Card.Text>
         </Card.Body> */}
-        <div className="cardFooter">
+        <div className="cardFooter userCard-footer">
           <Button variant="primary" className="filterCount active cardButton">
             <img src="/images/Chalets-Icon.png" alt="chalet" />
             <br />

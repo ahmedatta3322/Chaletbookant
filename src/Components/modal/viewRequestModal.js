@@ -14,7 +14,7 @@ export default function ViewRequestModal(props) {
   const rangeConfig = {
     rules: [{ type: "array", required: true, message: "Please select time!" }],
   };
-  console.log(request);
+  console.log(request, Object.keys(request).length === 0);
   return (
     <div>
       <Modal
@@ -41,44 +41,46 @@ export default function ViewRequestModal(props) {
                     <h4 className="h3 text-white text-center mb-5">
                       Your Chalet
                     </h4>
-                    <Card className="request-card">
-                      <Card.Img
-                        variant="top"
-                        className="cover-card"
-                        src={
-                          filterStatus === "Sent"
-                            ? request.chalet_Guest.cover
-                            : request.chalet_host.cover
-                        }
-                      />
+                    {Object.keys(request).length !== 0 && (
+                      <Card className="request-card">
+                        <Card.Img
+                          variant="top"
+                          className="cover-card"
+                          src={
+                            filterStatus === "Sent"
+                              ? request.chalet_Guest.cover
+                              : request.chalet_host.cover
+                          }
+                        />
 
-                      <Card.Footer className="exchange-card">
-                        <Row>
-                          <Col span={15}>
-                            <small className="text-muted h3">
-                              {filterStatus === "Sent"
-                                ? request.chalet_Guest.address
-                                : request.chalet_host.address}
-                            </small>
-                          </Col>
+                        <Card.Footer className="exchange-card">
+                          <Row>
+                            <Col span={15}>
+                              <small className="text-muted h3">
+                                {filterStatus === "Sent"
+                                  ? request.chalet_Guest.address
+                                  : request.chalet_host.address}
+                              </small>
+                            </Col>
 
-                          <Col span={9}>
-                            {" "}
-                            <NavLink
-                              variant="primary"
-                              className="active pl-4 pr-4 p-3 viewbtn d-flex border-0 h3"
-                              to={`/viewchalet/${
-                                filterStatus === "Sent"
-                                  ? request.chalet_Guest.id
-                                  : request.chalet_host.id
-                              }`}
-                            >
-                              view
-                            </NavLink>
-                          </Col>
-                        </Row>
-                      </Card.Footer>
-                    </Card>
+                            <Col span={9}>
+                              {" "}
+                              <NavLink
+                                variant="primary"
+                                className="active pl-4 pr-4 p-3 viewbtn d-flex border-0 h3"
+                                to={`/viewchalet/${
+                                  filterStatus === "Sent"
+                                    ? request.chalet_Guest.id
+                                    : request.chalet_host.id
+                                }`}
+                              >
+                                view
+                              </NavLink>
+                            </Col>
+                          </Row>
+                        </Card.Footer>
+                      </Card>
+                    )}
                   </Col>
                   <Col span={3} className="exchange-img">
                     <img src="/images/exchange.png" alt="icon" />
@@ -87,44 +89,46 @@ export default function ViewRequestModal(props) {
                     <h4 className="h3 text-white text-center mb-5">
                       {filterStatus === "Sent" ? `Host Chalet` : `Guest Chalet`}
                     </h4>
-                    <Card className="request-card">
-                      <Card.Img
-                        variant="top"
-                        className="cover-card"
-                        src={
-                          filterStatus === "Sent"
-                            ? request.chalet_host.cover
-                            : request.chalet_Guest.cover
-                        }
-                      />
+                    {Object.keys(request).length !== 0 && (
+                      <Card className="request-card">
+                        <Card.Img
+                          variant="top"
+                          className="cover-card"
+                          src={
+                            filterStatus === "Sent"
+                              ? request.chalet_host.cover
+                              : request.chalet_Guest.cover
+                          }
+                        />
 
-                      <Card.Footer className="exchange-card">
-                        <Row>
-                          <Col span={15}>
-                            <small className="text-muted h3">
-                              {filterStatus === "Sent"
-                                ? request.chalet_host.address
-                                : request.chalet_Guest.address}
-                            </small>
-                          </Col>
+                        <Card.Footer className="exchange-card">
+                          <Row>
+                            <Col span={15}>
+                              <small className="text-muted h3">
+                                {filterStatus === "Sent"
+                                  ? request.chalet_host.address
+                                  : request.chalet_Guest.address}
+                              </small>
+                            </Col>
 
-                          <Col span={9}>
-                            {" "}
-                            <NavLink
-                              variant="primary"
-                              className="active pl-4 pr-4 p-3 viewbtn d-flex border-0 h3"
-                              to={`/viewchalet/${
-                                filterStatus === "Sent"
-                                  ? request.chalet_host.id
-                                  : request.chalet_Guest.id
-                              }`}
-                            >
-                              view
-                            </NavLink>
-                          </Col>
-                        </Row>
-                      </Card.Footer>
-                    </Card>
+                            <Col span={9}>
+                              {" "}
+                              <NavLink
+                                variant="primary"
+                                className="active pl-4 pr-4 p-3 viewbtn d-flex border-0 h3"
+                                to={`/viewchalet/${
+                                  filterStatus === "Sent"
+                                    ? request.chalet_host.id
+                                    : request.chalet_Guest.id
+                                }`}
+                              >
+                                view
+                              </NavLink>
+                            </Col>
+                          </Row>
+                        </Card.Footer>
+                      </Card>
+                    )}
                   </Col>
                 </Row>
               </Jumbotron>
@@ -161,7 +165,13 @@ export default function ViewRequestModal(props) {
                             {...rangeConfig}
                             noStyle
                           >
-                            <RangePicker />
+                            <RangePicker
+                              disabled={
+                                request.status_host === "disapprove"
+                                  ? true
+                                  : false
+                              }
+                            />
                           </Form.Item>
                         </Col>
                       </Row>
@@ -220,6 +230,34 @@ export default function ViewRequestModal(props) {
                   {filterStatus === "Sent"
                     ? "You canceld this request"
                     : "This request is canceld"}
+                </Button>
+              )}
+              {request.status_guest === "disapprove" && (
+                <Button
+                  variant="danger"
+                  className={`bg-danger request-done request-cancel h4 mb-0 ${
+                    filterStatus === "Sent"
+                      ? "request-disapprove"
+                      : "disapprovee"
+                  } `}
+                >
+                  {filterStatus === "Sent"
+                    ? "Your request refused"
+                    : "This request is refused"}
+                </Button>
+              )}
+              {request.status_host === "disapprove" && (
+                <Button
+                  variant="danger"
+                  className={`bg-danger request-done request-cancel h4 mb-0 ${
+                    filterStatus === "Sent"
+                      ? "request-disapprove"
+                      : "disapprovee"
+                  } `}
+                >
+                  {filterStatus === "Sent"
+                    ? "Your request refused"
+                    : "You refused this request"}
                 </Button>
               )}
               {request.status_guest === "approve" &&

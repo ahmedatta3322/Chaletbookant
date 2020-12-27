@@ -9,6 +9,7 @@ export const Post_VerifyChalet = "Post_VerifyChalet";
 export const Edit_Chalet = "Edit_Chalet";
 export const Post_addAlbum = "Post_addAlbum";
 export const Delete_Image = "Delete_Image";
+export const Post_addAvatar = "Post_addAvatar";
 
 export const Post_SignUp = "Post_SignUp";
 export const Post_Login = "Post_Login";

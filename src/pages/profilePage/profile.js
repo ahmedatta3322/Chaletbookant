@@ -58,7 +58,7 @@ function Profile(props) {
   const [requestTypefilterStatus, setRequestTypeFilterStatus] = useState(
     "Sent"
   );
-
+  const [request, setRequest] = useState({});
   const handleRequestFilter = (value) => {
     if (value === "Exchange") setRequestFilterStatus("Exchange");
     else if (value === "Rent") setRequestFilterStatus("Rent");
@@ -74,6 +74,11 @@ function Profile(props) {
       content: "You need to Verify your Account First ",
     });
   }
+  const handleViewClick = (request) => {
+    setViewModalShow(true);
+    setRequest(request);
+  };
+  console.log(request);
   useEffect(() => {
     // console.log(match.params.id);
     // setStatus(status);
@@ -525,21 +530,11 @@ function Profile(props) {
                                               variant="primary"
                                               className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
                                               onClick={() =>
-                                                setViewModalShow(true)
+                                                handleViewClick(request)
                                               }
                                             >
                                               view
                                             </Button>
-                                            <ViewRequestModal
-                                              filterStatus={
-                                                requestTypefilterStatus
-                                              }
-                                              request={request}
-                                              show={viewModalShow}
-                                              onHide={() =>
-                                                setViewModalShow(false)
-                                              }
-                                            />
                                             {/*it will show in received only*/}
                                             {requestfilterStatus ===
                                               "Exchange" &&
@@ -557,6 +552,12 @@ function Profile(props) {
                             ) : (
                               <p>No Sent Exchange Requests yet</p>
                             ))}
+                          <ViewRequestModal
+                            filterStatus={requestTypefilterStatus}
+                            request={request}
+                            show={viewModalShow}
+                            onHide={() => setViewModalShow(false)}
+                          />
                           {requestTypefilterStatus === "Receivied" &&
                             requestfilterStatus === "Exchange" &&
                             (reciviedExchangeRequests &&
@@ -595,27 +596,17 @@ function Profile(props) {
                                             variant="primary"
                                             className="active pl-4 pr-4 p-3 viewbtn d-flex border-0"
                                             onClick={() =>
-                                              setViewModalShow(true)
+                                              handleViewClick(request)
                                             }
                                           >
                                             view
                                           </Button>
-                                          <ViewRequestModal
-                                            filterStatus={
-                                              requestTypefilterStatus
-                                            }
-                                            request={request}
-                                            show={viewModalShow}
-                                            onHide={() =>
-                                              setViewModalShow(false)
-                                            }
-                                          />
                                           {/*it will show in received only*/}
                                           {/* {requestfilterStatus === "0" && (
-                                <Button className="border-0">
-                                  <i class="fas fa-trash-alt trash"></i>
-                                </Button>
-                              )} */}
+                                            <Button className="border-0">
+                                            <i class="fas fa-trash-alt trash"></i>
+                                            </Button>
+                                          )} */}
                                         </Row>
                                       </Col>
                                     </Row>
@@ -624,6 +615,12 @@ function Profile(props) {
                             ) : (
                               <p>No Recivied Exchange Requests yet</p>
                             ))}
+                          <ViewRequestModal
+                            filterStatus={requestTypefilterStatus}
+                            request={request}
+                            show={viewModalShow}
+                            onHide={() => setViewModalShow(false)}
+                          />
                         </div>
                       </Col>
                     )}

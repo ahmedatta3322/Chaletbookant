@@ -10,6 +10,7 @@ import {
   Logout,
   Edit_User,
   Post_ChangePassword,
+  Post_addAvatar,
 } from "../actionTypes";
 
 export const Signup = (newUser) => (dispatch) => {
@@ -260,4 +261,29 @@ export const forgetPasword = (email) => (dispatch) => {
       console.log(error.response);
       // dispatch(getChaletsFailed(error.response.data.message));
     });
+};
+//////////////////////add prof image/////////////
+export const addAvatar = (image) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+
+  axios
+    .post(`${authApi}avatar`, image, config)
+    .then((response) => {
+      console.log(response);
+      const user = response.data.response.data;
+      if (response.status === 200) {
+        dispatch(addAvatarSuccess(user));
+      }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+const addAvatarSuccess = (user) => {
+  return { type: Post_addAvatar, payload: user };
 };

@@ -19,8 +19,8 @@ function ResetPassword(props) {
           <Col span={7}>
             <NavLink to="/">
               <img
-                className="login-logo mt-5 ml-3 d-block"
-                src="/images/navbar.png"
+                className="login-logo ml-3 d-block forget-logo"
+                src="/images/log.png"
                 alt="logo"
               />
             </NavLink>

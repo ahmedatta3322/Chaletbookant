@@ -32,9 +32,15 @@ background: none !important;
     margin-top: 24rem;
 }
 .request-done{
-    padding: 2rem 28.9rem 2rem 36.9rem !important;
+    padding:2rem 28rem 2rem 38.7rem !important;
     font-size: 2.5rem !important;
 }
 .request-cancel{
     padding: 2rem 26.9rem 2rem 25.9rem !important;
+}
+.request-disapprove{
+    padding: 2rem 26.9rem 2rem 29.9rem !important;
+}
+.disapprovee{
+    padding: 2rem 26.9rem 2rem 26.1rem !important;
 }
