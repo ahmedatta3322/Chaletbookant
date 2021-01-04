@@ -183,8 +183,8 @@ function Profile(props) {
   //   console.log(statuss);
   //   setShow(false);
   // };
-  console.log(errorMessg);
-  console.log(props);
+  // console.log(errorMessg);
+  // console.log(typeof sentRentRequests);
   return (
     <>
       {loading === true ? (
@@ -480,13 +480,13 @@ function Profile(props) {
                                           >
                                             view
                                           </Button>
-                                          <ViewRequestModal
+                                          {/* <ViewRequestModal
                                             request={request}
                                             show={viewModalShow}
                                             onHide={() =>
                                               setViewModalShow(false)
                                             }
-                                          />
+                                          /> */}
                                           {/*it will show in received only*/}
                                           {/* {requestfilterStatus === "0" && (
                                 <Button className="border-0">
