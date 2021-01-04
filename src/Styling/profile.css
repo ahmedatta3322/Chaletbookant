@@ -224,3 +224,12 @@
 .side {
   margin-top: -26rem;
 }
+.loader{
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 40rem !important;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+  font-size: xx-large !important;
+}

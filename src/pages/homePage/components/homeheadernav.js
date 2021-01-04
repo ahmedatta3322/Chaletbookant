@@ -12,6 +12,7 @@ function HomeNav({ auth, location, user, errorMessg }) {
   const handleLogOut = () => {
     localStorage.clear();
     // setAuth(false);
+    window.location.reload();
     dispatch(LogOut());
   };
   console.log(auth, user);
@@ -82,7 +83,18 @@ function HomeNav({ auth, location, user, errorMessg }) {
                 key="7"
                 onClick={handleLogOut}
               >
-                <i className="fas fa-sign-out-alt font"></i>
+                <Link
+                  to="/login"
+                  variant="primary"
+                  // className="login-btn"
+                  style={{
+                    color: "white",
+                    border: "none",
+                    borderRadius: "0",
+                  }}
+                >
+                  <i className="fas fa-sign-out-alt font"></i>
+                </Link>
               </Menu.Item>
             </>
           )}

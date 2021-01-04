@@ -6,3 +6,9 @@
     border-top-left-radius: 2.25rem !important;
     border-bottom-right-radius: 2.25rem !important;
 }
+.send-form{
+    width: 77.4rem !important;
+}
+.date-form{
+    transform: translate(-166px, 10px);
+}

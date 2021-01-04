@@ -10,7 +10,7 @@ import {
   Form,
   Pagination,
 } from "react-bootstrap";
-import { Row, Col, Layout, Modal as Modals, Select } from "antd";
+import { Row, Col, Layout, Modal as Modals, Select, Spin } from "antd";
 import UserCard from "./components/usercard";
 // import ProfileFilter from "./components/profileFilter";
 import ChaletCard from "./components/chaletCard";
@@ -59,6 +59,7 @@ function Profile(props) {
     "Sent"
   );
   const [request, setRequest] = useState({});
+  const [loading, setLoading] = useState(true);
   const handleRequestFilter = (value) => {
     if (value === "Exchange") setRequestFilterStatus("Exchange");
     else if (value === "Rent") setRequestFilterStatus("Rent");
@@ -120,7 +121,9 @@ function Profile(props) {
     } else {
       setShow(false);
     }
-
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
     // console.log(status, errorMessg);
   }, [
     dispatch,
@@ -184,7 +187,12 @@ function Profile(props) {
   console.log(props);
   return (
     <>
-      {errorMessg === "Unauthenticated." ? (
+      {loading === true ? (
+        <div className="loader">
+          {" "}
+          <Spin size="large" />
+        </div>
+      ) : errorMessg === "Unauthenticated." ? (
         <Redirect to="/login"></Redirect>
       ) : (
         <>

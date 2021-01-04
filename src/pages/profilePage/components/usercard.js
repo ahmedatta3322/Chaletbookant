@@ -10,7 +10,7 @@ function UserCard(props) {
   const { user, chaletsCount } = props;
   const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
-  const [state, setState] = useState({ loading: false });
+  // const [state, setState] = useState({ loading: false });
   const [fiile, setFile] = useState({ file: "", Upload: false });
   const { file } = fiile;
   // console.log(user, chaletsCount, match.url.slice(1, 8));

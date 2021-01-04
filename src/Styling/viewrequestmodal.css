@@ -44,3 +44,6 @@ background: none !important;
 .disapprovee{
     padding: 2rem 26.9rem 2rem 26.1rem !important;
 }
+.range-date{
+    transform: translate(22px, 10px);
+}

@@ -1,4 +1,4 @@
-import { Post_addAlbum } from "../actionTypes";
+import { Post_addAlbum, Post_ExchangeChalet } from "../actionTypes";
 import {
   Get_Chalets,
   Get_ChaletById,
@@ -97,6 +97,11 @@ export default (state = initialState, action) => {
       };
 
       // newState.status = action.payload;
+      break;
+    case Post_ExchangeChalet:
+      newState = { ...state };
+      console.log(action.payload);
+      newState.status = action.payload;
       break;
     default:
       newState = state;

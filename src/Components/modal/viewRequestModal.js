@@ -1,20 +1,94 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal, Card, Button, Jumbotron } from "react-bootstrap";
-import { Row, Layout, Col, DatePicker, Form } from "antd";
+import { Row, Layout, Col, DatePicker, Form, message } from "antd";
 import { NavLink } from "react-router-dom";
+import { connect, useDispatch } from "react-redux";
+import {
+  editGuestStatus,
+  editHostStatus,
+  getNotAvailableDays,
+} from "../../redux/actions/requestActionCreator";
 import "../../Styling/viewrequestmodal.css";
 import moment from "moment";
 const { RangePicker } = DatePicker;
 const dateFormat = "YYYY-MM-DD";
-export default function ViewRequestModal(props) {
-  const { request, filterStatus } = props;
+function ViewRequestModal(props) {
+  const { request, filterStatus, days } = props;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (Object.keys(request).length !== 0 && filterStatus === "Sent") {
+      dispatch(getNotAvailableDays(request.chalet_host.id));
+    } else if (
+      Object.keys(request).length !== 0 &&
+      filterStatus === "Receivied"
+    ) {
+      console.log(request);
+      // dispatch(getNotAvailableDays(request && request.chalet_Guest.id));
+    }
+  }, [dispatch, filterStatus, request]);
+
+  const warning = () => {
+    message.warning("You refused this Request");
+  };
   const handleCancel = () => {
+    if (filterStatus === "Receivied") {
+      dispatch(editHostStatus(request.id, { status_host: "disapprove" }));
+    } else if (filterStatus === "Sent") {
+      dispatch(editHostStatus(request.id, { status_guest: "disapprove" }));
+    }
     props.onHide();
+    warning();
   };
   const rangeConfig = {
     rules: [{ type: "array", required: true, message: "Please select time!" }],
   };
-  console.log(request, Object.keys(request).length === 0);
+  const success = () => {
+    message.success("You accept this Request ");
+  };
+  const handleRequest = (fieldsValue) => {
+    const checkValue = fieldsValue["check"];
+    const values = {
+      ...fieldsValue,
+      check: [
+        checkValue[0].format("YYYY-MM-DD"),
+        checkValue[1].format("YYYY-MM-DD"),
+      ],
+    };
+    console.log(values);
+    const { check } = values;
+    if (filterStatus === "Receivied") {
+      const check_in_host = check[0];
+      const check_out_host = check[1];
+      dispatch(
+        editHostStatus(request.id, {
+          check_in_host,
+          check_out_host,
+          status_host: "approve",
+        })
+      );
+      props.onHide();
+      success();
+    }
+  };
+  const handleApprove = () => {
+    if (filterStatus === "Sent") {
+      dispatch(
+        editGuestStatus(request.id, {
+          status_guest: "approve",
+        })
+      );
+      props.onHide();
+      success();
+    }
+  };
+  // console.log(request, Object.keys(request).length === 0);
+  function disabledDate(current) {
+    // Can not select days before today and today
+    let dayss = (d) => {
+      return current.format("YYYY-MM-DD") === d;
+    };
+    return days.some(dayss);
+  }
   return (
     <div>
       <Modal
@@ -134,94 +208,121 @@ export default function ViewRequestModal(props) {
               </Jumbotron>
               <hr className="seprate" />
               <h2 className="title h2 mt-5 mb-3 ml-5 view-title">Duration</h2>
-              <Modal.Body
-                id="Personal Info"
-                className="w-form ml-5 mr-5 mb-5 mt-0"
-              >
-                <Row>
-                  <Col span={24} offset={12}>
-                    <RangePicker
-                      defaultValue={[
-                        moment(`${request.check_in_guest}`, dateFormat),
-                        moment(`${request.check_out_guest}`, dateFormat),
-                      ]}
-                      disabled
-                    />
-                  </Col>
-                </Row>
-
-                {filterStatus === "Receivied" &&
-                  request.status_guest === "pending" && (
-                    <>
-                      <h2 className="title h2 mt-5 mb-4 ml-0 view-title text-left">
-                        {" "}
-                        Enter your valid duration
-                      </h2>
-                      <Row>
-                        <Col span={24} offset={12}>
-                          <Form.Item
-                            name="range-picker"
-                            label="RangePicker"
-                            {...rangeConfig}
-                            noStyle
-                          >
+              <Form onFinish={handleRequest}>
+                <Modal.Body
+                  id="Personal Info"
+                  className="w-form send-form ml-5 mr-5 mt-0"
+                >
+                  <Row className="date-form mb-5">
+                    <Col span={24} offset={12}>
+                      <RangePicker
+                        defaultValue={[
+                          moment(`${request.check_in_guest}`, dateFormat),
+                          moment(`${request.check_out_guest}`, dateFormat),
+                        ]}
+                        disabled
+                      />
+                    </Col>
+                  </Row>
+                  {request.status_guest === "pending" &&
+                    request.status_host === "approve" && (
+                      <>
+                        <h2 className="title h2 mt-5 mb-4 ml-0 view-title text-left">
+                          {" "}
+                          {filterStatus === "Sent"
+                            ? "Host Duration"
+                            : "your duration"}
+                        </h2>
+                        <Row>
+                          <Col span={24} offset={12}>
                             <RangePicker
-                              disabled={
-                                request.status_host === "disapprove"
-                                  ? true
-                                  : false
-                              }
+                              defaultValue={[
+                                moment(`${request.check_in_host}`, dateFormat),
+                                moment(`${request.check_out_host}`, dateFormat),
+                              ]}
+                              disabled
                             />
-                          </Form.Item>
-                        </Col>
-                      </Row>
-                    </>
-                  )}
-              </Modal.Body>
-              {filterStatus === "Receivied" &&
-                request.status_guest === "pending" &&
-                request.status_host === "pending" && (
-                  <Modal.Footer className="modalFooter mt-1">
-                    <>
-                      <Button
-                        variant="outline-primary"
-                        className="rounded"
-                        type="submit"
-                      >
-                        Approve
-                      </Button>{" "}
-                      <Button
-                        variant="outline-secondary"
-                        className="rounded"
-                        onClick={handleCancel}
-                      >
-                        Disapprove
-                      </Button>
-                    </>
-                  </Modal.Footer>
-                )}
-              {filterStatus === "Sent" &&
-                request.status_host === "pending" &&
-                request.status_guest === "approve" && (
-                  <Modal.Footer className="modalFooter mt-1">
-                    <>
-                      <Button
-                        variant="outline-primary"
-                        className="rounded"
-                        type="submit"
-                      >
-                        Approve
-                      </Button>{" "}
-                      <Button
-                        variant="outline-secondary"
-                        className="rounded"
-                        onClick={handleCancel}
-                      >
-                        Disapprove
-                      </Button>
-                    </>
-                  </Modal.Footer>
-                )}
+                          </Col>
+                        </Row>
+                      </>
+                    )}
+
+                  {filterStatus === "Receivied" &&
+                    request.status_guest === "pending" &&
+                    request.status_host !== "approve" && (
+                      <>
+                        <h2 className="title h2 mt-5 mb-4 ml-0 view-title text-left">
+                          {" "}
+                          Enter your valid duration
+                        </h2>
+                        <Row>
+                          <Col span={24} offset={6} className="range-date">
+                            <Form.Item
+                              name="check"
+                              // label="RangePicker"
+                              {...rangeConfig}
+                              // noStyle
+                            >
+                              <RangePicker
+                                disabled={
+                                  request.status_host === "disapprove"
+                                    ? true
+                                    : false
+                                }
+                                disabledDate={disabledDate}
+                              />
+                            </Form.Item>
+                          </Col>
+                        </Row>
+                      </>
+                    )}
+                  {filterStatus === "Receivied" &&
+                    request.status_guest === "pending" &&
+                    request.status_host === "pending" && (
+                      <Modal.Footer className="modalFooter mt-1">
+                        <>
+                          <Button
+                            variant="outline-primary"
+                            className="rounded"
+                            type="submit"
+                          >
+                            Approve
+                          </Button>{" "}
+                          <Button
+                            variant="outline-secondary"
+                            className="rounded"
+                            onClick={handleCancel}
+                          >
+                            Disapprove
+                          </Button>
+                        </>
+                      </Modal.Footer>
+                    )}
+                  {filterStatus === "Sent" &&
+                    request.status_host === "approve" &&
+                    request.status_guest === "pending" && (
+                      <Modal.Footer className="modalFooter mt-1">
+                        <>
+                          <Button
+                            variant="outline-primary"
+                            className="rounded"
+                            onClick={handleApprove}
+                          >
+                            Approve
+                          </Button>{" "}
+                          <Button
+                            variant="outline-secondary"
+                            className="rounded"
+                            type="submit"
+                            onClick={handleCancel}
+                          >
+                            Disapprove
+                          </Button>
+                        </>
+                      </Modal.Footer>
+                    )}
+                </Modal.Body>
+              </Form>
               {request.status_guest === "canceld" && (
                 <Button
                   variant="warning"
@@ -276,3 +377,9 @@ export default function ViewRequestModal(props) {
     </div>
   );
 }
+const mapStateToProps = (reduxState) => {
+  return {
+    days: reduxState.Requests.days,
+  };
+};
+export default connect(mapStateToProps)(ViewRequestModal);

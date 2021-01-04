@@ -1,7 +1,7 @@
 import axios from "axios";
 import { authApi } from "../../api/authApi";
 import { chaletsApi } from "../../api/notAuthApi";
-import { Post_addAlbum } from "../actionTypes";
+import { Post_addAlbum, Post_ExchangeChalet } from "../actionTypes";
 import {
   Get_Chalets,
   GET_Error,
@@ -65,13 +65,16 @@ export const getUserChalet = (page) => (dispatch) => {
     .get(`${authApi}user_chalets?page=${page}`, config)
     .then((response) => {
       // console.log(response);
+      console.log(page);
       const chalets = response.data.response.data;
-      // if (page) {
-      const pagesNum = response.data.response.meta.last_page;
-      const total = response.data.response.meta.total;
-      dispatch(getUserChaletSuccess(chalets, pagesNum, total));
-      // }
-      // dispatch(getUserChaletSuccess(chalets));
+      if (page !== "") {
+        console.log(page);
+        const pagesNum = response.data.response.meta.last_page;
+        const total = response.data.response.meta.total;
+        dispatch(getUserChaletSuccess(chalets, pagesNum, total));
+      } else {
+        dispatch(getUserChaletSuccess(chalets));
+      }
       // console.log("chalit", chalets);
       // return user;
     })
@@ -298,4 +301,28 @@ export const addImage = (newImage, id) => (dispatch) => {
 
 const addImageSuccess = (chalet, id) => {
   return { type: Post_addAlbum, payload: { chalet, id } };
+};
+//////////////////////send exchange request/////////////
+export const exchangeChalet = (requestData) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  axios
+    .post(`${authApi}exchange_chalet`, requestData, config)
+    .then((response) => {
+      console.log(response);
+      if (response.data.status === 200) {
+        console.log(response.statusText);
+        dispatch(exchangeChaletSuccess(response.statusText));
+      }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+const exchangeChaletSuccess = (status) => {
+  return { type: Post_ExchangeChalet, payload: status };
 };

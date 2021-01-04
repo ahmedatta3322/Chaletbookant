@@ -536,18 +536,7 @@ function AboutChaletModal(props) {
                   <Row>
                     <Col span={15}>
                       <Checkbox
-                        value="Air Condition"
-                        style={{
-                          lineHeight: "32px",
-                        }}
-                        className="mb-2"
-                      >
-                        Air Condition
-                      </Checkbox>
-                    </Col>
-                    <Col span={15}>
-                      <Checkbox
-                        value="WI-FI"
+                        value="Wifi"
                         style={{
                           lineHeight: "32px",
                         }}
@@ -558,13 +547,24 @@ function AboutChaletModal(props) {
                     </Col>
                     <Col span={15}>
                       <Checkbox
-                        value="Garden"
+                        value="garden"
                         style={{
                           lineHeight: "32px",
                         }}
                         className="mb-2"
                       >
                         Garden
+                      </Checkbox>
+                    </Col>
+                    <Col span={15}>
+                      <Checkbox
+                        value="airCondition"
+                        style={{
+                          lineHeight: "32px",
+                        }}
+                        className="mb-2"
+                      >
+                        Air Condition
                       </Checkbox>
                     </Col>
                   </Row>

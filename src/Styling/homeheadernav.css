@@ -10,6 +10,7 @@
     font-size: 1.8rem;
     font-family: 'Google Sans';
     z-index: 555;
+    height: 50rem;
   }
   .home-menu-item:hover {
     color: #F8B544 !important;

@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import HomeNav from "./components/homeheadernav";
-import { Layout, Row, Col } from "antd";
+import { Layout, Row, Col, Spin } from "antd";
 import { Card } from "react-bootstrap";
 import HomeFilter from "../../Components/filter";
 import Map from "../../Components/map";
 import { getChalets } from "../../redux/actions/chaletActionCreator";
 import "../../Styling/home.css";
 import Footer from "../../Layout/Footer";
+import { getOnlineUserProfile } from "../../redux/actions/userActionCreator";
 const { Content } = Layout;
 function Home({ chalets }) {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getChalets("", ""));
+    dispatch(getOnlineUserProfile());
+    setTimeout(() => {
+      setLoading(false);
+    }, 3500);
   }, [dispatch]);
   return (
     <Layout>
@@ -33,7 +39,14 @@ function Home({ chalets }) {
           <Row className="home-map">
             <Col span={24} offset={9}>
               <h5 className="pt-5 pb-5">Find the Perfect Chalet </h5>
-              <Map chalets={chalets} />
+              {loading === true ? (
+                <div className="loader chalet-loader">
+                  {" "}
+                  <Spin size="large" />
+                </div>
+              ) : (
+                <Map chalets={chalets} />
+              )}
             </Col>
           </Row>
           <div className="whychalet">
