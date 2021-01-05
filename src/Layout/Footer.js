@@ -5,7 +5,7 @@ const { Footer } = Layout;
 
 export default function Foter() {
   return (
-    <Footer className="text-white mt-5 ">
+    <Footer className="text-white">
       <div>
         <span className=" h1"> Stay in touch</span>
         <div className="ml-4 mt-3 h3">

@@ -58,7 +58,18 @@ function Nav({ auth, history, user, errorMessg }) {
           </Menu.Item>
         )}
         <Menu.Item className="home-menu-item" key="4">
-          ABOUT US
+          <Link
+            to="/aboutus"
+            variant="primary"
+            style={{
+              textDecoration: "none",
+              color: "white",
+              border: "none",
+              borderRadius: "0",
+            }}
+          >
+            ABOUT US
+          </Link>
         </Menu.Item>
         <Menu.Item className="home-menu-item" key="5">
           CONTACT

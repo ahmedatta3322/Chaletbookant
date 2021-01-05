@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Card, Button, Jumbotron } from "react-bootstrap";
 import { Row, Layout, Col, DatePicker, Form, Radio, message } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 // import { getUserChalet } from "../../redux/actions/chaletActionCreator";
 import "../../Styling/viewrequestmodal.css";
@@ -12,7 +12,15 @@ import { getNotAvailableDays } from "../../redux/actions/requestActionCreator";
 const { RangePicker } = DatePicker;
 // const dateFormat = "YYYY/MM/DD";
 function SendExchangeRequestModal(props) {
-  const { chalet, chalets, requestfilterStatus, dates, status, days } = props;
+  const {
+    chalet,
+    chalets,
+    requestfilterStatus,
+    dates,
+    status,
+    days,
+    user,
+  } = props;
   const dispatch = useDispatch();
   // const dispatch = useDispatch();
   // const [userChalets, setUserChalets] = useState(chalets);
@@ -56,7 +64,9 @@ function SendExchangeRequestModal(props) {
   // }
   const success = () => {
     message.success("Your Request Sent Successfully");
+    props.history.push(`/profile/${user.id}`);
   };
+  console.log(user, props);
   const handleSendExchangeRequest = (fieldsValue) => {
     const rangeValue = fieldsValue["range"];
     const values = {
@@ -258,6 +268,7 @@ const mapStateToProps = (reduxState) => {
     chalets: reduxState.Chalets.currentUserChalets,
     status: reduxState.Chalets.status,
     days: reduxState.Requests.days,
+    user: reduxState.Users.user,
   };
 };
-export default connect(mapStateToProps)(SendExchangeRequestModal);
+export default withRouter(connect(mapStateToProps)(SendExchangeRequestModal));
