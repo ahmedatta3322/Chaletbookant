@@ -1,6 +1,29 @@
-.ant-layout-footer {
+/* .ant-layout-footer {
   background-color: #0070d3 !important;
   display: flex;
   justify-content: space-between;
   color: #ffff;
+} */
+.footer-container{
+  background-color: #0070d3 !important ;
+  color: #ffff !important;
+  padding: 2rem 2rem 0rem;
+}
+.footer-seprator{
+  border-right: 2px solid #C8D2E2;
+  width: 2px;
+  height: 67px;
+  background: #C8D2E2;
+  margin: 1rem;
+}
+.second-seprator{
+  height: 30px;
+  transform: translate(0px, -13px);
+}
+.footer-list{
+  list-style: none;
+  transform: translate(0px, -29px);
+}
+.social-footer{
+  transform: translate(0px, -18px);
 }
