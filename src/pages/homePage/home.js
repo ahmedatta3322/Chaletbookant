@@ -44,7 +44,12 @@ function Home({ chalets }) {
                 </Col>
               </Row>
               <Row className="home-map">
-                <Col span={24} offset={9}>
+                <Col
+                  span={24}
+                  offset={9}
+                  xl={{ offset: 3 }}
+                  xxl={{ offset: 9 }}
+                >
                   <h5 className=" pb-1 map-header">Find the Perfect Chalet </h5>
                   {loading === true ? (
                     <div className="loader chalet-loader">
@@ -73,9 +78,14 @@ function Home({ chalets }) {
               </div>
               <div className="site-card-wrapper mb-5">
                 <Row>
-                  <Col span={15} offset={5}>
-                    <h5>Memberships </h5>
-                    <Row gutter={{ xl: 9, xxlg: 6 }}>
+                  <Col
+                    span={15}
+                    xl={{ span: 16, offset: 4 }}
+                    xxl={{ span: 15, offset: 5 }}
+                    offset={5}
+                  >
+                    <h5 className="memberships">Memberships </h5>
+                    <Row gutter={{ xl: 10, xxlg: 6 }}>
                       <Col className="gutter-row subscribe">
                         <Card className="text-center basic-card">
                           <Card.Header className="text-center text-white headerCard  font-weight-bold">
@@ -93,7 +103,8 @@ function Home({ chalets }) {
                             </Card.Text>
 
                             <Card.Text>
-                              <i className="fas fa-times blue-icon"></i>Exchange
+                              <i className="fas fa-times yellow ml-4 mr-4"></i>
+                              Exchange
                             </Card.Text>
 
                             <Card.Text>

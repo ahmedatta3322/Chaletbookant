@@ -36,16 +36,9 @@
         height: 79vh;
     } 
   }
-  
-  @media (min-width: 1440px)
-  {
-    #home-header {
-      height: 82vh;
-    }
-  }
-  @media(max-width:1536px){
+  @media(max-width:1360px){
     #home-header{
-      height: 88vh;
+      height:69vh;
     }
   }
       @media(min-width:1920px){
@@ -68,6 +61,15 @@
   .logo-img{
     width: 22%;
     height: 10%;
+  }
+  @media(min-width:1360px){
+    .logo-img{
+      width: 37%;
+    }
+  }
+  @media(min-width:1920px){
+    .logo-img{
+      width: 22%;}
   }
   .ant-btn{
     border-radius: 0 !important;
@@ -121,16 +123,41 @@
   }
   .chair{
     position: absolute;
-    top: 31rem;
-    right: 16.4rem;
-    width: 17%;
+
     z-index: 0;
+  }
+  @media(min-width:1360px){
+    .chair{
+      height: 34.6rem;
+      width: 34.5rem;
+      top: 37rem;
+      right: 8.4rem;
+    }
+  }
+  @media(min-width:1920px){
+    .chair{
+      /* height: 49.5rem; */
+      width: 18%;
+      height: 62%;
+      top: 31rem;
+      right: 16.4rem;
+    }
   }
   .header-content{
     position: absolute;
-    top: 23%;
-    /* left: 40%; */
-    left: 34%;
+   
+  }
+  @media(min-width:1360px){
+    .header-content{
+      top: 19%;
+      left: 24%;
+    }
+  }
+  @media(min-width:1920px){
+    .header-content{
+      top: 23%;
+      left: 34%;
+    }
   }
   .header-content h1,.header-content p{
     color: #ffffff;
@@ -174,8 +201,18 @@
   .side-wave-img{
 
     position: absolute;
-      top: 18rem;
+     
       right: 0;
       height: 70.9rem;
       z-index: 1;
+  }
+  @media(min-width:1360px){
+    .side-wave-img{
+      top: 23rem;
+    }
+  }
+  @media(min-width:1920px){
+    .side-wave-img{
+      top: 18rem;
+    }
   }

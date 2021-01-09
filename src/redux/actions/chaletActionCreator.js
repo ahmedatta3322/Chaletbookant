@@ -26,7 +26,8 @@ export const getChalets = (pagenaite, page) => (dispatch) => {
       dispatch(getChaletsSuccess(chalets, pagesNum, total));
     })
     .catch((error) => {
-      dispatch(getChaletsFailed(error.response.data.message));
+      if (error.response)
+        dispatch(getChaletsFailed(error.response.data.message));
     });
 };
 
@@ -295,7 +296,7 @@ export const addImage = (newImage, id) => (dispatch) => {
       }
     })
     .catch((err) => {
-      console.log(err.response);
+      console.log(err);
     });
 };
 
@@ -319,7 +320,7 @@ export const exchangeChalet = (requestData) => (dispatch) => {
       }
     })
     .catch((err) => {
-      console.log(err.response);
+      console.log(err);
     });
 };
 

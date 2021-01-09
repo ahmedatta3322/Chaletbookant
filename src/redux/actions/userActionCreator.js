@@ -102,8 +102,9 @@ export const getOnlineUserProfile = () => (dispatch) => {
       //return user;
     })
     .catch((err) => {
-      console.log(err.response);
-      dispatch(getOnlineUserProfileFailed(err.response.data.message));
+      // console.log(err == "Network Error");
+      if (err.response)
+        dispatch(getOnlineUserProfileFailed(err.response.data.message));
     });
 };
 const getOnlineUserProfileSuccess = (user) => {
@@ -154,11 +155,13 @@ export const verifyMobile = (code) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err.response);
-      if (err.response.status === 422)
-        dispatch(verifyMobileFailed(err.response.data.error));
-      else if (err.response.status === 500)
-        dispatch(verifyMobileFailed(err.response.data.message));
-      return err.response.data.message;
+      if (err.response) {
+        if (err.response.status === 422)
+          dispatch(verifyMobileFailed(err.response.data.error));
+        else if (err.response.status === 500)
+          dispatch(verifyMobileFailed(err.response.data.message));
+        return err.response.data.message;
+      }
     });
 };
 
@@ -204,11 +207,13 @@ export const changePassword = (data) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err.response);
-      if (err.response.status === 422)
-        dispatch(changePasswordFailed(err.response.data.error));
-      else if (err.response.status === 500)
-        dispatch(changePasswordFailed(err.response.data.message));
-      return err.response.data.message;
+      if (err.response) {
+        if (err.response.status === 422)
+          dispatch(changePasswordFailed(err.response.data.error));
+        else if (err.response.status === 500)
+          dispatch(changePasswordFailed(err.response.data.message));
+        return err.response.data.message;
+      }
     });
 };
 const changePasswordSuccess = (status) => {

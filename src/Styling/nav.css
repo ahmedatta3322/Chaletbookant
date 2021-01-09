@@ -14,9 +14,18 @@
 }
 .logo {
   display: flex;
-  width: 56%;
   height: 73%;
   padding-top: 1%;
+}
+@media(min-width:1350px){
+  .logo{
+    width: 41%;
+  }
+}
+@media(min-width:1920px){
+.logo{
+  width: 56%;
+}
 }
 .logo-immg {
   /* width: 20%; */
