@@ -118,7 +118,7 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
         <h3 className="p-3">{chalet && chalet.address}</h3>
         <Form onFinish={handleCheckAvailabilty}>
           <Row>
-            <Col span={15}>
+            <Col xxl={15} xl={14}>
               <h4 className="p-3">$ {chalet && chalet.fees}</h4>
             </Col>
             <Col>
@@ -143,7 +143,8 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
                 >
                   <Select
                     defaultValue="status"
-                    style={{ width: 109 }}
+                    // style={{ width: 109 }}
+                    className="selectbox"
                     name="status"
                     onChange={handleRequestFilter}
                   >
@@ -157,7 +158,7 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
           </Row>
 
           <Card.Title className="about-title pl-3">About</Card.Title>
-          <Card.Text className="coloor h4 pl-3">
+          <Card.Text className="coloor desc-card pl-3">
             {chalet && chalet.description}
           </Card.Text>
           <hr />
@@ -165,12 +166,12 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
           <div className="features d-flex">
             {Object.keys(chalet).length !== 0 ? (
               chalet.feature.map((f, i) => (
-                <div className="h6 ml-2">
+                <div className="about-title ml-2">
                   <img
                     key={i}
                     src={`/images/${f}.png`}
                     className="featureImg"
-                    alt="wifi"
+                    alt={`${f}`}
                   />
                   {f}
                 </div>
@@ -272,9 +273,9 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
           }}
         /> */}
       </Card.Body>
-      <hr />
-      <div className="footerCard d-block">
-        <div className="text-center">
+      <hr className="separte-guests" />
+      <div className="footerCard detail-footer d-block">
+        <div className="text-center guests-header">
           <hr className="d-inline-block rightdiv" />
           <h5 className="d-inline-block book">Guests </h5>
           <hr className="d-inline-block leftdiv" />

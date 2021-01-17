@@ -1,61 +1,78 @@
-.subscribeCard{
-    width: 26.9rem;
+.subscribeCard {
+  width: 26.9rem;
+}
+@media (min-width: 1360px) {
+  .subscribeCard {
+    width: 19rem;
+  }
+}
+@media (min-width: 1920px) {
+  .subscribeCard {
     max-height: 29.4rem;
+  }
 }
-.shape{
-    position: relative;
+.shape {
+  position: relative;
+  height: 12.7rem;
+  margin-left: 0.9rem;
+  /* margin-left: -1.6rem; */
+}
+@media (min-width: 1360px) {
+  .shape {
+    width: 17.3rem;
+  }
+}
+@media (min-width: 1920px) {
+  .shape {
     width: 24.3rem;
-    height: 12.7rem;
-    margin-left:.9rem
-    /* margin-left: -1.6rem; */
+  }
 }
-.leftSide{
-    position: absolute;
-    top: 29%;
-    left: 3.7rem;
+.leftSide {
+  position: absolute;
+  top: 29%;
+  left: 3.7rem;
 }
-.rightSide{
-    position: absolute;
-    top: 7.2rem;
-    left: 12.6rem;
+.rightSide {
+  position: absolute;
+  top: 7.2rem;
+  left: 12.6rem;
 }
-.price{
-    color: #FFB741;
-    font-size: x-large;
+.price {
+  color: #ffb741;
+  font-size: x-large;
 }
-.emptydivright,.emptydivleft{
-    width: 3rem;
-    height: .3rem;
-    background-color: #0070D3;
-    display: inline-block;
-    margin-bottom: 0.2rem;
-    margin-right: .5rem;
-    margin-left: 0.5rem;
-
+.emptydivright,
+.emptydivleft {
+  width: 3rem;
+  height: 0.3rem;
+  background-color: #0070d3;
+  display: inline-block;
+  margin-bottom: 0.2rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
-.heading{
-    color: #0070D3;
-    padding: 1rem 2rem !important;
-    font-size: 1.8rem;
-    background: none !important ;
-    align-items: baseline !important;
+.heading {
+  color: #0070d3;
+  padding: 1rem 2rem !important;
+  font-size: 1.8rem;
+  background: none !important ;
+  align-items: baseline !important;
 }
-.bluee{
-    color: #0070D3;
+.bluee {
+  color: #0070d3;
 }
-.date{
-    border-bottom: 1px solid #C8D2E2;
-    padding: 1rem;
+.date {
+  border-bottom: 1px solid #c8d2e2;
+  padding: 1rem;
 }
-.bottomcard{
-    border: 1px solid #C8D2E2;
-    border-radius: 0.5rem;
-    width: fit-content;
-    margin-left: 4rem;
-    box-shadow: 8px 7px 13px #00000038;
-
+.bottomcard {
+  border: 1px solid #c8d2e2;
+  border-radius: 0.5rem;
+  width: fit-content;
+  margin-left: 4rem;
+  box-shadow: 8px 7px 13px #00000038;
 }
-.bill{
-    margin-right: 3rem;
-    color: #A4ACB9;
+.bill {
+  margin-right: 3rem;
+  color: #a4acb9;
 }

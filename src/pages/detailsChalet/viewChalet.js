@@ -51,7 +51,7 @@ function ViewChalet({ match, chalet, chalets, auth, pagesNum, total, user }) {
               Chalet Details
             </h5>
             <hr className="d-inline-block ml-0 leftdiv" />
-            <Row>
+            <Row className="details-card">
               <Col span={4} offset={1} className="ml-0"></Col>
               <Col xl={10} xxl={11} offset={5} className="m-0">
                 <Row>
@@ -76,7 +76,7 @@ function ViewChalet({ match, chalet, chalets, auth, pagesNum, total, user }) {
                     </Carousel>
                     <Row
                       className="separator"
-                      style={{ height: "2.5rem", backgroundColor: "#0070D3" }}
+                      style={{  backgroundColor: "#0070D3" }}
                     >
                       <Col></Col>
                     </Row>
@@ -118,7 +118,6 @@ function ViewChalet({ match, chalet, chalets, auth, pagesNum, total, user }) {
               <Col span={4} offset={1} className="ml-0"></Col>
             </Row>
             <Row className="relatedChalets mb-5">
-              {/* chalits*/}
               <hr className="d-inline-block mr-0 rightdiv" />
               <h5 className="d-inline-block headings">Related Chalets</h5>
               <hr className="d-inline-block ml-0 leftdiv" />
@@ -131,7 +130,6 @@ function ViewChalet({ match, chalet, chalets, auth, pagesNum, total, user }) {
                         <Col xl={4} xxl={4} span={6} className="m-chalets">
                           <ChaletCard chalet={chalet} key={chalet.id} />
                         </Col>
-                        {/* <Col md={1} span={1}></Col> */}
                       </>
                     ))
                   ) : (

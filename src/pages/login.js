@@ -77,7 +77,7 @@ function Login(props) {
           }`}
         >
           <Row>
-            <Col span={6} offset={9}>
+            <Col xl={10} xxl={6} offset={9}>
               <Tabs
                 defaultActiveKey="1"
                 onChange={callback}
@@ -85,8 +85,8 @@ function Login(props) {
               >
                 <TabPane tab="Login" key="1" className="h1">
                   <Col className="ml-0 mr-5 ">
-                    <img src="/images/brand.png" className="mb-4" alt="brand" />
-                    <Col offset={4}>
+                    <img src="/images/brand.png" className="mb-4 brand-img" alt="brand" />
+                    <Col offset={4} className="form-container">
                       <Form
                         {...layout}
                         form={form}
@@ -162,6 +162,7 @@ function Login(props) {
                           name="remember"
                           valuePropName="checked"
                         ></Form.Item> */}
+                        <div className="d-block">
                         <Button
                           variant="outline-secondary"
                           className="connect-btn mr-5 p-2"
@@ -184,11 +185,12 @@ function Login(props) {
                             alt="gmail"
                           />
                         </Button>{" "}
+                        </div>
                         {/* <Form.Item {...tailLayout}> */}
                         <Btn
                           type="primary"
                           htmlType="submit"
-                          className="mt-5 mb-3 h3 pl-3 pr-3 btn-submit rounded"
+                          className="mt-5 mb-3 h3 pl-3 pr-3 pb-3 btn-submit"
                         >
                           LOGIN
                         </Btn>

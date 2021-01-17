@@ -1,10 +1,10 @@
 .profile {
   background-color: #efefef;
 }
-.fadee{
-  opacity: .5 !important;
+.fadee {
+  opacity: 0.5 !important;
 }
-.nofade{
+.nofade {
   opacity: 1;
 }
 .jumbotron {
@@ -92,11 +92,11 @@
 .add {
   font-size: -webkit-xxx-large;
 }
-.shadow{
+.shadow {
   box-shadow: 10px 10px 5px #00000038;
   border-radius: 2.25rem !important;
 }
-.prof-filter{
+.prof-filter {
   width: 12rem;
 }
 /* .ant-layout {
@@ -218,13 +218,22 @@
 }
 
 .adds {
-  width: 26.9rem;
   height: 42.6rem;
+}
+@media (min-width: 1360px) {
+  .adds {
+    width: 19rem;
+  }
+}
+@media (min-width: 1920px) {
+  .adds {
+    width: 26.9rem;
+  }
 }
 .side {
   margin-top: -26rem;
 }
-.loader{
+.loader {
   text-align: center;
   border-radius: 4px;
   margin-top: 40rem !important;

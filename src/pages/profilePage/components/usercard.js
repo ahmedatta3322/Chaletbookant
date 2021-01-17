@@ -174,7 +174,7 @@ function UserCard(props) {
             <i className="fas fa-phone-alt mr-2 blue"></i>
             <p className="d-inline-block count">{user.mobile}</p>
           </span>
-          <span className="color h6">
+          <span className="color email-card">
             <i className="fas fa-envelope mr-2 ml-3 blue"></i>
             <p className="d-inline-block count mt-3">{user.email}</p>
           </span>
@@ -201,21 +201,21 @@ function UserCard(props) {
         </Card.Body> */}
         <div className="cardFooter userCard-footer">
           <Button variant="primary" className="filterCount active cardButton">
-            <img src="/images/Chalets-Icon.png" alt="chalet" />
+            <img src="/images/Chalets-Icon.png" alt="chalet"className="image-usercard" />
             <br />
             <span className=" mt-1 h4">My Chalets</span>
             <br />
             <span className="count h3">{chaletsCount}</span>
           </Button>
           <Button variant="primary" className="filterCount cardButton">
-            <img src="/images/requests icon.png" alt="chalet" />
+            <img src="/images/requests icon.png" alt="chalet"className="image-usercard" />
             <br />
             <span className="mt-1 h4">Requests </span>
             <br />
             <span className="count h3">1000</span>
           </Button>
           <Button variant="primary" className="filterCount cardButton">
-            <img src="/images/view icon.png" alt="chalet" />
+            <img src="/images/view icon.png" alt="chalet"className="image-usercard" />
             <br />
             <span className="mt-1 h4">Views</span>
             <br />

@@ -1,39 +1,68 @@
-.relatedChalets{
+.details-card {
+  overflow: hidden;
+}
+.relatedChalets {
   margin-top: 3.7% !important;
 }
-.headings{
-    font-size: 2.3rem;
-    color:#C8D2E2;
-    font-family: Poppins;
-    margin: 0rem 1rem;
+.headings {
+  font-size: 2.3rem;
+  color: #c8d2e2;
+  font-family: Poppins;
+  margin: 0rem 1rem;
 }
-.rightdiv,.leftdiv{
-    width: 4.5rem;
-    color: #C8D2E2 !important;
-    position: relative;
-    top: 0.5rem;
-    left: 0;
+.rightdiv,
+.leftdiv {
+  width: 4.5rem;
+  color: #c8d2e2 !important;
+  position: relative;
+  top: 0.5rem;
+  left: 0;
 }
-.image{
+.image {
+  color: #fff;
+  line-height: 160px;
+  text-align: center;
+  background: #364d79;
+}
+@media (min-width: 1360px) {
+  .image {
+    width: 39.2rem;
+    height: 26.7rem;
+  }
+}
+@media (min-width: 1920px) {
+  .image {
     width: 55rem;
     height: 36.8rem;
-    color: #fff;
-    line-height: 160px;
-    text-align: center;
-    background: #364d79;
-  };
-  .separator{
-    height: 2rem;
-    background-color: black;
-
   }
- .view-map{
+}
+.separator {
+  background-color: black;
+}
+@media (min-width: 1360px) {
+  .separator {
+    height: 1.5rem;
+  }
+}
+@media (min-width: 1920px) {
+  .separator {
+    height: 2rem;
+  }
+}
+@media (min-width: 1360px) {
+  .view-map {
+    width: 103.8vw !important;
+    height: 11.5vh !important;
+    transform: translate(0px, 0px) !important;
+  }
+}
+@media (min-width: 1920px) {
+  .view-map {
     width: 76vw !important;
     height: 16.6vh !important;
     transform: translate(0px, -13px) !important;
- }
- .m-chalets{
-   
-   margin-right: 5.5rem;
-
- }
+  }
+}
+.m-chalets {
+  margin-right: 5.5rem;
+}

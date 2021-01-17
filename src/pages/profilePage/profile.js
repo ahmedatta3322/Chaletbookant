@@ -335,12 +335,12 @@ function Profile(props) {
                   <Row>
                     {/* chalits*/}
                     {filterStatus === "My Chalets" && (
-                      <Col xl={20} xxl={15} offset={2}>
+                      <Col xl={{span:15 ,offset:3}}xxl={15} offset={2} >
                         <Row>
                           {chalets && chalets.length !== 0 ? (
                             chalets.map((chalet) => (
                               <>
-                                <Col xl={10} xxl={7} span={6}>
+                                <Col xl={6} xxl={7} span={6}>
                                   <ChaletCard
                                     userChalet={chalet}
                                     key={chalet.id}
