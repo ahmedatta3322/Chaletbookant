@@ -108,7 +108,7 @@ function ChaletsPage({ chalets, pagesNum, total, auth }) {
                 <Sider className="m-0">
                   <Row className="maps">
                     <Col
-                      xl={6}
+                      xl={24}
                       xxl={8}
                       span={10}
                       offset={20}

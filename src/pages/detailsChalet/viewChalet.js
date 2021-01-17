@@ -53,7 +53,7 @@ function ViewChalet({ match, chalet, chalets, auth, pagesNum, total, user }) {
             <hr className="d-inline-block ml-0 leftdiv" />
             <Row>
               <Col span={4} offset={1} className="ml-0"></Col>
-              <Col span={11} offset={5} className="m-0">
+              <Col xl={10} xxl={11} offset={5} className="m-0">
                 <Row>
                   <Col span={15}>
                     <Carousel autoplay>
@@ -108,7 +108,7 @@ function ViewChalet({ match, chalet, chalets, auth, pagesNum, total, user }) {
                 </Row>
               </Col>
               <div style={{ width: "37px" }}></div>
-              <Col span={4} offset={5} className="m-0">
+              <Col xl={5} xxl={4} offset={5} className="m-0">
                 <Row>
                   <Col span={24}>
                     <GuestsReviews rate={chalet.rating} />
@@ -123,12 +123,12 @@ function ViewChalet({ match, chalet, chalets, auth, pagesNum, total, user }) {
               <h5 className="d-inline-block headings">Related Chalets</h5>
               <hr className="d-inline-block ml-0 leftdiv" />
 
-              <Col xl={20} xxl={22} offset={1}>
+              <Col xl={22} xxl={23} offset={1}>
                 <Row>
                   {chalets && chalets.length !== 0 ? (
                     chalets.map((chalet) => (
                       <>
-                        <Col xl={10} xxl={4} span={6} className="m-chalets">
+                        <Col xl={4} xxl={4} span={6} className="m-chalets">
                           <ChaletCard chalet={chalet} key={chalet.id} />
                         </Col>
                         {/* <Col md={1} span={1}></Col> */}

@@ -689,7 +689,7 @@ function EditChaletModal(props) {
                   <Row>
                     <Col span={15}>
                       <Checkbox
-                        value="Air Condition"
+                        value="airCondition"
                         style={{
                           lineHeight: "32px",
                         }}
@@ -700,7 +700,7 @@ function EditChaletModal(props) {
                     </Col>
                     <Col span={15}>
                       <Checkbox
-                        value="WI-FI"
+                        value="Wifi"
                         style={{
                           lineHeight: "32px",
                         }}
@@ -711,7 +711,7 @@ function EditChaletModal(props) {
                     </Col>
                     <Col span={15}>
                       <Checkbox
-                        value="Garden"
+                        value="garden"
                         style={{
                           lineHeight: "32px",
                         }}

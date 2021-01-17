@@ -30,14 +30,24 @@ function ChaletCard({ chalet, match, userChalet }) {
       setStatus("ban text-danger");
     }
   }, [userChalet]);
-  // console.log(userChalet, chalet, match);
+  console.log(userChalet, chalet, match);
   return (
     <Card
       className={`mt-5 shadow-card ${
-        match && match.url.slice(1, 8) === "profile"
+        match &&
+        match.url.slice(1, 8) === "profile" &&
+        match.url.slice(1, 8) !== "chalets"
           ? "Card-prof-height"
           : "Card-view-height"
-      }`}
+      }
+      ${
+        match &&
+        match.url.slice(1, 8) !== "profile" &&
+        match.url.slice(1, 8) !== "chalets"
+          ? "ml-chalet"
+          : "ml-0"
+      }
+      `}
     >
       {chalet !== undefined && (
         <>
@@ -80,17 +90,20 @@ function ChaletCard({ chalet, match, userChalet }) {
             </h4>
             <div className="features d-flex">
               <>
-                <div className="h6 ml-2">
+                {chalet.feature.map((f, i) => (
+                  <div className="h6 ml-2">
+                    <img
+                      key={i}
+                      src={`/images/${f}.png`}
+                      className="featureImg"
+                      alt="wifi"
+                    />
+                    {f}
+                  </div>
+                ))}
+                {/* <div className="h6">
                   <img
-                    src="/images/wifi.png"
-                    className="featureImg"
-                    alt="wifi"
-                  />
-                  {chalet && chalet.feature[0]}
-                </div>
-                <div className="h6">
-                  <img
-                    src="/images/garden.png"
+                    src={`/images/${chalet && chalet.feature[1]}.png`}
                     className="featureImg"
                     alt="garden"
                   />
@@ -98,12 +111,12 @@ function ChaletCard({ chalet, match, userChalet }) {
                 </div>
                 <div className="h6 air">
                   <img
-                    src="/images/air condition.png"
+                    src={`/images/${chalet && chalet.feature[2]}.png`}
                     className="featureImg"
                     alt="air condition"
                   />
                   {chalet && chalet.feature[2]}
-                </div>
+                </div> */}
               </>
             </div>
             <Card.Title>ABOUT</Card.Title>
@@ -159,7 +172,18 @@ function ChaletCard({ chalet, match, userChalet }) {
             </h4>
             <div className="features d-flex">
               <>
-                <div className="h6 ml-2">
+                {userChalet.feature.map((f, i) => (
+                  <div className="h6 ml-2">
+                    <img
+                      key={i}
+                      src={`/images/${f}.png`}
+                      className="featureImg"
+                      alt="wifi"
+                    />
+                    {f}
+                  </div>
+                ))}
+                {/* <div className="h6 ml-2">
                   <img
                     src="/images/wifi.png"
                     className="featureImg"
@@ -182,7 +206,7 @@ function ChaletCard({ chalet, match, userChalet }) {
                     alt="air condition"
                   />
                   {userChalet && userChalet.feature && userChalet.feature[2]}
-                </div>
+                </div> */}
               </>
             </div>
             <Card.Title>ABOUT</Card.Title>
@@ -194,7 +218,7 @@ function ChaletCard({ chalet, match, userChalet }) {
           <div className="footerCard">
             <NavLink
               variant="primary"
-              className="active m-3 pl-4 pr-4 p-3 view text-white"
+              className="active m-3 pl-4 pr-4 p-3 view text-white d-block"
               to={{
                 pathname: `/viewchalet/${userChalet && userChalet.id}`,
                 // aboutProps: {

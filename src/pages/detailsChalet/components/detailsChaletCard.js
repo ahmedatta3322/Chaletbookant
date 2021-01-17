@@ -163,7 +163,22 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
           <hr />
           <Card.Title className="about-title pl-3">Features</Card.Title>
           <div className="features d-flex">
-            <div className="h6 ml-2">
+            {Object.keys(chalet).length !== 0 ? (
+              chalet.feature.map((f, i) => (
+                <div className="h6 ml-2">
+                  <img
+                    key={i}
+                    src={`/images/${f}.png`}
+                    className="featureImg"
+                    alt="wifi"
+                  />
+                  {f}
+                </div>
+              ))
+            ) : (
+              <p>no features</p>
+            )}
+            {/* <div className="h6 ml-2">
               <img src="/images/wifi.png" className="featureImg" alt="wifi" />
               {chalet && chalet.feature && chalet.feature[0]}
             </div>
@@ -182,7 +197,7 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
                 alt="air condition"
               />
               {chalet && chalet.feature && chalet.feature[2]}
-            </div>
+            </div> */}
           </div>
           <hr />
           {!verifyChalets.some(mychalet) && (

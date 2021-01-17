@@ -65,13 +65,33 @@
     cursor: pointer;
   }
   .spans{
-    font-size: 1.4rem;
+ 
     font-family: Poppins;
     margin-bottom: 1rem;
     padding: 1rem;
   }
+  @media(min-width:1360px){
+    .spans{
+      font-size: .8rem;
+    }
+  }
+  @media(min-width:1920px){
+    .spans{
+      font-size: .8rem;
+    }
+  }
   .rangeInput{
     transform: translate(0px, 4px);
+  }
+  @media(min-width:1360px){
+    .rangeInput{
+      width: 40%;
+    }
+  }
+  @media(min-width:1920px){
+    .rangeInput{
+      width: 50%;
+    }
   }
   .link:hover{
     text-decoration: none;
