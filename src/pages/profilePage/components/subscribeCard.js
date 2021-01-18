@@ -16,7 +16,7 @@ export default function SubscribeCard() {
               alt="shape"
             />
             <div className="leftSide text-center">
-              <h4 className="text-white">Advance</h4>
+              <h4 className="text-white advance">Advance</h4>
               <span className="price">10$</span>
             </div>
             <div className="rightSide text-white ">

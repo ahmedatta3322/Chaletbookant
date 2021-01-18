@@ -1,5 +1,6 @@
 .subscribeCard {
-  width: 26.9rem;
+  max-height: 29.4rem;
+ 
 }
 @media (min-width: 1360px) {
   .subscribeCard {
@@ -8,7 +9,7 @@
 }
 @media (min-width: 1920px) {
   .subscribeCard {
-    max-height: 29.4rem;
+    width: 26.9rem;
   }
 }
 .shape {
@@ -29,13 +30,32 @@
 }
 .leftSide {
   position: absolute;
-  top: 29%;
-  left: 3.7rem;
+}
+@media(min-width:1360px){
+  .leftSide{
+    top: 26%;
+    left: 2.7rem;
+  }
+}
+@media(min-width:1920px){
+  .leftSide{
+    top: 29%;
+    left: 3.7rem;
+  }
 }
 .rightSide {
   position: absolute;
   top: 7.2rem;
-  left: 12.6rem;
+}
+@media(min-width:1360px){
+  .rightSide{
+    left: 9.6rem;
+  }
+}
+@media(min-width:1920px){
+  .rightSide{
+    left: 12.6rem;
+  }
 }
 .price {
   color: #ffb741;
@@ -54,9 +74,28 @@
 .heading {
   color: #0070d3;
   padding: 1rem 2rem !important;
-  font-size: 1.8rem;
   background: none !important ;
   align-items: baseline !important;
+}
+@media(min-width:1360px){
+  .heading{
+    font-size: 1.1rem;
+  }
+}
+@media(min-width:1920px){
+  .heading{
+    font-size: 1.8rem;
+  }
+}
+@media(min-width:1360px){
+  .advance{
+    font-size: 1.1rem;
+  }
+}
+@media(min-width:1920px){
+  .advance{
+    font-size:1.8;
+  }
 }
 .bluee {
   color: #0070d3;
@@ -69,10 +108,30 @@
   border: 1px solid #c8d2e2;
   border-radius: 0.5rem;
   width: fit-content;
-  margin-left: 4rem;
   box-shadow: 8px 7px 13px #00000038;
 }
+@media(min-width:1360px){
+  .bottomcard{
+    margin-left: 1.5rem;
+  }
+}
+@media(min-width:1920px){
+  .bottomcard{
+    margin-left: 4rem;
+  }
+}
 .bill {
-  margin-right: 3rem;
   color: #a4acb9;
+}
+@media(min-width:1360px){
+  .bill{
+    margin-left: 0;
+    margin-right: 0rem;
+  }
+}
+@media(min-width:1920px){
+  .bill{
+    margin-right: 3rem;
+    margin-left: 0;
+  }
 }

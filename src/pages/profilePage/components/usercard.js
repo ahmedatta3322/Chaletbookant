@@ -201,21 +201,33 @@ function UserCard(props) {
         </Card.Body> */}
         <div className="cardFooter userCard-footer">
           <Button variant="primary" className="filterCount active cardButton">
-            <img src="/images/Chalets-Icon.png" alt="chalet"className="image-usercard" />
+            <img
+              src="/images/Chalets-Icon.png"
+              alt="chalet"
+              className="image-usercard"
+            />
             <br />
-            <span className=" mt-1 h4">My Chalets</span>
+            <span className=" mt-1">My Chalets</span>
             <br />
             <span className="count h3">{chaletsCount}</span>
           </Button>
           <Button variant="primary" className="filterCount cardButton">
-            <img src="/images/requests icon.png" alt="chalet"className="image-usercard" />
+            <img
+              src="/images/requests icon.png"
+              alt="chalet"
+              className="image-usercard"
+            />
             <br />
-            <span className="mt-1 h4">Requests </span>
+            <span className="mt-1 ">Requests </span>
             <br />
             <span className="count h3">1000</span>
           </Button>
           <Button variant="primary" className="filterCount cardButton">
-            <img src="/images/view icon.png" alt="chalet"className="image-usercard" />
+            <img
+              src="/images/view icon.png"
+              alt="chalet"
+              className="image-usercard"
+            />
             <br />
             <span className="mt-1 h4">Views</span>
             <br />

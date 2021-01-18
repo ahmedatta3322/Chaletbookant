@@ -67,7 +67,7 @@
 @media (min-width: 1360px) and (max-width: 1366px) and (min-height: 768px) {
   .addButton {
     position: absolute;
-    bottom: 5%;
+    bottom: 2%;
     left: 7%;
   }
 }
@@ -223,11 +223,13 @@
 @media (min-width: 1360px) {
   .adds {
     width: 19rem;
+    margin-bottom: 3rem;
   }
 }
 @media (min-width: 1920px) {
   .adds {
     width: 26.9rem;
+    margin-bottom: 0rem;
   }
 }
 .side {

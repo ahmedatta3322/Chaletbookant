@@ -335,7 +335,7 @@ function Profile(props) {
                   <Row>
                     {/* chalits*/}
                     {filterStatus === "My Chalets" && (
-                      <Col xl={{span:15 ,offset:3}}xxl={15} offset={2} >
+                      <Col xl={{ span: 15, offset: 3 }} xxl={15} offset={2}>
                         <Row>
                           {chalets && chalets.length !== 0 ? (
                             chalets.map((chalet) => (
@@ -369,7 +369,7 @@ function Profile(props) {
                     {filterStatus === "Requests" && (
                       <Col
                         span={15}
-                        xl={23}
+                        xl={15}
                         xxl={16}
                         offset={2}
                         className="mt-5"

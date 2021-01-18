@@ -93,19 +93,48 @@
 .btn-trash,
 .status {
   position: absolute !important;
-  top: 0;
-  right: 0;
+ 
   color: #e81a1af5 !important;
   background: none !important;
   border: none !important;
 }
+@media(min-width:1360px){
+  .status{
+    right: 19%;
+    top: 3%;
+  }
+  .btn-trash{
+    right: 0%;
+    top: 0%;
+  }
+}
+@media(min-width:1920px){
+  .status{
+    right: 13%;
+    top: 2%;
+  }
+  
+  .btn-trash{
+    top: 0;
+    right: 0;
+  }
+}
 .edit-chalet {
   position: absolute !important;
   right: 8%;
-  top: 42%;
   border-radius: 50%;
 }
-.status {
+@media(min-width:1360px){
+  .edit-chalet{
+    top: 33%;
+  }
+}
+@media(min-width:1920px){
+  .edit-chalet{
+    top: 42%;
+  }
+}
+/* .status {
   right: 13%;
   top: 2%;
-}
+} */

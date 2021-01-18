@@ -179,7 +179,9 @@ function Home({ chalets }) {
               </div>
             </div>
           </Content>
-          <Footer />
+          <div className="home-footer">
+            <Footer />
+          </div>
         </Layout>
       )}
     </>
