@@ -24,8 +24,13 @@
 }
 .maps {
   position: absolute;
- 
   margin-left: -7%;
+}
+@media(min-width:1280px){
+  .maps{
+    width: 45.4rem !important;
+    height: 44.8em;
+  }
 }
 @media(min-width:1360px){
   .maps{
@@ -43,7 +48,15 @@
   margin-top: 65%;
   margin-left: -7%;
 }
-@media(min-width:1360px) {
+/* @media(min-width:1280px) {
+  .ads{
+    width: 45.4rem;
+    margin-top: 100%;
+    margin-left: -39%;
+    margin-right: -25%;
+  }
+} */
+@media(min-width:1280px) {
   .ads{
     width: 45.4rem;
     margin-top: 100%;

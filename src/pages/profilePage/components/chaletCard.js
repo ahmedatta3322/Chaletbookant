@@ -178,7 +178,7 @@ function ChaletCard({ chalet, match, userChalet }) {
                       key={i}
                       src={`/images/${f}.png`}
                       className="featureImg"
-                      alt="wifi"
+                      alt={f}
                     />
                     {f}
                   </div>
@@ -209,7 +209,7 @@ function ChaletCard({ chalet, match, userChalet }) {
                 </div> */}
               </>
             </div>
-            <Card.Title>ABOUT</Card.Title>
+            <Card.Title className="about">ABOUT</Card.Title>
             <Card.Text className="coloor">
               {userChalet && userChalet.description}
             </Card.Text>

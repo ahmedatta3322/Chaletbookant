@@ -192,13 +192,7 @@ function UserCard(props) {
           show={modalShow}
           onHide={() => setModalShow(false)}
         />
-        {/* <Card.Body className="p-3">
-          <Card.Title className="h5">ABOUT</Card.Title>
-          <Card.Text className="h6">
-            {user.description}
-            {user.description && <NavLink className="h5">Read More</NavLink>}
-          </Card.Text>
-        </Card.Body> */}
+
         <div className="cardFooter userCard-footer">
           <Button variant="primary" className="filterCount active cardButton">
             <img

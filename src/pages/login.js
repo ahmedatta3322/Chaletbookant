@@ -77,7 +77,7 @@ function Login(props) {
           }`}
         >
           <Row>
-            <Col xl={10} xxl={6} offset={9}>
+            <Col xl={10} xxl={6} lg={9} offset={9}>
               <Tabs
                 defaultActiveKey="1"
                 onChange={callback}
@@ -85,7 +85,11 @@ function Login(props) {
               >
                 <TabPane tab="Login" key="1" className="h1">
                   <Col className="ml-0 mr-5 ">
-                    <img src="/images/brand.png" className="mb-4 brand-img" alt="brand" />
+                    <img
+                      src="/images/brand.png"
+                      className="mb-4 brand-img"
+                      alt="brand"
+                    />
                     <Col offset={4} className="form-container">
                       <Form
                         {...layout}
@@ -163,28 +167,28 @@ function Login(props) {
                           valuePropName="checked"
                         ></Form.Item> */}
                         <div className="d-block">
-                        <Button
-                          variant="outline-secondary"
-                          className="connect-btn mr-5 p-2"
-                        >
-                          Continue with{" "}
-                          <img
-                            src="/images/facebook.png"
-                            className="connect"
-                            alt="facebook"
-                          />
-                        </Button>{" "}
-                        <Button
-                          variant="outline-secondary"
-                          className="connect-btn mr-5 p-2"
-                        >
-                          Continue with{" "}
-                          <img
-                            src="/images/gmail.png"
-                            className="connect"
-                            alt="gmail"
-                          />
-                        </Button>{" "}
+                          <Button
+                            variant="outline-secondary"
+                            className="connect-btn mr-5 p-2"
+                          >
+                            Continue with{" "}
+                            <img
+                              src="/images/facebook.png"
+                              className="connect"
+                              alt="facebook"
+                            />
+                          </Button>{" "}
+                          <Button
+                            variant="outline-secondary"
+                            className="connect-btn mr-5 p-2"
+                          >
+                            Continue with{" "}
+                            <img
+                              src="/images/gmail.png"
+                              className="connect"
+                              alt="gmail"
+                            />
+                          </Button>{" "}
                         </div>
                         {/* <Form.Item {...tailLayout}> */}
                         <Btn

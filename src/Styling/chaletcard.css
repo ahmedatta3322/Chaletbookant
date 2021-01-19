@@ -15,6 +15,17 @@
     
   }
 } */
+@media(min-width:1280px){
+  .chalits{
+    margin-left: 0 !important;
+    margin-right: 2rem;
+  }
+}
+@media(min-width:1920px){
+  .chalits{
+    margin-left: 4.16666667% !important;
+  }
+}
 @media (min-width: 1360px) {
   .ml-chalet {
     margin-left: 10rem;
@@ -46,6 +57,11 @@
 .imgCard {
   border-radius: 1.25rem !important;
 }
+@media (min-width: 1280px) {
+  .imgCard {
+    height: 11.4rem;
+  }
+}
 @media (min-width: 1360px) {
   .imgCard {
     height: 10.6rem;
@@ -74,6 +90,12 @@
 }
 .features {
   color: #8696a9;
+}
+@media(min-width:1280px){
+  .featureImg{
+    width: 12.54px;
+    height: 9.43px;
+  }
 }
 @media (min-width: 1360px) {
   .featureImg {

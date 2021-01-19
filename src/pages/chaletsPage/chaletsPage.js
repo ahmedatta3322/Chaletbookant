@@ -103,7 +103,7 @@ function ChaletsPage({ chalets, pagesNum, total, auth }) {
                 </>
               )}
             </Col>
-            <Col span={5} offset={25} className="mt-0 rentchalet">
+            <Col span={5} offset={25} className="mt-5 rentchalet">
               <Row>
                 <Sider className="m-0">
                   <Row className="maps">
