@@ -118,7 +118,7 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
         <h3 className="p-3">{chalet && chalet.address}</h3>
         <Form onFinish={handleCheckAvailabilty}>
           <Row>
-            <Col xxl={15} xl={14}>
+            <Col xxl={15} xl={12}>
               <h4 className="p-3">$ {chalet && chalet.fees}</h4>
             </Col>
             <Col>

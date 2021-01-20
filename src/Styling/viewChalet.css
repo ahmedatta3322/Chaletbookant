@@ -1,6 +1,13 @@
 .details-card {
   overflow: hidden;
 }
+@media(max-width:1280px){
+
+  .details-container{
+    width: 70.5rem;
+    transform: translate(-83px, 10px);
+  }
+}
 .relatedChalets {
   margin-top: 3.7% !important;
 }
@@ -24,6 +31,12 @@
   text-align: center;
   background: #364d79;
 }
+@media (min-width: 1280px) {
+  .image {
+    width: 46rem;
+    height:30.4rem;
+  }
+}
 @media (min-width: 1360px) {
   .image {
     width: 39.2rem;
@@ -36,10 +49,8 @@
     height: 36.8rem;
   }
 }
-.separator {
-  background-color: black;
-}
-@media (min-width: 1360px) {
+
+@media (min-width: 1280px) {
   .separator {
     height: 1.5rem;
   }
@@ -47,6 +58,13 @@
 @media (min-width: 1920px) {
   .separator {
     height: 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .view-map {
+    width: 137.5vw !important;
+    height: 16.6vh !important;
+    transform: translate(0px, 0px) !important;
   }
 }
 @media (min-width: 1360px) {
@@ -65,4 +83,16 @@
 }
 .m-chalets {
   margin-right: 5.5rem;
+}
+@media(max-width:1280px){
+  .m-chalets{
+    transform:translate(131px, 0px);
+    margin-left: 5rem;
+  }
+}
+@media(max-width:1280px){
+
+  .guest-container{
+    transform: translate(101px, 10px);
+  }
 }

@@ -42,6 +42,12 @@
     width: 27.1rem;
   }
 }
+@media (min-width: 1280px) {
+  .Card-view-height {
+    width: 24.6rem;
+    height: 28.5rem;
+  }
+}
 @media (min-width: 1360px) {
   .Card-view-height {
     width: 22.9rem;
