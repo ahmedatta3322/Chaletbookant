@@ -160,7 +160,12 @@
     left: 30%;
   }
 }
+@media(max-width:1360px){
 
+  .chaletCard-profile{
+    margin-right: 2rem;
+  }
+}
 .ant-layout-sider {
   flex: 0 0 22% !important;
   max-width: 0 !important;
@@ -220,6 +225,14 @@
 .adds {
   height: 42.6rem;
 }
+@media (max-width: 1280px) {
+  .adds {
+    width: 18rem;
+    margin-bottom: 3rem;
+    height: 29rem;
+    margin-top: 8rem;
+  }
+}
 @media (min-width: 1360px) {
   .adds {
     width: 19rem;
@@ -234,6 +247,11 @@
 }
 .side {
   margin-top: -26rem;
+}
+@media(max-width:1280px){
+  .side{
+    transform: translate(-13px, 10px);
+  }
 }
 .loader {
   text-align: center;

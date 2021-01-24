@@ -15,6 +15,11 @@
     
   }
 } */
+@media(max-width:1280px){
+  .cardBody{
+    font-size: .9rem !important;
+  }
+}
 @media(min-width:1280px){
   .chalits{
     margin-left: 0 !important;
@@ -34,6 +39,19 @@
 @media (min-width: 1920px) {
   .ml-chalet {
     margin-left: 0rem;
+  }
+}
+@media (max-width: 1280px) {
+  .Card-prof-height {
+    height: 20.59rem;
+    width: 17.7rem;
+  }
+}
+@media (min-width: 1360px) {
+  .Card-prof-height {
+    height: 22.2rem;
+    width: 19.1rem;
+    /* transform: translate(-21px, 0px); */
   }
 }
 @media (min-width: 1920px) {
@@ -63,9 +81,30 @@
 .imgCard {
   border-radius: 1.25rem !important;
 }
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .imgCard {
-    height: 11.4rem;
+    height: 8.3rem;
+  }
+} */
+@media(max-width: 1280px){
+  .profile-imgCard{
+  height: 8.3rem;
+  }
+}
+@media(min-width: 1360px){
+  .profile-imgCard{
+  height: 8.59rem;
+  }
+}
+@media(min-width: 1920px){
+  .profile-imgCard{
+  height: 12.7rem;
+
+  }
+}
+@media(min-width: 1280px){
+  .imgCard{
+  height: 11.4rem;
   }
 }
 @media (min-width: 1360px) {
@@ -78,6 +117,7 @@
     height: 14.9rem;
   }
 }
+
 .badge {
   background-color: #fef5df;
 }
@@ -126,7 +166,7 @@
   background: none !important;
   border: none !important;
 }
-@media(min-width:1360px){
+@media(min-width:1280px){
   .status{
     right: 19%;
     top: 3%;
@@ -152,14 +192,14 @@
   right: 8%;
   border-radius: 50%;
 }
-@media(min-width:1360px){
+@media(min-width:1280px){
   .edit-chalet{
     top: 33%;
   }
 }
 @media(min-width:1920px){
   .edit-chalet{
-    top: 42%;
+    top: 35%;
   }
 }
 /* .status {

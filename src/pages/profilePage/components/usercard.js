@@ -203,7 +203,7 @@ function UserCard(props) {
             <br />
             <span className=" mt-1">My Chalets</span>
             <br />
-            <span className="count h3">{chaletsCount}</span>
+            <span className="count">{chaletsCount}</span>
           </Button>
           <Button variant="primary" className="filterCount cardButton">
             <img
@@ -214,7 +214,7 @@ function UserCard(props) {
             <br />
             <span className="mt-1 ">Requests </span>
             <br />
-            <span className="count h3">1000</span>
+            <span className="count">1000</span>
           </Button>
           <Button variant="primary" className="filterCount cardButton">
             <img
@@ -223,9 +223,9 @@ function UserCard(props) {
               className="image-usercard"
             />
             <br />
-            <span className="mt-1 h4">Views</span>
+            <span className="mt-1">Views</span>
             <br />
-            <span className="count h3">10.000</span>
+            <span className="count">10.000</span>
           </Button>
         </div>
       </Card>

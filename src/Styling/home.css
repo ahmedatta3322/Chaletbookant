@@ -7,13 +7,17 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+@media(max-width:1280px){
+  .site-home-content {
+    height: 197vh !important;}
+}
 .home-map {
   /* height: 18vh; */
   /* height: 42vh; */
   
   margin-top: 2.8rem;
 }
-@media(min-width:1360px){
+@media(min-width:1280px){
   .home-map{
     height: 46.6rem;
     width: 98.5rem;
@@ -53,6 +57,15 @@
  
   bottom: -123.5%;
 }
+
+@media(min-width:1280px){
+  .whychalet-img{
+    width: 97.3rem;
+    left: 14%;
+    transform: translate(0px, -264px);
+  }
+}
+
 @media(min-width:1360px){
   .whychalet-img{
     width: 97.3rem;
@@ -73,7 +86,7 @@
     top: 150rem;
     left: -3px;
 }
-@media(min-width:1360px){
+@media(min-width:1280px){
   .left-side-wave-img{
     top: 186rem;
     height: 56.2rem;
@@ -83,6 +96,11 @@
   .left-side-wave-img{
     top: 172rem;
     height: 76.9rem;
+  }
+}
+@media(max-width:1280px){
+  .Memberships-container{
+    transform: translate(88px, 10px)
   }
 }
 @media(min-width:1360px){
@@ -136,7 +154,7 @@ padding: 4rem 2rem 3rem !important;
 
   font-weight: 500;
 }
-@media(min-width:1360px){
+@media(min-width:1280px){
   .size {
     font-size: 2rem;
   }
@@ -157,7 +175,7 @@ padding: 4rem 2rem 3rem !important;
     width: 35.4rem;
   }
 }
-@media(min-width:1360px){
+@media(min-width:1280px){
   .headerCard{
     font-size: 2.9rem;
   }
@@ -167,6 +185,12 @@ padding: 4rem 2rem 3rem !important;
   font-size: 3.5rem;
 }
 }
+@media(min-width:1280px){
+  .basic-card ,.advance-card,.platinum-card{
+    height: 38rem;
+    width: 28.7rem;
+  }
+  }
 @media(min-width:1360px){
   .basic-card ,.advance-card,.platinum-card{
     height: 39.8rem;
@@ -220,6 +244,11 @@ padding: 4rem 2rem 3rem !important;
   display: flex;
   justify-content: space-between;
   color: #ffff;
+}
+@media(min-width:1280px){
+  .home-footer{
+        transform: translate(0px, 0px);
+  }
 }
 @media(min-width:1360px){
   .home-footer{

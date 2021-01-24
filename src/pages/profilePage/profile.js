@@ -340,7 +340,12 @@ function Profile(props) {
                           {chalets && chalets.length !== 0 ? (
                             chalets.map((chalet) => (
                               <>
-                                <Col xl={6} xxl={7} span={6}>
+                                <Col
+                                  xl={6}
+                                  xxl={7}
+                                  span={6}
+                                  className="chaletCard-profile"
+                                >
                                   <ChaletCard
                                     userChalet={chalet}
                                     key={chalet.id}

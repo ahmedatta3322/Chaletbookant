@@ -12,6 +12,11 @@
     z-index: 555;
     height: 50rem;
   }
+  @media(max-width:1280px){
+    #home-menu{
+      margin-right: -4%;
+    }
+  }
   .home-menu-item:hover {
     color: #F8B544 !important;
     border-bottom: 2px solid #F8B544 !important
@@ -91,7 +96,7 @@
     .wave{
       position: absolute;
       right: 0%;
-      bottom: -12rem;
+      bottom: -4rem;
     }
   }
 @media(min-width:1360px){
@@ -117,6 +122,14 @@
 
     z-index: 0;
   }
+  @media(min-width:1280px){
+    .chair{
+      width: 321px;
+      height: 321px;
+      top: 40rem;
+      right: 9.4rem;
+    }
+  }
   @media(min-width:1360px){
     .chair{
       height: 34.6rem;
@@ -138,7 +151,7 @@
     position: absolute;
    
   }
-  @media(min-width:1360px){
+  @media(min-width:1280px){
     .header-content{
       top: 19%;
       left: 24%;
@@ -196,6 +209,12 @@
       right: 0;
       height: 70.9rem;
       z-index: 1;
+  }
+  @media(min-width:1280px){
+    .side-wave-img{
+      top: 25rem;
+
+    }
   }
   @media(min-width:1360px){
     .side-wave-img{

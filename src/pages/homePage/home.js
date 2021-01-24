@@ -83,6 +83,7 @@ function Home({ chalets }) {
                     xl={{ span: 16, offset: 4 }}
                     xxl={{ span: 15, offset: 5 }}
                     offset={5}
+                    className="Memberships-container"
                   >
                     <h5 className="memberships">Memberships </h5>
                     <Row gutter={{ xl: 10, xxlg: 6 }}>
