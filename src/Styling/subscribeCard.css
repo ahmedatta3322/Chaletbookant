@@ -1,8 +1,12 @@
 .subscribeCard {
   max-height: 29.4rem;
- 
 }
-@media (max-width: 1280px) {
+
+.subscribeCard {
+  width:14.010416666666666vw;
+  height: 31.376734258271078vh;
+}
+/* @media (max-width: 1280px) {
   .subscribeCard {
     width: 18rem;
     height: 20rem;
@@ -17,33 +21,40 @@
   .subscribeCard {
     width: 26.9rem;
   }
-}
+} */
 .shape {
   position: relative;
-  height: 12.7rem;
- 
+  height: 13.553895410885806vh;
+  width:12.65625vw;
   /* margin-left: -1.6rem; */
 }
 @media (min-width: 1280px) {
   .shape {
-    width: 16.3rem;
+    /* width: 16.3rem; */
     margin-left: 0.5rem;
   }
 }
 @media (min-width: 1360px) {
   .shape {
-    width: 17.3rem;
+    /* width: 17.3rem; */
     margin-left: 0.9rem;
   }
 }
 @media (min-width: 1920px) {
   .shape {
-    width: 24.3rem;
+    /* width: 24.3rem; */
     margin-left: 0.9rem;
   }
 }
 .leftSide {
   position: absolute;
+}
+
+@media(min-width:1024px){
+  .leftSide{
+    top: 28%;
+    left: 1.4rem;
+  }
 }
 @media(min-width:1280px){
   .leftSide{
@@ -67,9 +78,16 @@
   position: absolute;
   top: 7.2rem;
 }
+@media(max-width:1024px){
+  .rightSide{
+    left: 5.6rem;
+    top: 5.2rem;
+  }
+}
 @media(min-width:1280px){
   .rightSide{
     left: 8.6rem;
+    top: 5.2rem;
   }
 }
 @media(min-width:1360px){
@@ -80,11 +98,17 @@
 @media(min-width:1920px){
   .rightSide{
     left: 12.6rem;
+    top: 7.2rem;
   }
 }
 .price {
   color: #ffb741;
   font-size: x-large;
+}
+@media(max-width:1024px){
+  .price{
+    font-size: 2rem;
+  }
 }
 .emptydivright,
 .emptydivleft {
@@ -102,7 +126,7 @@
   background: none !important ;
   align-items: baseline !important;
 }
-@media(min-width:1280px){
+@media(min-width:1024px){
   .heading{
     font-size: 1.1rem;
   }
@@ -110,6 +134,11 @@
 @media(min-width:1920px){
   .heading{
     font-size: 1.8rem;
+  }
+}
+@media(min-width:1024px){
+  .advance{
+    font-size: .8rem;
   }
 }
 @media(min-width:1280px){
@@ -125,21 +154,33 @@
 .bluee {
   color: #0070d3;
 }
+@media(max-width:1280px){
+
+  .bill-heading{
+    font-size: .5rem;
+  }
+}
 .date {
   border-bottom: 1px solid #c8d2e2;
   padding: 1rem;
+}
+@media(max-width:1024px){
+  .date{
+    padding: .5rem;
+  }
 }
 .bottomcard {
   border: 1px solid #c8d2e2;
   border-radius: 0.5rem;
   width: fit-content;
+  /* width: 9.046875vw; */
   box-shadow: 8px 7px 13px #00000038;
 }
 @media(max-width:1280px){
   .bottomcard{
     margin-left: 2.5rem;
     font-size: .6rem;
-    width: 119px;
+    /* width: 119px; */
   }
 }
 @media(min-width:1360px){

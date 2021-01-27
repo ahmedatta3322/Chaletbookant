@@ -1,13 +1,13 @@
 .details-card {
   overflow: hidden;
 }
-@media(max-width:1280px){
+/* @media(max-width:1280px){
 
   .details-container{
     width: 70.5rem;
     transform: translate(-83px, 10px);
   }
-}
+} */
 .relatedChalets {
   margin-top: 3.7% !important;
 }
@@ -30,8 +30,10 @@
   line-height: 160px;
   text-align: center;
   background: #364d79;
+  width: 28.4375vw;
+  height:  39.27427961579509vh
 }
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .image {
     width: 46rem;
     height:30.4rem;
@@ -48,9 +50,11 @@
     width: 55rem;
     height: 36.8rem;
   }
+} */
+.separator{
+  height: 2.134471718249733vh
 }
-
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .separator {
     height: 1.5rem;
   }
@@ -59,8 +63,13 @@
   .separator {
     height: 2rem;
   }
+} */
+.view-map{
+  height: 16.969050160085377vh;
+  width:  28.4375vw;
+  transform: translate(0px, -1.3874066168623265vh) !important;
 }
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .view-map {
     width: 137.5vw !important;
     height: 16.6vh !important;
@@ -80,19 +89,19 @@
     height: 16.6vh !important;
     transform: translate(0px, -13px) !important;
   }
-}
+} */
 .m-chalets {
   margin-right: 5.5rem;
 }
-@media(max-width:1280px){
+/* @media(max-width:1280px){
   .m-chalets{
     transform:translate(131px, 0px);
     margin-left: 5rem;
   }
-}
-@media(max-width:1280px){
+} */
+/* @media(max-width:1280px){
 
   .guest-container{
-    transform: translate(101px, 10px);
+    transform: translate(5.260416666666667vw, 11.0672358591248665vh);
   }
-}
+} */

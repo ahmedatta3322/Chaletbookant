@@ -169,7 +169,9 @@ function Login(props) {
                         <div className="d-block">
                           <Button
                             variant="outline-secondary"
-                            className="connect-btn mr-5 p-2"
+                            className={`connect-btn ${
+                              window.innerWidth === 1024 ? "mr-0" : "mr-5"
+                            } p-2`}
                           >
                             Continue with{" "}
                             <img

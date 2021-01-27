@@ -52,6 +52,11 @@ width: 47.8rem;
   color: #31418c !important;
   margin-right: 0 !important;
 }
+@media (min-width: 1024px) {
+  .ant-tabs-tab {
+    padding: 2rem 3rem !important;
+  }
+}
 @media (min-width: 1280px) {
   .ant-tabs-tab {
     padding: 2rem 7rem !important;
@@ -69,6 +74,11 @@ width: 47.8rem;
 }
 .ant-tabs-tab-active {
   background-color: #f0f3f4 !important;
+}
+@media (max-width: 1024px) {
+  .ant-tabs-tab-active {
+    padding: 2rem 5.5rem !important;
+  }
 }
 .ant-tabs-ink-bar {
   height: 1.2rem !important;

@@ -118,10 +118,10 @@ function DetailsChaletCard({ chalet, chalets, auth, user, days }) {
         <h3 className="p-3">{chalet && chalet.address}</h3>
         <Form onFinish={handleCheckAvailabilty}>
           <Row>
-            <Col xxl={15} xl={12}>
+            <Col lg={10} xl={12} xxl={12}>
               <h4 className="p-3">$ {chalet && chalet.fees}</h4>
             </Col>
-            <Col>
+            <Col lg={10} xl={12} xxl={12}>
               {" "}
               {/* <Dropdown overlay={menu}>
               <Button className="btn-dropdown">

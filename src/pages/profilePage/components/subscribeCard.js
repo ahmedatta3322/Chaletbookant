@@ -35,7 +35,9 @@ export default function SubscribeCard() {
             </div>
             <div className="text-center mb-3 mt-3">
               <div className="emptydivright"></div>
-              <h5 className="d-inline-block bluee">Billing Info</h5>
+              <h5 className="d-inline-block bluee bill-heading">
+                Billing Info
+              </h5>
               <div className="emptydivleft"></div>
             </div>
 

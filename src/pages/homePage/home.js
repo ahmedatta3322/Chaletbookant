@@ -46,8 +46,9 @@ function Home({ chalets }) {
               <Row className="home-map">
                 <Col
                   span={24}
-                  offset={9}
-                  xl={{ offset: 3 }}
+                  // offset={9}
+                  lg={{ offset: 9 }}
+                  xl={{ offset: 9 }}
                   xxl={{ offset: 9 }}
                 >
                   <h5 className=" pb-1 map-header">Find the Perfect Chalet </h5>
@@ -80,13 +81,14 @@ function Home({ chalets }) {
                 <Row>
                   <Col
                     span={15}
-                    xl={{ span: 16, offset: 4 }}
+                    lg={{ span: 18, offset: 2 }}
+                    xl={{ span: 17, offset: 4 }}
                     xxl={{ span: 15, offset: 5 }}
                     offset={5}
                     className="Memberships-container"
                   >
                     <h5 className="memberships">Memberships </h5>
-                    <Row gutter={{ xl: 10, xxlg: 6 }}>
+                    <Row gutter={{ lg: 10, xl: 10, xxlg: 6 }}>
                       <Col className="gutter-row subscribe">
                         <Card className="text-center basic-card">
                           <Card.Header className="text-center text-white headerCard  font-weight-bold">

@@ -11,7 +11,10 @@
 /* .anticon svg {
   color: #ffb741 !important;
 } */
-@media (min-width: 1280px) {
+.Review-card{
+  height: 57.41728922091782vh;
+}
+/* @media (min-width: 1280px) {
   .Review-card {
     height: 44.6rem;
   }
@@ -25,4 +28,4 @@
   .Review-card {
     height: 53.8rem;
   }
-}
+} */

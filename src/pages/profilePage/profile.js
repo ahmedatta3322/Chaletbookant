@@ -302,10 +302,15 @@ function Profile(props) {
               <Layout className="content">
                 <Content>
                   <Row>
-                    <Col xl={15} span={5} offset={1}>
+                    <Col
+                      xl={15}
+                      span={5}
+                      offset={1}
+                      className="d-flex justify-content-center prof-container"
+                    >
                       <Button
                         variant="primary"
-                        className="prof-filter active shadow p-5 cardButton"
+                        className="prof-filter active shadow p-5 cardButton mr-3"
                         onClick={handleFilter}
                         disabled={user.mobile_verfied === 0 ? true : false}
                       >
@@ -335,12 +340,18 @@ function Profile(props) {
                   <Row>
                     {/* chalits*/}
                     {filterStatus === "My Chalets" && (
-                      <Col xl={{ span: 15, offset: 3 }} xxl={15} offset={2}>
+                      <Col
+                        lg={{ span: 15, offset: 4 }}
+                        xl={{ span: 15, offset: 3 }}
+                        xxl={15}
+                        offset={2}
+                      >
                         <Row>
                           {chalets && chalets.length !== 0 ? (
                             chalets.map((chalet) => (
                               <>
                                 <Col
+                                  lg={9}
                                   xl={6}
                                   xxl={7}
                                   span={6}
@@ -351,7 +362,7 @@ function Profile(props) {
                                     key={chalet.id}
                                   />
                                 </Col>
-                                <Col md={1} span={1}></Col>
+                                <Col lg={1} md={1} span={1}></Col>
                               </>
                             ))
                           ) : (
@@ -374,10 +385,11 @@ function Profile(props) {
                     {filterStatus === "Requests" && (
                       <Col
                         span={15}
+                        lg={{ span: 15, offset: 2 }}
                         xl={15}
-                        xxl={16}
+                        xxl={15}
                         offset={2}
-                        className="mt-5"
+                        className="mt-5 request-container"
                       >
                         <Row className="requestfilter">
                           <Select
@@ -432,12 +444,12 @@ function Profile(props) {
                                               view
                                             </Button>
                                             {/*it will show in received only*/}
-                                            {requestfilterStatus === "Rent" &&
+                                            {/* {requestfilterStatus === "Rent" &&
                                               request.chalet !== null && (
                                                 <Button className="border-0">
                                                   <i class="fas fa-trash-alt trash"></i>
                                                 </Button>
-                                              )}
+                                              )} */}
                                           </Row>
                                         </Col>
                                       </>
@@ -550,13 +562,13 @@ function Profile(props) {
                                               view
                                             </Button>
                                             {/*it will show in received only*/}
-                                            {requestfilterStatus ===
+                                            {/* {requestfilterStatus ===
                                               "Exchange" &&
                                               request.chalet !== null && (
                                                 <Button className="border-0">
                                                   <i class="fas fa-trash-alt trash"></i>
                                                 </Button>
-                                              )}
+                                              )} */}
                                           </Row>
                                         </Col>
                                       </>
@@ -640,10 +652,19 @@ function Profile(props) {
                     )}
 
                     {/* end of requests*/}
-                    <Col span={5} offset={25} className="ml-5 side">
+                    <Col span={5} offset={25} className="side">
                       <Row>
                         <Sider>
-                          <Col span={25} offset={10} className="m-0">
+                          <Col
+                            span={25}
+                            lg={{ offset: 8 }}
+                            offset={10}
+                            className={`${
+                              filterStatus === "Requests"
+                                ? "sidee-container"
+                                : "ml-0 side-container "
+                            } `}
+                          >
                             <SubscribeCard />
                             <br />
                             <img

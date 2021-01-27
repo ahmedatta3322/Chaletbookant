@@ -49,13 +49,20 @@ function ChaletsPage({ chalets, pagesNum, total, auth }) {
         <Content>
           {/* <div className="site-layout-content"> */}
           <Row className="mt-5 mb-5 chaletsFilter">
-            <Col xl={20} xxl={16} span={15} xxlOffset={4} offset={5}>
+            <Col
+              lg={{ span: 10, offset: 1 }}
+              xl={20}
+              xxl={16}
+              span={15}
+              xxlOffset={4}
+              offset={5}
+            >
               <HomeFilter />
             </Col>
           </Row>
           <Row>
             {/* chalits*/}
-            <Col span={15} offset={1} className="chalits">
+            <Col lg={16} span={15} offset={1} className="chalits">
               {loading === true ? (
                 <div className="loader">
                   {" "}
@@ -108,8 +115,9 @@ function ChaletsPage({ chalets, pagesNum, total, auth }) {
                 <Sider className="m-0">
                   <Row className="maps">
                     <Col
+                      lg={24}
                       xl={24}
-                      xxl={8}
+                      xxl={24}
                       span={10}
                       offset={20}
                       className="m-0 rentchalet"

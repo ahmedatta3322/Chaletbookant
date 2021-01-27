@@ -36,6 +36,12 @@
   height: 49rem !important;
   /* box-shadow: 0px 10px 5px #0000001f */
 }
+@media(min-width:1024px){
+  .img-Card{
+    width: 28.6rem !important;
+    height: 36rem !important;
+  }
+}
 @media(max-width:1280px){
   .img-Card{
     width: 31.6rem !important;
@@ -76,6 +82,12 @@
   height: 4.8rem;
   width: fit-content;
   /* width: 30.5rem; */
+}
+@media(min-width:1024px){
+  .info{
+    left: 8%;
+    transform: translateY(32rem);
+  }
 }
 @media(min-width:1280px){
   .info{
@@ -124,6 +136,13 @@
   /* top: 60%; */
   top: 67%;
 }
+@media (min-width: 1024px)
+{
+.edit {
+    left: 67%;
+    transform: translateY(32rem);
+  }
+}
 @media (min-width: 1280px){
 .edit {
     left: 72%;
@@ -150,7 +169,7 @@
   /* padding: 1rem 2rem !important; */
   color: #c8d2e2 !important;
 }
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .filterCount {
     width: 9.4rem;
     height: 8.2rem;
@@ -194,6 +213,14 @@
   padding: 0 !important;
   font-size: 1.7rem;
   position: absolute;
+}
+@media (min-width: 1024px){
+.userCard-footer {
+    top: 38rem;
+    left: 24px;
+    width: 31.3rem;
+    height: 8.2rem !important;
+}
 }
 @media (min-width: 1280px)
 {
@@ -246,6 +273,11 @@
   margin-top: -4rem;
   transform: translate(4px, 6px);
   /* transform: translate(147px, 201px); */
+}
+@media(min-width:1024px){
+  .uploader{
+    transform: translate(39px, -108px);
+  }
 }
 @media(min-width:1280px){
   .uploader{

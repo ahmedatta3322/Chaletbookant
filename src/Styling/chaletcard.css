@@ -20,6 +20,11 @@
     font-size: .9rem !important;
   }
 }
+.cardBody{
+  font-size: .9rem !important;
+  height: 20.17075773745998vh;
+  max-height:20.17075773745998vh ;
+}
 @media(min-width:1280px){
   .chalits{
     margin-left: 0 !important;
@@ -41,7 +46,12 @@
     margin-left: 0rem;
   }
 }
-@media (max-width: 1280px) {
+.Card-prof-height {
+  height: 33.6179295624333vh;
+  max-height:33.6179295624333vh ;
+  width: 14.114583333333334vw
+}
+/* @media (max-width: 1280px) {
   .Card-prof-height {
     height: 20.59rem;
     width: 17.7rem;
@@ -51,7 +61,6 @@
   .Card-prof-height {
     height: 22.2rem;
     width: 19.1rem;
-    /* transform: translate(-21px, 0px); */
   }
 }
 @media (min-width: 1920px) {
@@ -59,8 +68,12 @@
     height: 31.5rem;
     width: 27.1rem;
   }
+} */
+.Card-view-height{
+  width: 16.614583333333332vw;
+  height: 39.701173959445036vh;
 }
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .Card-view-height {
     width: 24.6rem;
     height: 28.5rem;
@@ -77,16 +90,21 @@
     height: 37.2rem;
     width: 27.1rem;
   }
-}
+} */
 .imgCard {
   border-radius: 1.25rem !important;
+  height: 15.901814300960512vh;
 }
 /* @media (min-width: 1280px) {
   .imgCard {
     height: 8.3rem;
   }
 } */
-@media(max-width: 1280px){
+.profile-imgCard{
+  height: 13.553895410885806vh;
+  }
+
+/* @media(max-width: 1280px){
   .profile-imgCard{
   height: 8.3rem;
   }
@@ -101,8 +119,8 @@
   height: 12.7rem;
 
   }
-}
-@media(min-width: 1280px){
+} */
+/* @media(min-width: 1280px){
   .imgCard{
   height: 11.4rem;
   }
@@ -116,7 +134,7 @@
   .imgCard {
     height: 14.9rem;
   }
-}
+} */
 
 .badge {
   background-color: #fef5df;
@@ -136,6 +154,10 @@
 }
 .features {
   color: #8696a9;
+}
+.featureImg{
+  width: 1.4583333333333333vw;
+  height:  1.8143009605122733vh
 }
 @media(min-width:1280px){
   .featureImg{
@@ -166,7 +188,7 @@
   background: none !important;
   border: none !important;
 }
-@media(min-width:1280px){
+@media(min-width:1024px){
   .status{
     right: 19%;
     top: 3%;
@@ -192,9 +214,9 @@
   right: 8%;
   border-radius: 50%;
 }
-@media(min-width:1280px){
+@media(min-width:1024px){
   .edit-chalet{
-    top: 33%;
+    top: 36%;
   }
 }
 @media(min-width:1920px){
