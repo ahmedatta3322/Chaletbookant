@@ -266,7 +266,9 @@ export const deleteImage = (imageId) => (dispatch) => {
       console.log(response);
       // if (response.status === 200) dispatch(deleteImageSuccess(imageId));
     })
-    .catch(console.log);
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // const deleteImageSuccess = (imageId) => {

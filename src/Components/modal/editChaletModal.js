@@ -105,10 +105,19 @@ function EditChaletModal(props) {
     onRemove: (file) => {
       console.log(file, fileList, userChalet.images);
       images.map((i) => {
-        console.log(i.id);
-        console.log(file.name);
-        if (i.name === file.name) {
+        console.log(i.name);
+        console.log(file.name, file.name.indexOf("."));
+        console.log(file, i);
+        if (file.name.indexOf(".") === -1 && i.name === file.name) {
           dispatch(deleteImage(i.id));
+        } else if (file.name.indexOf(".") !== -1) {
+          const index = file.name.indexOf(".");
+          const name = file.name.slice(0, index);
+          console.log(name, i.name);
+          if (i.name === name) {
+            console.log("done");
+            dispatch(deleteImage(i.id));
+          }
         }
         return true;
       });
@@ -185,7 +194,7 @@ function EditChaletModal(props) {
   // console.log(fileList);
   const handleChange = (fileList1, e) => {
     // console.log(editChalet);
-    console.log(e);
+    // console.log(e);
     // const newImages = images.map((i) => {
     //   return { uid: i.id, name: i.name, url: i.url, status: "done" };
     // });
